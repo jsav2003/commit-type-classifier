@@ -1,0 +1,45 @@
+# Configuración de selección de repositorios. DESIGN.md §4.1 y §5, y decisión 4/5
+# del plan de arranque.
+#
+# Criterios de ADMISIÓN para la F0 real (Parte C) — no aplicados todavía, se
+# verifican con `ccls discover` cuando el piloto confirme que vale la pena seguir:
+criterios_admision:
+  estrellas_minimas: 500
+  historial_minimo_anios: 2
+  actividad_maxima_meses_sin_push: 6
+  no_archivado: true
+  licencia_permisiva: true
+  tasa_prefijo_valido_minima: 0.60   # se ajusta con lo que mida el piloto (B2.1)
+  tope_commits_por_repo: 2000        # muestreo estratificado por trimestre (decisión 5)
+  perdida_maxima_merge: 0.80         # regla del piloto B2.4: por encima de esto, se
+                                      # descarta el repo o se usa el merge como unidad
+
+# Semilla del PILOTO (Parte B). Elegidos por diversidad de lenguaje, no por certeza
+# de que usan Conventional Commits — eso es justo lo que el piloto mide (B2.1), no
+# un supuesto. Dos de ellos (cobra, rustfmt) son deliberadamente "apuesta incierta":
+# si su tasa de prefijo sale baja, es una medición real, no un fallo del piloto.
+piloto_candidatos:
+  - owner_repo: python-poetry/poetry
+    lenguaje: python
+    nota: convención documentada en CONTRIBUTING.md del proyecto
+  - owner_repo: angular/angular-cli
+    lenguaje: typescript
+    nota: commitlint enforced por el equipo Angular
+  - owner_repo: sveltejs/svelte
+    lenguaje: typescript
+    nota: tasa de convención sin verificar de antemano
+  - owner_repo: spf13/cobra
+    lenguaje: go
+    nota: apuesta incierta, sin convención confirmada
+  - owner_repo: rust-lang/rustfmt
+    lenguaje: rust
+    nota: apuesta incierta; además designado para B2.3 (coste de clonado) por su
+      tamaño pequeño — mantiene el piloto rápido, no representa el tamaño de los
+      repos más grandes que puedan entrar en la F0 real
+  - owner_repo: hashicorp/hcl
+    lenguaje: go
+    nota: apuesta incierta, tamaño moderado
+
+# Repo designado para la medición de coste de clonado (B2.3): filter:blob:none vs
+# clon completo, sobre el historial ENTERO (no acotado — decisión 5).
+piloto_repo_costo_clonado: rust-lang/rustfmt

@@ -1,0 +1,7 @@
+# Versiones fijadas (DESIGN.md §7.7: "versiones fijadas, semillas fijadas, dataset
+# versionado"). Instalar con: pip install -r requirements.txt && pip install -e .
+pytest==8.3.5
+PyYAML==6.0.2
+pandas==2.2.3
+pyarrow==18.1.0
+numpy==2.2.1

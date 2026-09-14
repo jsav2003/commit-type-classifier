@@ -1,0 +1,18 @@
+# Entorno
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Datos: crudos e intermedios nunca van a git (son GB de clones bare).
+# Lo procesado tampoco (el parquet es demasiado grande) — lo que sí va a git es
+# el manifiesto (repo + SHA + etiqueta) que lo reconstruye, ver DESIGN.md §10.
+data/raw/
+data/interim/
+data/processed/*.parquet
+data/processed/*.jsonl
+
+# Sistema
+.DS_Store
+Thumbs.db
