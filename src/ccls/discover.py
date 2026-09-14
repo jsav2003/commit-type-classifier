@@ -41,7 +41,7 @@ def metadatos(owner_repo: str) -> MetadatosRepo:
     data = json.loads(proc.stdout)
     pushed = datetime.fromisoformat(data["pushedAt"].replace("Z", "+00:00"))
     dias = (datetime.now(timezone.utc) - pushed).days
-    licencia = (data.get("licenseInfo") or {}).get("spdxId")
+    licencia = (data.get("licenseInfo") or {}).get("key")
 
     return MetadatosRepo(
         owner_repo=owner_repo,

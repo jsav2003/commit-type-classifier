@@ -52,7 +52,12 @@ def render_piloto_md(resultados: dict) -> str:
 
     # --- Tabla 1: B2.1 tasa de prefijo + B2.2 distribución de clases -------
     lineas.append("## B2.1 / B2.2 · Tasa de prefijo válido y distribución de clases\n")
-    lineas.append(f"Muestra: últimos N commits de `git log` por defecto (sin `--no-merges`/`--first-parent`) por repo.\n")
+    lineas.append(
+        "Muestra: últimos N commits de `git log --no-merges --first-parent` por repo — "
+        "la misma población que usará la extracción real (C2), no el log crudo. Medir "
+        "sobre el log crudo diluiría la tasa con commits de merge, que nunca llevan "
+        "prefijo `tipo:` y no iban a entrar al dataset de todos modos.\n"
+    )
     lineas.append("| repo | muestreados | tasa prefijo válido | fix | feat | refactor | docs |")
     lineas.append("|---|---:|---:|---:|---:|---:|---:|")
     for r in repos:

@@ -11,7 +11,7 @@ from pathlib import Path
 import yaml
 
 from ccls import clone, discover, pilot
-from ccls.gitutil import ResultadoComando
+from ccls.gitutil import ResultadoComando, head_sha
 
 CONFIG_PATH = Path("config/repos.yaml")
 PILOT_RESULTS_PATH = Path("data/interim/pilot_results.json")
@@ -89,6 +89,9 @@ def cmd_pilot_measure(args: argparse.Namespace) -> int:
     resultados.setdefault("prefijo_clases", {})
     resultados.setdefault("merge_loss", {})
     resultados.setdefault("docs_baseline", {})
+    resultados.setdefault("meta", {})
+
+    import datetime
 
     for owner_repo in candidatos:
         repo_path = clone.ruta_local(owner_repo)
@@ -96,7 +99,11 @@ def cmd_pilot_measure(args: argparse.Namespace) -> int:
             print(f"[SALTADO] {owner_repo}: no está clonado (correr 'pilot clone' primero)")
             continue
 
-        print(f"midiendo {owner_repo} ...")
+        resultados["meta"][owner_repo] = {
+            "head_sha": head_sha(repo_path),
+            "medido_en": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        }
+        print(f"midiendo {owner_repo} (HEAD {resultados['meta'][owner_repo]['head_sha']}) ...")
         m1 = pilot.medir_prefijo_y_clases(repo_path, owner_repo, n=args.n)
         resultados["prefijo_clases"][owner_repo] = _asdict(m1)
 
@@ -153,6 +160,13 @@ def cmd_pilot_report(args: argparse.Namespace) -> int:
     PILOT_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     PILOT_REPORT_PATH.write_text(texto, encoding="utf-8")
     print(f"escrito {PILOT_REPORT_PATH}")
+
+    # Copia versionada de los resultados crudos (data/interim/ está en .gitignore,
+    # pero el JSON detrás del piloto sí debe quedar en git: es pequeño y es la
+    # evidencia de la puerta de decisión — DESIGN.md §7.7, reproducibilidad).
+    snapshot_path = PILOT_REPORT_PATH.parent / "pilot_results.json"
+    snapshot_path.write_text(json.dumps(resultados, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"escrito {snapshot_path}")
     return 0
 
 

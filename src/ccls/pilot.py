@@ -32,11 +32,13 @@ class MedicionPrefijoClases:
 
 
 def medir_prefijo_y_clases(repo_path: Path, owner_repo: str, n: int = 1000) -> MedicionPrefijoClases:
-    """B2.1 y B2.2. Sobre el historial 'tal cual aparece' (sin --no-merges ni
-    --first-parent): lo que un `git log` normal mostraría, que es la referencia
-    más directa de 'los últimos N commits' del repo.
+    """B2.1 y B2.2. Medido sobre `--no-merges --first-parent`: la MISMA población
+    que la extracción real usará en C2 (DESIGN.md), no el log crudo. Medir sobre
+    el log crudo diluye la tasa con commits de merge, que por definición nunca
+    llevan prefijo `tipo:` y jamás iban a entrar al dataset de todos modos — eso
+    sesgaría el umbral de admisión hacia abajo sin motivo real.
     """
-    commits, resultado = log_numstat(repo_path, no_merges=False, first_parent=False, limit=n)
+    commits, resultado = log_numstat(repo_path, no_merges=True, first_parent=True, limit=n)
     if not resultado.ok:
         raise RuntimeError(f"git log falló en {owner_repo}: {resultado.stderr}")
 
@@ -128,8 +130,9 @@ def _es_prediccion_docs(files: list[tuple[str, str, str]]) -> bool:
 def medir_docs_baseline(repo_path: Path, owner_repo: str, n: int = 1000) -> MedicionDocsBaseline:
     """B2.5. F1 de la regla 'todos los archivos son .md/.rst/.txt => docs',
     evaluada contra la etiqueta declarada por Conventional Commits (de los
-    commits que SÍ tienen prefijo válido en las 4 clases)."""
-    commits, resultado = log_numstat(repo_path, no_merges=False, first_parent=False, limit=n)
+    commits que SÍ tienen prefijo válido en las 4 clases). Misma población que
+    medir_prefijo_y_clases: --no-merges --first-parent."""
+    commits, resultado = log_numstat(repo_path, no_merges=True, first_parent=True, limit=n)
     if not resultado.ok:
         raise RuntimeError(f"git log falló en {owner_repo}: {resultado.stderr}")
 

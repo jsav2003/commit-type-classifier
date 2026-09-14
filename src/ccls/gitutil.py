@@ -170,6 +170,11 @@ def _is_windows() -> bool:
     return platform.system() == "Windows"
 
 
+def head_sha(repo_path: Path) -> str | None:
+    r = _run(["git", "rev-parse", "HEAD"], cwd=repo_path)
+    return r.stdout.strip() if r.ok else None
+
+
 def dir_size_bytes(path: Path) -> int:
     total = 0
     for p in path.rglob("*"):

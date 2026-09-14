@@ -1,0 +1,220 @@
+{
+  "prefijo_clases": {
+    "python-poetry/poetry": {
+      "owner_repo": "python-poetry/poetry",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 211,
+      "n_con_prefijo_descartado": 322,
+      "n_sin_prefijo": 467,
+      "distribucion": {
+        "fix": 93,
+        "feat": 45,
+        "refactor": 14,
+        "docs": 59
+      }
+    },
+    "angular/angular-cli": {
+      "owner_repo": "angular/angular-cli",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 525,
+      "n_con_prefijo_descartado": 474,
+      "n_sin_prefijo": 1,
+      "distribucion": {
+        "fix": 216,
+        "feat": 38,
+        "refactor": 172,
+        "docs": 99
+      }
+    },
+    "sveltejs/svelte": {
+      "owner_repo": "sveltejs/svelte",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 575,
+      "n_con_prefijo_descartado": 232,
+      "n_sin_prefijo": 193,
+      "distribucion": {
+        "fix": 475,
+        "feat": 27,
+        "refactor": 1,
+        "docs": 72
+      }
+    },
+    "spf13/cobra": {
+      "owner_repo": "spf13/cobra",
+      "n_muestreados": 836,
+      "n_con_prefijo_valido": 37,
+      "n_con_prefijo_descartado": 134,
+      "n_sin_prefijo": 665,
+      "distribucion": {
+        "fix": 23,
+        "feat": 7,
+        "refactor": 3,
+        "docs": 4
+      }
+    },
+    "rust-lang/rustfmt": {
+      "owner_repo": "rust-lang/rustfmt",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 132,
+      "n_con_prefijo_descartado": 141,
+      "n_sin_prefijo": 727,
+      "distribucion": {
+        "fix": 57,
+        "feat": 28,
+        "refactor": 31,
+        "docs": 16
+      }
+    },
+    "hashicorp/hcl": {
+      "owner_repo": "hashicorp/hcl",
+      "n_muestreados": 357,
+      "n_con_prefijo_valido": 1,
+      "n_con_prefijo_descartado": 118,
+      "n_sin_prefijo": 238,
+      "distribucion": {
+        "fix": 0,
+        "feat": 0,
+        "refactor": 0,
+        "docs": 1
+      }
+    }
+  },
+  "merge_loss": {
+    "python-poetry/poetry": {
+      "owner_repo": "python-poetry/poetry",
+      "total": 3859,
+      "no_merges": 3728,
+      "first_parent": 3286,
+      "no_merges_first_parent": 3182
+    },
+    "angular/angular-cli": {
+      "owner_repo": "angular/angular-cli",
+      "total": 18806,
+      "no_merges": 18766,
+      "first_parent": 15637,
+      "no_merges_first_parent": 15632
+    },
+    "sveltejs/svelte": {
+      "owner_repo": "sveltejs/svelte",
+      "total": 11399,
+      "no_merges": 9852,
+      "first_parent": 6966,
+      "no_merges_first_parent": 6033
+    },
+    "spf13/cobra": {
+      "owner_repo": "spf13/cobra",
+      "total": 1106,
+      "no_merges": 992,
+      "first_parent": 950,
+      "no_merges_first_parent": 836
+    },
+    "rust-lang/rustfmt": {
+      "owner_repo": "rust-lang/rustfmt",
+      "total": 6342,
+      "no_merges": 4784,
+      "first_parent": 2790,
+      "no_merges_first_parent": 1417
+    },
+    "hashicorp/hcl": {
+      "owner_repo": "hashicorp/hcl",
+      "total": 1591,
+      "no_merges": 1361,
+      "first_parent": 575,
+      "no_merges_first_parent": 357
+    }
+  },
+  "docs_baseline": {
+    "python-poetry/poetry": {
+      "owner_repo": "python-poetry/poetry",
+      "n_evaluados": 211,
+      "tp": 52,
+      "fp": 4,
+      "fn": 7
+    },
+    "angular/angular-cli": {
+      "owner_repo": "angular/angular-cli",
+      "n_evaluados": 525,
+      "tp": 91,
+      "fp": 2,
+      "fn": 8
+    },
+    "sveltejs/svelte": {
+      "owner_repo": "sveltejs/svelte",
+      "n_evaluados": 575,
+      "tp": 57,
+      "fp": 2,
+      "fn": 15
+    },
+    "spf13/cobra": {
+      "owner_repo": "spf13/cobra",
+      "n_evaluados": 37,
+      "tp": 4,
+      "fp": 2,
+      "fn": 0
+    },
+    "rust-lang/rustfmt": {
+      "owner_repo": "rust-lang/rustfmt",
+      "n_evaluados": 132,
+      "tp": 12,
+      "fp": 0,
+      "fn": 4
+    },
+    "hashicorp/hcl": {
+      "owner_repo": "hashicorp/hcl",
+      "n_evaluados": 1,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    }
+  },
+  "costo_clonado": {
+    "completo": {
+      "owner_repo": "rust-lang/rustfmt",
+      "filter_blob_none": false,
+      "clone_ok": true,
+      "clone_s": 39.81300000002375,
+      "clone_stderr": "Cloning into bare repository 'data\\raw\\pilot_costo\\rust-lang__rustfmt__full.git'...\n",
+      "extract_ok": true,
+      "extract_s": 2.9209999999729916,
+      "extract_stderr": "",
+      "disco_mb": 17.20234203338623
+    },
+    "filter_blob_none": {
+      "owner_repo": "rust-lang/rustfmt",
+      "filter_blob_none": true,
+      "clone_ok": true,
+      "clone_s": 16.40600000001723,
+      "clone_stderr": "Cloning into bare repository 'data\\raw\\pilot_costo\\rust-lang__rustfmt__filtered.git'...\n",
+      "extract_ok": false,
+      "extract_s": 1873.8910000000033,
+      "extract_stderr": "ekeeping.\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\n\n[timeout]",
+      "disco_mb": 11.337997436523438
+    }
+  },
+  "meta": {
+    "python-poetry/poetry": {
+      "head_sha": "be56ff07db06e9b82574648433ca228e4cac549b",
+      "medido_en": "2026-09-14T15:44:01.643429+00:00"
+    },
+    "angular/angular-cli": {
+      "head_sha": "31c045639e8bfd114cbd552d83cc70a968fe7f81",
+      "medido_en": "2026-09-14T15:44:03.563010+00:00"
+    },
+    "sveltejs/svelte": {
+      "head_sha": "6eb720a1b7cafca3ebe0ab5c76674272cd3044f9",
+      "medido_en": "2026-09-14T15:44:08.426911+00:00"
+    },
+    "spf13/cobra": {
+      "head_sha": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "medido_en": "2026-09-14T15:44:10.769326+00:00"
+    },
+    "rust-lang/rustfmt": {
+      "head_sha": "2f80bd5ba4be51cd7bc81df3cf9224ce5b4c96c3",
+      "medido_en": "2026-09-14T15:44:11.677758+00:00"
+    },
+    "hashicorp/hcl": {
+      "head_sha": "2f8831b8351c51cd74365975bbb1d2c28f91de7b",
+      "medido_en": "2026-09-14T15:44:13.518490+00:00"
+    }
+  }
+}
