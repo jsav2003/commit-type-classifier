@@ -188,6 +188,33 @@ def cmd_pilot_report(args: argparse.Namespace) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# f0 build / f0 stats  (Parte C)
+# --------------------------------------------------------------------------- #
+
+F0_STATS_PATH = Path("docs/F0_ESTADISTICAS.md")
+
+
+def cmd_f0_build(args: argparse.Namespace) -> int:
+    from ccls import build
+    meta = build.construir(_cargar_config())
+    print(f"{meta['n_registros']} registros -> {build.PROCESSED_DIR}  {meta['por_clase']}")
+    print(f"manifest_sha256 {meta['manifest_sha256']}")
+    return 0
+
+
+def cmd_f0_stats(args: argparse.Namespace) -> int:
+    from ccls import build, stats
+    dataset = build.PROCESSED_DIR / build.DATASET_NAME
+    if not dataset.exists():
+        print(f"no existe {dataset} (correr 'f0 build' primero)")
+        return 1
+    meta = json.loads((build.PROCESSED_DIR / build.META_NAME).read_text(encoding="utf-8"))
+    F0_STATS_PATH.write_text(stats.render(stats.cargar_jsonl(dataset), meta), encoding="utf-8")
+    print(f"escrito {F0_STATS_PATH}")
+    return 0
+
+
+# --------------------------------------------------------------------------- #
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ccls")
@@ -214,6 +241,15 @@ def main(argv: list[str] | None = None) -> int:
 
     p = pilot_sub.add_parser("report", help="renderiza docs/PILOTO.md desde los resultados guardados")
     p.set_defaults(func=cmd_pilot_report)
+
+    f0_parser = sub.add_parser("f0", help="construcción del dataset (Parte C)")
+    f0_sub = f0_parser.add_subparsers(dest="f0_comando", required=True)
+
+    p = f0_sub.add_parser("build", help="extrae, etiqueta y muestrea los f0_repos -> data/processed/")
+    p.set_defaults(func=cmd_f0_build)
+
+    p = f0_sub.add_parser("stats", help="escribe docs/F0_ESTADISTICAS.md desde data/processed/")
+    p.set_defaults(func=cmd_f0_stats)
 
     args = parser.parse_args(argv)
     return args.func(args)

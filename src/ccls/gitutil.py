@@ -1,4 +1,4 @@
-"""Operaciones de git de bajo nivel, compartidas por clone.py, extract.py y pilot.py.
+"""Operaciones de git de bajo nivel, compartidas por clone.py, build.py y pilot.py.
 
 Todo pasa por clones `--bare` locales: sin working tree, más rápido y más barato en
 disco. Ver DESIGN.md — decisión 2 (clonado local en vez de API de GitHub).
@@ -15,7 +15,10 @@ from pathlib import Path
 _REC_SEP = "\x1e"  # separa un commit del siguiente
 _FIELD_SEP = "\x1f"  # separa campos dentro del header de un commit
 
-_LOG_FORMAT = f"{_REC_SEP}%H{_FIELD_SEP}%aI{_FIELD_SEP}%an{_FIELD_SEP}%s{_FIELD_SEP}%b{_REC_SEP}END"
+_LOG_FORMAT = f"{_REC_SEP}%H{_FIELD_SEP}%aI{_FIELD_SEP}%cI{_FIELD_SEP}%an{_FIELD_SEP}%s{_FIELD_SEP}%b{_REC_SEP}END"
+
+# Rutas con caracteres no ASCII tal cual, no escapadas como "\303\251".
+_GIT = ["git", "-c", "core.quotepath=off"]
 
 
 @dataclass
@@ -79,6 +82,7 @@ def rev_counts(repo_path: Path) -> dict[str, int]:
 class Commit:
     sha: str
     author_date: str
+    committer_date: str  # la fecha en que el commit entró a la rama; la usa el muestreo por trimestre
     author_name: str
     subject: str
     body: str
@@ -95,12 +99,13 @@ def _parse_log_numstat(raw: str) -> list[Commit]:
         i += 1
         if not bloque:
             continue
-        # bloque = "%H\x1f%aI\x1f%an\x1f%s\x1f%b" y el siguiente elemento de la
-        # lista, tras el próximo _REC_SEP, empieza con "END\n<numstat...>"
-        campos = bloque.split(_FIELD_SEP)
-        if len(campos) < 5:
+        # bloque = "%H\x1f%aI\x1f%cI\x1f%an\x1f%s\x1f%b" y el siguiente elemento de
+        # la lista, tras el próximo _REC_SEP, empieza con "END\n<numstat...>".
+        # maxsplit=5: si el body trae un \x1f, se queda dentro del body.
+        campos = bloque.split(_FIELD_SEP, 5)
+        if len(campos) < 6:
             continue
-        sha, author_date, author_name, subject, body = campos[0], campos[1], campos[2], campos[3], campos[4]
+        sha, author_date, committer_date, author_name, subject, body = campos
         # El siguiente elemento trae "END\n" seguido del bloque numstat de ESTE commit.
         numstat_txt = ""
         if i < len(bloques):
@@ -115,7 +120,7 @@ def _parse_log_numstat(raw: str) -> list[Commit]:
             partes = linea.split("\t")
             if len(partes) == 3:
                 files.append((partes[0], partes[1], partes[2]))
-        commits.append(Commit(sha, author_date, author_name, subject.strip(), body.strip(), files))
+        commits.append(Commit(sha, author_date, committer_date, author_name, subject.strip(), body.strip(), files))
     return commits
 
 
@@ -124,22 +129,68 @@ def log_numstat(
     no_merges: bool = True,
     first_parent: bool = True,
     limit: int | None = None,
+    rev: str | None = None,
     timeout: int = 600,
 ) -> tuple[list[Commit], ResultadoComando]:
     """git log con --numstat (sin -p, sin contenido de diff) — barato: no requiere
     bajar blobs completos, solo los necesarios para contar líneas +/-.
+
+    `rev` fija desde dónde se camina el historial (por defecto HEAD).
     """
-    cmd = ["git", "log", f"--format={_LOG_FORMAT}", "--numstat"]
+    cmd = [*_GIT, "log", f"--format={_LOG_FORMAT}", "--numstat"]
     if no_merges:
         cmd.append("--no-merges")
     if first_parent:
         cmd.append("--first-parent")
     if limit:
         cmd += ["-n", str(limit)]
+    if rev:
+        cmd += [rev, "--"]
     r = _run(cmd, cwd=repo_path, timeout=timeout)
     if not r.ok:
         return [], r
     return _parse_log_numstat(r.stdout), r
+
+
+_MARCA_DIFF = "\x1eCOMMIT "
+
+
+def diffs_de_commits(
+    repo_path: Path,
+    shas: list[str],
+    contexto: int = 3,
+    lote: int = 200,
+    timeout: int = 900,
+) -> dict[str, str]:
+    """Diff (-p) de una lista concreta de commits, sha -> texto del diff.
+
+    Los SHAs van por stdin y en lotes: la línea de comandos de Windows no admite
+    2.000 SHAs como argumentos. Son commits sin merge, así que el diff es contra su
+    único padre. La salida se lee en bytes y se decodifica aquí: en modo texto,
+    Python convertiría los \\r\\n de archivos con CRLF y el diff guardado ya no sería
+    el que produjo git.
+    """
+    out: dict[str, str] = {}
+    cmd = [
+        *_GIT, "log", "--no-walk=unsorted", "--stdin",
+        "--format=%x1eCOMMIT %H", "-p", "--no-color", "--no-ext-diff", f"-U{contexto}",
+    ]
+    for i in range(0, len(shas), lote):
+        grupo = shas[i:i + lote]
+        proc = subprocess.run(
+            cmd,
+            cwd=str(repo_path),
+            input=("\n".join(grupo) + "\n").encode("ascii"),
+            capture_output=True,
+            timeout=timeout,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"git log -p falló en {repo_path}: {proc.stderr.decode('utf-8', 'replace')[-500:]}")
+        texto = proc.stdout.decode("utf-8", errors="replace")
+        for bloque in texto.split(_MARCA_DIFF)[1:]:
+            sha, _, diff = bloque.partition("\n")
+            out[sha.strip()] = diff.strip("\n")
+    return out
 
 
 def log_patch_to_devnull(repo_path: Path, no_merges: bool = True, first_parent: bool = True, timeout: int = 1800) -> ResultadoComando:
@@ -173,6 +224,11 @@ def _is_windows() -> bool:
 def head_sha(repo_path: Path) -> str | None:
     r = _run(["git", "rev-parse", "HEAD"], cwd=repo_path)
     return r.stdout.strip() if r.ok else None
+
+
+def git_version() -> str:
+    r = _run(["git", "--version"])
+    return r.stdout.strip() if r.ok else "desconocida"
 
 
 def dir_size_bytes(path: Path) -> int:

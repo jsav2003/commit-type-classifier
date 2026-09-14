@@ -1,0 +1,107 @@
+{
+  "dataset_jsonl_sha256": "797b73e4182caeed0643eb5ac88bbba05cc9de233a15f116cb6144f6c0d569ff",
+  "git_version": "git version 2.51.0.windows.1",
+  "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5",
+  "n_registros": 10000,
+  "nota_checksums": "manifest_sha256 identifica el dataset: mismos repos, SHAs y etiquetas. dataset_jsonl_sha256 depende además de cómo esta versión de git genera los diffs.",
+  "parametros": {
+    "diff_max_chars": 16000,
+    "estrato": "trimestre UTC de la fecha de commit",
+    "lineas_contexto_diff": 3,
+    "poblacion": "git log --no-merges --first-parent <sha>",
+    "rutas_excluidas": [
+      ".changeset/"
+    ],
+    "semilla": 20260914,
+    "tope_commits_por_repo": 2000
+  },
+  "por_clase": {
+    "docs": 2092,
+    "feat": 1566,
+    "fix": 5522,
+    "refactor": 820
+  },
+  "repos": [
+    {
+      "commits": 15632,
+      "etiquetables": 8019,
+      "etiquetables_por_clase": {
+        "docs": 1103,
+        "feat": 1297,
+        "fix": 3701,
+        "refactor": 1918
+      },
+      "muestreados": 2000,
+      "owner_repo": "angular/angular-cli",
+      "prefijo_fuera_de_clases": 7380,
+      "sha": "31c045639e8bfd114cbd552d83cc70a968fe7f81",
+      "sin_prefijo": 233,
+      "trimestres": 46
+    },
+    {
+      "commits": 6033,
+      "etiquetables": 2405,
+      "etiquetables_por_clase": {
+        "docs": 390,
+        "feat": 249,
+        "fix": 1763,
+        "refactor": 3
+      },
+      "muestreados": 2000,
+      "owner_repo": "sveltejs/svelte",
+      "prefijo_fuera_de_clases": 1011,
+      "sha": "6eb720a1b7cafca3ebe0ab5c76674272cd3044f9",
+      "sin_prefijo": 2617,
+      "trimestres": 27
+    },
+    {
+      "commits": 9275,
+      "etiquetables": 5584,
+      "etiquetables_por_clase": {
+        "docs": 1795,
+        "feat": 754,
+        "fix": 2759,
+        "refactor": 276
+      },
+      "muestreados": 2000,
+      "owner_repo": "nuxt/nuxt",
+      "prefijo_fuera_de_clases": 3578,
+      "sha": "87adef38436b0c1d455158eb6be74d1e541cd05e",
+      "sin_prefijo": 113,
+      "trimestres": 25
+    },
+    {
+      "commits": 9215,
+      "etiquetables": 5691,
+      "etiquetables_por_clase": {
+        "docs": 1221,
+        "feat": 992,
+        "fix": 3034,
+        "refactor": 444
+      },
+      "muestreados": 2000,
+      "owner_repo": "vitejs/vite",
+      "prefijo_fuera_de_clases": 3322,
+      "sha": "99bd9d1d46153fa939f4a304cc0177db42e28776",
+      "sin_prefijo": 202,
+      "trimestres": 26
+    },
+    {
+      "commits": 6134,
+      "etiquetables": 4007,
+      "etiquetables_por_clase": {
+        "docs": 871,
+        "feat": 854,
+        "fix": 2100,
+        "refactor": 182
+      },
+      "muestreados": 2000,
+      "owner_repo": "vitest-dev/vitest",
+      "prefijo_fuera_de_clases": 1846,
+      "sha": "05982297d0fb046d41e7accd89064f900071dd0a",
+      "sin_prefijo": 281,
+      "trimestres": 20
+    }
+  ],
+  "version_formato": 2
+}

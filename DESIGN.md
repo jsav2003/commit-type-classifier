@@ -51,6 +51,14 @@ verificables**.
 
 Meta: entre 20.000 y 50.000 commits. Más no aporta y complica el manejo.
 
+**Decisión tras el piloto (2026-09-14): 5 repos, ~10.000 commits.** La meta de arriba
+es la del diseño original y se deja tal como estaba escrita. El piloto dejó 5 repos
+admitidos, todos TS/JS, y se decidió no buscar más. La limitación del dataset es la
+diversidad de ecosistema, no el tamaño, y una tercera ola del único perfil que pasa el
+umbral (TS/JS con `commitlint`) la empeoraría. Lo de "varios lenguajes" tampoco se
+cumple, y se declara. El razonamiento completo está en el README ("Limitación
+principal") y la lista fijada, en `config/repos.yaml` → `f0_repos`.
+
 **Sesgo de selección, declarado.** Exigir una tasa alta de Conventional Commits para
 admitir un repo significa que el dataset entero está hecho de proyectos que ya siguen
 esa convención. El uso real de un clasificador de este tipo sería precisamente en
@@ -99,6 +107,47 @@ Por cada commit:
 - **Metadatos**: número de archivos tocados, líneas agregadas/eliminadas, extensiones
   de los archivos, si toca tests, si toca documentación.
 
+### 4.4 Balance de clases esperado: `refactor` es escasa
+
+_Añadido el 2026-09-14, después del piloto y antes de extraer el dataset._
+
+Proyección con la proporción de cada clase en los últimos 1.000 commits
+`--no-merges --first-parent` de cada repo admitido (`docs/PILOTO.md`, B2.2),
+escalada al tope de 2.000 commits por repo:
+
+| repo | `refactor` en la muestra del piloto | % | proyectados sobre 2.000 |
+|---|---:|---:|---:|
+| angular/angular-cli | 172 / 525 | 32,8% | ~655 |
+| nuxt/nuxt | 53 / 604 | 8,8% | ~175 |
+| vitejs/vite | 49 / 642 | 7,6% | ~153 |
+| vitest-dev/vitest | 36 / 693 | 5,2% | ~104 |
+| sveltejs/svelte | 1 / 575 | 0,2% | ~3 |
+| **total** | **311 / 3.039** | **10,2%** | **~1.090** |
+
+(El 9,6% que aparece en la distribución agregada de `docs/PILOTO.md` incluye los
+10 candidatos, admitidos o no; con los 5 admitidos y el tope por repo son ~1.090.)
+
+Lo que la F2 tiene que saber antes de empezar:
+
+1. **`refactor` es la clase minoritaria, con ~1.090 ejemplos esperados.** Desde el
+   primer experimento se reporta F1 por clase (§7.4), no solo exactitud ni F1 macro, y
+   se considera reponderar (riesgo de §9). Si se repondera, la decisión se documenta
+   con el número delante.
+2. **svelte no aporta casi ningún `refactor`.** Su 0,2% refleja la costumbre del
+   proyecto al etiquetar, no que no refactorice. En la partición por repositorio, un
+   fold con svelte en prueba tiene un F1 de `refactor` indefinido o puro ruido: se
+   reporta así, no se promedia a ciegas con los demás.
+3. **angular-cli aporta ~60% de todos los `refactor`.** En la partición por
+   repositorio, el fold que la deja en prueba entrena con ~435 `refactor`; el que la
+   deja en entrenamiento evalúa `refactor` casi solo sobre nuxt, vite y vitest. El F1
+   de `refactor` va a depender mucho de dónde cae angular-cli, y por eso se reporta
+   por fold.
+4. **Es una proyección, no una medición.** La muestra del piloto son commits
+   recientes; la extracción real es estratificada por trimestre a lo largo de todo el
+   historial, y la proporción puede moverse. Las estadísticas descriptivas de la F0
+   reemplazan esta tabla por el número real. **Número real: 820 `refactor` (8,2%);
+   angular-cli aporta 468 (57%) y svelte 1** (`docs/F0_ESTADISTICAS.md` §2).
+
 ## 5. Las particiones
 
 Aquí se juega la honestidad del proyecto. Tres particiones, de menos a más exigente:
@@ -121,6 +170,24 @@ real: ¿sirve esto en un proyecto nuevo?
 repo (§4.1, ver `config/repos.yaml`) se reparte por muestreo estratificado a lo largo
 de todo el historial disponible, no tomando los commits más recientes — de lo
 contrario no queda historial "antiguo" con el que entrenar la partición temporal.
+
+**svelte solo cubre 2023-2026.** _(Añadido el 2026-09-14, con el dataset de la F0.)_
+svelte adoptó Conventional Commits en 2023: su tasa de prefijo es de 0-7% por año
+hasta 2022 y de 52-59% desde 2023. Como el muestreo es proporcional a los commits
+etiquetables de cada trimestre, 1.952 de sus 2.000 commits son de 2023 en adelante
+(`docs/F0_ESTADISTICAS.md` §3). En la partición temporal, svelte no aporta nada a la
+parte antigua: con un corte anterior a 2023, prácticamente todo svelte cae en prueba.
+Se dice así en cada tabla de la partición temporal. El criterio de admisión no se
+cambió por esto (ver `config/repos.yaml`, cómo se mide `tasa_prefijo_valido_minima`).
+
+**`refactor` se reporta fold por fold, nunca como promedio entre folds.** svelte
+aporta 2.000 commits y 1 solo `refactor`; angular-cli aporta 468 de los 820 (57%). En
+la partición por repositorio hay folds donde `refactor` prácticamente no existe en
+prueba, y un F1 calculado sobre 1 ejemplo no es una métrica: promediarlo con los
+demás folds contamina el número. Regla, fijada antes de la F2: en la partición por
+repositorio, el F1 de `refactor` va en una fila por fold, con el número de ejemplos de
+`refactor` en prueba al lado, y no hay fila de promedio para esa clase. Cualquier
+otra clase que quede con muy pocos ejemplos en un fold recibe el mismo trato.
 
 ## 6. Los modelos
 
@@ -242,7 +309,10 @@ Presupuesto: 4-5 horas semanales durante 18-20 semanas ≈ 78 horas.
 |---|---|
 | Fuga por el prefijo de convención | Test automático desde el día uno, antes de entrenar nada |
 | Etiquetas demasiado ruidosas para aprender algo | El conjunto humano lo revela en la F3, a las 32 horas, no al final |
-| Clases muy desbalanceadas | Reportar F1 por clase y considerar reponderar, documentando la decisión |
+| Clases muy desbalanceadas | Reportar F1 por clase y considerar reponderar, documentando la decisión. `refactor` ya se sabe escasa y concentrada en angular-cli (§4.4) |
+| Dataset de un solo ecosistema (5 repos TS/JS, 3 de la misma comunidad) | Declarado como limitación principal en el README; la partición por repositorio se reporta como generalización dentro del ecosistema, no a proyectos nuevos en general |
+| Etiqueta filtrada por correlación, sin que el prefijo aparezca (los `.changeset` de svelte: `patch` va con `fix` en 1.309 de 1.315 casos) | Prueba de distribución por clase sobre tokens candidatos (LEAKAGE.md §7.3); `.changeset/` excluido de todas las entradas |
+| Prefijo filtrado por el cuerpo del mensaje (los squash-merge copian `* feat: ...` de la rama) | Detectado antes de la F0 (29% de los cuerpos de svelte); la limpieza y el test de fuga cubren líneas con viñeta, con fixtures plantados (LEAKAGE.md) |
 | Tentación de reportar solo el mejor número | Las cinco semillas y los intervalos están en la infraestructura desde la F1 |
 | Límites de la API de GitHub | Recolección por clonado local (`git log`), no por API; la API solo se usa para descubrir repos candidatos |
 | Sesgo de selección por exigir convención de commits | Declarado en el README; el techo humano (F3) se mide sobre repos sin convención, ajenos al dataset |

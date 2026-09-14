@@ -29,21 +29,33 @@ _CC_PREFIX = re.compile(
     r"^(?P<tipo>[A-Za-z]+)(?P<scope>\([^)]*\))?(?P<breaking>!)?:\s*",
 )
 
+# Inicio de línea con viñeta opcional. Los squash-merge de GitHub copian al cuerpo
+# la lista de commits de la rama ("* feat: ...", "- fix(x): ..."): antes de la F0 se
+# midió en el 29% de los cuerpos etiquetados de svelte (LEAKAGE.md).
+_VINETA = r"(?P<v>[ \t]*(?:[-*+•][ \t]*)?)"
+
+# El mismo prefijo, en cualquier línea y detrás de una viñeta. Para limpiar.
+_CC_PREFIX_LINEA = re.compile(
+    rf"^{_VINETA}(?P<tipo>[A-Za-z]+)(\([^)]*\))?!?:[ \t]*",
+)
+
 # Variantes fuera de la convención estricta, pero que declaran el mismo tipo de
 # cambio y por tanto son fuga si sobreviven en el texto de entrada. Se buscan en
-# CUALQUIER línea, no solo la primera (DESIGN.md / LEAKAGE.md §7.2).
+# CUALQUIER línea, no solo la primera (DESIGN.md / LEAKAGE.md §7.2). MULTILINE: sin
+# él, `^` solo ancla al inicio del texto y una variante en la segunda línea pasaba.
 _VARIANT_PATTERNS = [
-    re.compile(r"^\s*\[(fix|bugfix|feat|feature|refactor|docs)\]", re.IGNORECASE),
-    re.compile(r"^\s*(bugfix|feature)\s*:", re.IGNORECASE),
-    re.compile(r"^\s*chore\s*:", re.IGNORECASE),  # descartado, pero igual es fuga si queda
+    re.compile(rf"^{_VINETA}\[(fix|bugfix|feat|feature|refactor|docs)\]", re.IGNORECASE | re.MULTILINE),
+    re.compile(rf"^{_VINETA}(bugfix|feature)\s*:[ \t]*", re.IGNORECASE | re.MULTILINE),
+    # descartado, pero igual es fuga si queda
+    re.compile(rf"^{_VINETA}chore(\([^)]*\))?!?\s*:[ \t]*", re.IGNORECASE | re.MULTILINE),
 ]
 
 # Patrones completos usados por el test de fuga: el prefijo estricto en cualquier
 # línea del texto (no solo al inicio del string completo) + las variantes.
 LEAK_PATTERNS: list[re.Pattern[str]] = [
     re.compile(
-        r"(^|\n)\s*(fix|feat|refactor|docs)(\([^)]*\))?!?:\s*",
-        re.IGNORECASE,
+        rf"^{_VINETA}(fix|feat|refactor|docs)(\([^)]*\))?!?:",
+        re.IGNORECASE | re.MULTILINE,
     ),
 ] + _VARIANT_PATTERNS
 
@@ -78,21 +90,44 @@ def clasificar(subject: str, body: str = "") -> Etiqueta:
 
 def limpiar_texto_completo(texto: str) -> str:
     """Borra el prefijo de convención (y sus variantes) de CUALQUIER línea del
-    texto, no solo de la primera. Se aplica al subject ya limpiado por
-    `clasificar` y, por separado, al body completo, porque el body puede repetir
-    o citar el prefijo (p. ej. en un mensaje multilínea mal formado).
+    texto, no solo de la primera, también detrás de una viñeta. Se aplica al
+    subject ya limpiado por `clasificar` y, por separado, al body completo, porque
+    el body puede repetir o citar el prefijo (p. ej. la lista de commits de un
+    squash-merge). Borra el prefijo; la viñeta y el resto de la línea se quedan.
     """
     lineas = texto.split("\n")
     limpias = []
     for linea in lineas:
         nueva = linea
-        m = _CC_PREFIX.match(nueva)
+        m = _CC_PREFIX_LINEA.match(nueva)
         if m and m.group("tipo").lower() in TIPO_A_CLASE:
-            nueva = nueva[m.end():]
+            nueva = m.group("v") + nueva[m.end():]
         for pat in _VARIANT_PATTERNS:
-            nueva = pat.sub("", nueva)
+            nueva = pat.sub(lambda mm: mm.group("v"), nueva)
         limpias.append(nueva)
     return "\n".join(limpias).strip()
+
+
+_SUFIJO_PR = re.compile(r"\s*\(#\d+\)\s*$")
+
+
+def diff_repite_mensaje_propio(diff: str, tipo: str | None, asunto: str, largo: int = 25) -> bool:
+    """True si alguna línea del diff es `tipo(scope)!: <inicio del asunto>`, con el
+    tipo y el asunto de ESTE commit (p. ej. un .changeset que copia el título del PR).
+
+    Es la prueba del prefijo aplicada al diff. No se usa `contiene_fuga` porque en
+    código hay prefijos legítimos que no tienen nada que ver con la etiqueta
+    (`docs: false,` en TS, `refactor: TypeScriptFileRefactor`). La fuga por
+    correlación, sin la línea escrita, la cubre ccls.fuga_correlacion.
+    """
+    inicio = _SUFIJO_PR.sub("", asunto).strip().lower()[:largo]
+    if not tipo or not inicio:
+        return False
+    pat = re.compile(
+        rf"^[+\- ]?{_VINETA}{re.escape(tipo)}(\([^)]*\))?!?:[ \t]*(?P<resto>.*)$",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    return any(m.group("resto").strip().lower().startswith(inicio) for m in pat.finditer(diff))
 
 
 def contiene_fuga(texto: str) -> bool:

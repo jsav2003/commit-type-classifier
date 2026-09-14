@@ -1,8 +1,9 @@
 # Configuración de selección de repositorios. DESIGN.md §4.1 y §5, y decisión 4/5
 # del plan de arranque.
 #
-# Criterios de ADMISIÓN para la F0 real (Parte C) — no aplicados todavía, se
-# verifican con `ccls discover` cuando el piloto confirme que vale la pena seguir:
+# Criterios de ADMISIÓN. Los de metadatos (estrellas, actividad, archivado,
+# licencia) se verifican con `ccls discover-check`; la tasa de prefijo y la pérdida
+# por merge, con `ccls pilot measure`.
 criterios_admision:
   estrellas_minimas: 500
   historial_minimo_anios: 2
@@ -17,6 +18,15 @@ criterios_admision:
   # rindieron (angular-cli 52.5%, svelte 57.5%), y muy por encima de lo que
   # dieron los demás (poetry 21.1%, rustfmt 13.2%, cobra 4.4%, hcl 0.3%) — no
   # es un umbral que cualquier repo mediocre cruce.
+  #
+  # CÓMO SE MIDE: sobre los últimos 1.000 commits `--no-merges --first-parent`
+  # del clon (piloto, B2.1), NO sobre el historial completo. Así se aplicó a los
+  # 10 candidatos por igual. Consecuencia vista después, en la F0: svelte da 57.5%
+  # en esa ventana y 39.9% en todo su historial, porque adoptó la convención en
+  # 2023 (0-7% por año hasta 2022, 52-59% desde 2023). No se vuelve a medir con
+  # otra ventana: cambiar cómo se mide después de ver el dato es mover el criterio,
+  # igual que bajar el umbral. svelte queda admitido y la consecuencia (solo
+  # cubre 2023-2026) se declara en DESIGN.md §5.
   tasa_prefijo_valido_minima: 0.50
   tope_commits_por_repo: 2000        # muestreo estratificado por trimestre (decisión 5)
   perdida_maxima_merge: 0.80         # regla del piloto B2.4: por encima de esto, se
@@ -50,12 +60,9 @@ piloto_candidatos:
 
 # Segunda ola (tras la primera corrida del piloto): concentrada en TS/JS con
 # commitlint/semantic-release, porque los únicos dos candidatos de la primera
-# ola que rindieron (angular-cli, svelte) son de ese ecosistema. Esto es una
-# decisión CONSCIENTE de priorizar volumen sobre diversidad de lenguaje en esta
-# ronda — DESIGN.md §5 pide diversidad para la partición por repositorio, así
-# que antes de cerrar la F0 real hace falta una tercera ola que busque
-# candidatos Python/Go/Rust/Java con tasas comparables, o aceptar y declarar
-# que el dataset queda sesgado hacia TypeScript.
+# ola que rindieron (angular-cli, svelte) son de ese ecosistema. Esto dejaba
+# abierta una pregunta: ¿tercera ola para buscar más volumen, o aceptar y declarar
+# el sesgo hacia TypeScript? Resuelta el 2026-09-14 — ver f0_repos más abajo.
 piloto_candidatos_ola2:
   - owner_repo: vuejs/core
     lenguaje: typescript
@@ -79,3 +86,52 @@ piloto_candidatos_ola2:
 # Repo designado para la medición de coste de clonado (B2.3): filter:blob:none vs
 # clon completo, sobre el historial ENTERO (no acotado — decisión 5).
 piloto_repo_costo_clonado: rust-lang/rustfmt
+
+# --------------------------------------------------------------------------- #
+# F0 real (Parte C)
+# --------------------------------------------------------------------------- #
+
+# Decisión 2026-09-14: estos 5 repos y ninguno más. Sin tercera ola: el dataset
+# está limitado por diversidad de ecosistema, no por tamaño, y más repos TS/JS con
+# commitlint empeorarían justo eso (razonamiento completo en README.md,
+# "Limitación principal"). Los 5 pasan criterios_admision completos: metadatos con
+# discover-check, historial >= 4 años (vitest, el más joven, empieza en 2021-12),
+# prefijo >= 0.50 y pérdida por merge <= 0.80 en el piloto.
+#
+# `sha` fija el punto desde el que se camina el historial: es el HEAD del clon que
+# midió el piloto (docs/pilot_results.json -> meta). Un `git fetch` posterior no
+# cambia el dataset.
+f0_repos:
+  - owner_repo: angular/angular-cli
+    sha: 31c045639e8bfd114cbd552d83cc70a968fe7f81
+  - owner_repo: sveltejs/svelte
+    sha: 6eb720a1b7cafca3ebe0ab5c76674272cd3044f9
+  - owner_repo: nuxt/nuxt
+    sha: 87adef38436b0c1d455158eb6be74d1e541cd05e
+  - owner_repo: vitejs/vite
+    sha: 99bd9d1d46153fa939f4a304cc0177db42e28776
+  - owner_repo: vitest-dev/vitest
+    sha: 05982297d0fb046d41e7accd89064f900071dd0a
+
+f0_excluidos:
+  - owner_repo: vuejs/core
+    razon: tasa de prefijo 47.8%, por debajo de 0.50. Ya está clonado y medido,
+      pero eso no es razón para bajar el umbral — sería mover el criterio para
+      acomodar el dato.
+
+f0_extraccion:
+  # Semilla del muestreo estratificado. El orden dentro de cada trimestre es
+  # sha256("<semilla>:<sha del commit>"), así que la muestra no depende del
+  # generador aleatorio de ninguna versión de Python.
+  semilla: 20260914
+  # Tope de ALMACENAMIENTO del diff por commit, no el límite de entrada del modelo
+  # (ese lo fija cada enfoque en F2/F4 sobre este texto). Evita que un lockfile de
+  # 40.000 líneas domine el tamaño del dataset.
+  diff_max_chars: 16000
+  lineas_contexto_diff: 3
+  # Rutas que se sacan del diff, de files, de las extensiones y del conteo de
+  # líneas. .changeset/: casi todos los commits de svelte traen un .md con la línea
+  # "fix: ..." y el tipo de versión, y "patch" acompaña a fix en 1.309 de 1.315
+  # casos. Es la etiqueta, escrita o por correlación (LEAKAGE.md §7.2 y §7.3).
+  rutas_excluidas:
+    - .changeset/

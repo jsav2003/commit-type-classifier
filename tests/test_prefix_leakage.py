@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from ccls.label import clasificar, contiene_fuga, limpiar_texto_completo
+from ccls.label import clasificar, contiene_fuga, diff_repite_mensaje_propio, limpiar_texto_completo
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATASET_DIR = REPO_ROOT / "data" / "processed"
@@ -34,6 +34,15 @@ FUGAS_PLANTADAS = [
     "[FIX] arregla el crash al iniciar",
     "bugfix: corrige el null pointer",
     "chore: bump de dependencias",  # variante fuera de las 4 clases, pero igual es fuga
+    "chore(deps): actualiza dependencias",
+    # Cuerpo de un squash-merge de GitHub: copia la lista de commits de la rama, con
+    # viñeta. Medido antes de la F0: 29% de los cuerpos etiquetados de svelte.
+    "agrega aviso al fallar play()\n\n* feat: agrega aviso\n\n* chore: formato",
+    "- fix(parser): corrige el caso vacío",
+    "+ docs: aclara el ejemplo",
+    # Variantes en una línea intermedia, no al inicio del texto.
+    "texto normal\n[FIX] variante en una línea intermedia",
+    "texto normal\n  chore: variante en una línea intermedia",
 ]
 
 
@@ -49,6 +58,10 @@ TEXTOS_LIMPIOS = [
     "actualiza el README",
     "algo normal\n\nesto no debería sonar a prefijo",
     "arregla el crash al iniciar",
+    "* agrega aviso\n\n* formato",
+    "- fixes the parser when the input is empty",
+    "Note: esto no es un prefijo de convención",
+    "see docs/fix.md for details",
 ]
 
 
@@ -85,6 +98,40 @@ def test_limpiar_texto_completo_borra_prefijo_en_cualquier_linea():
     assert "esto no debería estar" in limpio  # se borra el prefijo, no la línea
 
 
+def test_limpiar_texto_completo_borra_prefijo_en_lineas_con_vineta():
+    sucio = "resumen\n\n* feat: agrega aviso\n\n* chore(deps): formato\n- fix(parser)!: caso vacío"
+    limpio = limpiar_texto_completo(sucio)
+    assert not contiene_fuga(limpio)
+    # se borra el prefijo; la viñeta y el contenido se quedan
+    assert limpio == "resumen\n\n* agrega aviso\n\n* formato\n- caso vacío"
+
+
+# El diff tiene su propia versión de la prueba: el detector genérico dispara sobre
+# código legítimo (`docs: false,`). Se busca el tipo Y el asunto del propio commit.
+DIFF_CHANGESET = (
+    "diff --git a/.changeset/wet-games-fly.md b/.changeset/wet-games-fly.md\n"
+    "+---\n+'svelte': patch\n+---\n+\n+fix: adjust mount and createRoot types\n"
+)
+
+
+def test_diff_repite_mensaje_propio_detecta_changeset_plantado():
+    assert diff_repite_mensaje_propio(DIFF_CHANGESET, "fix", "adjust mount and createRoot types (#10421)")
+
+
+def test_diff_repite_mensaje_propio_detecta_con_scope_y_vineta():
+    assert diff_repite_mensaje_propio("+- feat(kit): add the thing\n", "feat", "add the thing")
+
+
+@pytest.mark.parametrize("diff", [
+    "+      fix: 'Remove `experimental.headNext` from your `nuxt.config`',",
+    "+      docs: false,",
+    "+    refactor: TypeScriptFileRefactor) {",
+    "+fix: adjust something else entirely",
+])
+def test_diff_repite_mensaje_propio_ignora_prefijos_de_codigo(diff):
+    assert not diff_repite_mensaje_propio(diff, "fix", "adjust mount and createRoot types")
+
+
 # ---------------------------------------------------------------------------
 # 2. El dataset real, cuando exista, debe pasar limpio.
 # ---------------------------------------------------------------------------
@@ -109,11 +156,12 @@ def _iter_dataset_jsonl():
     reason="no hay dataset en data/processed/ todavía (F0 sin correr)",
 )
 def test_dataset_real_no_contiene_prefijo():
-    campos_de_entrada = ("message", "diff")
     fallos = []
     for path, lineno, registro in _iter_dataset_jsonl():
-        for campo in campos_de_entrada:
-            valor = registro.get(campo)
-            if isinstance(valor, str) and contiene_fuga(valor):
-                fallos.append(f"{path}:{lineno} campo '{campo}' contiene el prefijo")
+        mensaje = registro["message"]
+        if contiene_fuga(mensaje):
+            fallos.append(f"{path}:{lineno} campo 'message' contiene el prefijo")
+        tipo = registro["auditoria"]["tipo_declarado"]
+        if diff_repite_mensaje_propio(registro["diff"], tipo, mensaje.split("\n")[0]):
+            fallos.append(f"{path}:{lineno} campo 'diff' repite el mensaje del commit con su prefijo")
     assert not fallos, "fuga de prefijo encontrada:\n" + "\n".join(fallos[:20])
