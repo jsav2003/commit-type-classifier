@@ -77,6 +77,58 @@
         "refactor": 0,
         "docs": 1
       }
+    },
+    "vuejs/core": {
+      "owner_repo": "vuejs/core",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 478,
+      "n_con_prefijo_descartado": 512,
+      "n_sin_prefijo": 10,
+      "distribucion": {
+        "fix": 442,
+        "feat": 7,
+        "refactor": 17,
+        "docs": 12
+      }
+    },
+    "vitejs/vite": {
+      "owner_repo": "vitejs/vite",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 642,
+      "n_con_prefijo_descartado": 358,
+      "n_sin_prefijo": 0,
+      "distribucion": {
+        "fix": 270,
+        "feat": 118,
+        "refactor": 49,
+        "docs": 205
+      }
+    },
+    "nuxt/nuxt": {
+      "owner_repo": "nuxt/nuxt",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 604,
+      "n_con_prefijo_descartado": 396,
+      "n_sin_prefijo": 0,
+      "distribucion": {
+        "fix": 389,
+        "feat": 78,
+        "refactor": 53,
+        "docs": 84
+      }
+    },
+    "vitest-dev/vitest": {
+      "owner_repo": "vitest-dev/vitest",
+      "n_muestreados": 1000,
+      "n_con_prefijo_valido": 693,
+      "n_con_prefijo_descartado": 303,
+      "n_sin_prefijo": 4,
+      "distribucion": {
+        "fix": 374,
+        "feat": 131,
+        "refactor": 36,
+        "docs": 152
+      }
     }
   },
   "merge_loss": {
@@ -121,6 +173,34 @@
       "no_merges": 1361,
       "first_parent": 575,
       "no_merges_first_parent": 357
+    },
+    "vuejs/core": {
+      "owner_repo": "vuejs/core",
+      "total": 7176,
+      "no_merges": 7141,
+      "first_parent": 6455,
+      "no_merges_first_parent": 6424
+    },
+    "vitejs/vite": {
+      "owner_repo": "vitejs/vite",
+      "total": 9677,
+      "no_merges": 9607,
+      "first_parent": 9225,
+      "no_merges_first_parent": 9215
+    },
+    "nuxt/nuxt": {
+      "owner_repo": "nuxt/nuxt",
+      "total": 15600,
+      "no_merges": 15163,
+      "first_parent": 9287,
+      "no_merges_first_parent": 9275
+    },
+    "vitest-dev/vitest": {
+      "owner_repo": "vitest-dev/vitest",
+      "total": 6142,
+      "no_merges": 6139,
+      "first_parent": 6137,
+      "no_merges_first_parent": 6134
     }
   },
   "docs_baseline": {
@@ -165,6 +245,34 @@
       "tp": 1,
       "fp": 0,
       "fn": 0
+    },
+    "vuejs/core": {
+      "owner_repo": "vuejs/core",
+      "n_evaluados": 478,
+      "tp": 8,
+      "fp": 2,
+      "fn": 4
+    },
+    "vitejs/vite": {
+      "owner_repo": "vitejs/vite",
+      "n_evaluados": 642,
+      "tp": 142,
+      "fp": 0,
+      "fn": 63
+    },
+    "nuxt/nuxt": {
+      "owner_repo": "nuxt/nuxt",
+      "n_evaluados": 604,
+      "tp": 69,
+      "fp": 0,
+      "fn": 15
+    },
+    "vitest-dev/vitest": {
+      "owner_repo": "vitest-dev/vitest",
+      "n_evaluados": 693,
+      "tp": 101,
+      "fp": 1,
+      "fn": 51
     }
   },
   "costo_clonado": {
@@ -194,27 +302,43 @@
   "meta": {
     "python-poetry/poetry": {
       "head_sha": "be56ff07db06e9b82574648433ca228e4cac549b",
-      "medido_en": "2026-09-14T15:44:01.643429+00:00"
+      "medido_en": "2026-09-14T16:49:07.616827+00:00"
     },
     "angular/angular-cli": {
       "head_sha": "31c045639e8bfd114cbd552d83cc70a968fe7f81",
-      "medido_en": "2026-09-14T15:44:03.563010+00:00"
+      "medido_en": "2026-09-14T16:49:09.693294+00:00"
     },
     "sveltejs/svelte": {
       "head_sha": "6eb720a1b7cafca3ebe0ab5c76674272cd3044f9",
-      "medido_en": "2026-09-14T15:44:08.426911+00:00"
+      "medido_en": "2026-09-14T16:49:14.265162+00:00"
     },
     "spf13/cobra": {
       "head_sha": "adbc8813901bba65827259daa8e22ff94ec1f30e",
-      "medido_en": "2026-09-14T15:44:10.769326+00:00"
+      "medido_en": "2026-09-14T16:49:16.431480+00:00"
     },
     "rust-lang/rustfmt": {
       "head_sha": "2f80bd5ba4be51cd7bc81df3cf9224ce5b4c96c3",
-      "medido_en": "2026-09-14T15:44:11.677758+00:00"
+      "medido_en": "2026-09-14T16:49:17.289220+00:00"
     },
     "hashicorp/hcl": {
       "head_sha": "2f8831b8351c51cd74365975bbb1d2c28f91de7b",
-      "medido_en": "2026-09-14T15:44:13.518490+00:00"
+      "medido_en": "2026-09-14T16:49:19.094513+00:00"
+    },
+    "vuejs/core": {
+      "head_sha": "54097087a0918b98f16c84599b1a6d654e952ca7",
+      "medido_en": "2026-09-14T16:49:19.944014+00:00"
+    },
+    "vitejs/vite": {
+      "head_sha": "99bd9d1d46153fa939f4a304cc0177db42e28776",
+      "medido_en": "2026-09-14T16:49:22.170341+00:00"
+    },
+    "nuxt/nuxt": {
+      "head_sha": "87adef38436b0c1d455158eb6be74d1e541cd05e",
+      "medido_en": "2026-09-14T16:49:25.491001+00:00"
+    },
+    "vitest-dev/vitest": {
+      "head_sha": "05982297d0fb046d41e7accd89064f900071dd0a",
+      "medido_en": "2026-09-14T16:49:29.882082+00:00"
     }
   }
 }

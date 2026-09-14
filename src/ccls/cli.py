@@ -24,6 +24,15 @@ def _cargar_config() -> dict:
         return yaml.safe_load(f)
 
 
+def _todos_los_candidatos(cfg: dict) -> list[str]:
+    """Junta piloto_candidatos (ola 1) y cualquier piloto_candidatos_olaN
+    posterior (ola 2, ola 3, ...) en una sola lista, en orden."""
+    candidatos = [c["owner_repo"] for c in cfg.get("piloto_candidatos", [])]
+    for clave in sorted(k for k in cfg if k.startswith("piloto_candidatos_ola")):
+        candidatos += [c["owner_repo"] for c in cfg[clave]]
+    return candidatos
+
+
 def _guardar_resultados(resultados: dict) -> None:
     PILOT_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
     with PILOT_RESULTS_PATH.open("w", encoding="utf-8") as f:
@@ -48,7 +57,7 @@ def _asdict(obj):
 def cmd_discover_check(args: argparse.Namespace) -> int:
     cfg = _cargar_config()
     criterios = cfg.get("criterios_admision", {})
-    candidatos = [c["owner_repo"] for c in cfg.get("piloto_candidatos", [])]
+    candidatos = _todos_los_candidatos(cfg)
     print(f"{'repo':32} {'ok':4} {'estrellas':10} {'dias_sin_push':14} {'archivado':10} {'licencia':10}")
     for owner_repo in candidatos:
         m = discover.metadatos(owner_repo)
@@ -66,7 +75,7 @@ def cmd_discover_check(args: argparse.Namespace) -> int:
 
 def cmd_pilot_clone(args: argparse.Namespace) -> int:
     cfg = _cargar_config()
-    candidatos = [c["owner_repo"] for c in cfg.get("piloto_candidatos", [])]
+    candidatos = _todos_los_candidatos(cfg)
     for owner_repo in candidatos:
         dest, resultado = clone.asegurar_clonado(owner_repo, timeout=args.timeout)
         if resultado is None:
@@ -84,7 +93,7 @@ def cmd_pilot_clone(args: argparse.Namespace) -> int:
 
 def cmd_pilot_measure(args: argparse.Namespace) -> int:
     cfg = _cargar_config()
-    candidatos = [c["owner_repo"] for c in cfg.get("piloto_candidatos", [])]
+    candidatos = _todos_los_candidatos(cfg)
     resultados = _cargar_resultados()
     resultados.setdefault("prefijo_clases", {})
     resultados.setdefault("merge_loss", {})
@@ -99,19 +108,27 @@ def cmd_pilot_measure(args: argparse.Namespace) -> int:
             print(f"[SALTADO] {owner_repo}: no está clonado (correr 'pilot clone' primero)")
             continue
 
-        resultados["meta"][owner_repo] = {
-            "head_sha": head_sha(repo_path),
-            "medido_en": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        }
-        print(f"midiendo {owner_repo} (HEAD {resultados['meta'][owner_repo]['head_sha']}) ...")
-        m1 = pilot.medir_prefijo_y_clases(repo_path, owner_repo, n=args.n)
-        resultados["prefijo_clases"][owner_repo] = _asdict(m1)
+        try:
+            sha = head_sha(repo_path)
+            resultados["meta"][owner_repo] = {
+                "head_sha": sha,
+                "medido_en": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            }
+            print(f"midiendo {owner_repo} (HEAD {sha}) ...")
+            m1 = pilot.medir_prefijo_y_clases(repo_path, owner_repo, n=args.n)
+            resultados["prefijo_clases"][owner_repo] = _asdict(m1)
 
-        m2 = pilot.medir_merge_loss(repo_path, owner_repo)
-        resultados["merge_loss"][owner_repo] = _asdict(m2)
+            m2 = pilot.medir_merge_loss(repo_path, owner_repo)
+            resultados["merge_loss"][owner_repo] = _asdict(m2)
 
-        m3 = pilot.medir_docs_baseline(repo_path, owner_repo, n=args.n)
-        resultados["docs_baseline"][owner_repo] = _asdict(m3)
+            m3 = pilot.medir_docs_baseline(repo_path, owner_repo, n=args.n)
+            resultados["docs_baseline"][owner_repo] = _asdict(m3)
+        except RuntimeError as e:
+            # Un repo roto (clon incompleto, HEAD inconsistente) no debe tirar
+            # abajo la medición de los demás candidatos de la lista.
+            print(f"[FALLÓ] {owner_repo}: {e}")
+            resultados["meta"][owner_repo] = {"error": str(e)}
+            continue
 
         print(
             f"  prefijo válido: {m1.tasa_prefijo_valido:.1%} | "

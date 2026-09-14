@@ -11,7 +11,7 @@ import math
 TOPE_COMMITS_POR_REPO = 2000
 META_MINIMA = 20_000
 META_MAXIMA = 50_000
-UMBRAL_PREFIJO = 0.60
+UMBRAL_PREFIJO = 0.50  # ver config/repos.yaml: bajado de 0.60 con datos del piloto, no a ciegas
 UMBRAL_PERDIDA_MERGE = 0.80
 UMBRAL_CLASE_MINORITARIA = 0.05
 
@@ -177,7 +177,7 @@ def render_piloto_md(resultados: dict) -> str:
         for k, v in pc[r]["distribucion"].items():
             dist_total[k] = dist_total.get(k, 0) + v
     total_clasificados = sum(dist_total.values())
-    lineas.append("### Distribución de clases agregada (los 6 candidatos del piloto)\n")
+    lineas.append(f"### Distribución de clases agregada (los {len(repos)} candidatos del piloto)\n")
     if total_clasificados:
         lineas.append("| clase | commits | % del total clasificado |")
         lineas.append("|---|---:|---:|")

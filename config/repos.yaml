@@ -9,7 +9,15 @@ criterios_admision:
   actividad_maxima_meses_sin_push: 6
   no_archivado: true
   licencia_permisiva: true
-  tasa_prefijo_valido_minima: 0.60   # se ajusta con lo que mida el piloto (B2.1)
+  # 0.60 era un supuesto sin medir (DESIGN.md, redactado antes del código). El
+  # piloto (docs/PILOTO.md, primera corrida) mostró que NINGUNO de 6 candidatos
+  # lo alcanza — el mejor, sveltejs/svelte, dio 57.5% sobre --no-merges
+  # --first-parent. 0.50 es el número medido, no una relajación arbitraria:
+  # queda justo debajo del techo real observado en los dos únicos repos que
+  # rindieron (angular-cli 52.5%, svelte 57.5%), y muy por encima de lo que
+  # dieron los demás (poetry 21.1%, rustfmt 13.2%, cobra 4.4%, hcl 0.3%) — no
+  # es un umbral que cualquier repo mediocre cruce.
+  tasa_prefijo_valido_minima: 0.50
   tope_commits_por_repo: 2000        # muestreo estratificado por trimestre (decisión 5)
   perdida_maxima_merge: 0.80         # regla del piloto B2.4: por encima de esto, se
                                       # descarta el repo o se usa el merge como unidad
@@ -39,6 +47,34 @@ piloto_candidatos:
   - owner_repo: hashicorp/hcl
     lenguaje: go
     nota: apuesta incierta, tamaño moderado
+
+# Segunda ola (tras la primera corrida del piloto): concentrada en TS/JS con
+# commitlint/semantic-release, porque los únicos dos candidatos de la primera
+# ola que rindieron (angular-cli, svelte) son de ese ecosistema. Esto es una
+# decisión CONSCIENTE de priorizar volumen sobre diversidad de lenguaje en esta
+# ronda — DESIGN.md §5 pide diversidad para la partición por repositorio, así
+# que antes de cerrar la F0 real hace falta una tercera ola que busque
+# candidatos Python/Go/Rust/Java con tasas comparables, o aceptar y declarar
+# que el dataset queda sesgado hacia TypeScript.
+piloto_candidatos_ola2:
+  - owner_repo: vuejs/core
+    lenguaje: typescript
+    nota: commitlint + semantic-release, gobernanza estricta de mensajes
+  - owner_repo: vitejs/vite
+    lenguaje: typescript
+    nota: mismo ecosistema/gobernanza que vue
+  # storybookjs/storybook: descartado del piloto. Dos intentos de clonado (30
+  # min y luego sin límite, cortado a mano) no terminaron — monorepo demasiado
+  # pesado para el presupuesto de esta sesión. No es un rechazo por criterios
+  # de admisión, es un límite práctico: si hace falta más volumen en la F0 real,
+  # se puede reintentar con más tiempo o con --filter=blob:none SOLO para el
+  # clonado inicial (no para --numstat, que B2.3 ya mostró que es lentísimo).
+  - owner_repo: nuxt/nuxt
+    lenguaje: typescript
+    nota: ecosistema Vue, commitlint
+  - owner_repo: vitest-dev/vitest
+    lenguaje: typescript
+    nota: mismo patrón que vite/vue
 
 # Repo designado para la medición de coste de clonado (B2.3): filter:blob:none vs
 # clon completo, sobre el historial ENTERO (no acotado — decisión 5).

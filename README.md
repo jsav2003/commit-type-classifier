@@ -11,9 +11,28 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | Fase | Estado |
 |---|---|
 | Andamiaje del repo | ✅ hecho |
-| Piloto (mide 5 supuestos del diseño antes de comprometerse a la F0) | en curso |
-| F0 · Recolección de datos | pendiente del resultado del piloto |
+| Piloto (mide 5 supuestos del diseño antes de comprometerse a la F0) | ✅ hecho — ver `docs/PILOTO.md` |
+| F0 · Recolección de datos | **puerta abierta con la regla de rescate (10.000 commits)**; decisión pendiente: ¿ampliar a una 3ª ola de repos para intentar los 20.000 originales, o proceder con 10.000? |
 | F1-F6 | no empezadas |
+
+## Resultado del piloto (resumen)
+
+10 repos medidos (6 candidatos + 4 de una segunda ola centrada en TS/JS con
+`commitlint`, tras ver que ahí rendían los únicos dos candidatos iniciales que
+se acercaban al umbral). El umbral de 60% de `DESIGN.md` era un supuesto sin
+medir: ningún repo lo alcanzó, así que se bajó a 50% con el dato real en mano
+(ver `config/repos.yaml`, comentario en `tasa_prefijo_valido_minima`).
+
+**5 repos admitidos** (`angular/angular-cli`, `sveltejs/svelte`, `nuxt/nuxt`,
+`vitejs/vite`, `vitest-dev/vitest`), cada uno tocando el tope de 2.000
+commits/repo → **10.000 commits utilizables estimados**. Alcanza el piso de
+la regla de rescate (`DESIGN.md` §8) pero no el mínimo original de 20.000;
+harían falta ~5 repos más de perfil similar. `storybookjs/storybook` se
+descartó del piloto por ser demasiado pesado de clonar en el tiempo
+disponible, no por no cumplir criterios.
+
+Detalle completo, las 5 tablas y las decisiones de metodología en
+[`docs/PILOTO.md`](docs/PILOTO.md).
 
 ## Limitación declarada: sesgo de selección
 
