@@ -3,3 +3,6 @@
 # y el checksum dejaría de cuadrar.
 data/processed/** text eol=lf
 docs/*.json text eol=lf
+# Los resultados de la F1 se comparan byte a byte con lo que produce `ccls f1`.
+resultados/*.json text eol=lf
+docs/F*_*.md text eol=lf
