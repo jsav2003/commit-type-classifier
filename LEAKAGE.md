@@ -2,12 +2,12 @@
 
 Este documento registra las pruebas de fuga que exige `DESIGN.md` §7 y sus resultados.
 
-**Estado al 2026-09-14, con el dataset de la F0 construido:**
+**Estado al 2026-09-15, con la F0 cerrada:**
 
 | prueba | estado |
 |---|---|
 | §7.2 · prefijo de convención | ✅ pasa: 0 registros en `message`, 0 en `diff` |
-| §7.3 · correlación por clase | ❌ **falla en 4 mediciones de CHANGELOG (angular-cli)**, decisión pendiente; ver abajo |
+| §7.3 · correlación por clase | ✅ pasa: 0 mediciones, medida dentro de los estratos *solo docs* / *no solo docs* (decisión del 2026-09-15, ver abajo) |
 | §7.1 · etiquetas aleatorias | pendiente: depende de la infraestructura de experimentos (F1) |
 
 Las cifras de la F0 salen de `docs/F0_ESTADISTICAS.md` (§7 y §8), que se genera con
@@ -122,15 +122,21 @@ aparezca, como `patch` ↔ `fix` en los changesets.
 **Dónde:** `src/ccls/fuga_correlacion.py` (reutilizable: los candidatos son una lista)
 y `tests/test_fuga_correlacion.py`.
 
-**Estadístico.** Para cada token *t*, clase *c* y ámbito (dataset entero y cada repo
-por separado):
+**Estadístico.** Para cada token *t*, clase *c*, estrato y ámbito (dataset entero y
+cada repo por separado):
 
 - *P(t)*: frecuencia base del token.
 - *P(t|c)*: frecuencia del token dentro de la clase.
 - **ganancia** = (cota inferior de Wilson al 95% de *P(c|t)* − *P(c)*) / (1 − *P(c)*).
 
 Falla si **ganancia ≥ 0,5** en un token presente en **al menos 20 registros** del
-ámbito.
+ámbito y estrato.
+
+**Estratos (desde el 2026-09-15).** Todo se mide por separado en *solo docs* (todos
+los archivos son `.md`/`.rst`/`.txt`) y *no solo docs*, con *P(c)* calculada dentro
+del estrato. Esa regla es la señal estructural legítima de `DESIGN.md` §6.1, que ya se
+reporta como baseline: un token solo cuenta como fuga si dice algo **más** que ella.
+Por qué se decidió así, y lo que cuesta, está más abajo ("CHANGELOG de angular-cli").
 
 **Por qué no se usa el cociente P(t|c) / P(t) directamente.** Es igual a *P(c|t)* /
 *P(c)*, así que está acotado por 1 / *P(c)*. Con `fix` en el 55% del dataset, ni una
@@ -143,17 +149,26 @@ en los términos originales.
 **Tokens candidatos:** ruta `.changeset/`; bump `patch` / `minor` / `major` en el
 frontmatter; las palabras `patch`, `minor` y `major` en cualquier entrada; ruta
 `CHANGELOG`; encabezado de versión de changelog (`# 1.2.3`); encabezado de tipo
-(`### Bug Fixes`, `### Features`…); entrada de changelog con scope (`* **scope:**`); y
+(`### Bug Fixes`, `### Features`…); entrada de changelog con scope (`* **scope:**`), buscada solo dentro de los archivos
+CHANGELOG; y
 "diff vacío", por si la exclusión de rutas dejaba commits sin diff que delataran su
 clase.
 
 ### Sabe fallar
 
-**Fixtures sintéticos** (6 tests, con la proporción de clases del dataset real):
-detecta una fuga en la clase mayoritaria, donde el cociente crudo no llega a 1,82 y
-la ganancia supera 0,9; también en una clase minoritaria y en una fuga confinada a un
-repo. No dispara con un token repartido como las clases ni con un token visto en 5
-registros.
+**Fixtures sintéticos** (13 tests, con la proporción de clases del dataset real):
+
+- Detecta una fuga en la clase mayoritaria, donde el cociente crudo no llega a 1,82 y
+  la ganancia supera 0,9. También detecta una fuga en una clase minoritaria y otra
+  confinada a un repo.
+- No dispara con un token repartido como las clases ni con un token visto en 5
+  registros.
+- **Estratos:** el caso de angular-cli (CHANGELOG en commits *solo docs*) falla sin
+  estratos y pasa con ellos. Se sigue detectando una fuga hacia `docs` en commits con
+  código, y también una fuga hacia otra clase dentro de *solo docs*. Un test deja
+  escrito el punto ciego: una fuga hacia `docs` dentro de *solo docs* no se ve.
+- **`entrada con scope`:** la documentación de opciones (`- **Type:**` en
+  `docs/config/`) no dispara; la misma forma dentro de un CHANGELOG sí.
 
 **Con datos reales**, sobre la primera construcción, con `.changeset/` dentro:
 
@@ -167,14 +182,41 @@ registros.
 | changeset: bump minor | svelte | 56 | 2,8% | feat | 25,4% | 10,4% | 94,6% | 0,84 |
 | palabra minor | svelte | 77 | 3,9% | feat | 29,2% | 10,4% | 79,2% | 0,65 |
 
+**Con estratos, sobre los mismos datos.** La primera construcción ya no existe. Se
+reconstruyó svelte sin excluir `.changeset/` (mismo SHA, misma semilla, los mismos
+2.000 commits) y se juntó con los otros 4 repos del dataset final. La prueba
+estratificada falla en 6 mediciones, todas de changeset:
+
+| token | ámbito | estrato | con token | clase | P(c) | P(c\|t) | ganancia |
+|---|---|---|---:|---|---:|---:|---:|
+| changeset: bump patch | todos | no solo docs | 1.440 | fix | 65,8% | 91,1% | 0,69 |
+| changeset: ruta | todos | no solo docs | 1.496 | fix | 65,8% | 87,9% | 0,60 |
+| palabra patch | todos | no solo docs | 1.512 | fix | 65,8% | 89,2% | 0,63 |
+| changeset: bump minor | todos | no solo docs | 56 | feat | 18,7% | 94,6% | 0,82 |
+| changeset: bump minor | svelte | no solo docs | 56 | feat | 12,0% | 94,6% | 0,83 |
+| palabra minor | svelte | no solo docs | 75 | feat | 12,0% | 81,3% | 0,67 |
+
+**Costo medido: con estratos, una fuga en la clase mayoritaria de un repo pesa
+menos.** `bump patch → fix` medido solo en svelte baja de 0,61 a 0,36. En los commits
+de svelte que no son solo docs, `fix` ya es el 83,8% (1.454 de 1.736), y con esa base
+la ganancia tiene poco margen. Aquí la fuga se sigue viendo en el dataset entero,
+donde la base de `fix` en ese estrato es 65,8%. En un dataset donde la clase dominara
+igual en todas partes, podría quedar debajo del umbral. Se declara, y el umbral no se
+baja para compensar.
+
 ### Resultado sobre el dataset final
 
+**Pasa: 0 mediciones fallan.** La tabla completa está en `docs/F0_ESTADISTICAS.md` §8.
+
 - Tokens de changeset: **0 registros** con el token.
-- `palabra patch`: 84 registros, ganancia 0,03. `palabra minor`: 87 registros, 0,16.
-  `palabra major`: 224 registros, 0,06. Sin changesets, las palabras no dicen nada.
+- Palabras `patch`, `minor` y `major`: la ganancia más alta es 0,21 (`minor` → `feat`
+  en svelte, *no solo docs*, 22 registros). Sin changesets, no dicen nada.
+- `changelog: ruta` y `changelog: encabezado de versión`: en *solo docs*, 136 y 123
+  registros con ganancia ≤ 0; en *no solo docs*, 10 y 1 registros, sin soporte.
+- `changelog: entrada con scope`, ya restringida a archivos CHANGELOG: 3 registros.
 - `diff vacío`: 3 registros (nuxt 1, vitest 2), sin soporte ni señal.
-- **Fallan 4 mediciones, todas de CHANGELOG.** La tabla completa está en
-  `docs/F0_ESTADISTICAS.md` §8.
+
+Sin estratos, la misma prueba fallaba en 4 mediciones, todas de CHANGELOG:
 
 | token | ámbito | con token | P(t) | clase | P(t\|c) | P(c) | P(c\|t) | ganancia |
 |---|---|---:|---:|---|---:|---:|---:|---:|
@@ -184,9 +226,9 @@ registros.
 | changelog: encabezado de versión | angular-cli | 124 | 6,2% | docs | 43,6% | 14,1% | 99,2% | 0,95 |
 
 `changelog: encabezado de tipo` (11 registros) y `changelog: entrada con scope`
-(ganancia 0,41 hacia `feat`) no fallan.
+(ganancia 0,41 hacia `feat`) no fallaban.
 
-### CHANGELOG de angular-cli: falla, **decisión pendiente**
+### CHANGELOG de angular-cli: decisión del 2026-09-15
 
 Qué son esos registros:
 
@@ -208,18 +250,31 @@ estructural legítima de `DESIGN.md` §6.1 ("todos los archivos son `.md`/`.rst`
 
 A diferencia del changeset, que anota el tipo de *otro* cambio (el de código), aquí el
 CHANGELOG *es* el cambio. Condicionado a la señal estructural, el token no agrega
-información. Pero la regla de la prueba es la que es, y falla: **la F0 no se cierra
-hasta decidir**. Opciones:
+información. Pero la regla de la prueba era la que era, y fallaba. Opciones
+consideradas:
 
 - **(a) Condicionar la prueba a la señal estructural declarada:** medir la ganancia de
   cada token dentro de los estratos "solo docs / no solo docs". Es genérica, sin lista
-  de excepciones. Costo: no puede ver una fuga hacia `docs` dentro de commits que ya
-  son solo `.md`, aunque ahí la clase ya está decidida por la estructura.
+  de excepciones. Costos: no puede ver una fuga hacia `docs` dentro de commits que ya
+  son solo `.md`, aunque ahí la clase ya está decidida por la estructura; y le quita
+  fuerza a una fuga en la clase mayoritaria de un repo (medido arriba). **Elegida.**
 - **(b) Excepción explícita por token**, con la tabla de arriba como justificación
-  escrita en el test. Es simple, pero abre una puerta de excepciones en una prueba de
-  fuga.
-- **(c) Excluir CHANGELOG como `.changeset/`.** No se recomienda: 133 commits quedarían
-  con el diff vacío y todos `docs`, y la fuga pasaría a "diff vacío".
+  escrita en el test. Descartada: abre una puerta de excepciones en una prueba de fuga.
+- **(c) Excluir CHANGELOG como `.changeset/`.** Descartada: 133 commits quedarían con
+  el diff vacío y todos `docs`, y la fuga pasaría a "diff vacío".
+
+**Lo que destapó (a): `entrada con scope` no medía entradas de changelog.** Con
+estratos, el token falló en *no solo docs* hacia `feat`: ganancia 0,57 en 198
+registros (vitest 105 de 139, vite 35 de 47). Sin estratos daba 0,41, diluido por los
+commits *solo docs*. Las líneas no eran de ningún CHANGELOG: eran documentación de
+opciones, como `` - **Type:** `boolean` `` o `` - **Default:** `false` ``, en
+`docs/config/*.md` y `docs/api/*.md`, que acompaña a un `feat` que agrega una opción.
+Eso es señal de la tarea, no la etiqueta.
+
+El token ahora solo mira las partes del diff que pertenecen a archivos CHANGELOG, con
+fixtures de los dos lados. El ajuste se hizo **después de ver el dato**, y se dice. Lo
+que se corrigió es qué mide el token, que no coincidía con su nombre; el umbral y el
+soporte mínimo no se tocaron.
 
 ---
 

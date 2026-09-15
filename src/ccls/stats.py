@@ -12,12 +12,11 @@ import statistics
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from ccls.fuga_correlacion import MIN_SOPORTE, UMBRAL_GANANCIA, medir, sospechosas, tabla_md
+from ccls.fuga_correlacion import MIN_SOPORTE, UMBRAL_GANANCIA, medir, solo_docs, sospechosas, tabla_md
 from ccls.label import contiene_fuga, diff_repite_mensaje_propio
 
 CLASES = ("fix", "feat", "refactor", "docs")
 REFACTOR_PROYECTADO = 1090  # DESIGN.md §4.4
-_DOCS_EXTS = {".md", ".rst", ".txt"}
 
 
 def cargar_jsonl(path: Path) -> list[dict]:
@@ -27,11 +26,6 @@ def cargar_jsonl(path: Path) -> list[dict]:
 
 def _pct(a: int, b: int) -> str:
     return f"{a / b:.1%}" if b else "—"
-
-
-def _solo_docs(files: list[str]) -> bool:
-    """La regla de una línea de DESIGN.md §6.1, la misma que midió el piloto (B2.5)."""
-    return bool(files) and all(Path(p).suffix.lower() in _DOCS_EXTS for p in files)
 
 
 def _p90(valores: list[int]) -> float:
@@ -147,7 +141,7 @@ def render(registros: list[dict], meta: dict) -> str:
             f"{statistics.median(lineas):.0f} | {_p90(lineas):.0f} | "
             f"{_pct(sum(r['diff_truncado'] for r in rs), len(rs))} | "
             f"{_pct(sum(r['toca_tests'] for r in rs), len(rs))} | "
-            f"{_pct(sum(_solo_docs(r['files']) for r in rs), len(rs))} |"
+            f"{_pct(sum(solo_docs(r['files']) for r in rs), len(rs))} |"
         )
     L.append("")
 
@@ -181,9 +175,9 @@ def render(registros: list[dict], meta: dict) -> str:
     L.append("|---|---:|---:|---:|")
     grupos = [(res["owner_repo"], por_repo[res["owner_repo"]]) for res in resumenes] + [("**todos**", registros)]
     for nombre, rs in grupos:
-        tp = sum(1 for r in rs if _solo_docs(r["files"]) and r["label"] == "docs")
-        fp = sum(1 for r in rs if _solo_docs(r["files"]) and r["label"] != "docs")
-        fn = sum(1 for r in rs if not _solo_docs(r["files"]) and r["label"] == "docs")
+        tp = sum(1 for r in rs if solo_docs(r["files"]) and r["label"] == "docs")
+        fp = sum(1 for r in rs if solo_docs(r["files"]) and r["label"] != "docs")
+        fn = sum(1 for r in rs if not solo_docs(r["files"]) and r["label"] == "docs")
         p = tp / (tp + fp) if tp + fp else 0.0
         rc = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * p * rc / (p + rc) if p + rc else 0.0
@@ -222,8 +216,10 @@ def render(registros: list[dict], meta: dict) -> str:
     mediciones = medir(registros)
     L.append(
         f"Para cada token candidato, la clase donde más se concentra, en el dataset entero y en cada repo "
-        f"donde aparece. Falla si la ganancia es >= {UMBRAL_GANANCIA} con al menos {MIN_SOPORTE} registros "
-        f"con el token. Ganancia = (cota inferior de Wilson de P(c|t) − P(c)) / (1 − P(c)).\n"
+        f"donde aparece. Todo se mide por separado en los estratos *solo docs* y *no solo docs* (la regla "
+        f"estructural de DESIGN.md §6.1): un token cuenta como fuga solo si dice algo más que esa regla. "
+        f"Falla si la ganancia es >= {UMBRAL_GANANCIA} con al menos {MIN_SOPORTE} registros con el token. "
+        f"Ganancia = (cota inferior de Wilson de P(c|t) − P(c)) / (1 − P(c)), con P(c) dentro del estrato.\n"
     )
     L.extend(tabla_md(mediciones))
     L.append("")

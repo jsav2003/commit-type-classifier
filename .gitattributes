@@ -1,0 +1,5 @@
+# manifest_sha256 y dataset_meta.json se calculan sobre los bytes con LF. Con
+# core.autocrlf=true (el default de Git para Windows) un checkout los pasaría a CRLF
+# y el checksum dejaría de cuadrar.
+data/processed/** text eol=lf
+docs/*.json text eol=lf

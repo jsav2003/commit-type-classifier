@@ -98,55 +98,83 @@ Rutas excluidas de `diff`, `files`, extensiones y conteo de líneas: `.changeset
 
 ## 8 · Fuga por correlación (LEAKAGE.md §7.3)
 
-Para cada token candidato, la clase donde más se concentra, en el dataset entero y en cada repo donde aparece. Falla si la ganancia es >= 0.5 con al menos 20 registros con el token. Ganancia = (cota inferior de Wilson de P(c|t) − P(c)) / (1 − P(c)).
+Para cada token candidato, la clase donde más se concentra, en el dataset entero y en cada repo donde aparece. Todo se mide por separado en los estratos *solo docs* y *no solo docs* (la regla estructural de DESIGN.md §6.1): un token cuenta como fuga solo si dice algo más que esa regla. Falla si la ganancia es >= 0.5 con al menos 20 registros con el token. Ganancia = (cota inferior de Wilson de P(c|t) − P(c)) / (1 − P(c)), con P(c) dentro del estrato.
 
-| token | ámbito | con token | P(t) | clase | P(t\|c) | P(c) | P(c\|t) | ganancia | falla |
-|---|---|---:|---:|---|---:|---:|---:|---:|---|
-| changeset: ruta | todos | 0 | 0.0% | fix | 0.0% | 55.2% | 0.0% | 0.00 | no |
-| changeset: bump patch | todos | 0 | 0.0% | fix | 0.0% | 55.2% | 0.0% | 0.00 | no |
-| changeset: bump minor | todos | 0 | 0.0% | fix | 0.0% | 55.2% | 0.0% | 0.00 | no |
-| changeset: bump major | todos | 0 | 0.0% | fix | 0.0% | 55.2% | 0.0% | 0.00 | no |
-| palabra patch | todos | 84 | 0.8% | refactor | 1.8% | 8.2% | 17.9% | 0.03 | no |
-| palabra minor | todos | 87 | 0.9% | docs | 1.8% | 20.9% | 43.7% | 0.16 | no |
-| palabra major | todos | 224 | 2.2% | docs | 3.4% | 20.9% | 31.7% | 0.06 | no |
-| changelog: ruta | todos | 146 | 1.5% | docs | 6.7% | 20.9% | 96.6% | 0.90 | **SÍ** |
-| changelog: encabezado de versión | todos | 124 | 1.2% | docs | 5.9% | 20.9% | 99.2% | 0.94 | **SÍ** |
-| changelog: encabezado de tipo | todos | 11 | 0.1% | docs | 0.4% | 20.9% | 81.8% | 0.40 | no |
-| changelog: entrada con scope | todos | 252 | 2.5% | feat | 9.1% | 15.7% | 56.3% | 0.41 | no |
-| diff vacío | todos | 3 | 0.0% | docs | 0.1% | 20.9% | 66.7% | -0.00 | no |
-| palabra patch | angular/angular-cli | 23 | 1.1% | refactor | 1.9% | 23.4% | 39.1% | -0.02 | no |
-| palabra minor | angular/angular-cli | 24 | 1.2% | refactor | 2.4% | 23.4% | 45.8% | 0.06 | no |
-| palabra major | angular/angular-cli | 54 | 2.7% | refactor | 4.3% | 23.4% | 37.0% | 0.03 | no |
-| changelog: ruta | angular/angular-cli | 127 | 6.3% | docs | 44.7% | 14.1% | 99.2% | 0.95 | **SÍ** |
-| changelog: encabezado de versión | angular/angular-cli | 124 | 6.2% | docs | 43.6% | 14.1% | 99.2% | 0.95 | **SÍ** |
-| changelog: encabezado de tipo | angular/angular-cli | 5 | 0.2% | docs | 1.8% | 14.1% | 100.0% | 0.49 | no |
-| changelog: entrada con scope | angular/angular-cli | 4 | 0.2% | feat | 0.3% | 16.4% | 25.0% | -0.14 | no |
-| palabra patch | nuxt/nuxt | 14 | 0.7% | refactor | 1.0% | 5.1% | 7.1% | -0.04 | no |
-| palabra minor | nuxt/nuxt | 10 | 0.5% | docs | 1.1% | 31.8% | 70.0% | 0.12 | no |
-| palabra major | nuxt/nuxt | 26 | 1.3% | docs | 2.2% | 31.8% | 53.8% | 0.05 | no |
-| changelog: ruta | nuxt/nuxt | 2 | 0.1% | refactor | 2.0% | 5.1% | 100.0% | 0.31 | no |
-| changelog: encabezado de tipo | nuxt/nuxt | 1 | 0.1% | feat | 0.4% | 13.2% | 100.0% | 0.09 | no |
-| changelog: entrada con scope | nuxt/nuxt | 14 | 0.7% | docs | 1.9% | 31.8% | 85.7% | 0.41 | no |
-| diff vacío | nuxt/nuxt | 1 | 0.1% | refactor | 1.0% | 5.1% | 100.0% | 0.16 | no |
-| palabra patch | sveltejs/svelte | 3 | 0.1% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
-| palabra minor | sveltejs/svelte | 24 | 1.2% | feat | 5.3% | 10.4% | 45.8% | 0.19 | no |
-| palabra major | sveltejs/svelte | 16 | 0.8% | docs | 2.4% | 16.4% | 50.0% | 0.14 | no |
-| changelog: ruta | sveltejs/svelte | 3 | 0.1% | docs | 0.9% | 16.4% | 100.0% | 0.33 | no |
-| changelog: encabezado de tipo | sveltejs/svelte | 1 | 0.1% | docs | 0.3% | 16.4% | 100.0% | 0.05 | no |
-| palabra patch | vitejs/vite | 26 | 1.3% | refactor | 2.6% | 7.5% | 15.4% | -0.02 | no |
-| palabra minor | vitejs/vite | 12 | 0.6% | docs | 1.9% | 21.6% | 66.7% | 0.22 | no |
-| palabra major | vitejs/vite | 86 | 4.3% | docs | 6.0% | 21.6% | 30.2% | -0.00 | no |
-| changelog: ruta | vitejs/vite | 14 | 0.7% | docs | 2.8% | 21.6% | 85.7% | 0.49 | no |
-| changelog: encabezado de tipo | vitejs/vite | 3 | 0.1% | docs | 0.7% | 21.6% | 100.0% | 0.28 | no |
-| changelog: entrada con scope | vitejs/vite | 67 | 3.4% | feat | 10.0% | 17.5% | 52.2% | 0.28 | no |
-| palabra patch | vitest-dev/vitest | 18 | 0.9% | refactor | 1.0% | 4.9% | 5.6% | -0.04 | no |
-| palabra minor | vitest-dev/vitest | 17 | 0.9% | docs | 2.4% | 20.7% | 58.8% | 0.19 | no |
-| palabra major | vitest-dev/vitest | 42 | 2.1% | refactor | 0.0% | 4.9% | 0.0% | -0.05 | no |
-| changelog: encabezado de tipo | vitest-dev/vitest | 1 | 0.1% | refactor | 1.0% | 4.9% | 100.0% | 0.17 | no |
-| changelog: entrada con scope | vitest-dev/vitest | 167 | 8.3% | feat | 25.4% | 20.7% | 62.9% | 0.44 | no |
-| diff vacío | vitest-dev/vitest | 2 | 0.1% | docs | 0.5% | 20.7% | 100.0% | 0.17 | no |
+| token | ámbito | estrato | con token | P(t) | clase | P(t\|c) | P(c) | P(c\|t) | ganancia | falla |
+|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
+| changeset: ruta | todos | solo docs | 0 | 0.0% | fix | 0.0% | 0.9% | 0.0% | 0.00 | no |
+| changeset: bump patch | todos | solo docs | 0 | 0.0% | fix | 0.0% | 0.9% | 0.0% | 0.00 | no |
+| changeset: bump minor | todos | solo docs | 0 | 0.0% | fix | 0.0% | 0.9% | 0.0% | 0.00 | no |
+| changeset: bump major | todos | solo docs | 0 | 0.0% | fix | 0.0% | 0.9% | 0.0% | 0.00 | no |
+| palabra patch | todos | solo docs | 9 | 0.6% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| palabra minor | todos | solo docs | 27 | 1.7% | fix | 13.3% | 0.9% | 7.4% | 0.01 | no |
+| palabra major | todos | solo docs | 44 | 2.7% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| changelog: ruta | todos | solo docs | 136 | 8.4% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| changelog: encabezado de versión | todos | solo docs | 123 | 7.6% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| changelog: encabezado de tipo | todos | solo docs | 6 | 0.4% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| changelog: entrada con scope | todos | solo docs | 2 | 0.1% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| diff vacío | todos | solo docs | 0 | 0.0% | fix | 0.0% | 0.9% | 0.0% | 0.00 | no |
+| changeset: ruta | todos | no solo docs | 0 | 0.0% | fix | 0.0% | 65.8% | 0.0% | 0.00 | no |
+| changeset: bump patch | todos | no solo docs | 0 | 0.0% | fix | 0.0% | 65.8% | 0.0% | 0.00 | no |
+| changeset: bump minor | todos | no solo docs | 0 | 0.0% | fix | 0.0% | 65.8% | 0.0% | 0.00 | no |
+| changeset: bump major | todos | no solo docs | 0 | 0.0% | fix | 0.0% | 65.8% | 0.0% | 0.00 | no |
+| palabra patch | todos | no solo docs | 75 | 0.9% | refactor | 1.8% | 9.8% | 20.0% | 0.03 | no |
+| palabra minor | todos | no solo docs | 60 | 0.7% | docs | 2.7% | 5.8% | 21.7% | 0.08 | no |
+| palabra major | todos | no solo docs | 180 | 2.2% | docs | 5.6% | 5.8% | 15.0% | 0.05 | no |
+| changelog: ruta | todos | no solo docs | 10 | 0.1% | docs | 1.0% | 5.8% | 50.0% | 0.19 | no |
+| changelog: encabezado de versión | todos | no solo docs | 1 | 0.0% | feat | 0.1% | 18.7% | 100.0% | 0.02 | no |
+| changelog: encabezado de tipo | todos | no solo docs | 5 | 0.1% | docs | 0.6% | 5.8% | 60.0% | 0.18 | no |
+| changelog: entrada con scope | todos | no solo docs | 1 | 0.0% | docs | 0.2% | 5.8% | 100.0% | 0.16 | no |
+| diff vacío | todos | no solo docs | 3 | 0.0% | docs | 0.4% | 5.8% | 66.7% | 0.16 | no |
+| palabra patch | angular/angular-cli | solo docs | 6 | 2.6% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra minor | angular/angular-cli | solo docs | 7 | 3.1% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra major | angular/angular-cli | solo docs | 11 | 4.8% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: ruta | angular/angular-cli | solo docs | 126 | 55.5% | feat | 0.0% | 0.0% | 0.0% | -0.00 | no |
+| changelog: encabezado de versión | angular/angular-cli | solo docs | 123 | 54.2% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: encabezado de tipo | angular/angular-cli | solo docs | 5 | 2.2% | feat | 0.0% | 0.0% | 0.0% | -0.00 | no |
+| palabra patch | angular/angular-cli | no solo docs | 17 | 1.0% | refactor | 1.9% | 26.3% | 52.9% | 0.06 | no |
+| palabra minor | angular/angular-cli | no solo docs | 17 | 1.0% | refactor | 2.4% | 26.3% | 64.7% | 0.20 | no |
+| palabra major | angular/angular-cli | no solo docs | 43 | 2.4% | refactor | 4.3% | 26.3% | 46.5% | 0.08 | no |
+| changelog: ruta | angular/angular-cli | no solo docs | 1 | 0.1% | feat | 0.3% | 18.4% | 100.0% | 0.03 | no |
+| changelog: encabezado de versión | angular/angular-cli | no solo docs | 1 | 0.1% | feat | 0.3% | 18.4% | 100.0% | 0.03 | no |
+| palabra patch | nuxt/nuxt | solo docs | 2 | 0.4% | refactor | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra minor | nuxt/nuxt | solo docs | 6 | 1.1% | refactor | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra major | nuxt/nuxt | solo docs | 8 | 1.5% | refactor | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra patch | nuxt/nuxt | no solo docs | 12 | 0.8% | refactor | 1.0% | 7.0% | 8.3% | -0.06 | no |
+| palabra minor | nuxt/nuxt | no solo docs | 4 | 0.3% | docs | 1.0% | 7.0% | 25.0% | -0.03 | no |
+| palabra major | nuxt/nuxt | no solo docs | 18 | 1.2% | docs | 5.8% | 7.0% | 33.3% | 0.10 | no |
+| changelog: ruta | nuxt/nuxt | no solo docs | 2 | 0.1% | refactor | 2.0% | 7.0% | 100.0% | 0.29 | no |
+| changelog: encabezado de tipo | nuxt/nuxt | no solo docs | 1 | 0.1% | feat | 0.4% | 18.0% | 100.0% | 0.03 | no |
+| diff vacío | nuxt/nuxt | no solo docs | 1 | 0.1% | refactor | 1.0% | 7.0% | 100.0% | 0.15 | no |
+| palabra minor | sveltejs/svelte | solo docs | 2 | 0.8% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra major | sveltejs/svelte | solo docs | 3 | 1.1% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: ruta | sveltejs/svelte | solo docs | 1 | 0.4% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra patch | sveltejs/svelte | no solo docs | 3 | 0.2% | refactor | 0.0% | 0.1% | 0.0% | -0.00 | no |
+| palabra minor | sveltejs/svelte | no solo docs | 22 | 1.3% | feat | 5.3% | 12.0% | 50.0% | 0.21 | no |
+| palabra major | sveltejs/svelte | no solo docs | 13 | 0.7% | docs | 6.9% | 4.1% | 38.5% | 0.14 | no |
+| changelog: ruta | sveltejs/svelte | no solo docs | 2 | 0.1% | docs | 2.8% | 4.1% | 100.0% | 0.31 | no |
+| changelog: encabezado de tipo | sveltejs/svelte | no solo docs | 1 | 0.1% | docs | 1.4% | 4.1% | 100.0% | 0.17 | no |
+| palabra patch | vitejs/vite | solo docs | 1 | 0.3% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra minor | vitejs/vite | solo docs | 4 | 1.2% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra major | vitejs/vite | solo docs | 16 | 5.0% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: ruta | vitejs/vite | solo docs | 9 | 2.8% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: encabezado de tipo | vitejs/vite | solo docs | 1 | 0.3% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| changelog: entrada con scope | vitejs/vite | solo docs | 2 | 0.6% | feat | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra patch | vitejs/vite | no solo docs | 25 | 1.5% | docs | 2.7% | 6.7% | 12.0% | -0.03 | no |
+| palabra minor | vitejs/vite | no solo docs | 8 | 0.5% | docs | 3.5% | 6.7% | 50.0% | 0.16 | no |
+| palabra major | vitejs/vite | no solo docs | 70 | 4.2% | fix | 5.1% | 63.4% | 77.1% | 0.07 | no |
+| changelog: ruta | vitejs/vite | no solo docs | 5 | 0.3% | docs | 2.7% | 6.7% | 60.0% | 0.18 | no |
+| changelog: encabezado de tipo | vitejs/vite | no solo docs | 2 | 0.1% | docs | 1.8% | 6.7% | 100.0% | 0.29 | no |
+| changelog: entrada con scope | vitejs/vite | no solo docs | 1 | 0.1% | docs | 0.9% | 6.7% | 100.0% | 0.15 | no |
+| palabra minor | vitest-dev/vitest | solo docs | 8 | 2.8% | fix | 66.7% | 1.1% | 25.0% | 0.06 | no |
+| palabra major | vitest-dev/vitest | solo docs | 6 | 2.1% | refactor | 0.0% | 0.0% | 0.0% | 0.00 | no |
+| palabra patch | vitest-dev/vitest | no solo docs | 18 | 1.0% | refactor | 1.0% | 5.7% | 5.6% | -0.05 | no |
+| palabra minor | vitest-dev/vitest | no solo docs | 9 | 0.5% | docs | 2.9% | 8.0% | 44.4% | 0.12 | no |
+| palabra major | vitest-dev/vitest | no solo docs | 36 | 2.1% | docs | 2.9% | 8.0% | 11.1% | -0.04 | no |
+| changelog: encabezado de tipo | vitest-dev/vitest | no solo docs | 1 | 0.1% | refactor | 1.0% | 5.7% | 100.0% | 0.16 | no |
+| diff vacío | vitest-dev/vitest | no solo docs | 2 | 0.1% | docs | 1.5% | 8.0% | 100.0% | 0.29 | no |
 
-Tokens que fallan: **4**.
+Tokens que fallan: **0**.
 
 ## 9 · Versionado
 

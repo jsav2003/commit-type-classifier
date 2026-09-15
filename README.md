@@ -12,7 +12,7 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 |---|---|
 | Andamiaje del repo | ✅ hecho |
 | Piloto (mide 5 supuestos del diseño antes de comprometerse a la F0) | ✅ hecho — ver `docs/PILOTO.md` |
-| F0 · Recolección de datos | **dataset construido** (10.000 commits, reproducible byte a byte); **sin cerrar**: la prueba de fuga por correlación falla en los CHANGELOG de angular-cli, decisión pendiente (`LEAKAGE.md` §7.3) |
+| F0 · Recolección de datos | ✅ **cerrada** el 2026-09-15 con la regla de rescate: 10.000 commits de 5 repos, reproducible byte a byte, pruebas de fuga del prefijo y de correlación en verde (`LEAKAGE.md`). La de etiquetas aleatorias (§7.1) necesita la F1 |
 | F1-F6 | no empezadas |
 
 ## Resultado del piloto (resumen)
@@ -128,7 +128,9 @@ plantadas a propósito para demostrar que **sí saben fallar**:
   mensaje del propio commit con su prefijo.
 - `tests/test_fuga_correlacion.py`: ningún token candidato (`patch`, `minor`, rutas
   `.changeset/`, patrones de CHANGELOG…) predice una clase muy por encima de su
-  frecuencia base, en el dataset entero ni dentro de un repo.
+  frecuencia base, en el dataset entero ni dentro de un repo. Se mide por separado en
+  commits "solo docs" y "no solo docs": un token solo cuenta como fuga si dice algo más
+  que la regla estructural de `DESIGN.md` §6.1.
 
 ## Estructura
 

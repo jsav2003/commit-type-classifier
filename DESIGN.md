@@ -311,7 +311,7 @@ Presupuesto: 4-5 horas semanales durante 18-20 semanas ≈ 78 horas.
 | Etiquetas demasiado ruidosas para aprender algo | El conjunto humano lo revela en la F3, a las 32 horas, no al final |
 | Clases muy desbalanceadas | Reportar F1 por clase y considerar reponderar, documentando la decisión. `refactor` ya se sabe escasa y concentrada en angular-cli (§4.4) |
 | Dataset de un solo ecosistema (5 repos TS/JS, 3 de la misma comunidad) | Declarado como limitación principal en el README; la partición por repositorio se reporta como generalización dentro del ecosistema, no a proyectos nuevos en general |
-| Etiqueta filtrada por correlación, sin que el prefijo aparezca (los `.changeset` de svelte: `patch` va con `fix` en 1.309 de 1.315 casos) | Prueba de distribución por clase sobre tokens candidatos (LEAKAGE.md §7.3); `.changeset/` excluido de todas las entradas |
+| Etiqueta filtrada por correlación, sin que el prefijo aparezca (los `.changeset` de svelte: `patch` va con `fix` en 1.309 de 1.315 casos) | Prueba de distribución por clase sobre tokens candidatos, medida por separado en commits "solo docs" y "no solo docs" para no confundir la fuga con la señal estructural de §6.1 (LEAKAGE.md §7.3); `.changeset/` excluido de todas las entradas |
 | Prefijo filtrado por el cuerpo del mensaje (los squash-merge copian `* feat: ...` de la rama) | Detectado antes de la F0 (29% de los cuerpos de svelte); la limpieza y el test de fuga cubren líneas con viñeta, con fixtures plantados (LEAKAGE.md) |
 | Tentación de reportar solo el mejor número | Las cinco semillas y los intervalos están en la infraestructura desde la F1 |
 | Límites de la API de GitHub | Recolección por clonado local (`git log`), no por API; la API solo se usa para descubrir repos candidatos |
