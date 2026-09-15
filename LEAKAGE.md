@@ -2,13 +2,13 @@
 
 Este documento registra las pruebas de fuga que exige `DESIGN.md` §7 y sus resultados.
 
-**Estado al 2026-09-15, con la F0 cerrada:**
+**Estado al 2026-09-15, con la F1 cerrada:**
 
 | prueba | estado |
 |---|---|
 | §7.2 · prefijo de convención | ✅ pasa: 0 registros en `message`, 0 en `diff` |
 | §7.3 · correlación por clase | ✅ pasa: 0 mediciones, medida dentro de los estratos *solo docs* / *no solo docs* (decisión del 2026-09-15, ver abajo) |
-| §7.1 · etiquetas aleatorias | pendiente: depende de la infraestructura de experimentos (F1) |
+| §7.1 · etiquetas aleatorias | ✅ pasa: 7 de 7 folds, en las tres particiones (ver abajo) |
 
 Las cifras de la F0 salen de `docs/F0_ESTADISTICAS.md` (§7 y §8), que se genera con
 `python -m ccls f0 stats`. Las del "antes" (primera construcción, con `.changeset/`
@@ -291,14 +291,81 @@ señal por sí sola y decidir con el número delante, no a priori. En la F0 apar
 ## 7.1 · Fuga por etiquetas aleatorias
 
 **Qué se prueba:** entrenar todo el montaje (features, modelo, evaluación) con las
-etiquetas barajadas al azar. El resultado debe ser el del azar (≈ 1/4 si las clases
-están balanceadas, o la tasa de la clase mayoritaria si no). Si da más, hay fuga en
-alguna otra parte del pipeline y ningún número posterior es de fiar.
+etiquetas de entrenamiento barajadas al azar. Las de prueba no se tocan. El resultado
+debe ser el del azar. Si da más, hay fuga en alguna otra parte del pipeline y ningún
+número posterior es de fiar.
 
 **Cuándo corre:** antes que cualquier experimento real, y se reporta en el `README.md`
 del repo, no solo aquí.
 
-**Estado:** _pendiente — depende de la infraestructura de experimentos (F1)._
+**Dónde:** `src/ccls/experimento.py` (`evaluar_fuga_aleatoria`) y
+`tests/test_experimento.py`. `python -m ccls f1 fuga-aleatoria` corre la prueba y
+escribe `docs/F1_ETIQUETAS_ALEATORIAS.md` y los JSON de `resultados/`.
+
+**Criterio, fijado antes de correr** (`config/experimentos.yaml`):
+
+- **Techo del azar:** la tasa de la clase mayoritaria en la prueba de cada fold. Un
+  predictor que no mira la etiqueta tiene exactitud esperada Σ *q(c)*·*p(c)*, y eso
+  nunca pasa de max *p(c)*. Con `fix` en el 55% del dataset, "≈ 1/4" no sirve de
+  referencia.
+- **Falla** el fold cuya exactitud media con etiquetas barajadas (5 semillas) pasa ese
+  techo por más de **2 puntos**. Eso son ~2 errores estándar de una exactitud del 55%
+  sobre 2.000 commits.
+- **No concluyente** si no falla, pero el mismo montaje con las etiquetas de verdad
+  tampoco pasa el techo por más de 2 puntos. Un montaje que no aprende nada pasaría la
+  prueba sin demostrar nada, y por eso cada fold corre también un control.
+- Se evalúa fold por fold, en las tres particiones, nunca sobre un promedio.
+
+**Modelo:** `humo`, TF-IDF del mensaje + regresión logística con los valores por
+defecto. Existe solo para esta prueba: con el baseline trivial saldría el azar por
+construcción y la prueba no mediría nada. Sus números con etiquetas de verdad **no
+son resultados de la F2**.
+
+### Sabe fallar
+
+El runner le entrega al modelo solo las entradas de `DESIGN.md` §4.3
+(`experimento.ENTRADAS`). Los fixtures usan un modelo tramposo que predice
+`r["label"]` si el registro la trae:
+
+- Con el registro completo, **falla** en las tres particiones: acierta el 100% con las
+  etiquetas barajadas.
+- Con `ENTRADAS`, el mismo tramposo no recibe la etiqueta y predice la mayoritaria.
+  Queda **no concluyente**, porque el control tampoco aprende.
+- Un fixture donde el mensaje delata la clase **pasa**, con el control por encima del
+  90%.
+
+Tests aparte verifican que el modelo solo recibe las claves de `ENTRADAS`, y que
+barajar conserva cuántas etiquetas hay de cada clase con una permutación que no
+depende de la etiqueta.
+
+### Resultado sobre el dataset de la F0 (2026-09-15)
+
+**Pasa: 7 de 7 folds.** La tabla con intervalos está en
+`docs/F1_ETIQUETAS_ALEATORIAS.md`.
+
+| partición | fold | n prueba | techo del azar | exactitud, barajadas | exactitud, control |
+|---|---|---:|---:|---:|---:|
+| aleatoria | — | 1.999 | 55,2% | 53,7% | 75,4% |
+| repositorio | angular-cli | 2.000 | 46,2% | 44,2% | 54,5% |
+| repositorio | nuxt | 2.000 | 49,9% | 48,9% | 71,5% |
+| repositorio | svelte | 2.000 | 73,0% | 69,3% | 78,6% |
+| repositorio | vite | 2.000 | 53,3% | 52,2% | 70,9% |
+| repositorio | vitest | 2.000 | 53,7% | 52,6% | 71,2% |
+| temporal | — | 2.001 | 58,4% | 56,8% | 76,6% |
+
+- Con las etiquetas barajadas, ningún fold llega al techo: todos quedan entre 0,9 y
+  3,7 puntos **por debajo**. Es lo esperado. El modelo a veces predice clases que no
+  son la mayoritaria, y esos intentos aciertan menos.
+- El control tiene poco margen en angular-cli (8,3 puntos sobre el techo) y en svelte
+  (5,6). Pasan, pero en esos dos folds la prueba demuestra menos que en los demás.
+- En la aleatoria hay 1.999 commits de prueba y no 2.000: la estratificación redondea
+  clase por clase.
+- En las particiones por repositorio y temporal, el intervalo del control tiene ancho
+  cero. La división es fija y la regresión logística es determinista, así que la
+  semilla no cambia nada. Con las etiquetas barajadas sí hay varianza, porque cada
+  semilla baraja distinto.
+- La corrida es determinista: volver a correrla en la misma máquina da el mismo JSON,
+  byte a byte.
 
 ## Sesgo de selección (no es leakage, pero se registra aquí por relación directa)
 

@@ -1,0 +1,29 @@
+# Configuración de la F1: particiones, semillas y prueba de etiquetas aleatorias.
+# DESIGN.md §5 y §7. Fijada el 2026-09-15, antes de entrenar ningún modelo.
+
+# DESIGN.md §7.3: cinco semillas, se reporta media e intervalo, nunca la mejor.
+semillas: [1, 2, 3, 4, 5]
+
+particiones:
+  aleatoria:
+    # Estratificada por clase. Cada semilla da OTRA división, así que el intervalo
+    # incluye la varianza de la división, que es lo que infla esta partición.
+    fraccion_prueba: 0.2
+  # repositorio: un fold por repo, con ese repo entero en prueba. Sin parámetros; la
+  # semilla solo mueve el modelo.
+  repositorio: {}
+  temporal:
+    # Corte GLOBAL, no por repo: nada del futuro de un repo entra al entrenamiento de
+    # otro. Es el percentil 80 de committer_date en el dataset de la F0. Se fija la
+    # fecha y no el cuantil: si el dataset cambiara, el corte no se mueve solo. Con
+    # este corte los 5 repos quedan a los dos lados (DESIGN.md §5).
+    corte: "2025-06-01T00:00:00+00:00"
+
+# LEAKAGE.md §7.1
+fuga_etiquetas_aleatorias:
+  modelo: humo
+  # Con etiquetas barajadas, ningún predictor puede pasar en esperanza la tasa de la
+  # clase mayoritaria de prueba. Un fold falla si la exactitud media la supera por
+  # más de esto. 0,02 son ~2 errores estándar de una exactitud del 55% sobre 2.000
+  # commits de prueba.
+  tolerancia: 0.02

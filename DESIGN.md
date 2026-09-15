@@ -189,6 +189,31 @@ repositorio, el F1 de `refactor` va en una fila por fold, con el número de ejem
 `refactor` en prueba al lado, y no hay fila de promedio para esa clase. Cualquier
 otra clase que quede con muy pocos ejemplos en un fold recibe el mismo trato.
 
+**Cómo quedan implementadas.** _(Fijado el 2026-09-15, en la F1, antes de entrenar
+ningún modelo. Código en `src/ccls/particiones.py`, parámetros en
+`config/experimentos.yaml`.)_
+
+- **Aleatoria:** 80/20 estratificada por clase. Cada una de las cinco semillas da
+  **otra división**, así que el intervalo incluye la varianza de la división y no solo
+  la del modelo.
+- **Por repositorio:** 5 folds, uno por repo, con ese repo entero en prueba (2.000
+  commits cada uno). La división no depende de la semilla. El fold de svelte tiene
+  1 solo `refactor` en prueba.
+- **Temporal:** un corte **global** el `2025-06-01T00:00:00+00:00` (percentil 80 de
+  la fecha de commit), no uno por repo. Con un corte por repo, commits de 2026 de un
+  proyecto entrenarían un modelo que se evalúa con commits de 2025 de otro. Quedan
+  7.999 commits en entrenamiento y 2.001 en prueba, y **los 5 repos quedan a los dos
+  lados** (svelte: 1.483 / 517), porque el corte cae después de su adopción de la
+  convención. `refactor`: 644 / 176. La fecha se fija literal, no como cuantil, para
+  que el corte no se mueva solo si el dataset cambia.
+- El azar de las divisiones y de las etiquetas barajadas sale de sha256, igual que el
+  muestreo de la F0: no depende de la versión de Python ni de numpy.
+- **Intervalos:** t de Student al 95% sobre las semillas. El resumen agrega semillas
+  dentro de cada fold y **nunca folds entre sí**.
+- El modelo recibe solo las entradas de §4.3 (`experimento.ENTRADAS`). El runner le
+  quita la etiqueta, el repo, el SHA, las fechas y la auditoría antes de entregarle
+  los registros.
+
 ## 6. Los modelos
 
 ### 6.1 Baseline trivial

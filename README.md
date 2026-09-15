@@ -13,7 +13,8 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | Andamiaje del repo | ✅ hecho |
 | Piloto (mide 5 supuestos del diseño antes de comprometerse a la F0) | ✅ hecho — ver `docs/PILOTO.md` |
 | F0 · Recolección de datos | ✅ **cerrada** el 2026-09-15 con la regla de rescate: 10.000 commits de 5 repos, reproducible byte a byte, pruebas de fuga del prefijo y de correlación en verde (`LEAKAGE.md`). La de etiquetas aleatorias (§7.1) necesita la F1 |
-| F1-F6 | no empezadas |
+| F1 · Infraestructura de experimentos | ✅ **cerrada** el 2026-09-15: `python -m ccls f1 run` entrena, evalúa y guarda con las tres particiones y cinco semillas. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds** (`docs/F1_ETIQUETAS_ALEATORIAS.md`) |
+| F2-F6 | no empezadas |
 
 ## Resultado del piloto (resumen)
 
@@ -116,11 +117,17 @@ python -m ccls pilot clone-cost        # B2.3
 python -m ccls pilot report            # escribe docs/PILOTO.md
 python -m ccls f0 build                # extrae los f0_repos -> data/processed/
 python -m ccls f0 stats                # escribe docs/F0_ESTADISTICAS.md
+python -m ccls f1 run --modelo humo    # tres particiones x 5 semillas -> resultados/*.json
+python -m ccls f1 fuga-aleatoria       # LEAKAGE.md §7.1 -> docs/F1_ETIQUETAS_ALEATORIAS.md
 ```
+
+Las particiones (DESIGN.md §5) y las semillas están en `config/experimentos.yaml`:
+aleatoria 80/20 estratificada, con otra división por semilla; por repositorio, un
+fold por repo; temporal, con corte global el 2025-06-01.
 
 ## Pruebas de fuga
 
-Ver `LEAKAGE.md`. Dos pruebas corren hoy, y las dos incluyen fixtures con fugas
+Ver `LEAKAGE.md`. Tres pruebas corren hoy, y todas incluyen fixtures con fugas
 plantadas a propósito para demostrar que **sí saben fallar**:
 
 - `tests/test_prefix_leakage.py`: ningún `message` contiene el prefijo de Conventional
@@ -131,6 +138,10 @@ plantadas a propósito para demostrar que **sí saben fallar**:
   frecuencia base, en el dataset entero ni dentro de un repo. Se mide por separado en
   commits "solo docs" y "no solo docs": un token solo cuenta como fuga si dice algo más
   que la regla estructural de `DESIGN.md` §6.1.
+- `tests/test_experimento.py` (§7.1): con las etiquetas de entrenamiento barajadas, la
+  exactitud no pasa la tasa de la clase mayoritaria en ningún fold. Un modelo que lee
+  la etiqueta falla la prueba en cuanto el runner se la deja ver. **Sobre el dataset
+  real pasa en 7 de 7 folds**: entre 0,9 y 3,7 puntos por debajo del techo del azar.
 
 ## Estructura
 
@@ -139,9 +150,13 @@ DESIGN.md                 documento de diseño completo
 NO-GOALS.md               qué NO es este proyecto
 LEAKAGE.md                las pruebas de fuga (§7.1 aleatoria, §7.2 prefijo, §7.3 correlación) y sus cifras
 config/repos.yaml         criterios de admisión, candidatos del piloto, repos y parámetros de la F0
-src/ccls/                 paquete: gitutil, label, clone, discover, pilot, report, build, stats, fuga_correlacion, cli
-tests/                    pytest — pruebas de fuga, parser de git log, construcción del dataset
+config/experimentos.yaml  semillas, particiones y criterio de la prueba de etiquetas aleatorias (F1)
+src/ccls/                 paquete: gitutil, label, clone, discover, pilot, report, build, stats, fuga_correlacion,
+                          particiones, metricas, modelos, experimento, cli
+tests/                    pytest — pruebas de fuga, parser de git log, construcción del dataset, particiones, runner
 docs/PILOTO.md            resultados del piloto (Parte B), generado, no escrito a mano
 docs/F0_ESTADISTICAS.md   estadísticas descriptivas del dataset, generado, no escrito a mano
+docs/F1_ETIQUETAS_ALEATORIAS.md  prueba §7.1, generado, no escrito a mano
+resultados/               un JSON por modelo × partición (corridas, resumen, versiones, manifest_sha256)
 data/processed/           manifest.csv y dataset_meta.json en git; dataset.jsonl fuera
 ```

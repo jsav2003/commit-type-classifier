@@ -215,6 +215,75 @@ def cmd_f0_stats(args: argparse.Namespace) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# f1 run / f1 fuga-aleatoria
+# --------------------------------------------------------------------------- #
+
+EXPERIMENTOS_CONFIG_PATH = Path("config/experimentos.yaml")
+
+
+def _cargar_f1() -> tuple[dict, list[dict], str] | None:
+    from ccls import build, stats
+    dataset = build.PROCESSED_DIR / build.DATASET_NAME
+    if not dataset.exists():
+        print(f"no existe {dataset} (correr 'f0 build' primero)")
+        return None
+    with EXPERIMENTOS_CONFIG_PATH.open("r", encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+    meta = json.loads((build.PROCESSED_DIR / build.META_NAME).read_text(encoding="utf-8"))
+    return cfg, stats.cargar_jsonl(dataset), meta["manifest_sha256"]
+
+
+def _pct(x: float) -> str:
+    return f"{x:6.1%}"
+
+
+def cmd_f1_run(args: argparse.Namespace) -> int:
+    from ccls import experimento, particiones
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    cfg, registros, manifest_sha256 = cargado
+    tipos = particiones.TIPOS if args.particion == "todas" else (args.particion,)
+    for tipo in tipos:
+        res = experimento.correr(registros, args.modelo, tipo, cfg["semillas"], cfg["particiones"], barajar_etiquetas=args.barajar)
+        path = experimento.guardar(res, manifest_sha256)
+        print(f"{tipo} -> {path}")
+        for r in res["resumen"]:
+            print(f"  {r['fold']:24} n={r['n_prueba']:5}  exactitud {_pct(r['exactitud']['media'])}  "
+                  f"F1 macro {_pct(r['f1_macro']['media'])}  mayoritaria {_pct(r['tasa_mayoritaria']['media'])}")
+    return 0
+
+
+def cmd_f1_fuga_aleatoria(args: argparse.Namespace) -> int:
+    from ccls import experimento, particiones
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    cfg, registros, manifest_sha256 = cargado
+    prueba = cfg["fuga_etiquetas_aleatorias"]
+    filas_por_particion = {}
+    for tipo in particiones.TIPOS:
+        corridas = {}
+        for barajadas in (True, False):
+            print(f"{tipo}, etiquetas {'barajadas' if barajadas else 'de verdad'} ...")
+            corridas[barajadas] = experimento.correr(
+                registros, prueba["modelo"], tipo, cfg["semillas"], cfg["particiones"], barajar_etiquetas=barajadas
+            )
+            print(f"  -> {experimento.guardar(corridas[barajadas], manifest_sha256)}")
+        filas_por_particion[tipo] = experimento.evaluar_fuga_aleatoria(corridas[True], corridas[False], prueba["tolerancia"])
+        for f in filas_por_particion[tipo]:
+            print(f"  {f['fold']:24} techo {_pct(f['techo_azar'])}  barajadas {_pct(f['exactitud_barajadas']['media'])}  "
+                  f"control {_pct(f['exactitud_control']['media'])}  {f['estado']}")
+    experimento.F1_FUGA_PATH.write_text(
+        experimento.render_fuga_aleatoria(filas_por_particion, prueba["modelo"], cfg["semillas"], prueba["tolerancia"], manifest_sha256),
+        encoding="utf-8",
+    )
+    print(f"escrito {experimento.F1_FUGA_PATH}")
+    estados = [f["estado"] for filas in filas_por_particion.values() for f in filas]
+    return 0 if all(e == "pasa" for e in estados) else 1
+
+
+# --------------------------------------------------------------------------- #
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ccls")
@@ -250,6 +319,18 @@ def main(argv: list[str] | None = None) -> int:
 
     p = f0_sub.add_parser("stats", help="escribe docs/F0_ESTADISTICAS.md desde data/processed/")
     p.set_defaults(func=cmd_f0_stats)
+
+    f1_parser = sub.add_parser("f1", help="infraestructura de experimentos")
+    f1_sub = f1_parser.add_subparsers(dest="f1_comando", required=True)
+
+    p = f1_sub.add_parser("run", help="entrena y evalúa un modelo con las semillas de config/experimentos.yaml -> resultados/")
+    p.add_argument("--modelo", required=True, choices=("trivial", "humo"))
+    p.add_argument("--particion", default="todas", choices=("todas", "aleatoria", "repositorio", "temporal"))
+    p.add_argument("--barajar", action="store_true", help="baraja las etiquetas de entrenamiento (LEAKAGE.md §7.1)")
+    p.set_defaults(func=cmd_f1_run)
+
+    p = f1_sub.add_parser("fuga-aleatoria", help="LEAKAGE.md §7.1 en las tres particiones -> docs/F1_ETIQUETAS_ALEATORIAS.md")
+    p.set_defaults(func=cmd_f1_fuga_aleatoria)
 
     args = parser.parse_args(argv)
     return args.func(args)
