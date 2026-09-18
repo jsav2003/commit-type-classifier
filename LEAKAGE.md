@@ -278,7 +278,7 @@ soporte mínimo no se tocaron.
 
 ---
 
-### Decisión abierta: referencias a issues (`Fixes #123`, `Closes #456`)
+### Decisión cerrada: referencias a issues (`Fixes #123`, `Closes #456`)
 
 Es señal legítima del dominio (el autor está diciendo qué arregla el commit) y a la
 vez una fuga casi perfecta si el issue tiene un tipo asociado. Posición por defecto:
@@ -287,6 +287,15 @@ vez una fuga casi perfecta si el issue tiene un tipo asociado. Posición por def
 señal por sí sola y decidir con el número delante, no a priori. En la F0 aparece en el
 21,2% de los `fix`, 8,0% de los `feat`, 3,9% de los `docs` y 1,3% de los `refactor`
 (`docs/F0_ESTADISTICAS.md` §5).
+
+**Cerrada el 2026-09-18, en la F2: la bandera no entra.** Medida como ablación
+(`clasico_lr_issue` en `docs/F2_BASELINES.md`), mueve el F1 macro entre -0,67 y +0,99
+puntos según el fold, con el signo cambiado entre unos y otros. La razón de fondo es
+anterior al número y pesa más: el patrón que la calcula exige una de las palabras
+`close`/`fix`/`resolve` pegada a la referencia, y el TF-IDF del mensaje ya las ve. No
+es información nueva, es el mensaje reempaquetado — y construido sobre el nombre de una
+de las cuatro clases. El texto se sigue conservando y la bandera se queda en el dataset
+como metadato, fuera de `experimento.ENTRADAS` (DESIGN.md §6.2).
 
 ## 7.1 · Fuga por etiquetas aleatorias
 
@@ -366,6 +375,35 @@ depende de la etiqueta.
   semilla baraja distinto.
 - La corrida es determinista: volver a correrla en la misma máquina da el mismo JSON,
   byte a byte.
+
+### Repetida sobre el clásico de la F2 (2026-09-18)
+
+La corrida de arriba usa el modelo de humo, que solo mira el mensaje. El clásico de la
+F2 estrena rasgos —las extensiones de los archivos, la regla de §6.1, los verbos, los
+conteos del diff— y cada rasgo nuevo es un camino nuevo por el que la etiqueta podría
+colarse, así que la prueba se repite sobre `clasico_lr`. Mismo criterio, misma
+tolerancia. La tabla vive también en `docs/F2_BASELINES.md`, generada.
+
+**Pasa: 7 de 7 folds.**
+
+| partición | fold | techo del azar | exactitud, barajadas | exactitud, control | exceso |
+|---|---|---:|---:|---:|---:|
+| aleatoria | — | 55,2% | 54,0% | 82,8% | -1,3 |
+| repositorio | angular-cli | 46,2% | 45,0% | 65,8% | -1,2 |
+| repositorio | nuxt | 49,9% | 49,3% | 85,4% | -0,6 |
+| repositorio | svelte | 73,0% | 60,1% | 87,0% | -13,0 |
+| repositorio | vite | 53,3% | 52,0% | 81,3% | -1,3 |
+| repositorio | vitest | 53,7% | 52,5% | 79,8% | -1,2 |
+| temporal | — | 58,4% | 56,8% | 83,4% | -1,6 |
+
+- **El reparo de la corrida de la F1 desaparece.** Allí el control tenía poco margen en
+  angular-cli (+8,3 puntos sobre el techo) y en svelte (+5,6), y se dijo que en esos dos
+  folds la prueba demostraba menos. Con el clásico el control saca +19,6 y +14,0: el
+  montaje sí aprende, y que con las etiquetas barajadas no aprenda nada significa algo.
+- En svelte el modelo barajado queda 13 puntos por debajo del techo. No es un problema:
+  ese repo tiene el 73% de sus commits en una sola clase, y un modelo que reparte
+  predicciones entre cuatro clases al azar pierde mucho contra el que siempre dice la
+  mayoritaria.
 
 ## Sesgo de selección (no es leakage, pero se registra aquí por relación directa)
 

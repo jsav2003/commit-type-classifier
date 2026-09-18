@@ -132,7 +132,15 @@ Lo que la F2 tiene que saber antes de empezar:
 1. **`refactor` es la clase minoritaria, con ~1.090 ejemplos esperados.** Desde el
    primer experimento se reporta F1 por clase (§7.4), no solo exactitud ni F1 macro, y
    se considera reponderar (riesgo de §9). Si se repondera, la decisión se documenta
-   con el número delante.
+   con el número delante. **Decidido el 2026-09-18, en la F2: se repondera.** Con
+   `class_weight="balanced"`, el F1 de `refactor` sube en 6 de los 7 folds —
+   +26,8 puntos en angular-cli (0,286 → 0,554), +14,0 en la temporal, +11,3 en vite,
+   +8,7 en vitest— y baja solo en nuxt (-4,1). El F1 macro sube en 6 de 7 y la
+   exactitud baja en 6 de 7. Por §7.4 este proyecto mira el F1 por clase antes que la
+   exactitud, así que el clásico de referencia es `clasico_lr_balanceado`; el no
+   reponderado se sigue reportando al lado. (Una de esas 6 mejoras es el fold de
+   svelte, con 1 solo `refactor` en prueba, y por §5 ahí la diferencia no significa
+   nada: se cuenta y se declara, no se esconde.)
 2. **svelte no aporta casi ningún `refactor`.** Su 0,2% refleja la costumbre del
    proyecto al etiquetar, no que no refactorice. En la partición por repositorio, un
    fold con svelte en prueba tiene un F1 de `refactor` indefinido o puro ruido: se
@@ -241,6 +249,33 @@ Modelos: regresión logística y gradient boosting.
 
 **Aquí tú eliges qué mirar.** Esa es la definición del enfoque clásico, y hay que
 decirlo así en el informe.
+
+**Qué mira, en concreto.** _(Fijado el 2026-09-18, en la F2. Código en
+`src/ccls/modelos.py`, función `rasgos`; resultados en `docs/F2_BASELINES.md`.)_
+
+- **Del mensaje:** TF-IDF de palabras y bigramas (`min_df=2`, `sublinear_tf`), la
+  longitud, y una lista de 22 verbos típicos fijada **a priori** con vocabulario
+  general de mensajes de commit. No se escogió midiendo sobre el dataset: ajustarla
+  después de ver el resultado sería elegir el rasgo con el número delante.
+- **Del diff:** líneas agregadas y eliminadas (en logaritmo), la proporción entre
+  ambas, número de archivos y de binarios. **El texto del diff no entra en la F2.** No
+  es por costo: la prueba de correlación de §7.3 se midió sobre el mensaje y los
+  archivos, y meterle el texto del diff al modelo obliga a volver a correrla sobre sus
+  tokens antes de creerle a los números. Queda declarado como pendiente, no omitido.
+- **De los archivos:** el conjunto de extensiones, si toca tests, si toca
+  documentación, y la regla de §6.1 ("todos los archivos son `.md`/`.rst`/`.txt`") como
+  rasgo explícito — el conjunto de extensiones sabe decir "hay alguna `.md`", no "todas
+  son `.md`".
+
+**`tiene_referencia_issue` no entra.** _(Decidido el 2026-09-18.)_ La bandera se
+calculó en la F0 y se dejó fuera de `experimento.ENTRADAS` a propósito, para decidir en
+la F2 con el número delante. Medida como ablación (`clasico_lr_issue`), mueve el F1
+macro entre -0,67 y +0,99 puntos según el fold, con el signo cambiado entre unos y
+otros: no aporta. La razón de fondo es anterior al número y es la que vale: el patrón
+que la calcula exige una de las palabras `close`/`fix`/`resolve` pegada a la
+referencia, y el TF-IDF del mensaje ya las ve. No es información nueva, es el mensaje
+reempaquetado — y construido sobre el nombre de una de las cuatro clases. Se queda en
+el dataset como metadato y fuera de las entradas.
 
 ### 6.3 Deep learning con transfer learning
 

@@ -33,7 +33,10 @@ RESULTADOS_DIR = Path("resultados")
 F1_FUGA_PATH = Path("docs/F1_ETIQUETAS_ALEATORIAS.md")
 
 # DESIGN.md §4.3. Las banderas de build.py (tiene_referencia_issue, es_bot,
-# diff_truncado...) no entran por defecto: se miden en la F2.
+# diff_truncado...) no entran. `tiene_referencia_issue` se midió en la F2 y se queda
+# fuera: el patrón que la calcula exige las palabras close/fix/resolve, que el TF-IDF
+# del mensaje ya ve (DESIGN.md §6.2, ablación clasico_lr_issue). Un experimento que
+# necesite una entrada de más la declara en f2.EXPERIMENTOS y el runner se la pasa.
 ENTRADAS = (
     "message", "diff", "files", "n_files", "lines_added", "lines_deleted",
     "n_binarios", "extensiones", "toca_tests", "toca_docs",

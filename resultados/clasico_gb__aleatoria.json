@@ -1,0 +1,423 @@
+{
+  "experimento": {
+    "modelo": "clasico_gb",
+    "particion": "aleatoria",
+    "etiquetas_barajadas": false,
+    "semillas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "entradas": [
+      "message",
+      "diff",
+      "files",
+      "n_files",
+      "lines_added",
+      "lines_deleted",
+      "n_binarios",
+      "extensiones",
+      "toca_tests",
+      "toca_docs"
+    ]
+  },
+  "resumen": [
+    {
+      "fold": "aleatoria",
+      "n_prueba": 1999,
+      "exactitud": {
+        "n": 5,
+        "media": 0.8228,
+        "ic_inf": 0.814,
+        "ic_sup": 0.8317
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.7359,
+        "ic_inf": 0.7159,
+        "ic_sup": 0.7559
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.5523,
+        "ic_inf": 0.5523,
+        "ic_sup": 0.5523
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "f1": {
+            "n": 5,
+            "media": 0.8699,
+            "ic_inf": 0.8646,
+            "ic_sup": 0.8753
+          }
+        },
+        "feat": {
+          "n_prueba": 313,
+          "f1": {
+            "n": 5,
+            "media": 0.5877,
+            "ic_inf": 0.5529,
+            "ic_sup": 0.6226
+          }
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "f1": {
+            "n": 5,
+            "media": 0.5539,
+            "ic_inf": 0.5082,
+            "ic_sup": 0.5996
+          }
+        },
+        "docs": {
+          "n_prueba": 418,
+          "f1": {
+            "n": 5,
+            "media": 0.932,
+            "ic_inf": 0.9222,
+            "ic_sup": 0.9419
+          }
+        }
+      }
+    }
+  ],
+  "corridas": [
+    {
+      "semilla": 1,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.8284,
+      "f1_macro": 0.7434,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1251,
+          "precision": 0.8241,
+          "cobertura": 0.9339,
+          "f1": 0.8756
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 244,
+          "precision": 0.6926,
+          "cobertura": 0.5399,
+          "f1": 0.6068
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 104,
+          "precision": 0.7212,
+          "cobertura": 0.4573,
+          "f1": 0.5597
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 400,
+          "precision": 0.9525,
+          "cobertura": 0.9115,
+          "f1": 0.9315
+        }
+      },
+      "confusion": [
+        [
+          1031,
+          51,
+          14,
+          8
+        ],
+        [
+          121,
+          169,
+          12,
+          11
+        ],
+        [
+          73,
+          16,
+          75,
+          0
+        ],
+        [
+          26,
+          8,
+          3,
+          381
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.8224,
+      "f1_macro": 0.7388,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1269,
+          "precision": 0.8117,
+          "cobertura": 0.933,
+          "f1": 0.8681
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 231,
+          "precision": 0.6883,
+          "cobertura": 0.508,
+          "f1": 0.5846
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 106,
+          "precision": 0.7264,
+          "cobertura": 0.4695,
+          "f1": 0.5704
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 393,
+          "precision": 0.9618,
+          "cobertura": 0.9043,
+          "f1": 0.9322
+        }
+      },
+      "confusion": [
+        [
+          1030,
+          48,
+          14,
+          12
+        ],
+        [
+          140,
+          159,
+          12,
+          2
+        ],
+        [
+          71,
+          15,
+          77,
+          1
+        ],
+        [
+          28,
+          9,
+          3,
+          378
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.8204,
+      "f1_macro": 0.7261,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1273,
+          "precision": 0.8099,
+          "cobertura": 0.9339,
+          "f1": 0.8675
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 221,
+          "precision": 0.6878,
+          "cobertura": 0.4856,
+          "f1": 0.5693
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 104,
+          "precision": 0.6731,
+          "cobertura": 0.4268,
+          "f1": 0.5224
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 401,
+          "precision": 0.9651,
+          "cobertura": 0.9258,
+          "f1": 0.9451
+        }
+      },
+      "confusion": [
+        [
+          1031,
+          44,
+          21,
+          8
+        ],
+        [
+          143,
+          152,
+          13,
+          5
+        ],
+        [
+          75,
+          18,
+          70,
+          1
+        ],
+        [
+          24,
+          7,
+          0,
+          387
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.8304,
+      "f1_macro": 0.7566,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1239,
+          "precision": 0.8257,
+          "cobertura": 0.9266,
+          "f1": 0.8732
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 248,
+          "precision": 0.7056,
+          "cobertura": 0.5591,
+          "f1": 0.6239
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 111,
+          "precision": 0.7477,
+          "cobertura": 0.5061,
+          "f1": 0.6036
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 401,
+          "precision": 0.9451,
+          "cobertura": 0.9067,
+          "f1": 0.9255
+        }
+      },
+      "confusion": [
+        [
+          1023,
+          49,
+          16,
+          16
+        ],
+        [
+          124,
+          175,
+          9,
+          5
+        ],
+        [
+          62,
+          18,
+          83,
+          1
+        ],
+        [
+          30,
+          6,
+          3,
+          379
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.8124,
+      "f1_macro": 0.7147,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1265,
+          "precision": 0.8103,
+          "cobertura": 0.9284,
+          "f1": 0.8653
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 232,
+          "precision": 0.6509,
+          "cobertura": 0.4824,
+          "f1": 0.5541
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 97,
+          "precision": 0.6907,
+          "cobertura": 0.4085,
+          "f1": 0.5134
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 405,
+          "precision": 0.9407,
+          "cobertura": 0.9115,
+          "f1": 0.9259
+        }
+      },
+      "confusion": [
+        [
+          1025,
+          50,
+          14,
+          15
+        ],
+        [
+          139,
+          151,
+          14,
+          9
+        ],
+        [
+          77,
+          20,
+          67,
+          0
+        ],
+        [
+          24,
+          11,
+          2,
+          381
+        ]
+      ]
+    }
+  ],
+  "dataset": {
+    "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5"
+  },
+  "versiones": {
+    "python": "3.12.3",
+    "numpy": "2.2.1",
+    "scikit-learn": "1.6.1"
+  }
+}

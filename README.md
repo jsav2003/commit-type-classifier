@@ -14,7 +14,8 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | Piloto (mide 5 supuestos del diseño antes de comprometerse a la F0) | ✅ hecho — ver `docs/PILOTO.md` |
 | F0 · Recolección de datos | ✅ **cerrada** el 2026-09-15 con la regla de rescate: 10.000 commits de 5 repos, reproducible byte a byte, pruebas de fuga del prefijo y de correlación en verde (`LEAKAGE.md`). La de etiquetas aleatorias (§7.1) necesita la F1 |
 | F1 · Infraestructura de experimentos | ✅ **cerrada** el 2026-09-15: `python -m ccls f1 run` entrena, evalúa y guarda con las tres particiones y cinco semillas. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds** (`docs/F1_ETIQUETAS_ALEATORIAS.md`) |
-| F2-F6 | no empezadas |
+| F2 · Baselines | ✅ **cerrada** el 2026-09-18: trivial, la regla de `docs` de §6.1 y el clásico (TF-IDF + rasgos, con regresión logística y gradient boosting), en las tres particiones con 5 semillas e intervalos. Tablas en `docs/F2_BASELINES.md` |
+| F3-F6 | no empezadas |
 
 ## Resultado del piloto (resumen)
 
@@ -57,6 +58,43 @@ historial desde un SHA fijado. Detalle en
 - `data/processed/manifest.csv` (repo, SHA, etiqueta, fecha) define el dataset y va en
   git; el `.jsonl` con los diffs no. `manifest_sha256`:
   `0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5`.
+
+## Resultados de los baselines (F2)
+
+Tablas completas, por clase y fold por fold, en
+[`docs/F2_BASELINES.md`](docs/F2_BASELINES.md). Lo que hay que saber:
+
+**`docs` casi no requiere modelo.** La regla de una línea de `DESIGN.md` §6.1 — todos
+los archivos tocados son `.md`/`.rst`/`.txt` — saca un F1 de `docs` de **0,80 a 0,91**
+según el fold, con precisión de ~0,99. Cualquier F1 macro alto hay que leerlo restando
+eso: una parte viene de una señal estructural, no de haber aprendido la tarea.
+
+**La partición aleatoria infla el resultado ~18 puntos.** Es el punto 1 de §11:
+
+| modelo | F1 macro, aleatoria | F1 macro, peor fold por repositorio | caída |
+|---|---:|---:|---:|
+| `trivial` | 17,8% | 15,8% | -2,0 |
+| `regla_docs` | 41,4% | 39,1% | -2,3 |
+| `clasico_lr` | 74,5% | 56,7% | **-17,8** |
+| `clasico_gb` | 73,6% | 54,2% | **-19,4** |
+
+**`refactor` es donde se cae todo.** En la partición principal, el clásico sin
+reponderar saca **0,286** de F1 en `refactor` en angular-cli — el fold con 468 ejemplos,
+el más favorable. Reponderar (`class_weight="balanced"`) lo sube a **0,554**, a costa de
+exactitud. Por §7.4 el proyecto mira el F1 por clase antes que la exactitud, así que el
+clásico de referencia es el reponderado; el otro se reporta al lado (`DESIGN.md` §4.4).
+
+**Gradient boosting no le gana a la regresión logística** en ninguna partición, y en
+angular-cli pierde por 5 puntos de F1 macro.
+
+**Los rasgos hechos a mano sí aportan.** Solo con el mensaje, el F1 macro en angular-cli
+cae de 59,2% a 36,8%. `tiene_referencia_issue` **no** aporta y no entra: mueve menos de
+1 punto y el patrón que la calcula exige las palabras `close`/`fix`/`resolve`, que el
+TF-IDF ya ve (`DESIGN.md` §6.2).
+
+**La prueba de etiquetas aleatorias se repitió sobre el clásico** y pasa en 7 de 7
+folds, ahora con un control que saca entre 14 y 35 puntos sobre el techo del azar
+(`LEAKAGE.md` §7.1).
 
 ## Limitación principal: diversidad de ecosistema, no tamaño
 
@@ -119,6 +157,9 @@ python -m ccls f0 build                # extrae los f0_repos -> data/processed/
 python -m ccls f0 stats                # escribe docs/F0_ESTADISTICAS.md
 python -m ccls f1 run --modelo humo    # tres particiones x 5 semillas -> resultados/*.json
 python -m ccls f1 fuga-aleatoria       # LEAKAGE.md §7.1 -> docs/F1_ETIQUETAS_ALEATORIAS.md
+python -m ccls f2 run                  # los baselines de la F2 -> resultados/*.json
+python -m ccls f1 run --modelo clasico_lr --barajar   # §7.1 sobre el clásico
+python -m ccls f2 report               # escribe docs/F2_BASELINES.md
 ```
 
 Las particiones (DESIGN.md §5) y las semillas están en `config/experimentos.yaml`:
@@ -152,11 +193,12 @@ LEAKAGE.md                las pruebas de fuga (§7.1 aleatoria, §7.2 prefijo, �
 config/repos.yaml         criterios de admisión, candidatos del piloto, repos y parámetros de la F0
 config/experimentos.yaml  semillas, particiones y criterio de la prueba de etiquetas aleatorias (F1)
 src/ccls/                 paquete: gitutil, label, clone, discover, pilot, report, build, stats, fuga_correlacion,
-                          particiones, metricas, modelos, experimento, cli
+                          particiones, metricas, modelos, experimento, f2, cli
 tests/                    pytest — pruebas de fuga, parser de git log, construcción del dataset, particiones, runner
 docs/PILOTO.md            resultados del piloto (Parte B), generado, no escrito a mano
 docs/F0_ESTADISTICAS.md   estadísticas descriptivas del dataset, generado, no escrito a mano
 docs/F1_ETIQUETAS_ALEATORIAS.md  prueba §7.1, generado, no escrito a mano
+docs/F2_BASELINES.md      tablas de los baselines de la F2, generado, no escrito a mano
 resultados/               un JSON por modelo × partición (corridas, resumen, versiones, manifest_sha256)
 data/processed/           manifest.csv y dataset_meta.json en git; dataset.jsonl fuera
 ```

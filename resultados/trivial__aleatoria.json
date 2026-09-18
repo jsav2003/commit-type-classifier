@@ -1,0 +1,423 @@
+{
+  "experimento": {
+    "modelo": "trivial",
+    "particion": "aleatoria",
+    "etiquetas_barajadas": false,
+    "semillas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "entradas": [
+      "message",
+      "diff",
+      "files",
+      "n_files",
+      "lines_added",
+      "lines_deleted",
+      "n_binarios",
+      "extensiones",
+      "toca_tests",
+      "toca_docs"
+    ]
+  },
+  "resumen": [
+    {
+      "fold": "aleatoria",
+      "n_prueba": 1999,
+      "exactitud": {
+        "n": 5,
+        "media": 0.5523,
+        "ic_inf": 0.5523,
+        "ic_sup": 0.5523
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.1779,
+        "ic_inf": 0.1779,
+        "ic_sup": 0.1779
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.5523,
+        "ic_inf": 0.5523,
+        "ic_sup": 0.5523
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "f1": {
+            "n": 5,
+            "media": 0.7116,
+            "ic_inf": 0.7116,
+            "ic_sup": 0.7116
+          }
+        },
+        "feat": {
+          "n_prueba": 313,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "docs": {
+          "n_prueba": 418,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "corridas": [
+    {
+      "semilla": 1,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.5523,
+      "f1_macro": 0.1779,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1999,
+          "precision": 0.5523,
+          "cobertura": 1.0,
+          "f1": 0.7116
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1104,
+          0,
+          0,
+          0
+        ],
+        [
+          313,
+          0,
+          0,
+          0
+        ],
+        [
+          164,
+          0,
+          0,
+          0
+        ],
+        [
+          418,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.5523,
+      "f1_macro": 0.1779,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1999,
+          "precision": 0.5523,
+          "cobertura": 1.0,
+          "f1": 0.7116
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1104,
+          0,
+          0,
+          0
+        ],
+        [
+          313,
+          0,
+          0,
+          0
+        ],
+        [
+          164,
+          0,
+          0,
+          0
+        ],
+        [
+          418,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.5523,
+      "f1_macro": 0.1779,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1999,
+          "precision": 0.5523,
+          "cobertura": 1.0,
+          "f1": 0.7116
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1104,
+          0,
+          0,
+          0
+        ],
+        [
+          313,
+          0,
+          0,
+          0
+        ],
+        [
+          164,
+          0,
+          0,
+          0
+        ],
+        [
+          418,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.5523,
+      "f1_macro": 0.1779,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1999,
+          "precision": 0.5523,
+          "cobertura": 1.0,
+          "f1": 0.7116
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1104,
+          0,
+          0,
+          0
+        ],
+        [
+          313,
+          0,
+          0,
+          0
+        ],
+        [
+          164,
+          0,
+          0,
+          0
+        ],
+        [
+          418,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "aleatoria",
+      "n_entrenamiento": 8001,
+      "n_prueba": 1999,
+      "exactitud": 0.5523,
+      "f1_macro": 0.1779,
+      "tasa_mayoritaria": 0.5523,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1104,
+          "n_predichos": 1999,
+          "precision": 0.5523,
+          "cobertura": 1.0,
+          "f1": 0.7116
+        },
+        "feat": {
+          "n_prueba": 313,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 164,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 418,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1104,
+          0,
+          0,
+          0
+        ],
+        [
+          313,
+          0,
+          0,
+          0
+        ],
+        [
+          164,
+          0,
+          0,
+          0
+        ],
+        [
+          418,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "dataset": {
+    "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5"
+  },
+  "versiones": {
+    "python": "3.12.3",
+    "numpy": "2.2.1",
+    "scikit-learn": "1.6.1"
+  }
+}
