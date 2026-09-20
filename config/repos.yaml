@@ -113,6 +113,56 @@ f0_repos:
   - owner_repo: vitest-dev/vitest
     sha: 05982297d0fb046d41e7accd89064f900071dd0a
 
+# --------------------------------------------------------------------------- #
+# F3 · techo humano (DESIGN.md §4.2 y §7.5)
+# --------------------------------------------------------------------------- #
+
+# Estrato A de la muestra humana: repos SIN convención de commits, ajenos al dataset
+# de entrenamiento. Son los cuatro que el piloto rechazó por tasa de prefijo baja
+# (docs/PILOTO.md, B2.1), así que ya están medidos y clonados. Ninguno está en
+# f0_repos y ninguno aportó un commit al dataset. `sha` es el HEAD del clon que midió
+# el piloto (docs/pilot_results.json -> meta), igual que en f0_repos.
+f3_repos:
+  - owner_repo: python-poetry/poetry
+    sha: be56ff07db06e9b82574648433ca228e4cac549b
+    lenguaje: python
+    nota: tasa de prefijo 21,1% en el piloto
+  - owner_repo: rust-lang/rustfmt
+    sha: 2f80bd5ba4be51cd7bc81df3cf9224ce5b4c96c3
+    lenguaje: rust
+    nota: tasa de prefijo 13,2% en el piloto
+  - owner_repo: spf13/cobra
+    sha: adbc8813901bba65827259daa8e22ff94ec1f30e
+    lenguaje: go
+    nota: tasa de prefijo 4,4% en el piloto
+  - owner_repo: hashicorp/hcl
+    sha: 2f8831b8351c51cd74365975bbb1d2c28f91de7b
+    lenguaje: go
+    nota: tasa de prefijo 0,3% en el piloto
+
+f3_muestreo:
+  # Misma idea que f0_extraccion.semilla: el orden sale de sha256, no de un generador.
+  semilla: 20260920
+  # Estrato A: solo entran commits donde label.clasificar() da clase=None, es decir,
+  # sin prefijo válido. Con esto el estrato es "sin convención" de verdad y no una
+  # mezcla. (Es el criterio inverso al de admisión de la F0, por eso vive aquí y no
+  # en criterios_admision, cuyo piso tasa_prefijo_valido_minima es de otra cosa.)
+  n_estrato_a: 150
+  # Estrato B: del dataset de la F0, con la etiqueta declarada oculta. Cuotas por clase
+  # declarada, no proporcionales: con la proporción real caerían ~12 `refactor` y por
+  # DESIGN.md §5 eso no es una métrica. El acuerdo global se reporta reponderado a las
+  # proporciones reales del dataset.
+  cuotas_estrato_b:
+    fix: 40
+    feat: 35
+    refactor: 40
+    docs: 35
+  # Ítems repetidos al final, sin avisar: el acuerdo del anotador consigo mismo es la
+  # cota de ruido del propio techo. Mitad de cada estrato, tomados de los primeros
+  # `ventana_repeticiones` puestos del orden para que pase tiempo entre las dos vistas.
+  n_repeticiones: 50
+  ventana_repeticiones: 150
+
 f0_excluidos:
   - owner_repo: vuejs/core
     razon: tasa de prefijo 47.8%, por debajo de 0.50. Ya está clonado y medido,

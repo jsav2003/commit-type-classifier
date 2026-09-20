@@ -1,0 +1,68 @@
+{
+  "clave_sha256": "da59ba1afb66f71e214f3fce57144ff553f74d4487cb3b9055eb0df9d5460c1c",
+  "estrato_a": 150,
+  "estrato_a_por_repo": {
+    "hashicorp/hcl": 38,
+    "python-poetry/poetry": 38,
+    "rust-lang/rustfmt": 37,
+    "spf13/cobra": 37
+  },
+  "estrato_b_por_clase": {
+    "docs": 35,
+    "feat": 35,
+    "fix": 40,
+    "refactor": 40
+  },
+  "git_version": "git version 2.51.0.windows.1",
+  "hoja_sha256": "42a4ef08b50f18be24639b47456372746d65b8aba14ed3ad398078ebcc829ab8",
+  "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5",
+  "n_items": 350,
+  "n_originales": 300,
+  "n_repeticiones": 50,
+  "nota_checksums": "hoja_sha256 y clave_sha256 identifican la muestra: mismos commits, mismo orden. registros_jsonl_sha256 depende además de cómo esta versión de git genera los diffs.",
+  "parametros": {
+    "cuotas_estrato_b": {
+      "docs": 35,
+      "feat": 35,
+      "fix": 40,
+      "refactor": 40
+    },
+    "diff_max_chars": 16000,
+    "estrato_a": "git log --no-merges --first-parent <sha>, solo commits sin prefijo de convención",
+    "n_estrato_a": 150,
+    "n_repeticiones": 50,
+    "rutas_excluidas": [
+      ".changeset/"
+    ],
+    "semilla": 20260920,
+    "ventana_repeticiones": 150
+  },
+  "registros_jsonl_sha256": "86b856e54fae4acaae6574937a276550ec3e690941a272d05004d2986a14f3ec",
+  "repos_estrato_a": [
+    {
+      "muestreados": 38,
+      "owner_repo": "python-poetry/poetry",
+      "sha": "be56ff07db06e9b82574648433ca228e4cac549b",
+      "sin_prefijo": 1980
+    },
+    {
+      "muestreados": 37,
+      "owner_repo": "rust-lang/rustfmt",
+      "sha": "2f80bd5ba4be51cd7bc81df3cf9224ce5b4c96c3",
+      "sin_prefijo": 1143
+    },
+    {
+      "muestreados": 37,
+      "owner_repo": "spf13/cobra",
+      "sha": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "sin_prefijo": 665
+    },
+    {
+      "muestreados": 38,
+      "owner_repo": "hashicorp/hcl",
+      "sha": "2f8831b8351c51cd74365975bbb1d2c28f91de7b",
+      "sin_prefijo": 238
+    }
+  ],
+  "version_formato": 1
+}

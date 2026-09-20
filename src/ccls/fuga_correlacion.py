@@ -37,11 +37,12 @@ predice clases (".md" predice docs, DESIGN.md §6.1).
 
 from __future__ import annotations
 
-import math
 import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+
+from ccls.metricas import wilson
 
 CLASES = ("fix", "feat", "refactor", "docs")
 UMBRAL_GANANCIA = 0.5
@@ -126,10 +127,7 @@ def _texto(r: dict, campo: str) -> str:
 def _wilson_inferior(k: int, n: int) -> float:
     if n == 0:
         return 0.0
-    p = k / n
-    centro = p + _Z**2 / (2 * n)
-    margen = _Z * math.sqrt(p * (1 - p) / n + _Z**2 / (4 * n * n))
-    return (centro - margen) / (1 + _Z**2 / n)
+    return wilson(k, n, _Z)[0]
 
 
 @dataclass

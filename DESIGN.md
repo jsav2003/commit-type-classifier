@@ -98,6 +98,28 @@ al humano o al prefijo. Esto establece el **techo realista**: si tú y el autor 
 coinciden el 80% de las veces, ningún modelo debería reportar 95% sin levantar
 sospechas.
 
+**Cómo queda resuelta la contradicción entre §4.1 y §7.5: dos estratos.** _(Decidido el
+2026-09-20, al abrir la F3, antes de etiquetar nada.)_ §4.1 pide commits de repos sin
+convención; §7.5 define el techo como el acuerdo con la etiqueta declarada, que solo
+existe donde hay convención. Sobre una misma muestra no se pueden cumplir las dos. La
+muestra de 300 tiene dos estratos de 150, mezclados en un solo orden para que quien
+etiqueta no sepa cuál mira:
+
+- **A · sin convención.** Commits sin prefijo válido de los cuatro repos que el piloto
+  rechazó por tasa baja (`config/repos.yaml` → `f3_repos`: poetry, rustfmt, cobra, hcl).
+  Mide el acuerdo humano ↔ modelo en el caso de uso real. No hay etiqueta declarada.
+- **B · con convención.** Commits del dataset de la F0, con el prefijo ya quitado, por
+  cuotas de clase (40 `fix` / 35 `feat` / 40 `refactor` / 35 `docs`) porque la
+  proporción real dejaría ~12 `refactor`. Mide el techo: acuerdo humano ↔ etiqueta
+  declarada, reponderado a las proporciones reales del dataset.
+
+Se añaden 50 ítems repetidos, sin avisar, para medir el acuerdo del anotador consigo
+mismo. El anotador ve las entradas de §4.3 y nada más (no el texto del diff, que el
+modelo de la F2 tampoco ve), con una opción `?` cuyo uso se reporta. La hoja que lee la
+herramienta de etiquetado no contiene la etiqueta declarada, ni el repo, ni el SHA.
+Limitación declarada: las rutas de archivo delatan el proyecto, así que el estrato no
+queda ciego del todo; lo que queda ciego es la etiqueta.
+
 ### 4.3 Entradas del modelo
 
 Por cada commit:
@@ -327,6 +349,13 @@ predice `refactor` es un modelo roto.
 El conjunto de 300 commits etiquetados a mano fija el techo. Si tu acuerdo con la
 etiqueta declarada es del 78%, un modelo que reporta 92% está aprendiendo algo
 distinto de la tarea, y hay que investigarlo.
+
+**Qué muestra mide qué.** _(Fijado el 2026-09-20, en la F3.)_ El techo es el acuerdo
+humano ↔ etiqueta declarada **del estrato B** (§4.2). El estrato A no tiene etiqueta
+declarada y no entra en el techo: sirve para medir cuánto se parece el modelo al humano
+fuera de la convención. Los dos estratos no se promedian entre sí en ninguna tabla. Un
+techo bajo es un resultado, no un fallo (§9): no se re-muestrea ni se ajusta nada
+después de ver la cifra.
 
 ### 7.6 Análisis de errores
 

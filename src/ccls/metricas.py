@@ -56,3 +56,29 @@ def intervalo(valores: list[float | None], nivel: float = 0.95) -> dict | None:
         return {"n": n, "media": media, "ic_inf": None, "ic_sup": None}
     h = t_student.ppf((1 + nivel) / 2, n - 1) * statistics.stdev(valores) / math.sqrt(n)
     return {"n": n, "media": media, "ic_inf": media - h, "ic_sup": media + h}
+
+
+def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """Intervalo de Wilson para una proporción k/n. Sin ejemplos no hay intervalo:
+    (0, 1), que es "no sé nada", no (0, 0)."""
+    if n == 0:
+        return 0.0, 1.0
+    p = k / n
+    centro = p + z**2 / (2 * n)
+    margen = z * math.sqrt(p * (1 - p) / n + z**2 / (4 * n * n))
+    denom = 1 + z**2 / n
+    return (centro - margen) / denom, (centro + margen) / denom
+
+
+def kappa_cohen(a: list[str], b: list[str], clases: tuple[str, ...]) -> float | None:
+    """Kappa de Cohen entre dos anotaciones de los mismos ítems. None si no está
+    definido: sin ítems, o cuando el acuerdo esperado por azar es 1 (los dos dicen
+    siempre la misma clase y no hay nada que corregir)."""
+    n = len(a)
+    if n == 0:
+        return None
+    observado = sum(x == y for x, y in zip(a, b, strict=True)) / n
+    esperado = sum((a.count(c) / n) * (b.count(c) / n) for c in clases)
+    if esperado >= 1:
+        return None
+    return (observado - esperado) / (1 - esperado)

@@ -151,3 +151,44 @@ def test_71_render_resume_los_estados():
     filas = _prueba_71("tramposo", "temporal", entradas=None)
     md = experimento.render_fuga_aleatoria({"temporal": filas}, "tramposo", [1, 2, 3], 0.02, "abc")
     assert "0 pasan, 1 fallan, 0 no concluyentes" in md
+
+
+def test_wilson_coincide_con_la_cota_de_la_fuga_de_correlacion():
+    from ccls.fuga_correlacion import _wilson_inferior
+    from ccls.metricas import wilson
+
+    for k, n in [(0, 10), (7, 10), (10, 10), (55, 60), (1, 1000)]:
+        assert wilson(k, n)[0] == _wilson_inferior(k, n)
+
+
+def test_wilson_sin_ejemplos_no_dice_nada():
+    from ccls.metricas import wilson
+
+    assert wilson(0, 0) == (0.0, 1.0)
+
+
+def test_wilson_contiene_a_la_proporcion_y_se_estrecha_con_n():
+    from ccls.metricas import wilson
+
+    inf, sup = wilson(30, 40)
+    assert inf < 0.75 < sup
+    inf2, sup2 = wilson(300, 400)
+    assert sup2 - inf2 < sup - inf
+
+
+def test_kappa_perfecto_y_azar():
+    from ccls.metricas import kappa_cohen
+
+    clases = ("fix", "feat", "refactor", "docs")
+    a = ["fix", "feat", "refactor", "docs"] * 10
+    assert kappa_cohen(a, list(a), clases) == 1.0
+    # quien siempre dice `fix` no aporta nada más allá del azar
+    assert kappa_cohen(a, ["fix"] * len(a), clases) == 0.0
+
+
+def test_kappa_no_definido():
+    from ccls.metricas import kappa_cohen
+
+    clases = ("fix", "feat", "refactor", "docs")
+    assert kappa_cohen([], [], clases) is None
+    assert kappa_cohen(["fix"] * 5, ["fix"] * 5, clases) is None

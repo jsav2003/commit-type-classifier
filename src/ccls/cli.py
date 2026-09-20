@@ -349,6 +349,81 @@ def cmd_f2_report(args: argparse.Namespace) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# f3 build
+# --------------------------------------------------------------------------- #
+
+def cmd_f3_build(args: argparse.Namespace) -> int:
+    from ccls import f3
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    _, registros, manifest_sha256 = cargado
+    meta = f3.construir(_cargar_config(), registros, manifest_sha256)
+    print(f"{meta['n_items']} ítems ({meta['n_originales']} originales + {meta['n_repeticiones']} repeticiones)")
+    print(f"  estrato A por repo: {meta['estrato_a_por_repo']}")
+    print(f"  estrato B por clase: {meta['estrato_b_por_clase']}")
+    print(f"  hoja_sha256  {meta['hoja_sha256']}")
+    print(f"  clave_sha256 {meta['clave_sha256']}")
+    return 0
+
+
+def cmd_f3_label(args: argparse.Namespace) -> int:
+    from ccls import f3
+    if not f3.F3_HOJA_PATH.exists():
+        print(f"no existe {f3.F3_HOJA_PATH} (correr 'f3 build' primero)")
+        return 1
+    # Un mensaje con un carácter que la consola no sabe pintar (emoji, CJK) no debe tumbar
+    # el etiquetado a mitad de la hoja: se pinta un `?` y se sigue.
+    sys.stdout.reconfigure(errors="replace")
+    try:
+        f3.etiquetar(f3.cargar_hoja())
+    except KeyboardInterrupt:
+        print("\ninterrumpido; lo respondido ya está guardado.")
+    except RuntimeError as e:
+        print(e)
+        return 1
+    return 0
+
+
+def cmd_f3_predecir(args: argparse.Namespace) -> int:
+    from ccls import f3, stats
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    _, registros, _ = cargado
+    if not f3.F3_REGISTROS_PATH.exists():
+        print(f"no existe {f3.F3_REGISTROS_PATH} (correr 'f3 build' primero)")
+        return 1
+    lote = stats.cargar_jsonl(f3.F3_REGISTROS_PATH)
+    preds = f3.predecir(registros, lote)
+    sha = f3.escribir_predicciones(preds)
+    print(f"{len(preds)} predicciones de {f3.MODELO_F3} -> {f3.F3_PREDICCIONES_PATH}")
+    print(f"  sha256 {sha}")
+    return 0
+
+
+def cmd_f3_report(args: argparse.Namespace) -> int:
+    import hashlib
+    from ccls import build, f2, f3
+    for ruta in (f3.F3_CLAVE_PATH, f3.F3_META_PATH, f3.F3_PREDICCIONES_PATH, f3.F3_ANOTACIONES_PATH):
+        if not ruta.exists():
+            print(f"no existe {ruta} (correr 'f3 build', 'f3 label' y 'f3 predecir' primero)")
+            return 1
+    meta_f3 = json.loads(f3.F3_META_PATH.read_text(encoding="utf-8"))
+    meta_f0 = json.loads((build.PROCESSED_DIR / build.META_NAME).read_text(encoding="utf-8"))
+    try:
+        filas = f3.unir(f3.leer_clave(), f3.leer_anotaciones(), f3.leer_predicciones())
+    except RuntimeError as e:
+        print(e)
+        return 1
+    sha_preds = hashlib.sha256(f3.F3_PREDICCIONES_PATH.read_bytes()).hexdigest()
+    texto = f3.render(filas, meta_f3, meta_f0, f2.cargar(f2.REPONDERADO, "repositorio"), sha_preds)
+    f3.F3_REPORTE_PATH.write_bytes(texto.encode("utf-8"))
+    print(f"escrito {f3.F3_REPORTE_PATH}")
+    return 0
+
+
+# --------------------------------------------------------------------------- #
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ccls")
@@ -410,6 +485,21 @@ def main(argv: list[str] | None = None) -> int:
 
     p = f2_sub.add_parser("report", help="escribe docs/F2_BASELINES.md desde resultados/")
     p.set_defaults(func=cmd_f2_report)
+
+    f3_parser = sub.add_parser("f3", help="techo humano: 300 commits etiquetados a mano (DESIGN.md §4.2 y §7.5)")
+    f3_sub = f3_parser.add_subparsers(dest="f3_comando", required=True)
+
+    p = f3_sub.add_parser("build", help="muestrea los dos estratos y escribe la hoja ciega y la clave")
+    p.set_defaults(func=cmd_f3_build)
+
+    p = f3_sub.add_parser("label", help="etiqueta a mano, un commit por pantalla; reanudable")
+    p.set_defaults(func=cmd_f3_label)
+
+    p = f3_sub.add_parser("predecir", help="predice la muestra con el clasico de referencia, sin haber visto cada repo")
+    p.set_defaults(func=cmd_f3_predecir)
+
+    p = f3_sub.add_parser("report", help="escribe docs/F3_TECHO_HUMANO.md desde las anotaciones")
+    p.set_defaults(func=cmd_f3_report)
 
     args = parser.parse_args(argv)
     return args.func(args)

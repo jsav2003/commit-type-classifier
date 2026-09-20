@@ -1,0 +1,4398 @@
+{
+ "items": [
+  {
+   "files": [
+    "src/expr.rs",
+    "src/utils.rs",
+    "tests/target/multiline_string_in_macro_def.rs",
+    "tests/target/should_not_format_string_when_format_strings_is_not_set.rs"
+   ],
+   "id": "f3-0001",
+   "lines_added": 33,
+   "lines_deleted": 22,
+   "message": "Try to solve issue3456. (#3556)"
+  },
+  {
+   "files": [
+    "src/config.rs",
+    "tests/config/issue-1124.toml",
+    "tests/source/issue-1124.rs",
+    "tests/target/issue-1124.rs"
+   ],
+   "id": "f3-0002",
+   "lines_added": 39,
+   "lines_deleted": 35,
+   "message": "Fix a typo in the unstable options handling and address fallout"
+  },
+  {
+   "files": [
+    "ast/ast.go",
+    "ast/ast_test.go",
+    "decoder.go",
+    "decoder_test.go"
+   ],
+   "id": "f3-0003",
+   "lines_added": 72,
+   "lines_deleted": 4,
+   "message": "Decode into pointers"
+  },
+  {
+   "files": [
+    "docs/guide/index.md"
+   ],
+   "id": "f3-0004",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "update pnpm overrides URL link (#22464)\n\nCo-authored-by: 古月 <tao@guyues-Mac-mini-2.local>"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0005",
+   "lines_added": 132,
+   "lines_deleted": 2,
+   "message": "adding initial readme content"
+  },
+  {
+   "files": [
+    "packages/vitest/src/node/pool.ts"
+   ],
+   "id": "f3-0006",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "worker file url path (#207)"
+  },
+  {
+   "files": [
+    "decoder_test.go",
+    "hcl/lex.go",
+    "test-fixtures/basic_squish.hcl"
+   ],
+   "id": "f3-0007",
+   "lines_added": 11,
+   "lines_deleted": 1,
+   "message": "Fix broken parsing case"
+  },
+  {
+   "files": [
+    "docs/config/index.md",
+    "packages/browser/src/node/index.ts",
+    "packages/vitest/src/node/cli/cli-config.ts",
+    "packages/vitest/src/node/workspace.ts",
+    "packages/vitest/src/types/browser.ts",
+    "test/browser/vitest.config.mts"
+   ],
+   "id": "f3-0008",
+   "lines_added": 10,
+   "lines_deleted": 10,
+   "message": "rename indexScripts to orchestratorScripts (#5842)"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/application/index.ts",
+    "packages/schematics/angular/e2e/index.ts",
+    "packages/schematics/angular/library/index.ts",
+    "packages/schematics/angular/service-worker/index.ts",
+    "packages/schematics/angular/utility/paths.ts",
+    "packages/schematics/angular/utility/paths_spec.ts",
+    "packages/schematics/angular/web-worker/index.ts"
+   ],
+   "id": "f3-0009",
+   "lines_added": 81,
+   "lines_deleted": 32,
+   "message": "create `relativePathToWorkspaceRoot` helper and replace usages"
+  },
+  {
+   "files": [
+    "sites/svelte-5-preview/src/routes/docs/content/03-appendix/02-breaking-changes.md"
+   ],
+   "id": "f3-0010",
+   "lines_added": 3,
+   "lines_deleted": 1,
+   "message": "mention removal of `foreign` namespace (#12906)\n\nleftover from #12869"
+  },
+  {
+   "files": [
+    "decoder.go"
+   ],
+   "id": "f3-0011",
+   "lines_added": 16,
+   "lines_deleted": 2,
+   "message": "decode list of structs"
+  },
+  {
+   "files": [
+    "docs/guide/migration.md"
+   ],
+   "id": "f3-0012",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "clarify node types (#8216)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0013",
+   "lines_added": 4,
+   "lines_deleted": 3,
+   "message": "v2.12.0 release"
+  },
+  {
+   "files": [
+    "addon/ng2/utilities/change.ts",
+    "tests/acceptance/change.spec.ts"
+   ],
+   "id": "f3-0014",
+   "lines_added": 234,
+   "lines_deleted": 0,
+   "message": "add file system utilities for 'upgrade' process\n\n'fs-promise.ts' is a utility file for asynchronous read/write operations\n'change.ts' implements some change interfaces as specified by the upgrade design doc linked below:\nhttps://github.com/hansl/angular-cli/blob/7ea3e78ff3d899d5277aac5dfeeece4056d0efe3/docs/design/upgrade.md"
+  },
+  {
+   "files": [
+    "ci/check_diff.sh"
+   ],
+   "id": "f3-0015",
+   "lines_added": 3,
+   "lines_deleted": 0,
+   "message": "Add `LD_LIBRARY_PATH` in `check_diff.sh`\n\nThere were some upstream changes made a while back that requires this to\nbe set when building rustfmt from source like we do in the\n`check_diff.sh` script.\n\nSee issue 5675 for more details."
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml"
+   ],
+   "id": "f3-0016",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "nightly-0.2.4"
+  },
+  {
+   "files": [
+    "src/node/build.ts",
+    "src/node/buildPluginAsset.ts",
+    "src/node/buildPluginCss.ts",
+    "src/node/buildPluginHtml.ts",
+    "src/node/utils.ts"
+   ],
+   "id": "f3-0017",
+   "lines_added": 223,
+   "lines_deleted": 124,
+   "message": "better index html processing\n\nassetsOptions -> assetsInlineLimit"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/migrations/migration-collection.json",
+    "packages/schematics/angular/migrations/update-12/update-zonejs.ts",
+    "packages/schematics/angular/migrations/update-12/update-zonejs_spec.ts",
+    "packages/schematics/angular/utility/latest-versions.ts"
+   ],
+   "id": "f3-0018",
+   "lines_added": 227,
+   "lines_deleted": 1,
+   "message": "add migration to use new zone.js entry-points"
+  },
+  {
+   "files": [
+    "docs/docs/cli.md",
+    "docs/docs/pyproject.md",
+    "poetry/console/commands/lock.py",
+    "tests/console/commands/test_lock.py",
+    "tests/fixtures/outdated_lock/poetry.lock",
+    "tests/fixtures/outdated_lock/pyproject.toml",
+    "tests/fixtures/up_to_date_lock/poetry.lock",
+    "tests/fixtures/up_to_date_lock/pyproject.toml"
+   ],
+   "id": "f3-0019",
+   "lines_added": 406,
+   "lines_deleted": 5,
+   "message": "Add new --check flag to lock command"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/package.json",
+    "packages/angular_devkit/build_angular/src/angular-cli-files/models/webpack-configs/test.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0020",
+   "lines_added": 20,
+   "lines_deleted": 94,
+   "message": "use `@jsdevtools/coverage-istanbul-loader` instead of `coverage-istanbul-loader`\n\n`coverage-istanbul-loader` has been deprecated in favor of `@jsdevtools/coverage-istanbul-loader`"
+  },
+  {
+   "files": [
+    "src/config.rs",
+    "src/lib.rs"
+   ],
+   "id": "f3-0021",
+   "lines_added": 42,
+   "lines_deleted": 1,
+   "message": "Add config.rs which I forgot for the last commit\n\nCloses #73"
+  },
+  {
+   "files": [
+    "packages/svelte/src/internal/client/dom/elements/transitions.js",
+    "packages/svelte/tests/runtime-runes/samples/effect-tracking-transition/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/effect-tracking-transition/main.svelte"
+   ],
+   "id": "f3-0022",
+   "lines_added": 51,
+   "lines_deleted": 7,
+   "message": "ensure $effect.tracking returns false inside transition functions (#13775)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0023",
+   "lines_added": 0,
+   "lines_deleted": 2,
+   "message": "remove `misc` section"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/plugins/css.ts"
+   ],
+   "id": "f3-0024",
+   "lines_added": 11,
+   "lines_deleted": 16,
+   "message": "use `preliminaryFileName` to detect pure CSS chunks (#13974)"
+  },
+  {
+   "files": [
+    "packages/angular/cli/commands/add-impl.ts",
+    "packages/angular/cli/commands/build-impl.ts",
+    "packages/angular/cli/commands/generate-impl.ts",
+    "packages/angular/cli/commands/serve-impl.ts",
+    "packages/angular/cli/commands/version-impl.ts",
+    "packages/angular/cli/lib/cli/index.ts",
+    "packages/angular/cli/models/architect-command.ts",
+    "packages/angular/cli/models/command-runner.ts",
+    "packages/angular/cli/models/command.ts",
+    "packages/angular/cli/models/interface.ts",
+    "packages/angular/cli/models/schematic-command.ts",
+    "packages/angular/cli/utilities/project.ts"
+   ],
+   "id": "f3-0025",
+   "lines_added": 83,
+   "lines_deleted": 66,
+   "message": "rename project to workspace and clean up\n\nRemoved unnecessary fields in interfaces, added some comments. Overall QoL."
+  },
+  {
+   "files": [
+    "docs/.vitepress/config.ts",
+    "docs/.vitepress/theme/index.ts",
+    "docs/.vitepress/tsconfig.json",
+    "docs/config/build-options.md",
+    "docs/config/dep-optimization-options.md",
+    "docs/config/index.md",
+    "docs/config/server-options.md",
+    "docs/config/shared-options.md",
+    "docs/guide/api-hmr.md",
+    "docs/guide/api-javascript.md",
+    "docs/guide/api-plugin.md",
+    "docs/guide/assets.md",
+    "docs/guide/backend-integration.md",
+    "docs/guide/build.md",
+    "docs/guide/dep-pre-bundling.md",
+    "docs/guide/features.md",
+    "docs/guide/ssr.md",
+    "docs/guide/using-plugins.md",
+    "docs/package.json",
+    "package.json",
+    "packages/vite/src/node/config.ts",
+    "packages/vite/types/customEvent.d.ts",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml"
+   ],
+   "id": "f3-0026",
+   "lines_added": 997,
+   "lines_deleted": 152,
+   "message": "add `@shikiji/vitepress-twoslash` (#16168)"
+  },
+  {
+   "files": [
+    "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md"
+   ],
+   "id": "f3-0027",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "correct variable references (#11582)"
+  },
+  {
+   "files": [
+    "cobra_test.go",
+    "command.go"
+   ],
+   "id": "f3-0028",
+   "lines_added": 87,
+   "lines_deleted": 131,
+   "message": "Fix tests so they give correct args (#445)\n\n* Fix tests so they give correct args\n\nShell already deletes all quotes and unite args under quotes, so we\ndon't need to test it.\n\n* Simplify stripFlags\n\n* Fix 'unused' and 'gosimple' complaints"
+  },
+  {
+   "files": [
+    "tests/test_config.py"
+   ],
+   "id": "f3-0029",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "Skip config permissions test on Windows"
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular_devkit/build_angular/BUILD.bazel",
+    "packages/angular_devkit/build_angular/src/utils/webpack-browser-config.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0030",
+   "lines_added": 10,
+   "lines_deleted": 2,
+   "message": "lazy require speed-measure-webpack-plugin"
+  },
+  {
+   "files": [
+    "packages/ngtools/webpack/src/ngcc_processor.ts",
+    "tests/legacy-cli/e2e_runner.ts"
+   ],
+   "id": "f3-0031",
+   "lines_added": 6,
+   "lines_deleted": 3,
+   "message": "NGCC workspace libraries module resolution\n\nFixes #14594"
+  },
+  {
+   "files": [
+    "src/expr.rs",
+    "src/lib.rs",
+    "src/patterns.rs",
+    "src/range.rs",
+    "src/spanned.rs",
+    "src/types.rs",
+    "src/utils.rs",
+    "tests/source/configs/float_literal_trailing_zero/always.rs",
+    "tests/source/configs/float_literal_trailing_zero/if-no-postfix.rs",
+    "tests/source/configs/float_literal_trailing_zero/never.rs",
+    "tests/source/configs/spaces_around_ranges/false.rs",
+    "tests/source/configs/spaces_around_ranges/true.rs",
+    "tests/target/configs/float_literal_trailing_zero/always.rs",
+    "tests/target/configs/float_literal_trailing_zero/always_spaces_around_ranges_true.rs",
+    "tests/target/configs/float_literal_trailing_zero/if-no-postfix.rs",
+    "tests/target/configs/float_literal_trailing_zero/if-no-postfix_spaces_around_ranges_true.rs",
+    "tests/target/configs/float_literal_trailing_zero/never.rs",
+    "tests/target/configs/float_literal_trailing_zero/never_spaces_around_ranges_true.rs",
+    "tests/target/configs/float_literal_trailing_zero/preserve_spaces_around_ranges_true.rs",
+    "tests/target/configs/spaces_around_ranges/false.rs",
+    "tests/target/configs/spaces_around_ranges/true.rs",
+    "tests/target/issue_6869.rs"
+   ],
+   "id": "f3-0032",
+   "lines_added": 397,
+   "lines_deleted": 152,
+   "message": "Prevent ranges from getting collapsed in patterns (#6871)"
+  },
+  {
+   "files": [
+    "docs/1.getting-started/11.testing.md"
+   ],
+   "id": "f3-0033",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "introduce hint and link to environment override feature (#27315)"
+  },
+  {
+   "files": [
+    "command.go",
+    "flag_groups.go"
+   ],
+   "id": "f3-0034",
+   "lines_added": 6,
+   "lines_deleted": 5,
+   "message": "Expose ValidateRequiredFlags and ValidateFlagGroups (#1760)"
+  },
+  {
+   "files": [
+    "test-fixtures/structure_multi.hcl",
+    "test-fixtures/structure_multi.json"
+   ],
+   "id": "f3-0035",
+   "lines_added": 18,
+   "lines_deleted": 18,
+   "message": "unix line endings"
+  },
+  {
+   "files": [
+    "src/formatting.rs"
+   ],
+   "id": "f3-0036",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "Don't panic on license check errors (#3655)\n\nWithout this case, an ErrorKind::LicenseCheck results in a panic:\n\n    thread 'main' panicked at 'internal error: entered unreachable code', src/tools/rustfmt/src/formatting.rs:320:18\n\nN.B.: errors of this type are only raised when the configuration file\ncontains `license_tempate_path = \"TEMPLATE_FILE\"`."
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0037",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "poetry/repositories/installed_repository.py",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/directory_pep_610-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/directory_pep_610-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable_directory_pep_610-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/editable_directory_pep_610-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/file_pep_610-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/file_pep_610-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/url_pep_610-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/url_pep_610-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/test_installed_repository.py"
+   ],
+   "id": "f3-0038",
+   "lines_added": 262,
+   "lines_deleted": 52,
+   "message": "Read PEP-610-compliant files when loading installed packages"
+  },
+  {
+   "files": [
+    "packages/svelte/src/internal/client/runtime.js",
+    "packages/svelte/tests/runtime-runes/samples/fork-derived-dependency-rollback/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/fork-derived-dependency-rollback/main.svelte"
+   ],
+   "id": "f3-0039",
+   "lines_added": 67,
+   "lines_deleted": 3,
+   "message": "preserve old dependencies when updating reaction inside fork (#17579)\n\nCo-authored-by: David Roizenman <hmnd@users.noreply.github.com>"
+  },
+  {
+   "files": [
+    "packages/cli/src/commands/dev.ts",
+    "packages/components/src/module.ts",
+    "packages/kit/src/module/container.ts",
+    "packages/kit/src/module/utils.ts",
+    "packages/kit/src/types/module.ts",
+    "packages/kit/src/types/nuxt.ts",
+    "packages/nuxt3/src/app.ts",
+    "packages/pages/src/module.ts"
+   ],
+   "id": "f3-0040",
+   "lines_added": 214,
+   "lines_deleted": 227,
+   "message": "improved template utils (#393)"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "src/config/mod.rs"
+   ],
+   "id": "f3-0041",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "Release 1.4.3"
+  },
+  {
+   "files": [
+    "docs/config/server-options.md"
+   ],
+   "id": "f3-0042",
+   "lines_added": 8,
+   "lines_deleted": 6,
+   "message": "expand `server.proxy` description (#10831)"
+  },
+  {
+   "files": [
+    ".github/workflows/pkg.pr.new-comment.yml",
+    ".github/workflows/pkg.pr.new.yml"
+   ],
+   "id": "f3-0043",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "use both correct paths (#14157)\n\n* try to read from right folder\n\n* use both correct paths"
+  },
+  {
+   "files": [
+    "docs/api/index.md"
+   ],
+   "id": "f3-0044",
+   "lines_added": 5,
+   "lines_deleted": 1,
+   "message": "test done arg (#152)"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/index.ts",
+    "packages/angular_devkit/build_angular/src/webpack/utils/stats.ts"
+   ],
+   "id": "f3-0045",
+   "lines_added": 20,
+   "lines_deleted": 19,
+   "message": "show lazy files in stat table correctly with esbuild\n\nWhen using the esbuild-based browser application builder, the output build file stat table\nwas incorrectly displaying non-injected global styles and scripts as initial files. These\noutput files will now be correctly shown as lazy files. Initial files will also now display\ntheir respective name if available. The table entries are now sorted in descending order by\nraw file size as was done in the Webpack-based builder."
+  },
+  {
+   "files": [
+    "projects_using_cobra.md"
+   ],
+   "id": "f3-0046",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Add Constellation to projects using cobra. (#1829)"
+  },
+  {
+   "files": [
+    "cmd/hcldec/README.md",
+    "cmd/hcldec/diags_json.go",
+    "cmd/hcldec/main.go",
+    "cmd/hcldec/spec.go",
+    "cmd/hcldec/type_expr.go",
+    "cmd/hcldec/vars.go",
+    "cmd/hclfmt/main.go",
+    "cmd/hclspecsuite/diagnostics.go",
+    "cmd/hclspecsuite/log.go",
+    "cmd/hclspecsuite/main.go",
+    "cmd/hclspecsuite/runner.go",
+    "cmd/hclspecsuite/test_file.go",
+    "cmd/hclspecsuite/traversals.go",
+    "ext/dynblock/expand_body.go",
+    "ext/dynblock/expand_body_test.go",
+    "ext/dynblock/expand_spec.go",
+    "ext/dynblock/expr_wrap.go",
+    "ext/dynblock/iteration.go",
+    "ext/dynblock/public.go",
+    "ext/dynblock/schema.go",
+    "ext/dynblock/unknown_body.go",
+    "ext/dynblock/variables.go",
+    "ext/dynblock/variables_hcldec.go",
+    "ext/dynblock/variables_test.go",
+    "ext/include/file_resolver.go",
+    "ext/include/map_resolver.go",
+    "ext/include/resolver.go",
+    "ext/include/transformer.go",
+    "ext/include/transformer_test.go",
+    "ext/transform/error.go",
+    "ext/transform/transform.go",
+    "ext/transform/transform_test.go",
+    "ext/transform/transformer.go",
+    "ext/typeexpr/README.md",
+    "ext/typeexpr/get_type.go",
+    "ext/typeexpr/get_type_test.go",
+    "ext/typeexpr/public.go",
+    "ext/userfunc/README.md",
+    "ext/userfunc/decode.go",
+    "ext/userfunc/decode_test.go",
+    "ext/userfunc/public.go",
+    "go.mod",
+    "go.sum",
+    "gohcl/decode.go",
+    "gohcl/decode_test.go",
+    "gohcl/encode.go",
+    "gohcl/encode_test.go",
+    "gohcl/schema.go",
+    "gohcl/schema_test.go",
+    "gohcl/types.go",
+    "guide/go_decoding_gohcl.rst",
+    "guide/go_decoding_hcldec.rst",
+    "guide/go_decoding_lowlevel.rst",
+    "guide/go_parsing.rst",
+    "hcl/hclsyntax/diagnostics.go",
+    "hcl/hclsyntax/expression.go",
+    "hcl/hclsyntax/expression_ops.go",
+    "hcl/hclsyntax/expression_static_test.go",
+    "hcl/hclsyntax/expression_template.go",
+    "hcl/hclsyntax/expression_template_test.go",
+    "hcl/hclsyntax/expression_test.go",
+    "hcl/hclsyntax/expression_vars.go",
+    "hcl/hclsyntax/expression_vars_gen.go",
+    "hcl/hclsyntax/file.go",
+    "hcl/hclsyntax/fuzz/Makefile",
+    "hcl/hclsyntax/fuzz/config/fuzz.go",
+    "hcl/hclsyntax/fuzz/expr/fuzz.go",
+    "hcl/hclsyntax/fuzz/template/fuzz.go",
+    "hcl/hclsyntax/fuzz/traversal/fuzz.go",
+    "hcl/hclsyntax/navigation.go",
+    "hcl/hclsyntax/navigation_test.go",
+    "hcl/hclsyntax/node.go",
+    "hcl/hclsyntax/parse_traversal_test.go",
+    "hcl/hclsyntax/parser.go",
+    "hcl/hclsyntax/parser_template.go",
+    "hcl/hclsyntax/parser_test.go",
+    "hcl/hclsyntax/parser_traversal.go",
+    "hcl/hclsyntax/peeker.go",
+    "hcl/hclsyntax/public.go",
+    "hcl/hclsyntax/scan_tokens.go",
+    "hcl/hclsyntax/scan_tokens.rl",
+    "hcl/hclsyntax/scan_tokens_test.go",
+    "hcl/hclsyntax/structure.go",
+    "hcl/hclsyntax/structure_at_pos.go",
+    "hcl/hclsyntax/structure_at_pos_test.go",
+    "hcl/hclsyntax/structure_test.go",
+    "hcl/hclsyntax/token.go",
+    "hcl/hclsyntax/variables.go",
+    "hcl/hclsyntax/variables_test.go",
+    "hcl/hclsyntax/walk.go",
+    "hcl/hclsyntax/walk_test.go",
+    "hcl/integrationtest/terraformlike_test.go",
+    "hcl/json/ast.go",
+    "hcl/json/fuzz/Makefile",
+    "hcl/json/fuzz/config/fuzz.go",
+    "hcl/json/parser.go",
+    "hcl/json/parser_test.go",
+    "hcl/json/public.go",
+    "hcl/json/public_test.go",
+    "hcl/json/scanner.go",
+    "hcl/json/scanner_test.go",
+    "hcl/json/structure.go",
+    "hcl/json/structure_test.go",
+    "hcl/spectests/spec_test.go",
+    "hcldec/block_labels.go",
+    "hcldec/decode.go",
+    "hcldec/public.go",
+    "hcldec/public_test.go",
+    "hcldec/schema.go",
+    "hcldec/spec.go",
+    "hcldec/spec_test.go",
+    "hcldec/variables.go",
+    "hcldec/variables_test.go",
+    "hcled/navigation.go",
+    "hclparse/parser.go",
+    "hcltest/mock.go",
+    "hcltest/mock_test.go",
+    "hclwrite/ast_attribute.go",
+    "hclwrite/ast_block.go",
+    "hclwrite/ast_body.go",
+    "hclwrite/ast_body_test.go",
+    "hclwrite/ast_expression.go",
+    "hclwrite/examples_test.go",
+    "hclwrite/format.go",
+    "hclwrite/format_test.go",
+    "hclwrite/generate.go",
+    "hclwrite/generate_test.go",
+    "hclwrite/native_node_sorter.go",
+    "hclwrite/parser.go",
+    "hclwrite/parser_test.go",
+    "hclwrite/public.go",
+    "hclwrite/round_trip_test.go",
+    "hclwrite/tokens.go",
+    "specsuite/README.md"
+   ],
+   "id": "f3-0047",
+   "lines_added": 189,
+   "lines_deleted": 220,
+   "message": "Change module path to github.com/hashicorp/hcl/v2\n\nThis is in preparation for the first v2 release from the main HCL\nrepository."
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0048",
+   "lines_added": 10,
+   "lines_deleted": 10,
+   "message": "README is unix"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0049",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Fix RootCmd var name\n\n'rootCmd' should be 'RootCmd'."
+  },
+  {
+   "files": [
+    "docs/config/index.md",
+    "docs/guide/index.md"
+   ],
+   "id": "f3-0050",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "correct minor typos (#141)"
+  },
+  {
+   "files": [
+    "eslint.config.mjs",
+    "packages/nuxt/src/core/plugins/resolved-externals.ts",
+    "packages/nuxt/src/meta.mjs"
+   ],
+   "id": "f3-0051",
+   "lines_added": 37,
+   "lines_deleted": 21,
+   "message": "fully resolve nuxt dependencies (#31436)"
+  },
+  {
+   "files": [
+    "docs/guide/mocking-date.md",
+    "packages/vitest/src/integrations/utils.ts",
+    "test/core/test/date-mock.test.ts"
+   ],
+   "id": "f3-0052",
+   "lines_added": 20,
+   "lines_deleted": 20,
+   "message": "renaming mockdate methods (#258)"
+  },
+  {
+   "files": [
+    "src/node/build.ts",
+    "src/node/buildPluginAsset.ts",
+    "src/node/buildPluginCss.ts"
+   ],
+   "id": "f3-0053",
+   "lines_added": 37,
+   "lines_deleted": 13,
+   "message": "add asset options into build options (#53)"
+  },
+  {
+   "files": [
+    "docs/docs/dependency-specification.md"
+   ],
+   "id": "f3-0054",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "clarify wildcard dependency specification (#2229)"
+  },
+  {
+   "files": [
+    "packages/svelte/messages/client-warnings/warnings.md",
+    "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js",
+    "packages/svelte/src/internal/client/index.js",
+    "packages/svelte/src/internal/client/validate.js",
+    "packages/svelte/src/internal/client/warnings.js",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/Child.svelte",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/main.svelte"
+   ],
+   "id": "f3-0055",
+   "lines_added": 197,
+   "lines_deleted": 3,
+   "message": "warn if binding to a non-reactive property (#12500)\n\n* warn if binding to a non-reactive property\n\n* tweak"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0056",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Update changelog typo"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/utility/workspace-models.ts"
+   ],
+   "id": "f3-0057",
+   "lines_added": 11,
+   "lines_deleted": 6,
+   "message": "remove usage of experimental workspace API\n\nSeveral of the experimental workspace API types were still used with some of the internal helpers methods."
+  },
+  {
+   "files": [
+    "poetry/packages/dependency.py",
+    "poetry/semver/constraints/constraint.py",
+    "tests/masonry/builders/test_sdist.py",
+    "tests/packages/test_dependency.py"
+   ],
+   "id": "f3-0058",
+   "lines_added": 48,
+   "lines_deleted": 18,
+   "message": "Fix Dependency.to_pep_508() method"
+  },
+  {
+   "files": [
+    "Cargo.toml"
+   ],
+   "id": "f3-0059",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "0.5 release"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0060",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "parse.go",
+    "parse.y",
+    "parse_test.go"
+   ],
+   "id": "f3-0061",
+   "lines_added": 56,
+   "lines_deleted": 19,
+   "message": "Hook up a parser parse tests"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0062",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "docs/guide/build.md",
+    "docs/guide/troubleshooting.md"
+   ],
+   "id": "f3-0063",
+   "lines_added": 45,
+   "lines_deleted": 2,
+   "message": "add section for `Failed to fetch dynamically imported module` error (#20313)"
+  },
+  {
+   "files": [
+    "documentation/docs/02-runes/02-$state.md"
+   ],
+   "id": "f3-0064",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "add note about proxying state proxies (#16354)"
+  },
+  {
+   "files": [
+    "src/config.rs"
+   ],
+   "id": "f3-0065",
+   "lines_added": 4,
+   "lines_deleted": 2,
+   "message": "Do not print to stderr when parsing the toml file succeeded"
+  },
+  {
+   "files": [
+    "docs/3.api/1.composables/use-error.md"
+   ],
+   "id": "f3-0066",
+   "lines_added": 27,
+   "lines_deleted": 2,
+   "message": "add `useError` composable (#8912)"
+  },
+  {
+   "files": [
+    ".flake8",
+    ".pre-commit-config.yaml",
+    "src/poetry/installation/executor.py",
+    "tests/conftest.py",
+    "tests/console/commands/test_config.py",
+    "tests/console/commands/test_init.py",
+    "tests/console/commands/test_lock.py",
+    "tests/helpers.py",
+    "tests/installation/test_executor.py",
+    "tests/installation/test_installer.py",
+    "tests/installation/test_installer_old.py",
+    "tests/publishing/test_publisher.py",
+    "tests/publishing/test_uploader.py",
+    "tests/puzzle/conftest.py",
+    "tests/puzzle/test_provider.py",
+    "tests/puzzle/test_solver.py",
+    "tests/puzzle/test_transaction.py",
+    "tests/repositories/test_installed_repository.py",
+    "tests/repositories/test_legacy_repository.py",
+    "tests/repositories/test_pypi_repository.py",
+    "tests/test_factory.py",
+    "tests/types.py",
+    "tests/utils/test_authenticator.py",
+    "tests/utils/test_env.py",
+    "tests/utils/test_env_site.py",
+    "tests/utils/test_exporter.py",
+    "tests/utils/test_extras.py",
+    "tests/utils/test_helpers.py",
+    "tests/utils/test_password_manager.py",
+    "tests/utils/test_patterns.py",
+    "tests/utils/test_pip.py",
+    "tests/utils/test_setup_reader.py"
+   ],
+   "id": "f3-0067",
+   "lines_added": 1067,
+   "lines_deleted": 431,
+   "message": "Add missing type hints & Force type hints - Part 3 (#4805)\n\n* add typehints to tests.publishing\n\n* add typehints to tests.puzzle\n\n* add typehints to tests.repositories\n\n* add typehints to tests.utils.test_authenticator, tests.utils.test_env, tests.utils.test_env_site, tests.utils.test_exporter\n\n* add typehints to tests.utils.test_extras, tests.utils.test_helpers, tests.utils.test_password_manager, tests.utils.test_patterns, tests.utils.test_pip, tests.utils.setup_reader\n\n* add typehints to tests.test_factory\n\n* add typehints to tests.helpers\n\n* add remaining missing typehints to tests.conftest\n\n* add flake8-annotations to flake8 pre-commit hook\n\n* create a FixtureDirGetter protocol type\n\n* add comments to .flake8 settings and fix missing typehints after rebase"
+  },
+  {
+   "files": [
+    "hcl/fmtcmd/fmtcmd.go"
+   ],
+   "id": "f3-0068",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "hcl/fmtcmd: include filename in error"
+  },
+  {
+   "files": [
+    "cobra/cmd/root.go"
+   ],
+   "id": "f3-0069",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Restore the use of cobra.OnInitialize in cobra executable\n\nWithout cobra.OnInitialize, cobra does not see the --config\ncommand-line option and always tries to load $HOME/.cobra.yaml\ninstead."
+  },
+  {
+   "files": [
+    "src/node/server/serverPluginHmr.ts"
+   ],
+   "id": "f3-0070",
+   "lines_added": 8,
+   "lines_deleted": 1,
+   "message": "reload page when editing index.html"
+  },
+  {
+   "files": [
+    "cobra.go",
+    "command.go"
+   ],
+   "id": "f3-0071",
+   "lines_added": 20,
+   "lines_deleted": 2,
+   "message": "Add support for an InitializeConfig method as defined on Cobra by the user"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/app/components/nuxt-layout.ts",
+    "packages/nuxt/src/app/components/nuxt-root.vue",
+    "packages/nuxt/src/pages/runtime/page.ts"
+   ],
+   "id": "f3-0072",
+   "lines_added": 12,
+   "lines_deleted": 3,
+   "message": "self-remove hydration error guards after first navigation (#34572)"
+  },
+  {
+   "files": [
+    "tests/source/let_else.rs",
+    "tests/target/let_else.rs"
+   ],
+   "id": "f3-0073",
+   "lines_added": 6,
+   "lines_deleted": 6,
+   "message": "Spelling fixes(#6088)\n\nSigned-off-by: cui fliter <imcusg@gmail.com>"
+  },
+  {
+   "files": [
+    "packages/create-vite/template-react-ts/README.md"
+   ],
+   "id": "f3-0074",
+   "lines_added": 5,
+   "lines_deleted": 2,
+   "message": "eliminate the error that occurs when enabling eslint-plugin-markdown (#13942)"
+  },
+  {
+   "files": [
+    "docs/3.api/3.utils/create-error.md"
+   ],
+   "id": "f3-0075",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "use ts for create-error example (#28411)"
+  },
+  {
+   "files": [
+    "README.md",
+    "docs/documentation/stories/asset-configuration.md",
+    "docs/documentation/stories/autocompletion.md",
+    "docs/documentation/stories/routing.md"
+   ],
+   "id": "f3-0076",
+   "lines_added": 44,
+   "lines_deleted": 293,
+   "message": "move documentation from readme to wiki (#4576)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0077",
+   "lines_added": 10,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG for 2.20.1"
+  },
+  {
+   "files": [
+    "LICENSE"
+   ],
+   "id": "f3-0078",
+   "lines_added": 0,
+   "lines_deleted": 191,
+   "message": "Deleting Extra license file... keeping the better formatted one"
+  },
+  {
+   "files": [
+    ".eslintignore",
+    ".gitignore",
+    "docs/.vitepress/config.ts",
+    "docs/contributors.json",
+    "docs/docs-data.ts",
+    "docs/main.css",
+    "docs/package.json",
+    "docs/scripts/assets.ts",
+    "docs/scripts/fetch-avatars.ts",
+    "docs/src/components/Avatar.vue",
+    "docs/src/components/Contributors.vue",
+    "docs/src/components/Home.vue",
+    "docs/src/contributors.ts",
+    "docs/src/images.ts",
+    "docs/tsconfig.json",
+    "docs/vite.config.ts",
+    "package.json",
+    "pnpm-lock.yaml",
+    "scripts/update-contributors.ts",
+    "tsconfig.json"
+   ],
+   "id": "f3-0079",
+   "lines_added": 801,
+   "lines_deleted": 602,
+   "message": "prefetch avatar images (#895)\n\nCo-authored-by: Anthony Fu <anthonyfu117@hotmail.com>"
+  },
+  {
+   "files": [
+    "docs/package.json",
+    "docs/scripts/gen-docs.ts",
+    "package.json",
+    "packages/bridge/package.json",
+    "packages/bridge/src/app.ts",
+    "packages/bridge/src/capi.ts",
+    "packages/bridge/src/dirs.ts",
+    "packages/bridge/src/nitro.ts",
+    "packages/kit/package.json",
+    "packages/kit/src/config/env.ts",
+    "packages/kit/src/config/load.ts",
+    "packages/kit/src/config/schema/_app.ts",
+    "packages/kit/src/config/schema/_common.ts",
+    "packages/kit/src/config/schema/generate.ts",
+    "packages/kit/src/module/container.ts",
+    "packages/kit/src/module/utils.ts",
+    "packages/kit/src/utils/cjs.ts",
+    "packages/kit/src/utils/resolve.ts",
+    "packages/nitro/package.json",
+    "packages/nitro/src/build.ts",
+    "packages/nitro/src/context.ts",
+    "packages/nitro/src/presets/azure.ts",
+    "packages/nitro/src/presets/azure_functions.ts",
+    "packages/nitro/src/presets/browser.ts",
+    "packages/nitro/src/presets/cloudflare.ts",
+    "packages/nitro/src/presets/firebase.ts",
+    "packages/nitro/src/presets/netlify.ts",
+    "packages/nitro/src/presets/vercel.ts",
+    "packages/nitro/src/rollup/config.ts",
+    "packages/nitro/src/rollup/plugins/assets.ts",
+    "packages/nitro/src/rollup/plugins/dynamic-require.ts",
+    "packages/nitro/src/rollup/plugins/esbuild.ts",
+    "packages/nitro/src/rollup/plugins/externals.ts",
+    "packages/nitro/src/rollup/plugins/middleware.ts",
+    "packages/nitro/src/rollup/plugins/raw.ts",
+    "packages/nitro/src/rollup/plugins/static.ts",
+    "packages/nitro/src/rollup/plugins/timing.ts",
+    "packages/nitro/src/rollup/plugins/virtual.ts",
+    "packages/nitro/src/server/dev.ts",
+    "packages/nitro/src/server/middleware.ts",
+    "packages/nitro/src/utils/index.ts",
+    "packages/nitro/src/utils/tree.ts",
+    "packages/nitro/src/utils/wpfs.ts",
+    "packages/nuxi/package.json",
+    "packages/nuxi/src/commands/build.ts",
+    "packages/nuxi/src/commands/dev.ts",
+    "packages/nuxi/src/commands/info.ts",
+    "packages/nuxi/src/commands/prepare.ts",
+    "packages/nuxi/src/utils/cjs.ts",
+    "packages/nuxt3/package.json",
+    "packages/nuxt3/src/components/module.ts",
+    "packages/nuxt3/src/components/scan.ts",
+    "packages/nuxt3/src/core/app.ts",
+    "packages/nuxt3/src/core/nitro.ts",
+    "packages/nuxt3/src/core/nuxt.ts",
+    "packages/nuxt3/src/core/template.utils.ts",
+    "packages/nuxt3/src/dirs.ts",
+    "packages/nuxt3/src/global-imports/module.ts",
+    "packages/nuxt3/src/meta/module.ts",
+    "packages/nuxt3/src/pages/module.ts",
+    "packages/nuxt3/src/pages/utils.ts",
+    "packages/vite/package.json",
+    "packages/vite/src/client.ts",
+    "packages/vite/src/plugins/cache-dir.ts",
+    "packages/vite/src/plugins/virtual.ts",
+    "packages/vite/src/server.ts",
+    "packages/vite/src/utils/wpfs.ts",
+    "packages/vite/src/vite.ts",
+    "packages/webpack/package.json",
+    "packages/webpack/src/configs/client.ts",
+    "packages/webpack/src/configs/server.ts",
+    "packages/webpack/src/plugins/transform-setup.ts",
+    "packages/webpack/src/plugins/vue/client.ts",
+    "packages/webpack/src/presets/babel.ts",
+    "packages/webpack/src/presets/base.ts",
+    "packages/webpack/src/presets/style.ts",
+    "packages/webpack/src/presets/vue.ts",
+    "packages/webpack/src/utils/babel-preset.js",
+    "packages/webpack/src/utils/mfs.ts",
+    "packages/webpack/src/utils/postcss.ts",
+    "packages/webpack/src/webpack.ts",
+    "scripts/bump-edge.ts",
+    "test/presets/_tests.mjs",
+    "test/presets/cloudflare.test.mjs",
+    "test/presets/lambda.test.mjs",
+    "test/presets/node.test.mjs",
+    "test/presets/vercel.test.mjs",
+    "test/utils.mjs",
+    "yarn.lock"
+   ],
+   "id": "f3-0080",
+   "lines_added": 112,
+   "lines_deleted": 103,
+   "message": "migrate from upath to pathe (#553)"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "pyproject.toml"
+   ],
+   "id": "f3-0081",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Use requests^2.26 (#8336)"
+  },
+  {
+   "files": [
+    "poetry/json/schemas/poetry-schema.json",
+    "poetry/packages/package.py",
+    "tests/fixtures/sample_project/pyproject.toml",
+    "tests/repositories/fixtures/pypi.org/json/requests.json"
+   ],
+   "id": "f3-0082",
+   "lines_added": 33,
+   "lines_deleted": 4,
+   "message": "Prefer path to file for file dependencies"
+  },
+  {
+   "files": [
+    "documentation/docs/04-compiler-and-api/01-svelte-compiler.md",
+    "packages/svelte/src/compiler/compile/Component.js",
+    "packages/svelte/src/compiler/compile/internal_exports.ts",
+    "packages/svelte/src/compiler/interfaces.d.ts",
+    "packages/svelte/src/compiler/public.d.ts",
+    "pnpm-lock.yaml",
+    "sites/svelte.dev/package.json"
+   ],
+   "id": "f3-0083",
+   "lines_added": 192,
+   "lines_deleted": 317,
+   "message": "Auto-generated CompileOptions (#8756)\n\n---------\n\nCo-authored-by: Simon H <5968653+dummdidumm@users.noreply.github.com>\nCo-authored-by: Simon Holthausen <simon.holthausen@vercel.com>"
+  },
+  {
+   "files": [
+    "docs/config/index.md",
+    "docs/guide/cli.md",
+    "packages/vite/index.cjs",
+    "packages/vite/src/module-runner/esmEvaluator.ts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/basic.ts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/cjs.js",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/dynamic-import-dep.ts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/dynamic-import.ts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/plugin.ts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/vite.config.outside-pkg-import.mts",
+    "packages/vite/src/node/__tests__/fixtures/runner-import/vite.config.ts",
+    "packages/vite/src/node/__tests__/package.json",
+    "packages/vite/src/node/__tests__/packages/child/index.js",
+    "packages/vite/src/node/__tests__/packages/child/package.json",
+    "packages/vite/src/node/__tests__/packages/parent/index.ts",
+    "packages/vite/src/node/__tests__/packages/parent/package.json",
+    "packages/vite/src/node/__tests__/runnerImport.spec.ts",
+    "packages/vite/src/node/cli.ts",
+    "packages/vite/src/node/config.ts",
+    "packages/vite/src/node/index.ts",
+    "packages/vite/src/node/ssr/runnerImport.ts",
+    "pnpm-lock.yaml",
+    "vitest.config.ts"
+   ],
+   "id": "f3-0084",
+   "lines_added": 357,
+   "lines_deleted": 90,
+   "message": "use module runner to import the config (#18637)\n\nCo-authored-by: bluwy <bjornlu.dev@gmail.com>\nCo-authored-by: Hiroshi Ogawa <hi.ogawa.zz@gmail.com>"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_optimizer/src/transforms/wrap-enums.ts",
+    "packages/angular_devkit/build_optimizer/src/transforms/wrap-enums_spec.ts"
+   ],
+   "id": "f3-0085",
+   "lines_added": 38,
+   "lines_deleted": 0,
+   "message": "wrap classes which contain empty statements (#16538)\n\nNGCC currently produces empty statments which breaks class wrapping.\n\nCloses #16509"
+  },
+  {
+   "files": [
+    "cobra/cmd/init_test.go"
+   ],
+   "id": "f3-0086",
+   "lines_added": 8,
+   "lines_deleted": 78,
+   "message": "vgo - compare generated files against golden files"
+  },
+  {
+   "files": [
+    ".gitignore",
+    ".travis.yml",
+    "setup.py"
+   ],
+   "id": "f3-0087",
+   "lines_added": 58,
+   "lines_deleted": 2,
+   "message": "Add setup.py file until version 0.3.0 is out"
+  },
+  {
+   "files": [
+    "src/types.rs"
+   ],
+   "id": "f3-0088",
+   "lines_added": 127,
+   "lines_deleted": 66,
+   "message": "impl rewrite_result for AssocItemConstraintKind, GenericArg, GenericBound, Ty"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/server/ws.ts"
+   ],
+   "id": "f3-0089",
+   "lines_added": 3,
+   "lines_deleted": 0,
+   "message": "terminate WebSocket connections before closing WebSocket server (#6115)"
+  },
+  {
+   "files": [
+    ".pre-commit-config.yaml"
+   ],
+   "id": "f3-0090",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "[pre-commit.ci] pre-commit autoupdate\n\nupdates:\n- [github.com/hadialqattan/pycln: v1.3.2 → v1.3.3](https://github.com/hadialqattan/pycln/compare/v1.3.2...v1.3.3)"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/migrations/update-12/update-angular-config.ts"
+   ],
+   "id": "f3-0091",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "add migration to remove `lazyModules` configuration option"
+  },
+  {
+   "files": [
+    "cmd/hcldec/spec-format.md",
+    "specsuite/README.md"
+   ],
+   "id": "f3-0092",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Fix various stale links to spec.md\n\nThese resulted from repository reorganization in preparation for the 2.0.0 release."
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0093",
+   "lines_added": 5,
+   "lines_deleted": 1,
+   "message": "Update README.md"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/core/nitro.ts"
+   ],
+   "id": "f3-0094",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "add `build.transpile` strings to nitro inline list (#10094)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0095",
+   "lines_added": 12,
+   "lines_deleted": 0,
+   "message": "v2.17.1 release"
+  },
+  {
+   "files": [
+    "src/constants.ts",
+    "src/runtime/suite.ts",
+    "src/types/options.ts",
+    "test/core/vitest.config.ts"
+   ],
+   "id": "f3-0096",
+   "lines_added": 29,
+   "lines_deleted": 10,
+   "message": "defaultTimeout (#85)"
+  },
+  {
+   "files": [
+    "projects_using_cobra.md"
+   ],
+   "id": "f3-0097",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Add the new Twitch CLI to to projects_using_cobra.md (#1301)"
+  },
+  {
+   "files": [
+    "pnpm-lock.yaml",
+    "sites/svelte.dev/package.json",
+    "sites/svelte.dev/src/routes/docs/+layout.svelte",
+    "sites/svelte.dev/src/routes/docs/[slug]/+page.svelte"
+   ],
+   "id": "f3-0098",
+   "lines_added": 9,
+   "lines_deleted": 10,
+   "message": "On this page mobile (#8782)"
+  },
+  {
+   "files": [
+    "packages/svelte/src/reactivity/map.js",
+    "packages/svelte/tests/runtime-runes/samples/derived-map/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/derived-map/main.svelte"
+   ],
+   "id": "f3-0099",
+   "lines_added": 14,
+   "lines_deleted": 8,
+   "message": "more exhaustive check during `SvelteMap.set` in deriveds (#13951)\n\n* more exhaustive check during `SvelteMap.set` in deriveds\n\n* use set for version reactions\n\n* cleanup"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0100",
+   "lines_added": 16,
+   "lines_deleted": 0,
+   "message": "release notes for the v14.2.4 release"
+  },
+  {
+   "files": [
+    "src/poetry/puzzle/solver.py",
+    "tests/puzzle/test_solver_internals.py"
+   ],
+   "id": "f3-0101",
+   "lines_added": 153,
+   "lines_deleted": 110,
+   "message": "improve performance for merging markers from overrides"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0102",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Fix SilenceUsage and SilenceErrors in readme (#397)\n\nYou have to set them to true to silence the default output, not false."
+  },
+  {
+   "files": [
+    "cobra/cmd/licenses.go"
+   ],
+   "id": "f3-0103",
+   "lines_added": 120,
+   "lines_deleted": 120,
+   "message": "Reflow license text and add copyright year and name\n\n* Format license text and header to fit within 80 characters per line\n * Remove extra top line from LICENSE file for Apache-2.0\n * Remove the FreeBSD-specific disclaimer from the BSD-2-Clause license\n * Use {{ .copyright }} to add \"Copyright © YEAR FULL NAME\" to the\n   LICENSE file for MIT and BSD licenses."
+  },
+  {
+   "files": [
+    "decoder_test.go",
+    "hcl/lex.go",
+    "test-fixtures/escape.hcl"
+   ],
+   "id": "f3-0104",
+   "lines_added": 21,
+   "lines_deleted": 0,
+   "message": "Allow escaping quotes in HCL string [GH-14]"
+  },
+  {
+   "files": [
+    "Configurations.md"
+   ],
+   "id": "f3-0105",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Correct tracking issue link for `skip_children`\n\nUpdate the issue link to point to issue 3389"
+  },
+  {
+   "files": [
+    "src/types.rs",
+    "tests/source/issue-4689/one.rs",
+    "tests/source/issue-4689/two.rs",
+    "tests/target/issue-4689/one.rs",
+    "tests/target/issue-4689/two.rs"
+   ],
+   "id": "f3-0106",
+   "lines_added": 639,
+   "lines_deleted": 4,
+   "message": "Backport PR #4730 (#5390)\n\n* Backport PR #4730 that fix issue #4689\n\n* Test files for each Verion One and Two\n\n* Simplify per review comment - use defer and matches!\n\n* Changes per reviewer comments for reducing indentations"
+  },
+  {
+   "files": [
+    "src/config.rs",
+    "tests/config/small_tabs.toml",
+    "tests/source/fn-custom-2.rs",
+    "tests/source/fn-custom-6.rs",
+    "tests/source/fn-custom-8.rs",
+    "tests/target/fn-custom-2.rs",
+    "tests/target/fn-custom-6.rs",
+    "tests/target/fn-custom-8.rs"
+   ],
+   "id": "f3-0107",
+   "lines_added": 0,
+   "lines_deleted": 9,
+   "message": "Remove where_indent option"
+  },
+  {
+   "files": [
+    "packages/svelte/messages/compile-errors/script.md",
+    "packages/svelte/package.json",
+    "packages/svelte/src/compiler/errors.js",
+    "packages/svelte/src/compiler/phases/2-analyze/index.js",
+    "packages/svelte/src/motion/spring.js",
+    "packages/svelte/src/motion/tweened.js",
+    "packages/svelte/src/store/index-client.js",
+    "packages/svelte/src/store/index-server.js",
+    "packages/svelte/src/store/public.d.ts",
+    "packages/svelte/src/store/{ => shared}/index.js",
+    "packages/svelte/tests/compiler-errors/samples/runes-module-store-subscription/_config.js",
+    "packages/svelte/tests/compiler-errors/samples/runes-module-store-subscription/main.svelte.js",
+    "packages/svelte/tests/store/test.ts",
+    "packages/svelte/types/index.d.ts",
+    "sites/svelte-5-preview/src/routes/docs/content/01-api/05-imports.md"
+   ],
+   "id": "f3-0108",
+   "lines_added": 467,
+   "lines_deleted": 10,
+   "message": "add compiler error when encountering a $-prefixed store value outside a `.svelte` file (#12799)\n\n* add compiler error when encountering a $-prefixed store value outside a .svelte file\n\n* add fromState/toState APIs\n\n* another test, update types\n\n* rename fromState to toStore, and toState to fromStore\n\n* docs\n\n* add docs\n\n* separate client/server entry points for svelte/store"
+  },
+  {
+   "files": [
+    ".pre-commit-config.yaml",
+    "pyproject.toml",
+    "src/poetry/__init__.py"
+   ],
+   "id": "f3-0109",
+   "lines_added": 4,
+   "lines_deleted": 6,
+   "message": "Remove `src/poetry/__init__.py` to convert to namespace package (#5614)\n\n* Remove `poetry.__init__` to convert to namespace package\n* Add mypy settings to account for namespace package\n* Update flake8 pre-commit config to allow namespace package\n* Mark poetry-core as a third-party package in isort's config"
+  },
+  {
+   "files": [
+    "src/node/node.ts",
+    "src/reporters/error.ts",
+    "test/core/src/circularA.ts",
+    "test/core/src/circularB.ts",
+    "test/core/{test => src}/submodule.ts",
+    "test/core/test/basic.test.ts",
+    "test/core/test/cicular.test.ts"
+   ],
+   "id": "f3-0110",
+   "lines_added": 60,
+   "lines_deleted": 19,
+   "message": "resolve circular dependencies"
+  },
+  {
+   "files": [
+    "man_docs.go"
+   ],
+   "id": "f3-0111",
+   "lines_added": 3,
+   "lines_deleted": 2,
+   "message": "Ensure man page title is uppercase and has rootcmd\n\nAs described in http://man7.org/linux/man-pages/man7/man-pages.7.html"
+  },
+  {
+   "files": [
+    "packages/angular/cli/utilities/config.ts"
+   ],
+   "id": "f3-0112",
+   "lines_added": 16,
+   "lines_deleted": 0,
+   "message": "Support XDG Base Directory Specfication\n\nExplained here: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html\n\nCurrent change affects reading of global config from `.angular-config.json`. By default it will be created in user's home directory. If user moves it manually to `$HOME/.config/angular/.angular-config.json`, it will be subsequently read from new location."
+  },
+  {
+   "files": [
+    "src/test/mod.rs"
+   ],
+   "id": "f3-0113",
+   "lines_added": 0,
+   "lines_deleted": 6,
+   "message": "Remove useless conditional compilation"
+  },
+  {
+   "files": [
+    "decoder_test.go",
+    "test-fixtures/structure2.hcl",
+    "test-fixtures/structure2.json"
+   ],
+   "id": "f3-0114",
+   "lines_added": 23,
+   "lines_deleted": 0,
+   "message": "structure2 test"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/app/plugins/router.ts"
+   ],
+   "id": "f3-0115",
+   "lines_added": 1,
+   "lines_deleted": 2,
+   "message": "combine imports from same relative path"
+  },
+  {
+   "files": [
+    "projects_using_cobra.md"
+   ],
+   "id": "f3-0116",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Add Pulumi as a project using cobra (#1720)\n\n* Add Pulumi as a project using cobra"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0117",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Fix typos in CHANGELOG"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0118",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/experimental-warnings.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/index.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/options.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/tests/options/entry-points_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/tests/options/main_spec.ts"
+   ],
+   "id": "f3-0119",
+   "lines_added": 173,
+   "lines_deleted": 10,
+   "message": "add `entryPoints` to `browser-esbuild` as an internal option\n\nThis makes the `main` parameter optional and allows multiple entry points instead. `main` is still technically required by the schema, since it should almost always be set when invoked by a user. However, it now supports `null` as a value so it can be explicitly omitted.\n\nLonger term, we may choose to remove `main` and fold it into `entryPoints`, but for now we want to keep compatibility with the existing `browser` builder.\n\nSince `entryPoints` is an internal-only options (cannot be set in `angular.json` and isn't exposed in the schema), I made a new `buildEsbuildBrowserInternal()` function which adds the extra private option. This way direct invocations of the builder can provide this extra information without compromising the public API surface defined in the schema."
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular_devkit/build_angular/BUILD.bazel",
+    "packages/angular_devkit/build_angular/package.json",
+    "packages/angular_devkit/build_angular/src/utils/process-bundle.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/analytics.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/index-html-webpack-plugin.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/scripts-webpack-plugin.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0120",
+   "lines_added": 36,
+   "lines_deleted": 48,
+   "message": "remove redundant `webpack-sources` dependency\n\nThe `webpack` package now exports the `Source` based classes directly."
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular-cli/ember-cli/lib/commands/test.js",
+    "packages/angular-cli/ember-cli/lib/models/edit-file-diff.js",
+    "packages/angular-cli/package.json"
+   ],
+   "id": "f3-0121",
+   "lines_added": 3,
+   "lines_deleted": 17,
+   "message": "remove use of dual temp packages (#4281)"
+  },
+  {
+   "files": [
+    "docs/1.getting-started/18.upgrade.md"
+   ],
+   "id": "f3-0122",
+   "lines_added": 4,
+   "lines_deleted": 4,
+   "message": "remove rc tag in guide"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0123",
+   "lines_added": 5,
+   "lines_deleted": 3,
+   "message": "v2.9.0 release"
+  },
+  {
+   "files": [
+    "docs/3.api/4.commands/dev.md"
+   ],
+   "id": "f3-0124",
+   "lines_added": 3,
+   "lines_deleted": 2,
+   "message": "add tunnel option"
+  },
+  {
+   "files": [
+    "cobra/cmd/init.go",
+    "cobra/cmd/init_test.go"
+   ],
+   "id": "f3-0125",
+   "lines_added": 99,
+   "lines_deleted": 41,
+   "message": "Fix cobra init cmd help documentation (#1108)\n\nAdds tests for other cases where we do not expect projects to be created\nfor absolute paths and relative paths in GOPATH."
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0126",
+   "lines_added": 5,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/vite/src/server.ts"
+   ],
+   "id": "f3-0127",
+   "lines_added": 6,
+   "lines_deleted": 15,
+   "message": "replace browser globals with `undefined` on server (#24711)"
+  },
+  {
+   "files": [
+    "docs/components/app/AppHeader.vue",
+    "docs/components/app/AsideHeaderNavigation.vue",
+    "packages/bridge/src/runtime/app.ts",
+    "packages/nitro/src/rollup/config.ts",
+    "packages/nitro/src/rollup/plugins/assets.ts",
+    "packages/nuxi/src/commands/info.ts"
+   ],
+   "id": "f3-0128",
+   "lines_added": 6,
+   "lines_deleted": 6,
+   "message": "remove unnecessary optional chaining (#1991)"
+  },
+  {
+   "files": [
+    "docs/advanced/api/vitest.md",
+    "packages/browser/src/node/plugin.ts",
+    "packages/coverage-istanbul/src/provider.ts",
+    "packages/vitest/src/node/cli/cli-api.ts",
+    "packages/vitest/src/node/core.ts",
+    "packages/vitest/src/node/coverage.ts",
+    "packages/vitest/src/node/types/coverage.ts",
+    "test/coverage-test/test/mixed-versions-warning.unit.test.ts",
+    "test/coverage-test/test/run-dynamic-coverage.test.ts",
+    "test/coverage-test/test/threshold-auto-update.unit.test.ts",
+    "test/coverage-test/utils.ts"
+   ],
+   "id": "f3-0129",
+   "lines_added": 183,
+   "lines_deleted": 27,
+   "message": "add `enableCoverage` and `disableCoverage` methods (#8412)\n\nCo-authored-by: Ari Perkkiö <ari.perkkio@gmail.com>"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "src/expr.rs",
+    "src/imports.rs",
+    "src/items.rs",
+    "src/lib.rs",
+    "src/lists.rs",
+    "src/macros.rs",
+    "src/reorder.rs",
+    "src/rustfmt_diff.rs",
+    "src/types.rs"
+   ],
+   "id": "f3-0130",
+   "lines_added": 104,
+   "lines_deleted": 126,
+   "message": "Cargo update and clippy (#2643)"
+  },
+  {
+   "files": [
+    "src/node/cli.ts",
+    "src/node/watcher.ts",
+    "src/reporters/default.ts",
+    "src/types/options.ts"
+   ],
+   "id": "f3-0131",
+   "lines_added": 48,
+   "lines_deleted": 22,
+   "message": "allow to press any key to exit watch mode on first run"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/core/nuxt.ts"
+   ],
+   "id": "f3-0132",
+   "lines_added": 32,
+   "lines_deleted": 26,
+   "message": "hoist environment types (#30230)"
+  },
+  {
+   "files": [
+    "packages/vite/src/client/client.ts",
+    "packages/vite/src/node/plugins/clientInjections.ts"
+   ],
+   "id": "f3-0133",
+   "lines_added": 0,
+   "lines_deleted": 2,
+   "message": "remove unused placeholder in client.ts (#4675)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0134",
+   "lines_added": 6,
+   "lines_deleted": 1,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/browser/src/client/index.html"
+   ],
+   "id": "f3-0135",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "display UI\n\nFixes #5308"
+  },
+  {
+   "files": [
+    "go.mod",
+    "go.sum",
+    "hclsyntax/expression_test.go"
+   ],
+   "id": "f3-0136",
+   "lines_added": 15,
+   "lines_deleted": 17,
+   "message": "go.mod: Use cty v1.13.0, with support for refined unknown values\n\nThis new concept allows constraining the range of an unknown value beyond\nwhat can be captured in a type constraint. We'll make more use of this\nin subsequent commits."
+  },
+  {
+   "files": [
+    "packages/angular-cli/commands/version.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0137",
+   "lines_added": 6207,
+   "lines_deleted": 3,
+   "message": "display verions of @angular/* and @ngtools/* (#3592)\n\nFixes #3589"
+  },
+  {
+   "files": [
+    "docs/docs/cli.md"
+   ],
+   "id": "f3-0138",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "Added missing Option in install command description (#3500)\n\n* Added missing Option in install command description"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/application/execute-build.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/utils.ts",
+    "packages/angular_devkit/build_angular/src/tools/webpack/utils/stats.ts"
+   ],
+   "id": "f3-0139",
+   "lines_added": 45,
+   "lines_deleted": 9,
+   "message": "limit the number of lazy chunks visible in the stats table\n\nPrior to this change in the stats table we listed all the lazy chunk, in some cases this could be hundreds of files.\n\nWith this change, we limit the number of files listed. To display all entire list of files users would need to use the `--verbose` flag."
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compiler-plugin.ts"
+   ],
+   "id": "f3-0140",
+   "lines_added": 1,
+   "lines_deleted": 14,
+   "message": "remove no longer needed `realpathSync`\n\nThis is no longer needed since the path provided is already passed through `realpathSync`. https://github.com/angular/angular-cli/blob/9d7d136b32a8bb0e0d70a502071418c9e4beaa05/packages/angular_devkit/build_angular/src/builders/application/options.ts#L104-L109"
+  },
+  {
+   "files": [
+    "src/bin/main.rs"
+   ],
+   "id": "f3-0141",
+   "lines_added": 7,
+   "lines_deleted": 6,
+   "message": "Print empty commit info without trailing hyphen"
+  },
+  {
+   "files": [
+    "packages/vitest/src/node/hoistMocks.ts",
+    "test/core/test/injector-mock.test.ts"
+   ],
+   "id": "f3-0142",
+   "lines_added": 79,
+   "lines_deleted": 16,
+   "message": "vi.mock breaks tests when using imported variables inside the factory (#4873)\n\nCo-authored-by: Dunqing <dengqing0821@gmail.com>"
+  },
+  {
+   "files": [
+    "packages/vitest/src/api/setup.ts",
+    "packages/vitest/src/api/types.ts",
+    "packages/vitest/src/node/core.ts",
+    "packages/vitest/src/node/spec.ts",
+    "packages/vitest/src/node/types/reporter.ts",
+    "packages/vitest/src/public/index.ts",
+    "packages/vitest/src/runtime/types/utils.ts"
+   ],
+   "id": "f3-0143",
+   "lines_added": 32,
+   "lines_deleted": 27,
+   "message": "rename serialized spec, add toJSON to test spec implementation (#6404)"
+  },
+  {
+   "files": [
+    "hcl/parser/parser_test.go"
+   ],
+   "id": "f3-0144",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "hcl/parser: test case for error in \"10kb\"\n\nhttps://github.com/hashicorp/terraform/issues/3287#issuecomment-195779840"
+  },
+  {
+   "files": [
+    "examples/README.md",
+    "examples/playwright/index.html",
+    "examples/playwright/package.json",
+    "examples/playwright/src/index.ts",
+    "examples/playwright/test/basic.test.ts",
+    "examples/playwright/tsconfig.json",
+    "examples/playwright/vitest.config.ts",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0145",
+   "lines_added": 132,
+   "lines_deleted": 0,
+   "message": "add Playwright example (#1670)"
+  },
+  {
+   "files": [
+    "bash_completionsV2.go"
+   ],
+   "id": "f3-0146",
+   "lines_added": 56,
+   "lines_deleted": 19,
+   "message": "Add similar whitespace escape logic to bash v2 completions than in other completions (#1743)\n\nSigned-off-by: Toni Kangas <toni.kangas@upcloud.com>\nSigned-off-by: Marc Khouzam <marc.khouzam@gmail.com>\nCo-authored-by: Marc Khouzam <marc.khouzam@gmail.com>\nCo-authored-by: Jeffrey Faer <jeffrey.faer@gmail.com>"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0147",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "prepare for v2.21.0 release"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/plugins/importAnalysisBuild.ts",
+    "playground/js-sourcemap/__tests__/js-sourcemap.spec.ts"
+   ],
+   "id": "f3-0148",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "lazily evaluate __vite__mapDeps files (#17602)"
+  },
+  {
+   "files": [
+    "src/types.rs",
+    "tests/source/issue-4243.rs",
+    "tests/target/issue-4243.rs"
+   ],
+   "id": "f3-0149",
+   "lines_added": 167,
+   "lines_deleted": 44,
+   "message": "Comment between typebounds (#4474)\n\n* Test cases and get spans\n\n* Fixed type bounds\n\n* Fixed issue of test cases\n\n* Fixed first test case issue\n\n* Removed unwanted whitespaces\n\n* Removed tmp files"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/index.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/options.ts",
+    "packages/angular_devkit/build_angular/src/utils/service-worker.ts"
+   ],
+   "id": "f3-0150",
+   "lines_added": 119,
+   "lines_deleted": 47,
+   "message": "move more esbuild option setup into normalize option helper\n\nThe initial global stylesheet, file replacement, index HTML, and service worker option analysis and cleanup has\nnow been moved into the `normalizeOptions` helper for the esbuild-based browser application builder. This better\norganizes the option related setup steps as well as reduces the amount of code in the main builder source file."
+  },
+  {
+   "files": [
+    "packages/mocker/package.json",
+    "packages/vite-node/package.json",
+    "packages/vitest/package.json"
+   ],
+   "id": "f3-0151",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "support Vite 7 (#8003)"
+  },
+  {
+   "files": [
+    "build.rs",
+    "src/chains.rs",
+    "src/comment.rs",
+    "src/expr.rs",
+    "src/file_lines.rs",
+    "src/imports.rs",
+    "src/issues.rs",
+    "src/items.rs",
+    "src/lib.rs",
+    "src/lists.rs",
+    "src/macros.rs",
+    "src/missed_spans.rs",
+    "src/patterns.rs",
+    "src/string.rs",
+    "src/types.rs",
+    "src/visitor.rs"
+   ],
+   "id": "f3-0152",
+   "lines_added": 431,
+   "lines_deleted": 406,
+   "message": "Fallout"
+  },
+  {
+   "files": [
+    "docs/index.html"
+   ],
+   "id": "f3-0153",
+   "lines_added": 2,
+   "lines_deleted": 4,
+   "message": "fixup! Ensure that doc url hash IDs are scrolled to on page load"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0154",
+   "lines_added": 14,
+   "lines_deleted": 0,
+   "message": "release notes for the v19.1.2 release"
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular_devkit/build_angular/BUILD.bazel",
+    "packages/angular_devkit/build_angular/package.json",
+    "packages/angular_devkit/build_angular/src/utils/action-executor.ts",
+    "packages/angular_devkit/build_angular/src/utils/process-bundle.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0155",
+   "lines_added": 20,
+   "lines_deleted": 74,
+   "message": "remove `jest-worker` direct dependency\n\nThe worker pool for differential loading and i18n processing is now managed by the `piscina` dependency. This dependency is already used within the recently added JavaScript optimizer refactoring and reduces both the number of direct dependencies and amount of code to setup the worker pools."
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0156",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/core/nitro.ts",
+    "packages/nuxt/src/core/nuxt.ts",
+    "packages/schema/build.config.ts",
+    "packages/schema/package.json",
+    "packages/schema/src/config/_common.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0157",
+   "lines_added": 19,
+   "lines_deleted": 2,
+   "message": "add `workspaceDir` option and add it to `modulesDir` (#7439)"
+  },
+  {
+   "files": [
+    "packages/vite-node/package.json",
+    "packages/vite-node/src/externalize.ts",
+    "packages/vite-node/src/server.ts",
+    "packages/vitest/package.json",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0158",
+   "lines_added": 60,
+   "lines_deleted": 42,
+   "message": "inline isValidNodeImport"
+  },
+  {
+   "files": [
+    "args.go",
+    "cobra/cmd/project.go",
+    "cobra/main.go",
+    "cobra/tpl/main.go",
+    "command.go"
+   ],
+   "id": "f3-0159",
+   "lines_added": 1,
+   "lines_deleted": 14,
+   "message": "Adjustments per PR review feedback from @bogem"
+  },
+  {
+   "files": [
+    "src/poetry/utils/env.py",
+    "tests/console/commands/env/helpers.py",
+    "tests/console/commands/env/test_use.py",
+    "tests/utils/test_env.py"
+   ],
+   "id": "f3-0160",
+   "lines_added": 139,
+   "lines_deleted": 36,
+   "message": "use shutil.which() to detect the active python (#7771)\n\nCo-authored-by: Randy Döring <30527984+radoering@users.noreply.github.com>"
+  },
+  {
+   "files": [
+    "packages/runner/src/hooks.ts",
+    "test/cli/fixtures/fails/hooks-fail-afterAll.test.ts",
+    "test/cli/fixtures/fails/hooks-fail-afterEach.test.ts",
+    "test/cli/fixtures/fails/hooks-fail-beforeAll.test.ts",
+    "test/cli/fixtures/fails/hooks-fail-beforeEach.test.ts",
+    "test/cli/test/__snapshots__/fails.test.ts.snap"
+   ],
+   "id": "f3-0161",
+   "lines_added": 43,
+   "lines_deleted": 0,
+   "message": "guard test hook callback (#6604)"
+  },
+  {
+   "files": [
+    "poetry/puzzle/solver.py",
+    "poetry/version/markers.py",
+    "tests/puzzle/test_solver.py"
+   ],
+   "id": "f3-0162",
+   "lines_added": 56,
+   "lines_deleted": 24,
+   "message": "Fix handling of extra markers (#1555)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md",
+    "poetry/console/application.py",
+    "poetry/console/commands/self/__init__.py",
+    "poetry/console/commands/self/update.py"
+   ],
+   "id": "f3-0163",
+   "lines_added": 178,
+   "lines_deleted": 0,
+   "message": "Add the self:update command"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/angular/angular-compilation.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/angular/aot-compilation.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/angular/compiler-plugin.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/angular/jit-compilation.ts"
+   ],
+   "id": "f3-0164",
+   "lines_added": 157,
+   "lines_deleted": 137,
+   "message": "move TS/NG configuration reading into compiler classes\n\nThe TypeScript and Angular configuration reading (`tsconfig.json`) has now been moved into the\nAngular compilation classes (AOT/JIT) directly. This removes compilation specific functionality\nfrom the esbuild plugin and allows the plugin to focus primarily on integration with esbuild."
+  },
+  {
+   "files": [
+    "docs/content/3.docs/2.directory-structure/4.components.md"
+   ],
+   "id": "f3-0165",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "use slot component  in components example (#2027)"
+  },
+  {
+   "files": [
+    "packages/plugin-vue-jsx/index.d.ts",
+    "packages/plugin-vue-jsx/package.json",
+    "yarn.lock"
+   ],
+   "id": "f3-0166",
+   "lines_added": 7,
+   "lines_deleted": 14,
+   "message": "use options interface of `@vue/babel-plugin-jsx` (#1454)"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/optimizer/index.ts",
+    "packages/vite/src/node/optimizer/scan.ts"
+   ],
+   "id": "f3-0167",
+   "lines_added": 11,
+   "lines_deleted": 5,
+   "message": "enable optimizeDeps.esbuildOptions.loader (#6840)\n\nCo-authored-by: bluwy <bjornlu.dev@gmail.com>"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "poetry/console/application.py",
+    "poetry/console/commands/__init__.py",
+    "poetry/console/commands/about.py",
+    "poetry/console/commands/add.py",
+    "poetry/console/commands/build.py",
+    "poetry/console/commands/cache/cache.py",
+    "poetry/console/commands/cache/clear.py",
+    "poetry/console/commands/check.py",
+    "poetry/console/commands/config.py",
+    "poetry/console/commands/debug/debug.py",
+    "poetry/console/commands/debug/info.py",
+    "poetry/console/commands/debug/resolve.py",
+    "poetry/console/commands/env/env.py",
+    "poetry/console/commands/env/info.py",
+    "poetry/console/commands/env/list.py",
+    "poetry/console/commands/env/remove.py",
+    "poetry/console/commands/env/use.py",
+    "poetry/console/commands/export.py",
+    "poetry/console/commands/init.py",
+    "poetry/console/commands/install.py",
+    "poetry/console/commands/lock.py",
+    "poetry/console/commands/new.py",
+    "poetry/console/commands/publish.py",
+    "poetry/console/commands/remove.py",
+    "poetry/console/commands/run.py",
+    "poetry/console/commands/search.py",
+    "poetry/console/commands/self/self.py",
+    "poetry/console/commands/self/update.py",
+    "poetry/console/commands/shell.py",
+    "poetry/console/commands/show.py",
+    "poetry/console/commands/update.py",
+    "poetry/console/commands/version.py",
+    "pyproject.toml"
+   ],
+   "id": "f3-0168",
+   "lines_added": 339,
+   "lines_deleted": 217,
+   "message": "Update commands to use new Cleo helpers"
+  },
+  {
+   "files": [
+    "parse_test.go"
+   ],
+   "id": "f3-0169",
+   "lines_added": 49,
+   "lines_deleted": 2,
+   "message": "Parse tests that parsing succeeds for all types"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "src/bin/main.rs",
+    "src/expr.rs",
+    "src/format-diff/main.rs",
+    "src/git-rustfmt/main.rs",
+    "src/lib.rs"
+   ],
+   "id": "f3-0170",
+   "lines_added": 60,
+   "lines_deleted": 53,
+   "message": "Cargo update and cargo clippy"
+  },
+  {
+   "files": [
+    "packages/vitest/src/node/core.ts"
+   ],
+   "id": "f3-0171",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "replace the order of coverage and watch (#634)"
+  },
+  {
+   "files": [
+    "cobra/cmd/add.go"
+   ],
+   "id": "f3-0172",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "depricate package name flag"
+  },
+  {
+   "files": [
+    "packages/svelte/src/compiler/migrate/index.js",
+    "packages/svelte/tests/migrate/samples/props-rest-props/output.svelte",
+    "packages/svelte/tests/migrate/samples/slots-custom-element/input.svelte",
+    "packages/svelte/tests/migrate/samples/slots-custom-element/output.svelte",
+    "packages/svelte/tests/migrate/samples/slots-with-$$props/input.svelte",
+    "packages/svelte/tests/migrate/samples/slots-with-$$props/output.svelte",
+    "packages/svelte/tests/migrate/samples/slots/input.svelte",
+    "packages/svelte/tests/migrate/samples/slots/output.svelte",
+    "packages/svelte/tests/migrate/samples/svelte-component/output.svelte"
+   ],
+   "id": "f3-0173",
+   "lines_added": 136,
+   "lines_deleted": 21,
+   "message": "correctly migrate `$$slots` with bracket member expressions & slots with static props (#13468)\n\n- correctly migrate `$$slots` with bracket member expressions\n- wrong type for JSDoc `$$restProps`\n- correctly migrate slots with static props\n-  `$$props` messing with `$$slots`\n\nFixes #13467, fixes #13466, fixes #13472"
+  },
+  {
+   "files": [
+    "docs/2.guide/2.directory-structure/1.components.md"
+   ],
+   "id": "f3-0174",
+   "lines_added": 4,
+   "lines_deleted": 0,
+   "message": "mention island features are SFC only (#26013)"
+  },
+  {
+   "files": [
+    "cobra/cmd/licenses.go"
+   ],
+   "id": "f3-0175",
+   "lines_added": 702,
+   "lines_deleted": 0,
+   "message": "add GNU GPL3 as a license"
+  },
+  {
+   "files": [
+    "src/formatting.rs",
+    "src/lib.rs",
+    "tests/source/issue-4603.rs",
+    "tests/target/issue-4603.rs"
+   ],
+   "id": "f3-0176",
+   "lines_added": 120,
+   "lines_deleted": 5,
+   "message": "Fix for issue 4603 about extra macro body indentation (third version)"
+  },
+  {
+   "files": [
+    "docs/.vitepress/config.ts"
+   ],
+   "id": "f3-0177",
+   "lines_added": 4,
+   "lines_deleted": 0,
+   "message": "fix guide entry"
+  },
+  {
+   "files": [
+    ".pre-commit-config.yaml"
+   ],
+   "id": "f3-0178",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "[pre-commit.ci] pre-commit autoupdate (#8595)\n\nCo-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>"
+  },
+  {
+   "files": [
+    "docs/guide/index.md",
+    "docs/main.css",
+    "docs/vite.config.ts",
+    "examples/README.md",
+    "scripts/update-examples.ts"
+   ],
+   "id": "f3-0179",
+   "lines_added": 27,
+   "lines_deleted": 10,
+   "message": "use example table"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0180",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/server/middlewares/transform.ts",
+    "playground/fs-serve/__tests__/fs-serve.spec.ts",
+    "playground/fs-serve/root/src/index.html"
+   ],
+   "id": "f3-0181",
+   "lines_added": 65,
+   "lines_deleted": 2,
+   "message": "fs raw query with query separators (#19702)"
+  },
+  {
+   "files": [
+    "fish_completions.go"
+   ],
+   "id": "f3-0182",
+   "lines_added": 82,
+   "lines_deleted": 83,
+   "message": "Fix multiple fish completion issues (#1249)\n\n* Fix fish for ShellDirectiveNoSpace and file comp\n\nFor fish shell we achieve ShellDirectiveNoSpace by outputing a fake\nsecond completion with an extra character.  However, this extra\ncharacter was being added after the description string, instead of\nbefore.  This commit fixes that.\n\nIt also cleans up the script of useless code, now that fish completion\ndetails are better understood.\n\nSigned-off-by: Marc Khouzam <marc.khouzam@montreal.ca>\n\n* Handle case when completion starts with a space\n\nFixes #1303\n\nSigned-off-by: Marc Khouzam <marc.khouzam@montreal.ca>\n\n* Support fish completion with env vars in the path\n\nFixes https://github.com/spf13/cobra/issues/1214\nFixes https://github.com/spf13/cobra/issues/1306\n\nSigned-off-by: Marc Khouzam <marc.khouzam@montreal.ca>\n\n* Update based on review\n\n1- We use `set -l` for local variable to make sure there are no\n   conflicts with global variables\n2- We use `commandline -opc` which:\n   a) splits the command line into tokens (-o)\n   b) only considers the current command (-p) (e.g., echo hello; helm <TAB>)\n   c) stops at the cursor (-c)\n3- We extract the last arg with `commandline -ct` and escape it to handle\n   the case where it is a space, or unmatched quote.\n4- We avoid looping when filtering on prefix.\n5- We don't add a fake comp for ShellCompDirectiveNoSpace when the\n   completion ends with any of @=/:., as fish won't add a space\n\nSigned-off-by: Marc Khouzam <marc.khouzam@montreal.ca>"
+  },
+  {
+   "files": [
+    "CHANGELOG.md",
+    "poetry/packages/dependency.py",
+    "poetry/packages/package.py",
+    "tests/mixology/fixtures/index/circular.json",
+    "tests/mixology/fixtures/index/conflict.json",
+    "tests/mixology/fixtures/index/unresolvable_child.json"
+   ],
+   "id": "f3-0183",
+   "lines_added": 11,
+   "lines_deleted": 8,
+   "message": "Fix packages name normalization"
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/plugin-legacy/package.json",
+    "packages/plugin-react/package.json",
+    "packages/plugin-vue-jsx/package.json",
+    "packages/plugin-vue/package.json",
+    "packages/vite/package.json",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0184",
+   "lines_added": 770,
+   "lines_deleted": 570,
+   "message": "update all non-major dependencies (#6782)"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "pyproject.toml"
+   ],
+   "id": "f3-0185",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "Add lockfile as an explicit dependency (#7169)"
+  },
+  {
+   "files": [
+    "packages/kit/package.json",
+    "packages/kit/src/index.ts",
+    "packages/kit/src/watch.fs.test.ts",
+    "packages/kit/src/watch.test.ts",
+    "packages/kit/src/watch.ts",
+    "packages/nuxt/src/core/builder.ts",
+    "packages/vite/src/vite.ts",
+    "packages/vite/src/watcher.ts",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0186",
+   "lines_added": 612,
+   "lines_deleted": 6,
+   "message": "handle missed chokidar watch events (#35887)"
+  },
+  {
+   "files": [
+    ".github/stale.yml"
+   ],
+   "id": "f3-0187",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "Update Stale bot config"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0188",
+   "lines_added": 10,
+   "lines_deleted": 0,
+   "message": "Document fix for retaining inner attributes on const blocks"
+  },
+  {
+   "files": [
+    "src/expr.rs",
+    "tests/target/issue-3717.rs"
+   ],
+   "id": "f3-0189",
+   "lines_added": 12,
+   "lines_deleted": 0,
+   "message": "fix internal error when using rustfmt::skip with newline on stmt (#3785)"
+  },
+  {
+   "files": [
+    "src/expr.rs",
+    "tests/source/let_chains.rs",
+    "tests/source/match.rs",
+    "tests/target/let_chains.rs",
+    "tests/target/match.rs"
+   ],
+   "id": "f3-0190",
+   "lines_added": 100,
+   "lines_deleted": 1,
+   "message": "Add support for ExprKind::Let"
+  },
+  {
+   "files": [
+    "packages/angular/cli/src/commands/command-config.ts"
+   ],
+   "id": "f3-0191",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "update E2E command alias\n\nThe mistake was introduced in a previous commit that introduced registration of lazy loading of commands."
+  },
+  {
+   "files": [
+    "packages/svelte/src/compiler/phases/1-parse/utils/html.js",
+    "packages/svelte/src/compiler/phases/2-analyze/validation.js",
+    "packages/svelte/tests/validator/samples/invalid-node-placement/errors.json",
+    "packages/svelte/tests/validator/samples/invalid-node-placement/input.svelte"
+   ],
+   "id": "f3-0192",
+   "lines_added": 43,
+   "lines_deleted": 1,
+   "message": "improve invalid nested interactive element error (#10199)\n\n* improve invalid nested interactive element error\n\n* add test\n\n* revise"
+  },
+  {
+   "files": [
+    "src/bin/main.rs",
+    "src/config/mod.rs",
+    "src/config/options.rs",
+    "src/git-rustfmt/main.rs",
+    "src/lib.rs",
+    "src/test/mod.rs"
+   ],
+   "id": "f3-0193",
+   "lines_added": 180,
+   "lines_deleted": 161,
+   "message": "Refactor CliOptions"
+  },
+  {
+   "files": [
+    "cobra_test.go",
+    "command.go"
+   ],
+   "id": "f3-0194",
+   "lines_added": 43,
+   "lines_deleted": 0,
+   "message": "adding support for prefix matching against aliases & names"
+  },
+  {
+   "files": [
+    "docs/content/4.support/3.us.md"
+   ],
+   "id": "f3-0195",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "fix hero (#9941)"
+  },
+  {
+   "files": [
+    "docs/config/preview-options.md",
+    "docs/config/server-options.md",
+    "packages/vite/LICENSE.md",
+    "packages/vite/package.json",
+    "packages/vite/rolldown.dts.config.ts",
+    "packages/vite/src/node/http.ts",
+    "packages/vite/src/node/index.ts",
+    "packages/vite/src/node/server/middlewares/proxy.ts",
+    "packages/vite/src/types/http-proxy.d.ts",
+    "packages/vite/src/types/shims.d.ts",
+    "patches/http-proxy@1.18.1.patch",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml"
+   ],
+   "id": "f3-0196",
+   "lines_added": 73,
+   "lines_deleted": 450,
+   "message": "use `http-proxy-3` (#20402)"
+  },
+  {
+   "files": [
+    "docs/3.api/2.composables/use-runtime-hook.md",
+    "packages/nuxt/src/app/composables/index.ts",
+    "packages/nuxt/src/app/composables/runtime-hook.ts",
+    "packages/nuxt/src/app/index.ts",
+    "packages/nuxt/src/app/nuxt.ts",
+    "packages/nuxt/src/imports/presets.ts",
+    "test/nuxt/composables.test.ts"
+   ],
+   "id": "f3-0197",
+   "lines_added": 103,
+   "lines_deleted": 2,
+   "message": "add `useRuntimeHook` composable (#29741)"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/ssr/ssrModuleLoader.ts"
+   ],
+   "id": "f3-0198",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "reject ssrLoadModule promises if evaluation fails (#2079)\n\nclose #2078"
+  },
+  {
+   "files": [
+    "packages/vite/package.json",
+    "packages/vite/rolldown.config.ts",
+    "packages/vite/src/node/config.ts",
+    "playground/devtools/package.json",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0199",
+   "lines_added": 52,
+   "lines_deleted": 43,
+   "message": "use internal devtools config (#21609)"
+  },
+  {
+   "files": [
+    "cobra/cmd/project.go",
+    "cobra/tpl/main.go"
+   ],
+   "id": "f3-0200",
+   "lines_added": 4,
+   "lines_deleted": 3,
+   "message": "vgo - add command working"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/core/nuxt.ts"
+   ],
+   "id": "f3-0201",
+   "lines_added": 5,
+   "lines_deleted": 5,
+   "message": "handle subpaths more correctly"
+  },
+  {
+   "files": [
+    "docs/4.api/6.advanced/2.import-meta.md",
+    "packages/kit/src/loader/config.ts",
+    "packages/kit/test/load-nuxt-config.spec.ts",
+    "packages/nuxt/src/app/types/augments.ts",
+    "packages/schema/src/config/common.ts",
+    "packages/schema/src/types/schema.ts",
+    "packages/vite/src/shared/client.ts",
+    "packages/vite/src/shared/server.ts",
+    "packages/webpack/src/presets/base.ts",
+    "test/basic.test.ts",
+    "test/fixtures/basic-types/app/app-types.ts",
+    "test/fixtures/basic/app/pages/env-name.vue"
+   ],
+   "id": "f3-0202",
+   "lines_added": 59,
+   "lines_deleted": 1,
+   "message": "expose environment name on `import.meta` (#34844)"
+  },
+  {
+   "files": [
+    "docs/1.getting-started/6.data-fetching.md"
+   ],
+   "id": "f3-0203",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "fix typo in `useAsyncData` docs (#25644)"
+  },
+  {
+   "files": [
+    "src/config/config_type.rs",
+    "src/imports.rs",
+    "src/lib.rs",
+    "src/macros.rs",
+    "src/overflow.rs"
+   ],
+   "id": "f3-0204",
+   "lines_added": 31,
+   "lines_deleted": 28,
+   "message": "Remove various feature flags"
+  },
+  {
+   "files": [
+    "packages/vitest/src/integrations/chai/poll.ts",
+    "test/core/test/expect-poll.test.ts"
+   ],
+   "id": "f3-0205",
+   "lines_added": 15,
+   "lines_deleted": 14,
+   "message": "show the assertion error first when `expect.poll` assertion fails (#8483)"
+  },
+  {
+   "files": [
+    "packages/create-vite/package.json",
+    "packages/create-vite/src/index.ts"
+   ],
+   "id": "f3-0206",
+   "lines_added": 9,
+   "lines_deleted": 5,
+   "message": "handle double dash for `npm exec` (#21830)"
+  },
+  {
+   "files": [
+    "packages/plugin-legacy/index.js"
+   ],
+   "id": "f3-0207",
+   "lines_added": 4,
+   "lines_deleted": 2,
+   "message": "fix type errors (#4762)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0208",
+   "lines_added": 3,
+   "lines_deleted": 0,
+   "message": "Prepare CHANGELOG for forthcoming v2.5.0 release"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/angular-cli-files/models/webpack-configs/typescript.ts",
+    "packages/angular_devkit/build_angular/src/browser/index.ts",
+    "packages/angular_devkit/build_angular/src/browser/index2.ts",
+    "packages/angular_devkit/build_angular/src/extract-i18n/index.ts",
+    "packages/angular_devkit/build_angular/src/karma/index.ts",
+    "packages/angular_devkit/build_angular/src/server/index.ts"
+   ],
+   "id": "f3-0209",
+   "lines_added": 15,
+   "lines_deleted": 26,
+   "message": "remove unused host parameter from typescript webpack methods"
+  },
+  {
+   "files": [
+    "docs/public/vite4-3-hmr-time.png",
+    "docs/public/vite4-3-startup-time.png"
+   ],
+   "id": "f3-0210",
+   "lines_added": 0,
+   "lines_deleted": 0,
+   "message": "4.3 announcement graph updates (#12927)"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/app/components/nuxt-root.vue"
+   ],
+   "id": "f3-0211",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "add additional logging when skipping error page for bot"
+  },
+  {
+   "files": [
+    "cobra/go.mod"
+   ],
+   "id": "f3-0212",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "bugfix/cli: Temporary fix for go get on cobra cli (#1200)\n\nPR #1139 introduced a complexity that will have to be taken into account\nas we figure out our release pipeline. This fix pins to cobrav1.0.0 as a\ntemporary workaround.\n\nfixes: #1191"
+  },
+  {
+   "files": [
+    "hcl/scanner/scanner_test.go"
+   ],
+   "id": "f3-0213",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "hcl/scanner: add test for negative number"
+  },
+  {
+   "files": [
+    "packages/ui/client/components/trace/TraceView.vue",
+    "packages/ui/client/composables/trace-view.ts",
+    "test/ui/README.md",
+    "test/ui/fixtures/trace-stream/nested.test.ts",
+    "test/ui/fixtures/trace/nested.test.ts",
+    "test/ui/test/trace-stream.spec.ts",
+    "test/ui/test/trace.spec.ts"
+   ],
+   "id": "f3-0214",
+   "lines_added": 188,
+   "lines_deleted": 19,
+   "message": "display nested mark trace in UI (#10437)\n\nCo-authored-by: Hiroshi Ogawa <4232207+hi-ogawa@users.noreply.github.com>\nCo-authored-by: Codex <noreply@openai.com>"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0215",
+   "lines_added": 57,
+   "lines_deleted": 38,
+   "message": "update doc w/ newer cmd/root.go example (#973)"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compilation/angular-compilation.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compilation/factory.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compilation/index.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compilation/parallel-compilation.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compilation/parallel-worker.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compiler-plugin.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/diagnostics.ts",
+    "packages/angular_devkit/build_angular/src/utils/environment-options.ts"
+   ],
+   "id": "f3-0216",
+   "lines_added": 329,
+   "lines_deleted": 27,
+   "message": "add initial support for parallel TS/NG compilation\n\nBy default Angular compilations will now use a Node.js Worker thread to load and execute the\nTypeScript and Angular compilers when using esbuild-based builders (`application`/`browser-esbuild`).\nThis allows for longer synchronous actions such as semantic and template diagnostics to be calculated\nin parallel to the other aspects of the application bundling process. The worker thread also has\na separate memory pool which significantly reduces the need for adjusting the main Node.js CLI process\nmemory settings with large application code sizes. This can be disabled via the `NG_BUILD_PARALLEL_TS`\nenvironment variable currently to support performance benchmarking. However, this is an unsupported\nenvironment variable option and may be removed in a future version."
+  },
+  {
+   "files": [
+    "lex.go",
+    "lex_test.go"
+   ],
+   "id": "f3-0217",
+   "lines_added": 5,
+   "lines_deleted": 1,
+   "message": "Empty files are HCL"
+  },
+  {
+   "files": [
+    "packages/angular/cli/BUILD.bazel",
+    "packages/angular/cli/package.json",
+    "packages/angular/cli/src/commands/add/cli.ts",
+    "packages/angular/cli/src/utilities/package-manager.ts",
+    "packages/angular/cli/src/utilities/spinner.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0218",
+   "lines_added": 5,
+   "lines_deleted": 78,
+   "message": "remove ora spinner dependency from package\n\nThe ora package has been removed now that the progress indicator for the\nupdate command is now based on the `listr2` package that is also used\nby the `ng add` command."
+  },
+  {
+   "files": [
+    "packages/angular/build/src/private.ts",
+    "packages/angular/build/src/tools/angular/compilation/factory.ts"
+   ],
+   "id": "f3-0219",
+   "lines_added": 5,
+   "lines_deleted": 1,
+   "message": "provide private factory API for internal compilation infrastructure\n\nThe `createAngularCompilation` factory function is now available from the\n`private` entry point for the `@angular/build` package. All items exposed\nfrom this entry point are not subject to SemVer guarantees and may change between\nreleases."
+  },
+  {
+   "files": [
+    "docs/config/dep-optimization-options.md",
+    "packages/vite/src/node/optimizer/index.ts"
+   ],
+   "id": "f3-0220",
+   "lines_added": 7,
+   "lines_deleted": 1,
+   "message": "stabilize `optimizeDeps.noDiscovery` (#19984)"
+  },
+  {
+   "files": [
+    "src/cargo-fmt/main.rs"
+   ],
+   "id": "f3-0221",
+   "lines_added": 1,
+   "lines_deleted": 4,
+   "message": "Improve error message when failing cargo metadata (#3024)"
+  },
+  {
+   "files": [
+    "extras/grammar/HCL.json-tmLanguage",
+    "extras/grammar/HCL.tmLanguage",
+    "extras/grammar/HCL.yaml-tmLanguage",
+    "extras/grammar/HCLExpression.json-tmLanguage",
+    "extras/grammar/HCLExpression.tmLanguage",
+    "extras/grammar/HCLExpression.yaml-tmLanguage",
+    "extras/grammar/HCLTemplate.json-tmLanguage",
+    "extras/grammar/HCLTemplate.tmLanguage",
+    "extras/grammar/HCLTemplate.yaml-tmLanguage",
+    "extras/grammar/build.go"
+   ],
+   "id": "f3-0222",
+   "lines_added": 0,
+   "lines_deleted": 1422,
+   "message": "extras/grammar: Remove\n\nThese grammar files are not yet feature-complete and so we'll remove them\nfor now until such time that we're ready to support them.\n\nThe main blocker here is in lacking a good testing procedure for updates\nto these. While in principle they can be loaded into a number of different\ntext editors, that is a very manual process that often requires a high\ndegree of familiarity with the extension API. In order to support these\nproperly we'd instead need some sort of automatic test suite which can\nrun various inputs through these rulesets and check that the resulting\ntokenization."
+  },
+  {
+   "files": [
+    "src/config/options.rs"
+   ],
+   "id": "f3-0223",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "fix broken markdown"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/angular-cli-files/plugins/karma.ts"
+   ],
+   "id": "f3-0224",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "fixes cors issues with karma (#11970)\n\nChecking the stack trace in the issue one can noticed that the paths for the components are being served via the `webpack://` protocol which is causing a `cors` issue between `http` and `webpack` protocol\n\nThis PR removed the `webpack` protocol from the `devtoolModuleFilenameTemplate`\n\nCloses #11966"
+  },
+  {
+   "files": [
+    "completions_test.go"
+   ],
+   "id": "f3-0225",
+   "lines_added": 110,
+   "lines_deleted": 0,
+   "message": "Add tests for flag completion registration (#2053)\n\nDifferent problems have been reported about flag completion registration.\nThese two tests are the cases that were not being verified but had been\nmentioned as problematic.\n\nRef:\n- https://github.com/spf13/cobra/issues/1320\n- https://github.com/spf13/cobra/pull/1438#issuecomment-872928669\n\nSigned-off-by: Marc Khouzam <marc.khouzam@gmail.com>"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0226",
+   "lines_added": 11,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0227",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "Prepare changelog for future v2.15.1 release"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/server/hmr.ts",
+    "packages/vite/src/shared/invokeMethods.ts",
+    "packages/vite/src/shared/moduleRunnerTransport.ts"
+   ],
+   "id": "f3-0228",
+   "lines_added": 10,
+   "lines_deleted": 16,
+   "message": "make internal invoke event to use the same interface with `handleInvoke` (#18902)"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0229",
+   "lines_added": 13,
+   "lines_deleted": 1,
+   "message": "version badges (#318)"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/tools/esbuild/rxjs-esm-resolution-plugin.ts",
+    "packages/angular_devkit/build_angular/src/tools/esbuild/server-code-bundle.ts"
+   ],
+   "id": "f3-0230",
+   "lines_added": 52,
+   "lines_deleted": 1,
+   "message": "force ESM resolution of rxjs when in server bundles\n\nRxjs conditional export for node points to the CJS version. This commits adds a resolver to replace the resolved path to the ESM version."
+  },
+  {
+   "files": [
+    "packages/schematics/angular/component/files/__name@dasherize@if-flat__/__name@dasherize__.__type@dasherize__.spec.ts.template"
+   ],
+   "id": "f3-0231",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "remove unnecessary whitespace in spec template"
+  },
+  {
+   "files": [
+    "docs/content/2.guide/2.features/5.data-fetching.md"
+   ],
+   "id": "f3-0232",
+   "lines_added": 49,
+   "lines_deleted": 43,
+   "message": "add note about difference between `useFetch` and `useAsyncData` (#4974)"
+  },
+  {
+   "files": [
+    "cobra/cmd/project.go"
+   ],
+   "id": "f3-0233",
+   "lines_added": 0,
+   "lines_deleted": 17,
+   "message": "remove commented code"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0234",
+   "lines_added": 18,
+   "lines_deleted": 0,
+   "message": "release notes for the v12.2.0-rc.0 release"
+  },
+  {
+   "files": [
+    "packages/angular/build/src/builders/dev-server/vite-server.ts"
+   ],
+   "id": "f3-0235",
+   "lines_added": 4,
+   "lines_deleted": 0,
+   "message": "add console note about development server raw file size\n\nAn informational note will now be shown upon development server startup\nto indicate that the raw file sizes shown in the console do not reflect\nany of the per-request transformations that may occur within the Vite-based\ndevelopment server. The raw file size and the size shown within the browser\nmay differ as a result of these development workflow based transformations."
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/browser/index.ts"
+   ],
+   "id": "f3-0236",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "change error message to use option name instead of args"
+  },
+  {
+   "files": [
+    "poetry/config.py"
+   ],
+   "id": "f3-0237",
+   "lines_added": 7,
+   "lines_deleted": 2,
+   "message": "Fix error when config file is not present"
+  },
+  {
+   "files": [
+    "CHANGELOG.md",
+    "poetry/__version__.py",
+    "pyproject.toml"
+   ],
+   "id": "f3-0238",
+   "lines_added": 5,
+   "lines_deleted": 4,
+   "message": "Bump version to 0.11.2"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0239",
+   "lines_added": 16,
+   "lines_deleted": 0,
+   "message": "release notes for the v16.2.1 release"
+  },
+  {
+   "files": [
+    "packages/playground/ssr/__tests__/ssr.spec.ts",
+    "packages/playground/ssr/server.js",
+    "packages/vite/src/node/server/index.ts",
+    "packages/vite/src/node/server/middlewares/indexHtml.ts"
+   ],
+   "id": "f3-0240",
+   "lines_added": 63,
+   "lines_deleted": 39,
+   "message": "add ViteDevServer.transformIndexHtml method for ssr\n\nclose #1745"
+  },
+  {
+   "files": [
+    "packages/vitest/src/integrations/inject.ts",
+    "packages/vitest/src/node/core.ts",
+    "packages/vitest/src/node/globalSetup.ts",
+    "packages/vitest/src/node/workspace.ts"
+   ],
+   "id": "f3-0241",
+   "lines_added": 7,
+   "lines_deleted": 7,
+   "message": "correct `project.provide` type (#5959)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0242",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "v2.1.0 release"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/migrations/karma/migration.ts",
+    "packages/schematics/angular/migrations/karma/migration_spec.ts",
+    "packages/schematics/angular/migrations/{karma => migrate-karma-to-vitest}/karma-config-analyzer.ts",
+    "packages/schematics/angular/migrations/{karma => migrate-karma-to-vitest}/karma-config-analyzer_spec.ts",
+    "packages/schematics/angular/migrations/{karma => migrate-karma-to-vitest}/karma-config-comparer.ts",
+    "packages/schematics/angular/migrations/{karma => migrate-karma-to-vitest}/karma-config-comparer_spec.ts",
+    "packages/schematics/angular/migrations/migrate-karma-to-vitest/karma-processor.ts",
+    "packages/schematics/angular/migrations/migration-collection.json"
+   ],
+   "id": "f3-0243",
+   "lines_added": 2,
+   "lines_deleted": 539,
+   "message": "move Karma migration utilities to the migrate-karma-to-vitest directory\n\nThe standalone migration is no longer used."
+  },
+  {
+   "files": [
+    "command.go",
+    "command_test.go"
+   ],
+   "id": "f3-0244",
+   "lines_added": 115,
+   "lines_deleted": 0,
+   "message": "Add support for ignoring parse errors (#662)"
+  },
+  {
+   "files": [
+    "packages/svelte/src/internal/client/dom/elements/events.js",
+    "packages/svelte/tests/runtime-runes/samples/event-attribute-delegation-8/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/event-attribute-delegation-8/main.svelte"
+   ],
+   "id": "f3-0245",
+   "lines_added": 35,
+   "lines_deleted": 3,
+   "message": "ensure event currentTarget is reset after propagation logic (#13042)\n\n* ensure event currentTarget is reset after propgation logic\n\n* ensure event currentTarget is reset after propgation logic"
+  },
+  {
+   "files": [
+    "site/content/docs/04-compile-time.md"
+   ],
+   "id": "f3-0246",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "adjust formatting in compiler options table"
+  },
+  {
+   "files": [
+    "command.go"
+   ],
+   "id": "f3-0247",
+   "lines_added": 11,
+   "lines_deleted": 3,
+   "message": "Default usage output to stdout\n\nIf the command has not set an output explicitly everything will go to\nstderr.  This makes a lot of sense, but is a huge PITA for people who\nwant to be able to grep the help output.  It is very common for users to\nwant to do\n\ncommand --help | grep flag\n\nThis patch fixes that by default help output (but not error output like\nan invalid command) to stdout instead of defaulting to stderr."
+  },
+  {
+   "files": [
+    ".github/workflows/checks.yml",
+    "cmd/hcldec/main.go",
+    "cmd/hclfmt/main.go",
+    "cmd/hclspecsuite/main.go",
+    "cmd/hclspecsuite/runner.go",
+    "cmd/hclspecsuite/test_file.go",
+    "diagnostic.go",
+    "ext/dynblock/variables.go",
+    "gohcl/decode.go",
+    "gohcl/decode_test.go",
+    "hcldec/spec.go",
+    "hclparse/parser.go",
+    "hclsimple/hclsimple.go",
+    "hclsyntax/expression.go",
+    "hclsyntax/expression_static_test.go",
+    "hclsyntax/expression_template.go",
+    "hclsyntax/parser_test.go",
+    "hclsyntax/scan_string_lit.go",
+    "hclsyntax/scan_tokens.go",
+    "hclsyntax/structure_at_pos_test.go",
+    "hclsyntax/walk_test.go",
+    "hclwrite/ast.go",
+    "hclwrite/ast_block.go",
+    "hclwrite/ast_block_test.go",
+    "hclwrite/ast_body.go",
+    "hclwrite/format.go",
+    "hclwrite/fuzz/fuzz_test.go",
+    "hclwrite/parser.go",
+    "hclwrite/public.go",
+    "json/parser.go",
+    "json/public.go",
+    "json/public_test.go",
+    "json/structure_test.go",
+    "merged.go",
+    "ops_test.go"
+   ],
+   "id": "f3-0248",
+   "lines_added": 113,
+   "lines_deleted": 122,
+   "message": "fix staticcheck lint errors"
+  },
+  {
+   "files": [
+    "args_test.go"
+   ],
+   "id": "f3-0249",
+   "lines_added": 29,
+   "lines_deleted": 0,
+   "message": "Add backwards-compatibility tests for legacyArgs() (#1547)\n\nThese tests make sure we don't break backwards-compatibility with\nrespect to the current behaviour of legacyArgs().\n\nSee #1500 for the back-story.\n\nSigned-off-by: Marc Khouzam <marc.khouzam@montreal.ca>"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/cli.ts"
+   ],
+   "id": "f3-0250",
+   "lines_added": 5,
+   "lines_deleted": 0,
+   "message": "support outDir option (#10418)"
+  },
+  {
+   "files": [
+    "packages/svelte/src/compiler/phases/1-parse/read/context.js",
+    "packages/svelte/src/compiler/phases/1-parse/state/tag.js",
+    "packages/svelte/src/compiler/phases/1-parse/utils/bracket.js",
+    "packages/svelte/src/compiler/types/template.d.ts",
+    "packages/svelte/tests/parser-modern/samples/generic-snippets/input.svelte",
+    "packages/svelte/tests/parser-modern/samples/generic-snippets/output.json",
+    "packages/svelte/types/index.d.ts"
+   ],
+   "id": "f3-0251",
+   "lines_added": 416,
+   "lines_deleted": 103,
+   "message": "allow generics on snippets (#15915)\n\n* allow generics on snippets\n\n* fix lint\n\n* reuse bracket matching logic\n\n* remove some unused stuff\n\n* update name, test and types\n\n* fix lint\n\n---------\n\nCo-authored-by: Rich Harris <rich.harris@vercel.com>"
+  },
+  {
+   "files": [
+    "packages/svelte/src/internal/client/context.js",
+    "packages/svelte/src/internal/client/dev/ownership.js"
+   ],
+   "id": "f3-0252",
+   "lines_added": 19,
+   "lines_deleted": 23,
+   "message": "widen ownership when calling setContext (#15153)\n\nInstead of doing ownership addition at each `getContext` call site, we do it once as the `setContext` call site and make the state basically global.\n- avoids potential false positives in edge cases\n- makes the whole thing more performant, especially around things like calling `getContext` inside a list item component\n- false negatives are unlikely from this\n\nfixes #15072"
+  },
+  {
+   "files": [
+    "cobra/cmd/license_agpl.go",
+    "cobra/cmd/license_apache_2.go",
+    "cobra/cmd/license_bsd_clause_2.go",
+    "cobra/cmd/license_bsd_clause_3.go",
+    "cobra/cmd/license_gpl_2.go",
+    "cobra/cmd/license_gpl_3.go",
+    "cobra/cmd/license_lgpl.go",
+    "cobra/cmd/license_mit.go"
+   ],
+   "id": "f3-0253",
+   "lines_added": 8,
+   "lines_deleted": 8,
+   "message": "Allow specifying licenses using their SPDX identifier (#1159)"
+  },
+  {
+   "files": [
+    "packages/angular/build/src/builders/karma/application_builder.ts"
+   ],
+   "id": "f3-0254",
+   "lines_added": 18,
+   "lines_deleted": 20,
+   "message": "minor code changes in karma `AngularAssetsMiddleware`\n\nEarly exits and reduce optional chaining."
+  },
+  {
+   "files": [
+    "poetry/installation/pip_installer.py",
+    "tests/installation/test_pip_installer.py"
+   ],
+   "id": "f3-0255",
+   "lines_added": 16,
+   "lines_deleted": 0,
+   "message": "Fix support for url sourced packages in pip installer (#1306)\n\nThis change fixes the installation of packages using a url source.\nPreviously, the installer attempted to install the package using the\nname ignoring the source url."
+  },
+  {
+   "files": [
+    "bash_completions.go"
+   ],
+   "id": "f3-0256",
+   "lines_added": 3,
+   "lines_deleted": 1,
+   "message": "Bash completion variable leak fixes (#1352)\n\nFixes bash variables leaking into the parent shell without `local`"
+  },
+  {
+   "files": [
+    "src/poetry/repositories/installed_repository.py",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610_no_requested_version-1.2.3.dist-info/METADATA",
+    "tests/repositories/fixtures/installed/lib/python3.7/site-packages/git_pep_610_no_requested_version-1.2.3.dist-info/direct_url.json",
+    "tests/repositories/test_installed_repository.py"
+   ],
+   "id": "f3-0257",
+   "lines_added": 38,
+   "lines_deleted": 1,
+   "message": "PEP610: handle optional vcs_info.requested_version\n\nAs per PEP610, presence of `vcs_info.requested_version` is optional in\ndirect_url.json for vcs packages. Prior to this change, Poetry would\ncrash when loading an environment with a vcs package not installed by\nPoetry."
+  },
+  {
+   "files": [
+    "command.go",
+    "command_test.go"
+   ],
+   "id": "f3-0258",
+   "lines_added": 121,
+   "lines_deleted": 1,
+   "message": "Add support for --version flag (#584)"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "pyproject.toml"
+   ],
+   "id": "f3-0259",
+   "lines_added": 79,
+   "lines_deleted": 60,
+   "message": "update export plugin to 1.0.4"
+  },
+  {
+   "files": [
+    "src/poetry/inspection/info.py",
+    "tests/inspection/test_info.py"
+   ],
+   "id": "f3-0260",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "include metadata version in \"unknown metadata\" error message\n\nI thought this would be nice just to help people debug things in the\nfuture."
+  },
+  {
+   "files": [
+    "packages/svelte/src/compiler/migrate/index.js",
+    "packages/svelte/tests/migrate/samples/self-closing-elements/input.svelte",
+    "packages/svelte/tests/migrate/samples/self-closing-elements/output.svelte"
+   ],
+   "id": "f3-0261",
+   "lines_added": 20,
+   "lines_deleted": 0,
+   "message": "support migration of self closing tags (#13479)"
+  },
+  {
+   "files": [
+    "packages/vitest/src/node/reporters/junit.ts",
+    "test/reporters/src/data-for-junit.ts",
+    "test/reporters/src/data.ts",
+    "test/reporters/tests/__snapshots__/reporters.spec.ts.snap",
+    "test/reporters/tests/reporters.spec.ts"
+   ],
+   "id": "f3-0262",
+   "lines_added": 116,
+   "lines_deleted": 2,
+   "message": "escape XML when in error message (fix: #1823) (#1890)"
+  },
+  {
+   "files": [
+    "poetry/console/commands/add.py",
+    "poetry/console/commands/debug/resolve.py",
+    "poetry/console/commands/install.py",
+    "poetry/console/commands/remove.py",
+    "poetry/inspection/info.py"
+   ],
+   "id": "f3-0263",
+   "lines_added": 5,
+   "lines_deleted": 5,
+   "message": "Propagate package inspection logs"
+  },
+  {
+   "files": [
+    "src/expr.rs",
+    "src/string.rs",
+    "tests/source/string-lit-2.rs",
+    "tests/target/enum.rs",
+    "tests/target/string-lit-2.rs"
+   ],
+   "id": "f3-0264",
+   "lines_added": 47,
+   "lines_deleted": 18,
+   "message": "If a string goes over-width, give up formatting it\n\nLogic here is that the original might be better and at best we'll only make it a different kind of bad.\n\nFixes #1237"
+  },
+  {
+   "files": [
+    "packages/angular/build/src/private.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/tests/behavior/postcss_config_spec.ts",
+    "packages/angular_devkit/build_angular/src/tools/webpack/configs/styles.ts",
+    "packages/angular_devkit/build_angular/src/utils/tailwind.ts"
+   ],
+   "id": "f3-0265",
+   "lines_added": 101,
+   "lines_deleted": 60,
+   "message": "provide partial custom postcss configuration support\n\nThe `browser` builder now supports providing a custom postcss configuration\nsimilar to the functionality available in the `@angular/build:application`\nbuilder. A postcss configuration file named either `postcss.config.json` or\n`.postcssrc.json` will be discovered in order from the project root or\nworkspace root. Only plugins can be configured via the file. All other\nfields will be ignored. Additionally the plugins will be placed after\nany internal build system plugins but before `autoprefixer`.\nWhen using a custom postcss configuration, the automatic tailwind integration\nwill be disabled. The Tailwind postcss plugin should be added to the configuration\nfile in this scenario.\n\nCo-Authored-By: Jan Martin <jankrems@google.com>"
+  },
+  {
+   "files": [
+    "goldens/public-api/angular_devkit/build_angular/index.md",
+    "packages/angular_devkit/build_angular/src/builders/browser/index.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/allow-js_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/base-href_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/build-optimizer_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/cross-origin_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/deploy-url_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser/specs/index_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/server/index.ts"
+   ],
+   "id": "f3-0266",
+   "lines_added": 20,
+   "lines_deleted": 43,
+   "message": "remove deprecated `outputPaths` and `outputPath` Builder output\n\nRemove the deprecated `outputPath` and `outputPaths` from the server and browser builder.\n\nBREAKING CHANGE:\n\nDeprecated `outputPath` and `outputPaths` from the server and browser builder have been removed from the builder output. Use `outputs` instead.\n\nNote: this change does not effect application developers."
+  },
+  {
+   "files": [
+    "args_test.go"
+   ],
+   "id": "f3-0267",
+   "lines_added": 103,
+   "lines_deleted": 145,
+   "message": "args_test: add helper functions  (#1426)\n\n* args_test: add helper function expectSuccess\n* args_test: add helper function getCommand\n* args_test: add additional helper functions\n* noArgsWithArgs\n* validWithInvalidArgs\n* minimumNArgsWithLessArgs\n* maximumNArgsWithMoreArgs\n* exactArgsWithInvalidCount\n* rangeArgsWithInvalidCount"
+  },
+  {
+   "files": [
+    "packages/vite/src/node/optimizer/index.ts",
+    "packages/vite/src/node/optimizer/scan.ts"
+   ],
+   "id": "f3-0268",
+   "lines_added": 64,
+   "lines_deleted": 18,
+   "message": "dep optimizer entry option"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0269",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "Fix README example to be consistent with others (#585)\n\nAlphabetize and separate builtin imports from external imports\nto be gofmt-compliant and consistent with other examples in README."
+  },
+  {
+   "files": [
+    "docs/4.api/6.advanced/1.hooks.md",
+    "packages/kit/src/module/define.ts",
+    "packages/kit/src/module/install.ts",
+    "packages/kit/test/module.test.ts",
+    "packages/schema/src/index.ts",
+    "packages/schema/src/types/hooks.ts"
+   ],
+   "id": "f3-0270",
+   "lines_added": 201,
+   "lines_deleted": 22,
+   "message": "add `module:before`/`module:done` hooks (#36173)"
+  },
+  {
+   "files": [
+    "packages/@angular/cli/bin/ng"
+   ],
+   "id": "f3-0271",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Backwards warning that global CLI is greater version than local CLI #4341"
+  },
+  {
+   "files": [
+    "documentation/docs/98-reference/.generated/client-warnings.md",
+    "packages/svelte/messages/client-warnings/warnings.md",
+    "packages/svelte/src/internal/client/warnings.js",
+    "packages/svelte/src/legacy/legacy-client.js",
+    "packages/svelte/tests/runtime-runes/samples/legacy-recursive-reactive-block/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/legacy-recursive-reactive-block/main.svelte"
+   ],
+   "id": "f3-0272",
+   "lines_added": 38,
+   "lines_deleted": 6,
+   "message": "show filename information in `legacy_recursive_reactive_block` (#13764)"
+  },
+  {
+   "files": [
+    "src/poetry/utils/env/env_manager.py"
+   ],
+   "id": "f3-0273",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Replace --python with --try-first-with (#9413)\n\nIf a tool like asdf provides a python that is first in the path, virtualenv does not use it even though it is the one\nused to invoke poetry.  Using --try-first-with (introduced in 20.3.0) allows poetry to point to the prefered python.\n\nSee https://virtualenv.pypa.io/en/latest/changelog.html#v20-3-0-2021-01-10\nfixes python-poetry#9278"
+  },
+  {
+   "files": [
+    "packages/kit/build.config.ts",
+    "packages/kit/src/types/hooks.ts",
+    "packages/kit/src/types/nuxt.ts",
+    "packages/nuxt3/src/nuxt.ts",
+    "packages/webpack/package.json",
+    "packages/webpack/src/webpack.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0274",
+   "lines_added": 134,
+   "lines_deleted": 18,
+   "message": "add hook signatures and basic typings (#79)"
+  },
+  {
+   "files": [
+    "packages/mocker/README.md"
+   ],
+   "id": "f3-0275",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "fix links in mocker README (#6515)"
+  },
+  {
+   "files": [
+    "packages/svelte/src/internal/client/dev/ownership.js",
+    "packages/svelte/tests/runtime-runes/samples/non-local-mutation-inherited-owner-6/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/non-local-mutation-inherited-owner-6/main.svelte",
+    "packages/svelte/tests/runtime-runes/samples/non-local-mutation-inherited-owner-6/sub.svelte"
+   ],
+   "id": "f3-0276",
+   "lines_added": 143,
+   "lines_deleted": 13,
+   "message": "ensure deep mutation ownership widening (#11094)\n\nPreviously, ownership widening/removal was only done if the immediate object that was encountered was state. This isn't always the case. It also didn't take into account classes with state on it (which turn into getters). This change takes both these cases into account and now always traverses the given object deeply.\nfixes #11060"
+  },
+  {
+   "files": [
+    "packages/vite-node/README.md",
+    "packages/vite-node/assets/vite-node.svg"
+   ],
+   "id": "f3-0277",
+   "lines_added": 20,
+   "lines_deleted": 7,
+   "message": "logo for vite-node"
+  },
+  {
+   "files": [
+    "etc/api/angular_devkit/core/src/_golden-api.d.ts",
+    "package.json",
+    "packages/angular_devkit/core/BUILD.bazel",
+    "packages/angular_devkit/core/package.json",
+    "packages/angular_devkit/core/src/json/schema/interface.ts",
+    "packages/angular_devkit/core/src/json/schema/registry.ts",
+    "packages/angular_devkit/core/src/json/schema/registry_spec.ts",
+    "packages/angular_devkit/schematics/src/formats/html-selector.ts",
+    "tests/legacy-cli/e2e/tests/generate/help-output.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0278",
+   "lines_added": 140,
+   "lines_deleted": 256,
+   "message": "update schema validator\n\nWith this change we update ajv to version 8\n\nBREAKING CHANGE: support for JSON Schema draft-04 and draft-06 is removed. If you have schemas using the `id` keyword replace them with `$id`. For an interim period we will auto rename any top level `id` keyword to `$id`.\n\n**NB**: This change only effects schematics and builders authors."
+  },
+  {
+   "files": [
+    "src/poetry/packages/locker.py",
+    "tests/installation/fixtures/with-pypi-repository.test",
+    "tests/installation/test_installer.py",
+    "tests/installation/test_installer_old.py",
+    "tests/packages/test_locker.py"
+   ],
+   "id": "f3-0279",
+   "lines_added": 59,
+   "lines_deleted": 16,
+   "message": "Sort extras and extras dependencies in lockfile (#6169)\n\n* test(locker): add test to ensure sorted order\n\n* sort dependencies of extras\n\n* sort extras\n\n* test(installation): remove obsolete `deepDiff`"
+  },
+  {
+   "files": [
+    "CHANGELOG.md",
+    "docs/docs/basic-usage.md",
+    "poetry/config.py",
+    "poetry/console/commands/check.py",
+    "poetry/console/commands/config.py",
+    "poetry/console/commands/script.py",
+    "poetry/masonry/builders/builder.py",
+    "poetry/masonry/builders/wheel.py",
+    "poetry/poetry.py",
+    "poetry/puzzle/provider.py",
+    "poetry/repositories/legacy_repository.py",
+    "poetry/repositories/pypi_repository.py"
+   ],
+   "id": "f3-0280",
+   "lines_added": 111,
+   "lines_deleted": 39,
+   "message": "Add a fallback mechanism for missing dependencies"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0281",
+   "lines_added": 3,
+   "lines_deleted": 1,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "src/poetry/puzzle/transaction.py",
+    "tests/puzzle/test_transaction.py"
+   ],
+   "id": "f3-0282",
+   "lines_added": 35,
+   "lines_deleted": 4,
+   "message": "Don't uninstall packages that should be kept"
+  },
+  {
+   "files": [
+    "docs/guide/static-deploy.md"
+   ],
+   "id": "f3-0283",
+   "lines_added": 4,
+   "lines_deleted": 0,
+   "message": "add Kinsta deployment guide (#14755)"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml"
+   ],
+   "id": "f3-0284",
+   "lines_added": 36,
+   "lines_deleted": 36,
+   "message": "Upgrade again"
+  },
+  {
+   "files": [
+    "docs/guide/advanced/index.md",
+    "packages/vitest/src/node/config/resolveConfig.ts",
+    "packages/vitest/src/node/plugins/workspace.ts",
+    "packages/vitest/src/node/projects/resolveProjects.ts"
+   ],
+   "id": "f3-0285",
+   "lines_added": 38,
+   "lines_deleted": 12,
+   "message": "deduplicate run-level option propagation and document the resolution model (#10823)"
+  },
+  {
+   "files": [
+    "packages/vitest/src/node/plugins/mock.ts",
+    "packages/vitest/src/utils/index.ts"
+   ],
+   "id": "f3-0286",
+   "lines_added": 57,
+   "lines_deleted": 57,
+   "message": "update"
+  },
+  {
+   "files": [
+    "poetry/console/commands/add.py",
+    "poetry/console/commands/init.py",
+    "tests/console/commands/test_init.py"
+   ],
+   "id": "f3-0287",
+   "lines_added": 18,
+   "lines_deleted": 21,
+   "message": "Fix add and init in a cleaner way"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/core/schema.ts"
+   ],
+   "id": "f3-0288",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "opt-in to future `jiti.import` for schema (#24526)"
+  },
+  {
+   "files": [
+    ".github/workflows/test.yml",
+    ".golangci.yml",
+    "active_help.go",
+    "active_help_test.go",
+    "args.go",
+    "args_test.go",
+    "bash_completions.go",
+    "bash_completionsV2.go",
+    "bash_completionsV2_test.go",
+    "bash_completions_test.go",
+    "cobra.go",
+    "cobra_test.go",
+    "command.go",
+    "command_notwin.go",
+    "command_test.go",
+    "command_win.go",
+    "completions.go",
+    "completions_test.go",
+    "doc/cmd_test.go",
+    "doc/man_docs.go",
+    "doc/man_docs_test.go",
+    "doc/man_examples_test.go",
+    "doc/md_docs.go",
+    "doc/md_docs_test.go",
+    "doc/rest_docs.go",
+    "doc/rest_docs_test.go",
+    "doc/util.go",
+    "doc/yaml_docs.go",
+    "doc/yaml_docs_test.go",
+    "fish_completions.go",
+    "fish_completions_test.go",
+    "flag_groups.go",
+    "flag_groups_test.go",
+    "powershell_completions.go",
+    "powershell_completions_test.go",
+    "shell_completions.go",
+    "zsh_completions.go",
+    "zsh_completions_test.go"
+   ],
+   "id": "f3-0289",
+   "lines_added": 38,
+   "lines_deleted": 38,
+   "message": "update copyright year (#1927)"
+  },
+  {
+   "files": [
+    ".github/workflows/docs.yml",
+    ".github/workflows/main.yml",
+    ".github/workflows/release.yml"
+   ],
+   "id": "f3-0290",
+   "lines_added": 16,
+   "lines_deleted": 43,
+   "message": "ci/gha: simplify poetry setup and caching"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0291",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "release v2.11.0"
+  },
+  {
+   "files": [
+    "command.go"
+   ],
+   "id": "f3-0292",
+   "lines_added": 21,
+   "lines_deleted": 19,
+   "message": "Group fields of Command"
+  },
+  {
+   "files": [
+    "tests/helpers.py",
+    "tests/puzzle/test_solver.py"
+   ],
+   "id": "f3-0293",
+   "lines_added": 47,
+   "lines_deleted": 2,
+   "message": "Add tests for Solver"
+  },
+  {
+   "files": [
+    "docs/3.api/4.commands/init.md"
+   ],
+   "id": "f3-0294",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "document the --modules flag in the init command (#32599)"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "pyproject.toml"
+   ],
+   "id": "f3-0295",
+   "lines_added": 126,
+   "lines_deleted": 6,
+   "message": "Revert cleo update"
+  },
+  {
+   "files": [
+    "ext/customdecode/README.md",
+    "ext/customdecode/customdecode.go",
+    "ext/customdecode/expression_type.go",
+    "ext/typeexpr/README.md",
+    "ext/typeexpr/type_type.go",
+    "ext/typeexpr/type_type_test.go",
+    "hcldec/spec.go",
+    "hclsyntax/expression.go",
+    "integrationtest/convertfunc_test.go",
+    "integrationtest/hcldec_into_expr_test.go"
+   ],
+   "id": "f3-0296",
+   "lines_added": 952,
+   "lines_deleted": 18,
+   "message": "ext/customdecode: Custom expression decoding extension\n\nMost of the time, the standard expression decoding built in to HCL is\nsufficient. Sometimes though, it's useful to be able to customize the\ndecoding of certain arguments where the application intends to use them\nin a very specific way, such as in static analysis.\n\nThis extension is an approximate analog of gohcl's support for decoding\ninto an hcl.Expression, allowing hcldec-based applications and\napplications with custom functions to similarly capture and manipulate\nthe physical expressions used in arguments, rather than their values.\n\nThis includes one example use-case: the typeexpr extension now includes\na cty.Function called ConvertFunc that takes a type expression as its\nsecond argument. A type expression is not evaluatable in the usual sense,\nbut thanks to cty capsule types we _can_ produce a cty.Value from one\nand then make use of it inside the function implementation, without\nexposing this custom type to the broader language:\n\n    convert([\"foo\"], set(string))\n\nThis mechanism is intentionally restricted only to \"argument-like\"\nlocations where there is a specific type we are attempting to decode into.\nFor now, that's hcldec AttrSpec/BlockAttrsSpec -- analogous to gohcl\ndecoding into hcl.Expression -- and in arguments to functions."
+  },
+  {
+   "files": [
+    "src/formatting.rs",
+    "src/source_file.rs",
+    "src/test/mod.rs",
+    "tests/config/newline_file.toml",
+    "tests/source/newline_file.rs",
+    "tests/source/reorder_modules_2027/A2/mod.rs",
+    "tests/source/reorder_modules_2027/ABCD/mod.rs",
+    "tests/source/reorder_modules_2027/ZYXW/mod.rs",
+    "tests/source/reorder_modules_2027/ZYXW_/mod.rs",
+    "tests/source/reorder_modules_2027/ZY_XW/mod.rs",
+    "tests/source/reorder_modules_2027/Z_YXW/mod.rs",
+    "tests/source/reorder_modules_2027/_ZYXW/mod.rs",
+    "tests/source/reorder_modules_2027/_abcd/mod.rs",
+    "tests/source/reorder_modules_2027/a1/mod.rs",
+    "tests/source/reorder_modules_2027/abcd/mod.rs",
+    "tests/source/{reorder_modules => reorder_modules_2027}/disabled_style_edition_2027.rs",
+    "tests/source/{reorder_modules => reorder_modules_2027}/enabled_style_edition_2027.rs",
+    "tests/source/reorder_modules_2027/u128/mod.rs",
+    "tests/source/reorder_modules_2027/u16/mod.rs",
+    "tests/source/reorder_modules_2027/u256/mod.rs",
+    "tests/source/reorder_modules_2027/u32/mod.rs",
+    "tests/source/reorder_modules_2027/u64/mod.rs",
+    "tests/source/reorder_modules_2027/u8/mod.rs",
+    "tests/source/reorder_modules_2027/u_zzz/mod.rs",
+    "tests/source/reorder_modules_2027/ua/mod.rs",
+    "tests/source/reorder_modules_2027/usize/mod.rs",
+    "tests/source/reorder_modules_2027/uz/mod.rs",
+    "tests/source/reorder_modules_2027/v0/mod.rs",
+    "tests/source/reorder_modules_2027/v00/mod.rs",
+    "tests/source/reorder_modules_2027/v000/mod.rs",
+    "tests/source/reorder_modules_2027/v001/mod.rs",
+    "tests/source/reorder_modules_2027/v009/mod.rs",
+    "tests/source/reorder_modules_2027/v00t/mod.rs",
+    "tests/source/reorder_modules_2027/v01/mod.rs",
+    "tests/source/reorder_modules_2027/v010/mod.rs",
+    "tests/source/reorder_modules_2027/v09/mod.rs",
+    "tests/source/reorder_modules_2027/v0s/mod.rs",
+    "tests/source/reorder_modules_2027/v0u/mod.rs",
+    "tests/source/reorder_modules_2027/v1/mod.rs",
+    "tests/source/reorder_modules_2027/v10/mod.rs",
+    "tests/source/reorder_modules_2027/v9/mod.rs",
+    "tests/source/reorder_modules_2027/w005s09t/mod.rs",
+    "tests/source/reorder_modules_2027/w5s009t/mod.rs",
+    "tests/source/reorder_modules_2027/x64/mod.rs",
+    "tests/source/reorder_modules_2027/x86/mod.rs",
+    "tests/source/reorder_modules_2027/x86_128/mod.rs",
+    "tests/source/reorder_modules_2027/x86_32/mod.rs",
+    "tests/source/reorder_modules_2027/x86_64/mod.rs",
+    "tests/source/reorder_modules_2027/x87/mod.rs",
+    "tests/source/reorder_modules_2027/zyxw/mod.rs",
+    "tests/target/newline_file.rs",
+    "tests/target/reorder_modules_2027/A2/mod.rs",
+    "tests/target/reorder_modules_2027/ABCD/mod.rs",
+    "tests/target/reorder_modules_2027/ZYXW/mod.rs",
+    "tests/target/reorder_modules_2027/ZYXW_/mod.rs",
+    "tests/target/reorder_modules_2027/ZY_XW/mod.rs",
+    "tests/target/reorder_modules_2027/Z_YXW/mod.rs",
+    "tests/target/reorder_modules_2027/_ZYXW/mod.rs",
+    "tests/target/reorder_modules_2027/_abcd/mod.rs",
+    "tests/target/reorder_modules_2027/a1/mod.rs",
+    "tests/target/reorder_modules_2027/abcd/mod.rs",
+    "tests/target/{reorder_modules => reorder_modules_2027}/disabled_style_edition_2027.rs",
+    "tests/target/{reorder_modules => reorder_modules_2027}/enabled_style_edition_2027.rs",
+    "tests/target/reorder_modules_2027/u128/mod.rs",
+    "tests/target/reorder_modules_2027/u16/mod.rs",
+    "tests/target/reorder_modules_2027/u256/mod.rs",
+    "tests/target/reorder_modules_2027/u32/mod.rs",
+    "tests/target/reorder_modules_2027/u64/mod.rs",
+    "tests/target/reorder_modules_2027/u8/mod.rs",
+    "tests/target/reorder_modules_2027/u_zzz/mod.rs",
+    "tests/target/reorder_modules_2027/ua/mod.rs",
+    "tests/target/reorder_modules_2027/usize/mod.rs",
+    "tests/target/reorder_modules_2027/uz/mod.rs",
+    "tests/target/reorder_modules_2027/v0/mod.rs",
+    "tests/target/reorder_modules_2027/v00/mod.rs",
+    "tests/target/reorder_modules_2027/v000/mod.rs",
+    "tests/target/reorder_modules_2027/v001/mod.rs",
+    "tests/target/reorder_modules_2027/v009/mod.rs",
+    "tests/target/reorder_modules_2027/v00t/mod.rs",
+    "tests/target/reorder_modules_2027/v01/mod.rs",
+    "tests/target/reorder_modules_2027/v010/mod.rs",
+    "tests/target/reorder_modules_2027/v09/mod.rs",
+    "tests/target/reorder_modules_2027/v0s/mod.rs",
+    "tests/target/reorder_modules_2027/v0u/mod.rs",
+    "tests/target/reorder_modules_2027/v1/mod.rs",
+    "tests/target/reorder_modules_2027/v10/mod.rs",
+    "tests/target/reorder_modules_2027/v9/mod.rs",
+    "tests/target/reorder_modules_2027/w005s09t/mod.rs",
+    "tests/target/reorder_modules_2027/w5s009t/mod.rs",
+    "tests/target/reorder_modules_2027/x64/mod.rs",
+    "tests/target/reorder_modules_2027/x86/mod.rs",
+    "tests/target/reorder_modules_2027/x86_128/mod.rs",
+    "tests/target/reorder_modules_2027/x86_32/mod.rs",
+    "tests/target/reorder_modules_2027/x86_64/mod.rs",
+    "tests/target/reorder_modules_2027/x87/mod.rs",
+    "tests/target/reorder_modules_2027/zyxw/mod.rs"
+   ],
+   "id": "f3-0297",
+   "lines_added": 24,
+   "lines_deleted": 3,
+   "message": "Let empty files be empty files (rust-lang/rustfmt#6839)\n\n* Empty files don't need trailing newlines\n* Move reorder_modules 2027 tests into reorder_modules_2027\n* Rename test: empty_file_style_edition_2024 to newline_file\n* invert check. fix newline_file.\n* Move empty_file test from tests/{source,target,config}/ to next to append_newline\n* Make tests/source/recorder_modules_2027/*/mod.rs empty files"
+  },
+  {
+   "files": [
+    "src/bin/cargo-fmt.rs",
+    "src/bin/rustfmt.rs",
+    "src/chains.rs",
+    "src/expr.rs",
+    "src/imports.rs",
+    "src/items.rs",
+    "src/lists.rs",
+    "src/macros.rs",
+    "src/missed_spans.rs",
+    "src/string.rs",
+    "src/types.rs",
+    "src/utils.rs",
+    "src/visitor.rs"
+   ],
+   "id": "f3-0298",
+   "lines_added": 101,
+   "lines_deleted": 73,
+   "message": "Source formatting fallout"
+  },
+  {
+   "files": [
+    "src/overflow.rs",
+    "src/patterns.rs",
+    "tests/source/issue-4530.rs",
+    "tests/target/issue-4530.rs"
+   ],
+   "id": "f3-0299",
+   "lines_added": 27,
+   "lines_deleted": 2,
+   "message": "Wrap long array and slice patterns.\n\nCloses #4530."
+  },
+  {
+   "files": [
+    "src/poetry/packages/locker.py",
+    "tests/packages/test_locker.py"
+   ],
+   "id": "f3-0300",
+   "lines_added": 75,
+   "lines_deleted": 38,
+   "message": "adds @generated to header of lockfile (#2773)\n\nResolves: #2034 \n\nIt's useful to both developer tools and for users to recognize the\nlock file is generated. This header should achieve both."
+  },
+  {
+   "files": [
+    "pnpm-lock.yaml",
+    "sites/svelte.dev/package.json",
+    "sites/svelte.dev/src/routes/docs/+layout.svelte",
+    "sites/svelte.dev/src/routes/docs/[slug]/+page.svelte"
+   ],
+   "id": "f3-0301",
+   "lines_added": 9,
+   "lines_deleted": 10,
+   "message": "On this page mobile (#8782)"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0302",
+   "lines_added": 0,
+   "lines_deleted": 2,
+   "message": "remove `misc` section"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/application/index.ts",
+    "packages/schematics/angular/e2e/index.ts",
+    "packages/schematics/angular/library/index.ts",
+    "packages/schematics/angular/service-worker/index.ts",
+    "packages/schematics/angular/utility/paths.ts",
+    "packages/schematics/angular/utility/paths_spec.ts",
+    "packages/schematics/angular/web-worker/index.ts"
+   ],
+   "id": "f3-0303",
+   "lines_added": 81,
+   "lines_deleted": 32,
+   "message": "create `relativePathToWorkspaceRoot` helper and replace usages"
+  },
+  {
+   "files": [
+    "cobra_test.go",
+    "command.go"
+   ],
+   "id": "f3-0304",
+   "lines_added": 87,
+   "lines_deleted": 131,
+   "message": "Fix tests so they give correct args (#445)\n\n* Fix tests so they give correct args\n\nShell already deletes all quotes and unite args under quotes, so we\ndon't need to test it.\n\n* Simplify stripFlags\n\n* Fix 'unused' and 'gosimple' complaints"
+  },
+  {
+   "files": [
+    "src/types.rs"
+   ],
+   "id": "f3-0305",
+   "lines_added": 127,
+   "lines_deleted": 66,
+   "message": "impl rewrite_result for AssocItemConstraintKind, GenericArg, GenericBound, Ty"
+  },
+  {
+   "files": [
+    "packages/vite/src/server.ts"
+   ],
+   "id": "f3-0306",
+   "lines_added": 6,
+   "lines_deleted": 15,
+   "message": "replace browser globals with `undefined` on server (#24711)"
+  },
+  {
+   "files": [
+    "docs/guide/build.md",
+    "docs/guide/troubleshooting.md"
+   ],
+   "id": "f3-0307",
+   "lines_added": 45,
+   "lines_deleted": 2,
+   "message": "add section for `Failed to fetch dynamically imported module` error (#20313)"
+  },
+  {
+   "files": [
+    "src/formatting.rs"
+   ],
+   "id": "f3-0308",
+   "lines_added": 2,
+   "lines_deleted": 1,
+   "message": "Don't panic on license check errors (#3655)\n\nWithout this case, an ErrorKind::LicenseCheck results in a panic:\n\n    thread 'main' panicked at 'internal error: entered unreachable code', src/tools/rustfmt/src/formatting.rs:320:18\n\nN.B.: errors of this type are only raised when the configuration file\ncontains `license_tempate_path = \"TEMPLATE_FILE\"`."
+  },
+  {
+   "files": [
+    "documentation/docs/04-compiler-and-api/01-svelte-compiler.md",
+    "packages/svelte/src/compiler/compile/Component.js",
+    "packages/svelte/src/compiler/compile/internal_exports.ts",
+    "packages/svelte/src/compiler/interfaces.d.ts",
+    "packages/svelte/src/compiler/public.d.ts",
+    "pnpm-lock.yaml",
+    "sites/svelte.dev/package.json"
+   ],
+   "id": "f3-0309",
+   "lines_added": 192,
+   "lines_deleted": 317,
+   "message": "Auto-generated CompileOptions (#8756)\n\n---------\n\nCo-authored-by: Simon H <5968653+dummdidumm@users.noreply.github.com>\nCo-authored-by: Simon Holthausen <simon.holthausen@vercel.com>"
+  },
+  {
+   "files": [
+    "docs/3.api/4.commands/dev.md"
+   ],
+   "id": "f3-0310",
+   "lines_added": 3,
+   "lines_deleted": 2,
+   "message": "add tunnel option"
+  },
+  {
+   "files": [
+    "docs/1.getting-started/18.upgrade.md"
+   ],
+   "id": "f3-0311",
+   "lines_added": 4,
+   "lines_deleted": 4,
+   "message": "remove rc tag in guide"
+  },
+  {
+   "files": [
+    "command.go",
+    "flag_groups.go"
+   ],
+   "id": "f3-0312",
+   "lines_added": 6,
+   "lines_deleted": 5,
+   "message": "Expose ValidateRequiredFlags and ValidateFlagGroups (#1760)"
+  },
+  {
+   "files": [
+    "packages/svelte/messages/client-warnings/warnings.md",
+    "packages/svelte/src/compiler/phases/3-transform/client/visitors/template.js",
+    "packages/svelte/src/internal/client/index.js",
+    "packages/svelte/src/internal/client/validate.js",
+    "packages/svelte/src/internal/client/warnings.js",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/Child.svelte",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/_config.js",
+    "packages/svelte/tests/runtime-runes/samples/binding-property-static/main.svelte"
+   ],
+   "id": "f3-0313",
+   "lines_added": 197,
+   "lines_deleted": 3,
+   "message": "warn if binding to a non-reactive property (#12500)\n\n* warn if binding to a non-reactive property\n\n* tweak"
+  },
+  {
+   "files": [
+    "packages/schematics/angular/migrations/migration-collection.json",
+    "packages/schematics/angular/migrations/update-12/update-zonejs.ts",
+    "packages/schematics/angular/migrations/update-12/update-zonejs_spec.ts",
+    "packages/schematics/angular/utility/latest-versions.ts"
+   ],
+   "id": "f3-0314",
+   "lines_added": 227,
+   "lines_deleted": 1,
+   "message": "add migration to use new zone.js entry-points"
+  },
+  {
+   "files": [
+    "src/poetry/puzzle/solver.py",
+    "tests/puzzle/test_solver_internals.py"
+   ],
+   "id": "f3-0315",
+   "lines_added": 153,
+   "lines_deleted": 110,
+   "message": "improve performance for merging markers from overrides"
+  },
+  {
+   "files": [
+    "docs/guide/index.md"
+   ],
+   "id": "f3-0316",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "update pnpm overrides URL link (#22464)\n\nCo-authored-by: 古月 <tao@guyues-Mac-mini-2.local>"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0317",
+   "lines_added": 5,
+   "lines_deleted": 1,
+   "message": "Update README.md"
+  },
+  {
+   "files": [
+    "docs/config/index.md",
+    "packages/browser/src/node/index.ts",
+    "packages/vitest/src/node/cli/cli-config.ts",
+    "packages/vitest/src/node/workspace.ts",
+    "packages/vitest/src/types/browser.ts",
+    "test/browser/vitest.config.mts"
+   ],
+   "id": "f3-0318",
+   "lines_added": 10,
+   "lines_deleted": 10,
+   "message": "rename indexScripts to orchestratorScripts (#5842)"
+  },
+  {
+   "files": [
+    "src/node/cli.ts",
+    "src/node/watcher.ts",
+    "src/reporters/default.ts",
+    "src/types/options.ts"
+   ],
+   "id": "f3-0319",
+   "lines_added": 48,
+   "lines_deleted": 22,
+   "message": "allow to press any key to exit watch mode on first run"
+  },
+  {
+   "files": [
+    "projects_using_cobra.md"
+   ],
+   "id": "f3-0320",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Add Pulumi as a project using cobra (#1720)\n\n* Add Pulumi as a project using cobra"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0321",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0322",
+   "lines_added": 5,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "README.md"
+   ],
+   "id": "f3-0323",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "Fix SilenceUsage and SilenceErrors in readme (#397)\n\nYou have to set them to true to silence the default output, not false."
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular_devkit/build_angular/BUILD.bazel",
+    "packages/angular_devkit/build_angular/package.json",
+    "packages/angular_devkit/build_angular/src/utils/process-bundle.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/analytics.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/index-html-webpack-plugin.ts",
+    "packages/angular_devkit/build_angular/src/webpack/plugins/scripts-webpack-plugin.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0324",
+   "lines_added": 36,
+   "lines_deleted": 48,
+   "message": "remove redundant `webpack-sources` dependency\n\nThe `webpack` package now exports the `Source` based classes directly."
+  },
+  {
+   "files": [
+    "ast/ast.go",
+    "ast/ast_test.go",
+    "decoder.go",
+    "decoder_test.go"
+   ],
+   "id": "f3-0325",
+   "lines_added": 72,
+   "lines_deleted": 4,
+   "message": "Decode into pointers"
+  },
+  {
+   "files": [
+    "package.json",
+    "packages/angular_devkit/build_angular/BUILD.bazel",
+    "packages/angular_devkit/build_angular/src/utils/webpack-browser-config.ts",
+    "yarn.lock"
+   ],
+   "id": "f3-0326",
+   "lines_added": 10,
+   "lines_deleted": 2,
+   "message": "lazy require speed-measure-webpack-plugin"
+  },
+  {
+   "files": [
+    "poetry.lock",
+    "pyproject.toml"
+   ],
+   "id": "f3-0327",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "Use requests^2.26 (#8336)"
+  },
+  {
+   "files": [
+    "src/node/build.ts",
+    "src/node/buildPluginAsset.ts",
+    "src/node/buildPluginCss.ts"
+   ],
+   "id": "f3-0328",
+   "lines_added": 37,
+   "lines_deleted": 13,
+   "message": "add asset options into build options (#53)"
+  },
+  {
+   "files": [
+    "poetry/json/schemas/poetry-schema.json",
+    "poetry/packages/package.py",
+    "tests/fixtures/sample_project/pyproject.toml",
+    "tests/repositories/fixtures/pypi.org/json/requests.json"
+   ],
+   "id": "f3-0329",
+   "lines_added": 33,
+   "lines_deleted": 4,
+   "message": "Prefer path to file for file dependencies"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "src/config/mod.rs"
+   ],
+   "id": "f3-0330",
+   "lines_added": 3,
+   "lines_deleted": 3,
+   "message": "Release 1.4.3"
+  },
+  {
+   "files": [
+    "src/config.rs",
+    "src/lib.rs"
+   ],
+   "id": "f3-0331",
+   "lines_added": 42,
+   "lines_deleted": 1,
+   "message": "Add config.rs which I forgot for the last commit\n\nCloses #73"
+  },
+  {
+   "files": [
+    "src/bin/main.rs"
+   ],
+   "id": "f3-0332",
+   "lines_added": 7,
+   "lines_deleted": 6,
+   "message": "Print empty commit info without trailing hyphen"
+  },
+  {
+   "files": [
+    "packages/angular/cli/commands/add-impl.ts",
+    "packages/angular/cli/commands/build-impl.ts",
+    "packages/angular/cli/commands/generate-impl.ts",
+    "packages/angular/cli/commands/serve-impl.ts",
+    "packages/angular/cli/commands/version-impl.ts",
+    "packages/angular/cli/lib/cli/index.ts",
+    "packages/angular/cli/models/architect-command.ts",
+    "packages/angular/cli/models/command-runner.ts",
+    "packages/angular/cli/models/command.ts",
+    "packages/angular/cli/models/interface.ts",
+    "packages/angular/cli/models/schematic-command.ts",
+    "packages/angular/cli/utilities/project.ts"
+   ],
+   "id": "f3-0333",
+   "lines_added": 83,
+   "lines_deleted": 66,
+   "message": "rename project to workspace and clean up\n\nRemoved unnecessary fields in interfaces, added some comments. Overall QoL."
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0334",
+   "lines_added": 1,
+   "lines_deleted": 0,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "docs/components/app/AppHeader.vue",
+    "docs/components/app/AsideHeaderNavigation.vue",
+    "packages/bridge/src/runtime/app.ts",
+    "packages/nitro/src/rollup/config.ts",
+    "packages/nitro/src/rollup/plugins/assets.ts",
+    "packages/nuxi/src/commands/info.ts"
+   ],
+   "id": "f3-0335",
+   "lines_added": 6,
+   "lines_deleted": 6,
+   "message": "remove unnecessary optional chaining (#1991)"
+  },
+  {
+   "files": [
+    "src/constants.ts",
+    "src/runtime/suite.ts",
+    "src/types/options.ts",
+    "test/core/vitest.config.ts"
+   ],
+   "id": "f3-0336",
+   "lines_added": 29,
+   "lines_deleted": 10,
+   "message": "defaultTimeout (#85)"
+  },
+  {
+   "files": [
+    "docs/docs/cli.md"
+   ],
+   "id": "f3-0337",
+   "lines_added": 2,
+   "lines_deleted": 0,
+   "message": "Added missing Option in install command description (#3500)\n\n* Added missing Option in install command description"
+  },
+  {
+   "files": [
+    "Cargo.lock",
+    "Cargo.toml"
+   ],
+   "id": "f3-0338",
+   "lines_added": 2,
+   "lines_deleted": 2,
+   "message": "nightly-0.2.4"
+  },
+  {
+   "files": [
+    "test-fixtures/structure_multi.hcl",
+    "test-fixtures/structure_multi.json"
+   ],
+   "id": "f3-0339",
+   "lines_added": 18,
+   "lines_deleted": 18,
+   "message": "unix line endings"
+  },
+  {
+   "files": [
+    "CHANGELOG.md"
+   ],
+   "id": "f3-0340",
+   "lines_added": 6,
+   "lines_deleted": 1,
+   "message": "Update CHANGELOG.md"
+  },
+  {
+   "files": [
+    "packages/angular/cli/utilities/config.ts"
+   ],
+   "id": "f3-0341",
+   "lines_added": 16,
+   "lines_deleted": 0,
+   "message": "Support XDG Base Directory Specfication\n\nExplained here: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html\n\nCurrent change affects reading of global config from `.angular-config.json`. By default it will be created in user's home directory. If user moves it manually to `$HOME/.config/angular/.angular-config.json`, it will be subsequently read from new location."
+  },
+  {
+   "files": [
+    "packages/vitest/src/api/setup.ts",
+    "packages/vitest/src/api/types.ts",
+    "packages/vitest/src/node/core.ts",
+    "packages/vitest/src/node/spec.ts",
+    "packages/vitest/src/node/types/reporter.ts",
+    "packages/vitest/src/public/index.ts",
+    "packages/vitest/src/runtime/types/utils.ts"
+   ],
+   "id": "f3-0342",
+   "lines_added": 32,
+   "lines_deleted": 27,
+   "message": "rename serialized spec, add toJSON to test spec implementation (#6404)"
+  },
+  {
+   "files": [
+    "packages/nuxt/src/app/plugins/router.ts"
+   ],
+   "id": "f3-0343",
+   "lines_added": 1,
+   "lines_deleted": 2,
+   "message": "combine imports from same relative path"
+  },
+  {
+   "files": [
+    "examples/README.md",
+    "examples/playwright/index.html",
+    "examples/playwright/package.json",
+    "examples/playwright/src/index.ts",
+    "examples/playwright/test/basic.test.ts",
+    "examples/playwright/tsconfig.json",
+    "examples/playwright/vitest.config.ts",
+    "pnpm-lock.yaml"
+   ],
+   "id": "f3-0344",
+   "lines_added": 132,
+   "lines_deleted": 0,
+   "message": "add Playwright example (#1670)"
+  },
+  {
+   "files": [
+    "parse.go",
+    "parse.y",
+    "parse_test.go"
+   ],
+   "id": "f3-0345",
+   "lines_added": 56,
+   "lines_deleted": 19,
+   "message": "Hook up a parser parse tests"
+  },
+  {
+   "files": [
+    "hcl/fmtcmd/fmtcmd.go"
+   ],
+   "id": "f3-0346",
+   "lines_added": 1,
+   "lines_deleted": 1,
+   "message": "hcl/fmtcmd: include filename in error"
+  },
+  {
+   "files": [
+    ".flake8",
+    ".pre-commit-config.yaml",
+    "src/poetry/installation/executor.py",
+    "tests/conftest.py",
+    "tests/console/commands/test_config.py",
+    "tests/console/commands/test_init.py",
+    "tests/console/commands/test_lock.py",
+    "tests/helpers.py",
+    "tests/installation/test_executor.py",
+    "tests/installation/test_installer.py",
+    "tests/installation/test_installer_old.py",
+    "tests/publishing/test_publisher.py",
+    "tests/publishing/test_uploader.py",
+    "tests/puzzle/conftest.py",
+    "tests/puzzle/test_provider.py",
+    "tests/puzzle/test_solver.py",
+    "tests/puzzle/test_transaction.py",
+    "tests/repositories/test_installed_repository.py",
+    "tests/repositories/test_legacy_repository.py",
+    "tests/repositories/test_pypi_repository.py",
+    "tests/test_factory.py",
+    "tests/types.py",
+    "tests/utils/test_authenticator.py",
+    "tests/utils/test_env.py",
+    "tests/utils/test_env_site.py",
+    "tests/utils/test_exporter.py",
+    "tests/utils/test_extras.py",
+    "tests/utils/test_helpers.py",
+    "tests/utils/test_password_manager.py",
+    "tests/utils/test_patterns.py",
+    "tests/utils/test_pip.py",
+    "tests/utils/test_setup_reader.py"
+   ],
+   "id": "f3-0347",
+   "lines_added": 1067,
+   "lines_deleted": 431,
+   "message": "Add missing type hints & Force type hints - Part 3 (#4805)\n\n* add typehints to tests.publishing\n\n* add typehints to tests.puzzle\n\n* add typehints to tests.repositories\n\n* add typehints to tests.utils.test_authenticator, tests.utils.test_env, tests.utils.test_env_site, tests.utils.test_exporter\n\n* add typehints to tests.utils.test_extras, tests.utils.test_helpers, tests.utils.test_password_manager, tests.utils.test_patterns, tests.utils.test_pip, tests.utils.setup_reader\n\n* add typehints to tests.test_factory\n\n* add typehints to tests.helpers\n\n* add remaining missing typehints to tests.conftest\n\n* add flake8-annotations to flake8 pre-commit hook\n\n* create a FixtureDirGetter protocol type\n\n* add comments to .flake8 settings and fix missing typehints after rebase"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/tools/esbuild/angular/compiler-plugin.ts"
+   ],
+   "id": "f3-0348",
+   "lines_added": 1,
+   "lines_deleted": 14,
+   "message": "remove no longer needed `realpathSync`\n\nThis is no longer needed since the path provided is already passed through `realpathSync`. https://github.com/angular/angular-cli/blob/9d7d136b32a8bb0e0d70a502071418c9e4beaa05/packages/angular_devkit/build_angular/src/builders/application/options.ts#L104-L109"
+  },
+  {
+   "files": [
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/experimental-warnings.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/index.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/options.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/tests/options/entry-points_spec.ts",
+    "packages/angular_devkit/build_angular/src/builders/browser-esbuild/tests/options/main_spec.ts"
+   ],
+   "id": "f3-0349",
+   "lines_added": 173,
+   "lines_deleted": 10,
+   "message": "add `entryPoints` to `browser-esbuild` as an internal option\n\nThis makes the `main` parameter optional and allows multiple entry points instead. `main` is still technically required by the schema, since it should almost always be set when invoked by a user. However, it now supports `null` as a value so it can be explicitly omitted.\n\nLonger term, we may choose to remove `main` and fold it into `entryPoints`, but for now we want to keep compatibility with the existing `browser` builder.\n\nSince `entryPoints` is an internal-only options (cannot be set in `angular.json` and isn't exposed in the schema), I made a new `buildEsbuildBrowserInternal()` function which adds the extra private option. This way direct invocations of the builder can provide this extra information without compromising the public API surface defined in the schema."
+  },
+  {
+   "files": [
+    "addon/ng2/utilities/change.ts",
+    "tests/acceptance/change.spec.ts"
+   ],
+   "id": "f3-0350",
+   "lines_added": 234,
+   "lines_deleted": 0,
+   "message": "add file system utilities for 'upgrade' process\n\n'fs-promise.ts' is a utility file for asynchronous read/write operations\n'change.ts' implements some change interfaces as specified by the upgrade design doc linked below:\nhttps://github.com/hansl/angular-cli/blob/7ea3e78ff3d899d5277aac5dfeeece4056d0efe3/docs/design/upgrade.md"
+  }
+ ],
+ "version_formato": 1
+}

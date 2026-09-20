@@ -414,3 +414,9 @@ se toman de repos **sin** convención — ver `DESIGN.md` §4.1 y §4.2. No es u
 porque no contamina entrenamiento con test, pero si se ignorara al reportar
 resultados, daría una imagen más optimista de lo que el clasificador puede hacer en
 uso real.
+
+**Cómo lo resuelve la F3** _(2026-09-20)_. La muestra humana tiene dos estratos: 150
+commits de cuatro repos sin convención (`config/repos.yaml` → `f3_repos`) y 150 del
+dataset con el prefijo quitado (`DESIGN.md` §4.2). La caída del acuerdo modelo ↔ humano
+del segundo al primero es la medición directa de este sesgo, que hasta la F3 solo se
+podía declarar. El resultado va en `docs/F3_TECHO_HUMANO.md`.
