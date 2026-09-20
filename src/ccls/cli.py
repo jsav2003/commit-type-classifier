@@ -405,21 +405,26 @@ def cmd_f3_predecir(args: argparse.Namespace) -> int:
 def cmd_f3_report(args: argparse.Namespace) -> int:
     import hashlib
     from ccls import build, f2, f3
-    for ruta in (f3.F3_CLAVE_PATH, f3.F3_META_PATH, f3.F3_PREDICCIONES_PATH, f3.F3_ANOTACIONES_PATH):
+    for ruta in (f3.F3_CLAVE_PATH, f3.F3_META_PATH, f3.F3_PREDICCIONES_PATH):
         if not ruta.exists():
             print(f"no existe {ruta} (correr 'f3 build', 'f3 label' y 'f3 predecir' primero)")
             return 1
     meta_f3 = json.loads(f3.F3_META_PATH.read_text(encoding="utf-8"))
     meta_f0 = json.loads((build.PROCESSED_DIR / build.META_NAME).read_text(encoding="utf-8"))
+    anotaciones = Path(args.anotaciones) if args.anotaciones else f3.F3_ANOTACIONES_PATH
+    salida = Path(args.salida) if args.salida else f3.F3_REPORTE_PATH
+    if not anotaciones.exists():
+        print(f"no existe {anotaciones}")
+        return 1
     try:
-        filas = f3.unir(f3.leer_clave(), f3.leer_anotaciones(), f3.leer_predicciones())
+        filas = f3.unir(f3.leer_clave(), f3.leer_anotaciones(anotaciones), f3.leer_predicciones())
     except RuntimeError as e:
         print(e)
         return 1
     sha_preds = hashlib.sha256(f3.F3_PREDICCIONES_PATH.read_bytes()).hexdigest()
-    texto = f3.render(filas, meta_f3, meta_f0, f2.cargar(f2.REPONDERADO, "repositorio"), sha_preds)
-    f3.F3_REPORTE_PATH.write_bytes(texto.encode("utf-8"))
-    print(f"escrito {f3.F3_REPORTE_PATH}")
+    texto = f3.render(filas, meta_f3, meta_f0, f2.cargar(f2.REPONDERADO, "repositorio"), sha_preds, args.anotador)
+    salida.write_bytes(texto.encode("utf-8"))
+    print(f"escrito {salida}")
     return 0
 
 
@@ -499,6 +504,9 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(func=cmd_f3_predecir)
 
     p = f3_sub.add_parser("report", help="escribe docs/F3_TECHO_HUMANO.md desde las anotaciones")
+    p.add_argument("--anotaciones", default=None, help="CSV de anotaciones; por defecto, las humanas")
+    p.add_argument("--anotador", default="humano", help='quién etiquetó; con algo distinto de "humano" el reporte lo advierte')
+    p.add_argument("--salida", default=None, help="por defecto docs/F3_TECHO_HUMANO.md")
     p.set_defaults(func=cmd_f3_report)
 
     args = parser.parse_args(argv)

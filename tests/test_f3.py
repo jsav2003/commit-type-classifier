@@ -470,3 +470,43 @@ def test_predecir_devuelve_una_prediccion_por_item_entrenada_sin_ese_repo():
     preds = f3.predecir(dataset, lote)
     assert {p["id"] for p in preds} == {r["f3_id"] for r in lote}
     assert all(p["entrenado_sin"] in ("o/uno", "o/dos") for p in preds)
+
+
+# --- reporte con un anotador que no es una persona -----------------------------------------------
+
+def _sin_aviso(texto: str) -> str:
+    return "\n".join(l for l in texto.splitlines() if not l.startswith(">"))
+
+
+def test_reporte_de_anotador_no_humano_advierte_arriba_de_todo_y_no_dice_humano():
+    filas = _filas()
+    texto = f3.render(filas, _meta_f3(), _meta_f0(), anotador="Claude")
+    assert texto.startswith("# F3 · Techo del anotador (Claude)")
+    assert "**Esto no es un techo humano.**" in texto
+    assert texto.index("Esto no es un techo humano") < texto.index("## 1 ·")
+    cuerpo = _sin_aviso(texto)
+    assert "humano" not in cuerpo.lower() and "anotador" in cuerpo
+
+
+def test_reporte_de_anotador_no_humano_mantiene_los_invariantes():
+    texto = f3.render(_filas(), _meta_f3(), _meta_f0(), anotador="Claude")
+    assert texto.count("| **global,") == 4
+    assert "| `refactor` | 40 |" in texto
+    assert "\r" not in texto
+
+
+def test_sin_tiempos_no_hay_seccion_de_coste_y_la_numeracion_no_salta():
+    filas = _filas()
+    for f in filas:
+        f["segundos"] = 0.0
+    doc = {"resumen": [{"fold": "a/b", "n_prueba": 2000, "exactitud": {"media": 0.8}, "f1_macro": {"media": 0.6}}]}
+    texto = f3.render(filas, _meta_f3(), _meta_f0(), doc, anotador="Claude")
+    assert "## 6 · Coste" not in texto
+    assert "## 6 · Contra los números de la F2" in texto and "## 7 ·" not in texto
+
+
+def test_el_reporte_humano_por_defecto_no_cambia():
+    texto = f3.render(_filas(), _meta_f3(), _meta_f0())
+    assert texto.startswith("# F3 · Techo humano")
+    assert "Esto no es un techo humano" not in texto
+    assert "## 6 · Coste" in texto

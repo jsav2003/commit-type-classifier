@@ -703,7 +703,7 @@ def _seccion_f2(doc: dict | None) -> list[str]:
 
 
 def render(filas: list[dict], meta_f3: dict, meta_f0: dict, f2_repositorio: dict | None = None,
-           predicciones_sha256: str | None = None) -> str:
+           predicciones_sha256: str | None = None, anotador: str = "humano") -> str:
     originales = [f for f in filas if not f["repeticion_de"]]
     A = [f for f in originales if f["estrato"] == "A"]
     B = [f for f in originales if f["estrato"] == "B"]
@@ -728,5 +728,38 @@ def render(filas: list[dict], meta_f3: dict, meta_f0: dict, f2_repositorio: dict
          "(±12-15 puntos): una diferencia de pocos puntos entre dos celdas no significa nada, y cuando los "
          "intervalos se superponen se dice.", ""]
     L += _seccion_techo(B, pesos) + _seccion_modelo(A, B, pesos) + _seccion_fuera(A, B)
-    L += _seccion_ruido(filas) + _seccion_evidencia(A, B) + _seccion_coste(filas) + _seccion_f2(f2_repositorio)
-    return "\n".join(L).rstrip("\n") + "\n"
+    coste = _seccion_coste(filas) if any(f["segundos"] > 0 for f in filas) else []
+    L += _seccion_ruido(filas) + _seccion_evidencia(A, B) + coste + _seccion_f2(f2_repositorio)
+    texto = "\n".join(L).rstrip("\n") + "\n"
+    if anotador == "humano":
+        return texto
+    return _con_anotador(texto, anotador)
+
+
+def _con_anotador(texto: str, anotador: str) -> str:
+    """El mismo reporte para un anotador que no es una persona: el nombre correcto en cada
+    frase y, arriba de todo, la advertencia de que esto no es un techo humano."""
+    texto = texto.replace("humano", "anotador").replace("Humano", "Anotador")
+    texto = texto.replace("# F3 · Techo anotador", f"# F3 · Techo del anotador ({anotador})", 1)
+    aviso = [
+        f"> **Esto no es un techo humano.** Las 350 etiquetas las puso **{anotador}**, un modelo de lenguaje, en una sola pasada, "
+        "leyendo únicamente la hoja ciega (mensaje, archivos y líneas; sin la etiqueta declarada, el repo "
+        "ni las predicciones) y **antes** de calcular ningún número, porque no hubo tiempo de etiquetar a "
+        "mano. Mide cuánto coincide un lector fuerte con la etiqueta declarada; no dice cuánto coincidiría "
+        "una persona. La fase sigue pendiente de un anotador humano (`python -m ccls f3 label`).",
+        ">",
+        "> Criterio fijo: `fix` corrige un comportamiento incorrecto; `feat` añade una capacidad; `refactor` "
+        "reestructura o renombra sin cambiar el comportamiento; `docs` es solo documentación o changelog; "
+        "`ninguna` es un release, un bump de versión, CI, dependencias, tests solos o estilo; `mixto` es un "
+        "cambio que hace varias cosas de peso.",
+        ">",
+        "> Dos límites: un modelo de lenguaje puede parecerse más a quien escribió la etiqueta declarada que "
+        "una persona, así que este acuerdo puede sobrestimar el techo; y las 50 repeticiones se etiquetaron "
+        "en el mismo contexto que las originales, por lo que el acuerdo consigo mismo de la sección 4 no es "
+        "comparable con el de una persona.",
+        "",
+    ]
+    if "## 6 · Coste" not in texto:  # sin tiempos no hay coste que reportar: la numeración no debe saltar
+        texto = texto.replace("## 7 · Contra", "## 6 · Contra", 1)
+    marca = "## Cómo hay que leer esto"
+    return texto.replace(marca, "\n".join(aviso) + "\n" + marca, 1)

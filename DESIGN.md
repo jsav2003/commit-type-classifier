@@ -357,6 +357,18 @@ fuera de la convención. Los dos estratos no se promedian entre sí en ninguna t
 techo bajo es un resultado, no un fallo (§9): no se re-muestrea ni se ajusta nada
 después de ver la cifra.
 
+**Sin tiempo para etiquetar a mano: anotador LLM provisional.** _(Decidido el 2026-09-20,
+después de fijar la muestra y antes de calcular ningún número.)_ Las 350 etiquetas de la
+muestra las puso un modelo de lenguaje (Claude), en una sola pasada, leyendo solo la hoja
+ciega —sin la etiqueta declarada, el repo ni las predicciones— y con un criterio fijado
+por escrito en el reporte. El resultado es `docs/F3_TECHO_LLM.md` y se llama **techo del
+anotador LLM**, no techo humano: no dice cuánto coincidiría una persona, y un LLM puede
+parecerse más al autor de la etiqueta que una persona, así que tiende a sobrestimarlo.
+Las 50 repeticiones se etiquetaron en el mismo contexto que las originales, por lo que su
+acuerdo consigo mismo no es comparable con el de una persona. **La F3 no queda cerrada:**
+la herramienta humana (`python -m ccls f3 label`) sigue lista y el techo humano sigue
+pendiente. Todo resultado que dependa de este número lo cita como anotador LLM.
+
 ### 7.6 Análisis de errores
 
 Revisión manual de al menos 50 commits mal clasificados, agrupados por causa:

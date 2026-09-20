@@ -15,7 +15,7 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | F0 · Recolección de datos | ✅ **cerrada** el 2026-09-15 con la regla de rescate: 10.000 commits de 5 repos, reproducible byte a byte, pruebas de fuga del prefijo y de correlación en verde (`LEAKAGE.md`). La de etiquetas aleatorias (§7.1) necesita la F1 |
 | F1 · Infraestructura de experimentos | ✅ **cerrada** el 2026-09-15: `python -m ccls f1 run` entrena, evalúa y guarda con las tres particiones y cinco semillas. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds** (`docs/F1_ETIQUETAS_ALEATORIAS.md`) |
 | F2 · Baselines | ✅ **cerrada** el 2026-09-18: trivial, la regla de `docs` de §6.1 y el clásico (TF-IDF + rasgos, con regresión logística y gradient boosting), en las tres particiones con 5 semillas e intervalos. Tablas en `docs/F2_BASELINES.md` |
-| F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **falta que las etiquete una persona**. Sin ese número, los de la F2 no tienen contra qué leerse |
+| F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **hay un techo provisional puesto por un LLM** (`docs/F3_TECHO_LLM.md`, no es un techo humano); el techo humano sigue pendiente de que lo etiquete una persona |
 | F4-F6 | no empezadas |
 
 ## Resultado del piloto (resumen)
