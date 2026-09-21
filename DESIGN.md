@@ -289,6 +289,15 @@ decirlo así en el informe.
   rasgo explícito — el conjunto de extensiones sabe decir "hay alguna `.md`", no "todas
   son `.md`".
 
+**El texto del diff no entra en la F4 de entrada.** _(Decidido el 2026-09-21, antes de
+empezar la F4.)_ La F4 se mide con las mismas entradas que la F2 (`experimento.ENTRADAS`),
+para que la comparación clásico ↔ transfer learning sea limpia: si además cambian las
+entradas, una diferencia entre los dos no se sabe de dónde viene. El dato con número
+delante es la §5 de `docs/F3_TECHO_LLM.md`: el anotador, viendo lo mismo que el modelo,
+pidió ver el diff en el **6,7%** de los ítems, en los dos estratos. Si la F4 se queda
+corta, se repite primero la prueba de correlación de §7.3 sobre los tokens del diff y solo
+entonces se añade, como ablación declarada y no como cambio de las entradas base.
+
 **`tiene_referencia_issue` no entra.** _(Decidido el 2026-09-18.)_ La bandera se
 calculó en la F0 y se dejó fuera de `experimento.ENTRADAS` a propósito, para decidir en
 la F2 con el número delante. Medida como ablación (`clasico_lr_issue`), mueve el F1

@@ -422,7 +422,13 @@ def cmd_f3_report(args: argparse.Namespace) -> int:
         print(e)
         return 1
     sha_preds = hashlib.sha256(f3.F3_PREDICCIONES_PATH.read_bytes()).hexdigest()
-    texto = f3.render(filas, meta_f3, meta_f0, f2.cargar(f2.REPONDERADO, "repositorio"), sha_preds, args.anotador)
+    # Solo el reporte humano se compara con el provisional del LLM; el del LLM no cambia.
+    llm = f3.leer_anotaciones(f3.F3_ANOTACIONES_LLM_PATH) if args.anotador == "humano" else None
+    try:
+        texto = f3.render(filas, meta_f3, meta_f0, f2.cargar(f2.REPONDERADO, "repositorio"), sha_preds, args.anotador, llm)
+    except RuntimeError as e:
+        print(e)
+        return 1
     salida.write_bytes(texto.encode("utf-8"))
     print(f"escrito {salida}")
     return 0

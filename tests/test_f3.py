@@ -510,3 +510,83 @@ def test_el_reporte_humano_por_defecto_no_cambia():
     assert texto.startswith("# F3 · Techo humano")
     assert "Esto no es un techo humano" not in texto
     assert "## 6 · Coste" in texto
+
+
+# --- comparación con el anotador LLM ---------------------------------------------------------
+
+def _llm(filas, etiqueta=lambda f: f["declarada"] or "fix", necesita_diff=lambda f: False):
+    """Anotaciones sintéticas del LLM para las mismas filas (una por ítem original)."""
+    return [{"id": f["id"], "etiqueta": etiqueta(f), "necesita_diff": necesita_diff(f), "segundos": 0.0}
+            for f in filas if not f["repeticion_de"]]
+
+
+def _seccion(texto: str) -> str:
+    return texto.split("· Contra el anotador LLM", 1)[1]
+
+
+def test_llm_identico_al_humano_no_sobrestima_nada():
+    filas = _filas()
+    texto = f3.render(filas, _meta_f3(), _meta_f0(), anotaciones_llm=_llm(filas, lambda f: f["humana"]))
+    sec = _seccion(texto)
+    assert "| LLM − humano | | +0,0 · reponderado +0,0 | |" in sec
+    assert "se superponen: la diferencia no es concluyente" in sec
+    # acuerdo total entre los dos y kappa 1 en los dos estratos
+    assert sec.count("| 100,0% [") >= 4 and "| 1,00 |" in sec
+
+
+def test_llm_que_acierta_mas_que_el_humano_sale_con_diferencia_positiva():
+    # el humano falla en la mitad de B; el LLM copia la declarada
+    filas = _filas(humano=lambda d, i: d if (d is None or i % 2) else ("docs" if d != "docs" else "fix"))
+    texto = f3.render(filas, _meta_f3(), _meta_f0(), anotaciones_llm=_llm(filas))
+    linea = next(l for l in _seccion(texto).splitlines() if l.startswith("| LLM − humano"))
+    assert "| +" in linea and "reponderado +" in linea
+    assert "no se superponen: la diferencia es real." in _seccion(texto)
+
+
+def test_llm_el_techo_del_llm_filtra_por_lo_que_puso_el_llm():
+    # el LLM pone `ninguna` en 10 ítems de B: salen de SU denominador, no del humano
+    filas = _filas()
+    b = [f for f in filas if f["estrato"] == "B" and not f["repeticion_de"]][:10]
+    ninguna = {f["id"] for f in b}
+    texto = f3.render(filas, _meta_f3(), _meta_f0(),
+                      anotaciones_llm=_llm(filas, lambda f: "ninguna" if f["id"] in ninguna else (f["declarada"] or "fix")))
+    sec = _seccion(texto)
+    assert "| humano | 150 |" in sec and "| LLM | 140 |" in sec   # sin `mixto` ni `ninguna`
+    assert "| LLM | 150 |" in sec                                 # contándolas como desacuerdo
+
+
+def test_llm_salidas_de_escape_de_cada_anotador_por_separado():
+    filas = _filas()
+    texto = f3.render(filas, _meta_f3(), _meta_f0(),
+                      anotaciones_llm=_llm(filas, lambda f: "ninguna" if f["estrato"] == "A" else f["humana"]))
+    sec = _seccion(texto)
+    fila_llm_a = next(l for l in sec.splitlines() if l.startswith("| A | LLM |"))
+    fila_hum_a = next(l for l in sec.splitlines() if l.startswith("| A | humano |"))
+    assert fila_llm_a.split("|")[5].strip().startswith("100,0%")     # `ninguna` en todo A
+    assert fila_hum_a.split("|")[5].strip().startswith("0,0%")
+
+
+def test_sin_anotaciones_llm_el_reporte_no_cambia_ni_para_el_llm():
+    filas = _filas()
+    base = f3.render(filas, _meta_f3(), _meta_f0())
+    assert "Contra el anotador LLM" not in base
+    assert f3.render(filas, _meta_f3(), _meta_f0(), anotaciones_llm=[]) == base
+    # el reporte del propio LLM nunca se compara consigo mismo
+    llm = f3.render(filas, _meta_f3(), _meta_f0(), anotador="Claude", anotaciones_llm=_llm(filas))
+    assert "Contra el anotador LLM" not in llm
+
+
+def test_llm_la_numeracion_no_salta_sin_tiempos():
+    filas = _filas()
+    for f in filas:
+        f["segundos"] = 0.0
+    texto = f3.render(filas, _meta_f3(), _meta_f0(), anotaciones_llm=_llm(filas))
+    assert "## 6 · Coste" not in texto
+    # sin coste ni doc de la F2, las secciones son 1-5 y la del LLM es la 6
+    assert "\n## 6 · Contra el anotador LLM" in texto
+
+
+def test_llm_que_no_cubre_la_muestra_se_rechaza():
+    filas = _filas()
+    with pytest.raises(RuntimeError, match="no cubren toda la muestra"):
+        f3.render(filas, _meta_f3(), _meta_f0(), anotaciones_llm=_llm(filas)[:-1])

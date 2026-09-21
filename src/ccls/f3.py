@@ -46,6 +46,7 @@ F3_CLAVE_PATH = build.PROCESSED_DIR / "f3_clave.csv"
 F3_REGISTROS_PATH = build.PROCESSED_DIR / "f3_registros.jsonl"
 F3_META_PATH = build.PROCESSED_DIR / "f3_meta.json"
 F3_ANOTACIONES_PATH = build.PROCESSED_DIR / "f3_anotaciones.csv"
+F3_ANOTACIONES_LLM_PATH = build.PROCESSED_DIR / "f3_anotaciones_llm.csv"
 
 VERSION_FORMATO = 1
 CLAVE_COLS = ("id", "estrato", "repo", "sha", "declarada", "repeticion_de")
@@ -702,8 +703,64 @@ def _seccion_f2(doc: dict | None) -> list[str]:
     return L + [""]
 
 
+def _seccion_llm(A: list[dict], B: list[dict], llm: dict[str, dict], pesos: dict[str, float], n: int) -> list[str]:
+    """Cuánto sobrestimó el anotador LLM. Con las dos anotaciones de la misma muestra, la
+    advertencia de `_con_anotador` ("puede sobrestimar el techo") pasa a ser un número."""
+    def con(fs: list[dict]) -> list[dict]:
+        return [{**f, "llm": llm[f["id"]]["etiqueta"], "llm_necesita_diff": llm[f["id"]]["necesita_diff"]} for f in fs]
+    A, B = con(A), con(B)
+    # Las filas del LLM cambian de columna `humana` para reusar `acuerdo_por_clase`: cada
+    # variante filtra por lo que puso quien se está midiendo, como en `docs/F3_TECHO_LLM.md`.
+    B_llm = [{**f, "humana": f["llm"]} for f in B]
+    L = [f"## {n} · Contra el anotador LLM", "",
+         "Las mismas 350 etiquetas se pusieron antes con un modelo de lenguaje (`docs/F3_TECHO_LLM.md`, "
+         "provisional). Con las de una persona en mano, se mide cuánto se separaron. La diferencia es "
+         "**LLM − humano** sobre el techo (acuerdo con la etiqueta declarada, estrato B): un valor "
+         "positivo es lo que el LLM sobrestimó.", "",
+         "### El techo, uno al lado del otro", ""]
+    for solo, nombre, _ in VARIANTES:
+        h = acuerdo_por_clase(B, "humana", "declarada", solo)
+        m = acuerdo_por_clase(B_llm, "humana", "declarada", solo)
+        hs, ms = _sumar(h), _sumar(m)
+        rh, rm = reponderado(h, pesos), reponderado(m, pesos)
+        sup = _se_superponen(hs, ms)
+        L += [f"_{nombre[0].upper() + nombre[1:]}._", "",
+              "| anotador | n | sin reponderar | reponderado al dataset |", "|---|---:|---|---|",
+              f"| humano | {hs[1]} | {_celda(*hs)} | {_celda_rep(h, pesos)} |",
+              f"| LLM | {ms[1]} | {_celda(*ms)} | {_celda_rep(m, pesos)} |"]
+        if hs[1] and ms[1]:
+            rep = f" · reponderado {_puntos(rm[0] - rh[0])}" if rh and rm else ""
+            L.append(f"| LLM − humano | | {_puntos(ms[0] / ms[1] - hs[0] / hs[1])}{rep} | |")
+        L += ["", "Los intervalos " + ("no pueden compararse (falta algún ítem)." if sup is None else
+              "se superponen: la diferencia no es concluyente." if sup else
+              "no se superponen: la diferencia es real."), ""]
+    L += ["### Cuánto coinciden entre sí", "",
+          "Todas las filas usan los ítems originales. Kappa de Cohen sobre las seis opciones "
+          "(`mixto` y `ninguna` cuentan como etiqueta) o solo sobre los ítems donde **los dos** pusieron "
+          "una de las cuatro clases.", "",
+          "| estrato | qué se cuenta | n | acuerdo | kappa |", "|---|---|---:|---|---:|"]
+    for nombre, fs in (("A", A), ("B", B)):
+        for etiqueta, vs, clases in (
+            ("seis opciones", fs, ETIQUETAS_HUMANAS),
+            ("solo las cuatro clases", [f for f in fs if f["humana"] in ETIQUETAS and f["llm"] in ETIQUETAS], ETIQUETAS),
+        ):
+            k = sum(f["humana"] == f["llm"] for f in vs)
+            kappa = metricas.kappa_cohen([f["humana"] for f in vs], [f["llm"] for f in vs], clases)
+            L.append(f"| {nombre} | {etiqueta} | {len(vs)} | {_celda(k, len(vs))} | {_num(kappa)} |")
+    L += ["", "### Cómo usó cada uno las salidas de escape", "",
+          "Un anotador que pone `ninguna` o `?` mucho más que el otro dice algo del anotador, no de los commits.", "",
+          "| estrato | anotador | `?` (habría querido el diff) | `mixto` | `ninguna` |", "|---|---|---|---|---|"]
+    for nombre, fs in (("A", A), ("B", B)):
+        for quien, col, diff in (("humano", "humana", "necesita_diff"), ("LLM", "llm", "llm_necesita_diff")):
+            L.append(f"| {nombre} | {quien} | {_celda(sum(f[diff] for f in fs), len(fs))} | "
+                     f"{_celda(sum(f[col] == 'mixto' for f in fs), len(fs))} | "
+                     f"{_celda(sum(f[col] == 'ninguna' for f in fs), len(fs))} |")
+    return L + [""]
+
+
 def render(filas: list[dict], meta_f3: dict, meta_f0: dict, f2_repositorio: dict | None = None,
-           predicciones_sha256: str | None = None, anotador: str = "humano") -> str:
+           predicciones_sha256: str | None = None, anotador: str = "humano",
+           anotaciones_llm: list[dict] | None = None) -> str:
     originales = [f for f in filas if not f["repeticion_de"]]
     A = [f for f in originales if f["estrato"] == "A"]
     B = [f for f in originales if f["estrato"] == "B"]
@@ -730,6 +787,13 @@ def render(filas: list[dict], meta_f3: dict, meta_f0: dict, f2_repositorio: dict
     L += _seccion_techo(B, pesos) + _seccion_modelo(A, B, pesos) + _seccion_fuera(A, B)
     coste = _seccion_coste(filas) if any(f["segundos"] > 0 for f in filas) else []
     L += _seccion_ruido(filas) + _seccion_evidencia(A, B) + coste + _seccion_f2(f2_repositorio)
+    if anotador == "humano" and anotaciones_llm:
+        llm = {a["id"]: a for a in anotaciones_llm}
+        if not all(f["id"] in llm for f in originales):
+            raise RuntimeError("las anotaciones del LLM no cubren toda la muestra")
+        # la numeración sigue a las secciones que sí salieron (sin tiempos no hay §Coste)
+        n = 1 + sum(l.startswith("## ") and l[3:4].isdigit() for l in L)
+        L += _seccion_llm(A, B, llm, pesos, n)
     texto = "\n".join(L).rstrip("\n") + "\n"
     if anotador == "humano":
         return texto
