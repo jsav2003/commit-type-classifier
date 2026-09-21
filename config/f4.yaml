@@ -1,0 +1,36 @@
+# Configuración de la F4: transfer learning (DESIGN.md §6.3).
+# Fijada el 2026-09-21, ANTES de entrenar ningún modelo profundo.
+#
+# Nada de esto se afina mirando las particiones de prueba: ajustar hiperparámetros contra
+# el fold que luego se reporta sería elegir la configuración con el número delante (la
+# misma regla que DESIGN.md §6.2 aplica a los rasgos del clásico). Los valores son los
+# habituales para afinar un encoder de ~125M parámetros en clasificación y no hay conjunto
+# de validación: se entrena un número fijo de épocas y se predice con el último estado.
+# Si algún valor hubiera que cambiarlo, se cambia aquí, se fecha y se reportan las dos
+# configuraciones.
+
+# Modelo base. Solo existe pytorch_model.bin en el hub (sin safetensors). El hash fija la
+# revisión: sin él, un `from_pretrained` de dentro de un año podría bajar otros pesos.
+modelo_base: microsoft/codebert-base
+revision: 3b0952feddeffad0063f274080e3c23d75e7eb39
+
+# Del encoder solo se reentrenan las últimas `capas_entrenables` capas y la cabeza de
+# clasificación (DESIGN.md §6.3: "solo se reentrenan las últimas capas"). Embeddings y
+# capas bajas quedan congeladas.
+capas_entrenables: 2
+
+max_longitud: 256      # tokens, mensaje + metadatos juntos
+epocas: 3
+tamano_lote: 32
+tasa_aprendizaje: 5.0e-5
+decaimiento_pesos: 0.01
+calentamiento: 0.1     # fracción de pasos con la tasa subiendo desde 0
+
+# Pérdida ponderada por clase, n / (k * n_c): la misma fórmula de class_weight="balanced"
+# de scikit-learn. El clásico de referencia es `clasico_lr_balanceado` (DESIGN.md §4.4), así
+# que la comparación se hace con los dos reponderados. No hay una variante sin ponderar.
+pesos_por_clase: balanceados
+
+# Cuántos archivos entran como texto al lado del mensaje. Las rutas completas, no solo las
+# extensiones: LEAKAGE.md §7.3 midió la correlación sobre mensaje y archivos.
+max_archivos_en_texto: 25

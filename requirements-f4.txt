@@ -1,0 +1,7 @@
+# F4 y F5: el enfoque profundo (DESIGN.md §6.3 y §6.4). Aparte de requirements.txt a
+# propósito: el CI y el resto del pipeline no necesitan ~2 GB de torch.
+# Instalar con: pip install -r requirements.txt -r requirements-f4.txt && pip install -e .
+# En Colab, torch ya viene instalado con CUDA: no reinstalarlo, y comprobar que la versión
+# que trae quede anotada en el JSON del resultado (`versiones.torch`).
+torch==2.14.0
+transformers==4.57.6

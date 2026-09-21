@@ -312,6 +312,34 @@ def cmd_f2_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_f4_run(args: argparse.Namespace) -> int:
+    import hashlib
+    from ccls import experimento, particiones, profundo
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    cfg, registros, manifest_sha256 = cargado
+    cfg_f4 = profundo.cargar_config()
+    # La huella liga cada corrida guardada a la config y al dataset con que se hizo: si
+    # cambia cualquiera de los dos, las corridas viejas no se reutilizan.
+    # read_text normaliza CRLF a LF: la misma config da la misma huella en Windows y en Colab.
+    config_lf = profundo.F4_CONFIG_PATH.read_text(encoding="utf-8")
+    huella = hashlib.sha256((config_lf + manifest_sha256).encode("utf-8")).hexdigest()
+    tipos = particiones.TIPOS if args.particion == "todas" else (args.particion,)
+    for tipo in tipos:
+        res = experimento.correr(
+            registros, args.modelo, tipo, cfg["semillas"], cfg["particiones"],
+            barajar_etiquetas=args.barajar, cache_dir=Path(args.cache), huella=huella,
+        )
+        res["experimento"]["hiperparametros"] = cfg_f4
+        res["versiones_extra"] = profundo.versiones()
+        print(f"{tipo} -> {experimento.guardar(res, manifest_sha256)}")
+        for r in res["resumen"]:
+            print(f"  {r['fold']:24} n={r['n_prueba']:5}  exactitud {_pct(r['exactitud']['media'])}  "
+                  f"F1 macro {_pct(r['f1_macro']['media'])}  mayoritaria {_pct(r['tasa_mayoritaria']['media'])}")
+    return 0
+
+
 def cmd_f2_report(args: argparse.Namespace) -> int:
     from ccls import f2, particiones
     cargado = _cargar_f1()
@@ -496,6 +524,17 @@ def main(argv: list[str] | None = None) -> int:
 
     p = f2_sub.add_parser("report", help="escribe docs/F2_BASELINES.md desde resultados/")
     p.set_defaults(func=cmd_f2_report)
+
+    f4_parser = sub.add_parser("f4", help="transfer learning (DESIGN.md §6.3); necesita requirements-f4.txt")
+    f4_sub = f4_parser.add_subparsers(dest="subcomando", required=True)
+
+    p = f4_sub.add_parser("run", help="entrena y evalúa el modelo profundo con las semillas de config/experimentos.yaml; reanudable")
+    p.add_argument("--modelo", default="f4_codebert")
+    p.add_argument("--particion", default="todas", choices=("todas", "aleatoria", "repositorio", "temporal"))
+    p.add_argument("--barajar", action="store_true", help="baraja las etiquetas de entrenamiento (LEAKAGE.md §7.1)")
+    p.add_argument("--cache", default="data/interim/f4_corridas",
+                   help="dónde se guarda cada (semilla, fold) al terminar; al relanzar se saltan las hechas")
+    p.set_defaults(func=cmd_f4_run)
 
     f3_parser = sub.add_parser("f3", help="techo humano: 300 commits etiquetados a mano (DESIGN.md §4.2 y §7.5)")
     f3_sub = f3_parser.add_subparsers(dest="f3_comando", required=True)

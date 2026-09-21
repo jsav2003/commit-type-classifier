@@ -17,6 +17,7 @@ Nada lleva marca de hora: la misma corrida en la misma máquina da el mismo JSON
 from __future__ import annotations
 
 import json
+import os
 import platform
 from collections import defaultdict
 from pathlib import Path
@@ -50,6 +51,30 @@ def barajar(etiquetas: list[str], ids: list[str], semilla: int) -> list[str]:
     return [etiquetas[j] for j in perm]
 
 
+def _ruta_cache(cache_dir: Path, modelo: str, particion: str, barajadas: bool, semilla: int, fold: str) -> Path:
+    # un fold puede llamarse `owner/repo`: la barra no puede ser parte de un nombre de archivo
+    carpeta = nombre_resultado(modelo, particion, barajadas).removesuffix(".json")
+    return cache_dir / carpeta / f"s{semilla}__{fold.replace('/', '__')}.json"
+
+
+def _leer_cache(ruta: Path, huella: str) -> dict | None:
+    """La corrida guardada, solo si se hizo con la misma huella (config y dataset). Una
+    corrida de otra configuración no se reutiliza: se rehace."""
+    if not ruta.exists():
+        return None
+    doc = json.loads(ruta.read_text(encoding="utf-8"))
+    return doc["corrida"] if doc.get("huella") == huella else None
+
+
+def _escribir_cache(ruta: Path, huella: str, corrida: dict) -> None:
+    """Por un temporal: si el proceso muere a la mitad queda la corrida anterior entera,
+    no una a medias. Es lo que hace reanudable una corrida de horas en una GPU prestada."""
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    tmp = ruta.with_suffix(".tmp")
+    tmp.write_bytes(json.dumps({"huella": huella, "corrida": corrida}, ensure_ascii=False).encode("utf-8"))
+    os.replace(tmp, ruta)
+
+
 def correr(
     registros: list[dict],
     modelo: str,
@@ -59,25 +84,39 @@ def correr(
     barajar_etiquetas: bool = False,
     entradas: tuple[str, ...] | None = ENTRADAS,
     fabricas: dict[str, Callable] = MODELOS,
+    cache_dir: Path | None = None,
+    huella: str = "",
 ) -> dict:
     """`entradas=None` pasa los registros completos. Solo lo usan los tests, para
-    demostrar que la prueba §7.1 atrapa un modelo que lee la etiqueta."""
+    demostrar que la prueba §7.1 atrapa un modelo que lee la etiqueta.
+
+    `cache_dir`: guarda cada (semilla, fold) apenas termina y, al volver a correr, salta los
+    que ya están con la misma `huella`. Sin él, todo se recalcula (lo que hacen la F1 y la
+    F2). El resultado es el mismo con o sin caché."""
     X = registros if entradas is None else [{k: r[k] for k in entradas} for r in registros]
     corridas = []
     for semilla in semillas:
         for fold in particiones.generar(particion, registros, semilla, cfg_particiones):
+            ruta = _ruta_cache(cache_dir, modelo, particion, barajar_etiquetas, semilla, fold.nombre) if cache_dir else None
+            guardada = _leer_cache(ruta, huella) if ruta else None
+            if guardada is not None:
+                corridas.append(guardada)
+                continue
             y_tr = [registros[i]["label"] for i in fold.entrenamiento]
             if barajar_etiquetas:
                 y_tr = barajar(y_tr, [registros[i]["id"] for i in fold.entrenamiento], semilla)
             m = fabricas[modelo](semilla).fit([X[i] for i in fold.entrenamiento], y_tr)
             pred = [str(p) for p in m.predict([X[i] for i in fold.prueba])]
             verdad = [registros[i]["label"] for i in fold.prueba]
-            corridas.append({
+            corrida = {
                 "semilla": semilla,
                 "fold": fold.nombre,
                 "n_entrenamiento": len(fold.entrenamiento),
                 **metricas.evaluar(verdad, pred, CLASES),
-            })
+            }
+            if ruta:
+                _escribir_cache(ruta, huella, corrida)
+            corridas.append(corrida)
     return {
         "experimento": {
             "modelo": modelo,
@@ -131,9 +170,10 @@ def nombre_resultado(modelo: str, particion: str, barajadas: bool) -> str:
 def guardar(resultado: dict, manifest_sha256: str, out_dir: Path = RESULTADOS_DIR) -> Path:
     exp = resultado["experimento"]
     doc = {
-        **resultado,
+        **{k: v for k, v in resultado.items() if k != "versiones_extra"},
         "dataset": {"manifest_sha256": manifest_sha256},
-        "versiones": {"python": platform.python_version(), "numpy": numpy.__version__, "scikit-learn": sklearn.__version__},
+        "versiones": {"python": platform.python_version(), "numpy": numpy.__version__, "scikit-learn": sklearn.__version__,
+                      **resultado.get("versiones_extra", {})},
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / nombre_resultado(exp["modelo"], exp["particion"], exp["etiquetas_barajadas"])

@@ -2,7 +2,7 @@
 
 Un modelo es una fábrica: recibe la semilla y devuelve un objeto con fit(X, y) y
 predict(X). X es una lista de registros ya reducidos a experimento.ENTRADAS. Los
-modelos del enfoque profundo llegan en la F4.
+modelos del enfoque profundo viven en profundo.py y se registran aquí con import perezoso.
 
 - trivial:      siempre la clase más frecuente del entrenamiento (DESIGN.md §6.1).
 - regla_docs:   la regla de una línea de DESIGN.md §6.1 sobre el baseline trivial (F2).
@@ -227,6 +227,17 @@ def clasico_gb(semilla: int):
     )
 
 
+# --------------------------------------------------------------------------- #
+# F4 · transfer learning (DESIGN.md §6.3)
+# --------------------------------------------------------------------------- #
+
+def f4_codebert(semilla: int):
+    """CodeBERT con las últimas capas reentrenadas (config/f4.yaml). El import es
+    perezoso: importar `modelos` no debe exigir torch."""
+    from ccls import profundo
+    return profundo.ClasificadorProfundo(semilla, profundo.cargar_config())
+
+
 MODELOS = {
     "trivial": trivial,
     "regla_docs": regla_docs,
@@ -236,4 +247,5 @@ MODELOS = {
     "clasico_lr_issue": clasico_lr_issue,
     "clasico_gb": clasico_gb,
     "humo": humo,
+    "f4_codebert": f4_codebert,
 }
