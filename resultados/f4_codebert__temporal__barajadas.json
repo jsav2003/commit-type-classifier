@@ -1,0 +1,440 @@
+{
+  "experimento": {
+    "modelo": "f4_codebert",
+    "particion": "temporal",
+    "etiquetas_barajadas": true,
+    "semillas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "entradas": [
+      "message",
+      "diff",
+      "files",
+      "n_files",
+      "lines_added",
+      "lines_deleted",
+      "n_binarios",
+      "extensiones",
+      "toca_tests",
+      "toca_docs"
+    ],
+    "hiperparametros": {
+      "modelo_base": "microsoft/codebert-base",
+      "revision": "3b0952feddeffad0063f274080e3c23d75e7eb39",
+      "capas_entrenables": 2,
+      "max_longitud": 256,
+      "epocas": 3,
+      "tamano_lote": 32,
+      "tasa_aprendizaje": 0.0001,
+      "decaimiento_pesos": 0.01,
+      "calentamiento": 0.1,
+      "pesos_por_clase": "balanceados",
+      "max_archivos_en_texto": 25
+    }
+  },
+  "resumen": [
+    {
+      "fold": "temporal",
+      "n_prueba": 2001,
+      "exactitud": {
+        "n": 5,
+        "media": 0.3992,
+        "ic_inf": 0.2372,
+        "ic_sup": 0.5612
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.1809,
+        "ic_inf": 0.1475,
+        "ic_sup": 0.2144
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.5842,
+        "ic_inf": 0.5842,
+        "ic_sup": 0.5842
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "f1": {
+            "n": 5,
+            "media": 0.5453,
+            "ic_inf": 0.3454,
+            "ic_sup": 0.7453
+          }
+        },
+        "feat": {
+          "n_prueba": 243,
+          "f1": {
+            "n": 5,
+            "media": 0.0611,
+            "ic_inf": -0.0516,
+            "ic_sup": 0.1737
+          }
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "f1": {
+            "n": 5,
+            "media": 0.0067,
+            "ic_inf": -0.0119,
+            "ic_sup": 0.0253
+          }
+        },
+        "docs": {
+          "n_prueba": 413,
+          "f1": {
+            "n": 5,
+            "media": 0.1106,
+            "ic_inf": -0.0724,
+            "ic_sup": 0.2937
+          }
+        }
+      }
+    }
+  ],
+  "corridas": [
+    {
+      "semilla": 1,
+      "fold": "temporal",
+      "n_entrenamiento": 7999,
+      "n_prueba": 2001,
+      "exactitud": 0.5197,
+      "f1_macro": 0.1925,
+      "tasa_mayoritaria": 0.5842,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "n_predichos": 1792,
+          "precision": 0.5703,
+          "cobertura": 0.8743,
+          "f1": 0.6903
+        },
+        "feat": {
+          "n_prueba": 243,
+          "n_predichos": 209,
+          "precision": 0.0861,
+          "cobertura": 0.0741,
+          "f1": 0.0796
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 413,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1022,
+          147,
+          0,
+          0
+        ],
+        [
+          225,
+          18,
+          0,
+          0
+        ],
+        [
+          133,
+          43,
+          0,
+          0
+        ],
+        [
+          412,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "temporal",
+      "n_entrenamiento": 7999,
+      "n_prueba": 2001,
+      "exactitud": 0.3263,
+      "f1_macro": 0.1837,
+      "tasa_mayoritaria": 0.5842,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "n_predichos": 783,
+          "precision": 0.6335,
+          "cobertura": 0.4243,
+          "f1": 0.5082
+        },
+        "feat": {
+          "n_prueba": 243,
+          "n_predichos": 1208,
+          "precision": 0.1275,
+          "cobertura": 0.6337,
+          "f1": 0.2123
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 413,
+          "n_predichos": 10,
+          "precision": 0.3,
+          "cobertura": 0.0073,
+          "f1": 0.0142
+        }
+      },
+      "confusion": [
+        [
+          496,
+          666,
+          0,
+          7
+        ],
+        [
+          89,
+          154,
+          0,
+          0
+        ],
+        [
+          55,
+          121,
+          0,
+          0
+        ],
+        [
+          143,
+          267,
+          0,
+          3
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "temporal",
+      "n_entrenamiento": 7999,
+      "n_prueba": 2001,
+      "exactitud": 0.5462,
+      "f1_macro": 0.19,
+      "tasa_mayoritaria": 0.5842,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "n_predichos": 1856,
+          "precision": 0.5862,
+          "cobertura": 0.9307,
+          "f1": 0.7193
+        },
+        "feat": {
+          "n_prueba": 243,
+          "n_predichos": 2,
+          "precision": 0.0,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "n_predichos": 3,
+          "precision": 1.0,
+          "cobertura": 0.017,
+          "f1": 0.0335
+        },
+        "docs": {
+          "n_prueba": 413,
+          "n_predichos": 140,
+          "precision": 0.0143,
+          "cobertura": 0.0048,
+          "f1": 0.0072
+        }
+      },
+      "confusion": [
+        [
+          1088,
+          0,
+          0,
+          81
+        ],
+        [
+          226,
+          0,
+          0,
+          17
+        ],
+        [
+          131,
+          2,
+          3,
+          40
+        ],
+        [
+          411,
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "temporal",
+      "n_entrenamiento": 7999,
+      "n_prueba": 2001,
+      "exactitud": 0.2399,
+      "f1_macro": 0.1346,
+      "tasa_mayoritaria": 0.5842,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "n_predichos": 587,
+          "precision": 0.4923,
+          "cobertura": 0.2472,
+          "f1": 0.3292
+        },
+        "feat": {
+          "n_prueba": 243,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 413,
+          "n_predichos": 1414,
+          "precision": 0.1351,
+          "cobertura": 0.4625,
+          "f1": 0.2091
+        }
+      },
+      "confusion": [
+        [
+          289,
+          0,
+          0,
+          880
+        ],
+        [
+          37,
+          0,
+          0,
+          206
+        ],
+        [
+          39,
+          0,
+          0,
+          137
+        ],
+        [
+          222,
+          0,
+          0,
+          191
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "temporal",
+      "n_entrenamiento": 7999,
+      "n_prueba": 2001,
+      "exactitud": 0.3638,
+      "f1_macro": 0.204,
+      "tasa_mayoritaria": 0.5842,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1169,
+          "n_predichos": 824,
+          "precision": 0.5801,
+          "cobertura": 0.4089,
+          "f1": 0.4797
+        },
+        "feat": {
+          "n_prueba": 243,
+          "n_predichos": 53,
+          "precision": 0.0377,
+          "cobertura": 0.0082,
+          "f1": 0.0135
+        },
+        "refactor": {
+          "n_prueba": 176,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 413,
+          "n_predichos": 1124,
+          "precision": 0.2206,
+          "cobertura": 0.6005,
+          "f1": 0.3227
+        }
+      },
+      "confusion": [
+        [
+          478,
+          30,
+          0,
+          661
+        ],
+        [
+          124,
+          2,
+          0,
+          117
+        ],
+        [
+          70,
+          8,
+          0,
+          98
+        ],
+        [
+          152,
+          13,
+          0,
+          248
+        ]
+      ]
+    }
+  ],
+  "dataset": {
+    "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5"
+  },
+  "versiones": {
+    "python": "3.13.15",
+    "numpy": "2.2.1",
+    "scikit-learn": "1.6.1",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "cuda": "12.8",
+    "plataforma": "Linux-6.6.122+-x86_64-with-glibc2.39"
+  }
+}
