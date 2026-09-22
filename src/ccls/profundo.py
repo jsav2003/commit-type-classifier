@@ -26,6 +26,11 @@ import yaml
 from ccls.stats import CLASES
 
 F4_CONFIG_PATH = Path("config/f4.yaml")
+F5_CONFIG_PATH = Path("config/f5.yaml")
+
+# De qué config sale cada modelo profundo. `f4 run` / `f5 run` calculan la huella del caché
+# y registran los hiperparámetros a partir de esta tabla.
+CONFIG_POR_MODELO = {"f4_codebert": F4_CONFIG_PATH, "f5_desde_cero": F5_CONFIG_PATH}
 
 _CLAVES = (
     "modelo_base", "revision", "capas_entrenables", "max_longitud", "epocas", "tamano_lote",

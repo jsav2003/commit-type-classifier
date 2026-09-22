@@ -261,3 +261,29 @@ def test_el_modelo_desde_cero_se_entrena_entero(red_diminuta, monkeypatch):
     X, y = _datos()
     m = profundo.ClasificadorProfundo(1, _cfg(epocas=1), preentrenado=False).fit(X, y)
     assert llamadas == [] and all(p.requires_grad for p in m.modelo_.parameters())
+
+
+# --- F5: la red desde cero (DESIGN.md §6.4) -------------------------------------
+
+def test_la_config_de_la_f5_es_la_de_la_f4_salvo_las_capas():
+    """config/f5.yaml promete que lo único que cambia son los pesos preentrenados (y, por
+    eso, que se entrena la red entera). Si alguien retoca un hiperparámetro de uno solo de
+    los dos archivos, la diferencia F4 − F5 dejaría de medir el preentrenamiento."""
+    f4 = profundo.cargar_config(profundo.F4_CONFIG_PATH)
+    f5 = profundo.cargar_config(profundo.F5_CONFIG_PATH)
+    assert f5["capas_entrenables"] is None
+    assert {k: v for k, v in f4.items() if k != "capas_entrenables"} == \
+           {k: v for k, v in f5.items() if k != "capas_entrenables"}
+
+
+def test_el_modelo_f5_no_carga_pesos_preentrenados():
+    from ccls.modelos import MODELOS
+    m = MODELOS["f5_desde_cero"](7)
+    assert m.preentrenado is False and m.semilla == 7
+    assert m.cfg == profundo.cargar_config(profundo.F5_CONFIG_PATH)
+    assert MODELOS["f4_codebert"](7).preentrenado is True
+
+
+def test_cada_modelo_profundo_tiene_su_config():
+    from ccls.modelos import MODELOS
+    assert set(profundo.CONFIG_POR_MODELO) == {"f4_codebert", "f5_desde_cero"} <= set(MODELOS)

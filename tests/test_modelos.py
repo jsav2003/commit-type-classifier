@@ -75,7 +75,7 @@ def test_rasgos_marca_la_regla_de_docs():
 
 
 # El profundo baja ~500 MB y necesita torch: tiene sus propios tests en test_profundo.py
-@pytest.mark.parametrize("nombre", sorted(set(MODELOS) - {"f4_codebert"}))
+@pytest.mark.parametrize("nombre", sorted(set(MODELOS) - {"f4_codebert", "f5_desde_cero"}))
 def test_todo_modelo_entrena_y_predice_las_clases_declaradas(nombre):
     from ccls.stats import CLASES
     X = [_reg(["src/a.ts"]) for _ in range(40)] + [_reg(["R.md"]) for _ in range(40)]

@@ -1,0 +1,30 @@
+# Configuración de la F5: la red desde cero (DESIGN.md §6.4).
+# Fijada el 2026-09-22, ANTES de entrenarla y con la F4 ya cerrada.
+#
+# La misma arquitectura que la F4 (la de microsoft/codebert-base, un RoBERTa de ~125M
+# parámetros) con pesos al azar. Todo lo demás es IGUAL a config/f4.yaml a propósito: así
+# la diferencia F4 − F5 mide lo que aportan los pesos preentrenados con el mismo presupuesto
+# de entrenamiento, y nada más. Un test lo comprueba clave por clave.
+#
+# Esto NO es la mejor red desde cero posible. Una red al azar suele pedir más épocas y otra
+# tasa de aprendizaje; buscarlas obligaría a elegir mirando los folds de prueba (no hay
+# conjunto de validación) y a comparar dos cosas cambiadas a la vez. Queda declarado.
+#
+# Lo que se hereda del preentrenamiento aunque los pesos sean al azar: el tokenizador (BPE de
+# CodeBERT) y la forma de la red. Se declara también.
+
+modelo_base: microsoft/codebert-base
+revision: 3b0952feddeffad0063f274080e3c23d75e7eb39   # de aquí salen solo la arquitectura y el tokenizador
+
+# La única diferencia inevitable con la F4: se entrena la red ENTERA. Congelar capas con
+# pesos al azar sería dejar ruido fijo en medio de la red. `null` = no congela nada.
+capas_entrenables: null
+
+max_longitud: 256
+epocas: 3
+tamano_lote: 32
+tasa_aprendizaje: 5.0e-5
+decaimiento_pesos: 0.01
+calentamiento: 0.1
+pesos_por_clase: balanceados
+max_archivos_en_texto: 25

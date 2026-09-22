@@ -238,6 +238,13 @@ def f4_codebert(semilla: int):
     return profundo.ClasificadorProfundo(semilla, profundo.cargar_config())
 
 
+def f5_desde_cero(semilla: int):
+    """F5 (DESIGN.md §6.4): la misma arquitectura con pesos al azar, entrenada entera, con
+    los hiperparámetros de la F4 (config/f5.yaml)."""
+    from ccls import profundo
+    return profundo.ClasificadorProfundo(semilla, profundo.cargar_config(profundo.F5_CONFIG_PATH), preentrenado=False)
+
+
 MODELOS = {
     "trivial": trivial,
     "regla_docs": regla_docs,
@@ -248,4 +255,5 @@ MODELOS = {
     "clasico_gb": clasico_gb,
     "humo": humo,
     "f4_codebert": f4_codebert,
+    "f5_desde_cero": f5_desde_cero,
 }

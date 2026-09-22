@@ -325,6 +325,17 @@ La misma arquitectura, sin pesos preentrenados. **Probablemente pierda**, y esa 
 demostración empírica de por qué existe el transfer learning. Un resultado negativo,
 bien medido, es un resultado.
 
+**Con los hiperparámetros de la F4.** _(Decidido el 2026-09-22, con la F4 cerrada y antes
+de entrenar la F5.)_ `config/f5.yaml` es `config/f4.yaml` con una sola diferencia: se
+entrena la red entera (`capas_entrenables: null`), porque congelar capas con pesos al azar
+sería dejar ruido fijo en medio de la red. La tasa de aprendizaje, las épocas, el lote y la
+pérdida ponderada son los mismos, y un test lo comprueba. Así la diferencia F4 − F5 mide lo
+que aportan los pesos preentrenados con el mismo presupuesto de entrenamiento. El costo se
+declara: **no es la mejor red desde cero posible**. Una red al azar suele pedir más épocas y
+otra tasa, pero buscarlas obligaría a elegir mirando los folds de prueba (no hay conjunto de
+validación) y a cambiar dos cosas a la vez. El tokenizador sí es el de CodeBERT: la F5
+hereda su vocabulario, no sus pesos.
+
 ## 7. Cómo se demuestra que los resultados son reales
 
 Esta sección es el proyecto. Sin ella queda un notebook más.
