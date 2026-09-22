@@ -16,7 +16,7 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | F1 · Infraestructura de experimentos | ✅ **cerrada** el 2026-09-15: `python -m ccls f1 run` entrena, evalúa y guarda con las tres particiones y cinco semillas. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds** (`docs/F1_ETIQUETAS_ALEATORIAS.md`) |
 | F2 · Baselines | ✅ **cerrada** el 2026-09-18: trivial, la regla de `docs` de §6.1 y el clásico (TF-IDF + rasgos, con regresión logística y gradient boosting), en las tres particiones con 5 semillas e intervalos. Tablas en `docs/F2_BASELINES.md` |
 | F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **hay un techo provisional puesto por un LLM** (`docs/F3_TECHO_LLM.md`, no es un techo humano); el techo humano sigue pendiente de que lo etiquete una persona |
-| F4 · Transfer learning | 🔶 **corrida** (2026-09-21, Colab T4): CodeBERT con las últimas 2 capas reentrenadas (`config/f4.yaml`, fijada antes de entrenar) en las tres particiones, 5 semillas (`resultados/f4_codebert__*.json`). **No le gana al clásico reponderado:** en F1 macro el clásico cae dentro del intervalo de CodeBERT en 5 de los 6 folds por repositorio y temporal, y en vite queda por encima (73,1% contra 71,0% [70,3; 71,8]). En `refactor` es igual o peor en todos los folds con más de un ejemplo (vite: 48,3% contra 59,4%). La prueba de etiquetas aleatorias pasa en 6 de 7 folds; falta la temporal. Sin reporte generado todavía |
+| F4 · Transfer learning | ✅ **cerrada** el 2026-09-22: CodeBERT con las últimas 2 capas reentrenadas (`config/f4.yaml`, fijada antes de entrenar) en las tres particiones, 5 semillas, corrido en Colab T4. **No le gana al clásico reponderado:** en F1 macro empata en 5 de los 6 folds por repositorio y temporal y pierde en vite (71,0% [70,3; 71,8] contra 73,1%). En `refactor` es igual o peor en todos los folds con más de un ejemplo (vite: 48,3% contra 59,4%). La prueba de etiquetas aleatorias **pasa en 7 de 7 folds**. Tablas en `docs/F4_TRANSFER.md` |
 | F5-F6 | no empezadas |
 
 ## Resultado del piloto (resumen)
@@ -164,6 +164,7 @@ python -m ccls f2 run                  # los baselines de la F2 -> resultados/*.
 python -m ccls f1 run --modelo clasico_lr --barajar   # §7.1 sobre el clásico
 python -m ccls f2 report               # escribe docs/F2_BASELINES.md
 python -m ccls f4 run                  # F4: necesita requirements-f4.txt y GPU; reanudable (data/interim/f4_corridas)
+python -m ccls f4 report               # escribe docs/F4_TRANSFER.md; no necesita torch
 ```
 
 Las particiones (DESIGN.md §5) y las semillas están en `config/experimentos.yaml`:
