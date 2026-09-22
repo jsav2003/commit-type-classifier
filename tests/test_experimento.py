@@ -118,6 +118,17 @@ def test_guardar_es_determinista(tmp_path):
     assert "scikit-learn" in doc["versiones"]
 
 
+def test_guardar_no_redondea_lo_declarado(tmp_path):
+    # Con el redondeo a 4 decimales de las métricas, la tasa de aprendizaje de la F4
+    # (5e-5) quedaba escrita como 0.0001: el doble de la que se usó.
+    res = experimento.correr(_registros(), "trivial", "temporal", [1, 2], CFG, fabricas=FABRICAS)
+    res["experimento"]["hiperparametros"] = {"tasa_aprendizaje": 5e-5}
+    doc = json.loads(experimento.guardar(res, "abc", tmp_path).read_text(encoding="utf-8"))
+    assert doc["experimento"]["hiperparametros"]["tasa_aprendizaje"] == 5e-5
+    # las métricas sí se siguen redondeando
+    assert all(len(str(c["exactitud"]).split(".")[-1]) <= 4 for c in doc["corridas"])
+
+
 # --- §7.1 · etiquetas aleatorias -------------------------------------------------
 
 def _prueba_71(modelo: str, particion: str, entradas=experimento.ENTRADAS, fabricas=None):

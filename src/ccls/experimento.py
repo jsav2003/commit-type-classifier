@@ -175,9 +175,13 @@ def guardar(resultado: dict, manifest_sha256: str, out_dir: Path = RESULTADOS_DI
         "versiones": {"python": platform.python_version(), "numpy": numpy.__version__, "scikit-learn": sklearn.__version__,
                       **resultado.get("versiones_extra", {})},
     }
+    # Solo se redondean las métricas. `experimento` es lo declarado (semillas, entradas,
+    # hiperparámetros) y va tal cual: redondeado a 4 decimales, la tasa de aprendizaje de la
+    # F4 (5e-5) quedaba escrita como 0.0001.
+    doc = {**_redondear(doc), "experimento": exp}
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / nombre_resultado(exp["modelo"], exp["particion"], exp["etiquetas_barajadas"])
-    path.write_bytes((json.dumps(_redondear(doc), ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+    path.write_bytes((json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     return path
 
 
