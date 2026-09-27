@@ -13,6 +13,10 @@ data/interim/
 data/processed/*.parquet
 data/processed/*.jsonl
 
+# Caché resumible de las corridas de F5 (checkpoints por fold, no el resultado final).
+resultados/f5_corridas/
+*.log
+
 # Sistema
 .DS_Store
 Thumbs.db
