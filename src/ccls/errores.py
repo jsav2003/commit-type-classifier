@@ -21,10 +21,16 @@ los repos sin convención el 31% de los commits no es ninguna de las cuatro clas
 (releases, dependencias, CI, tests) y el clasificador no puede decir "ninguna"; sin esta
 causa esos errores caerían en `error_modelo` y lo inflarían. Declarada aquí, con fecha.
 
-**Quién categoriza.** La causa de cada error la decide una persona. El archivo de causas
-lleva una columna `estado`: `propuesta` es lo que propuso el asistente leyendo el commit;
-`confirmada` es lo que una persona revisó y dejó igual o corrigió. El reporte cuenta cada
-estado por separado y no presenta una propuesta como revisada.
+**Quién categoriza.** La causa de cada error debería decidirla una persona. El archivo de
+causas lleva una columna `estado`:
+
+- `propuesta`: lo que propuso el asistente leyendo el mensaje y los archivos del commit.
+- `revisada`: una segunda pasada del asistente, hecha a pedido del autor del repo y leyendo
+  también el diff. Corrige propuestas, pero **no la vio una persona**.
+- `confirmada`: lo que una persona revisó y dejó igual o corrigió.
+
+El reporte cuenta cada estado por separado y no presenta ninguno de los dos primeros como
+una revisión humana.
 """
 
 from __future__ import annotations
@@ -59,7 +65,7 @@ CAUSAS = {
     "fuera_de_clases": "No es ninguna de las cuatro clases: release, versión, dependencias, CI, tests o estilo.",
     "error_modelo": "La etiqueta es razonable y el mensaje o los archivos alcanzaban: es un error real del modelo.",
 }
-ESTADOS = ("propuesta", "confirmada")
+ESTADOS = ("propuesta", "revisada", "confirmada")
 
 
 # --------------------------------------------------------------------------- #
@@ -232,17 +238,19 @@ def _seccion_causas_definicion() -> list[str]:
 def _seccion_estado(filas: list[dict]) -> list[str]:
     n = len(filas)
     por_estado = Counter(f["estado"] for f in filas)
-    sin = por_estado.get(None, 0)
     L = ["## Quién decidió cada causa\n"]
     L.append(f"De los {n} errores de la muestra: **{por_estado.get('confirmada', 0)} confirmados** "
-             f"por una persona, **{por_estado.get('propuesta', 0)} propuestos** por el asistente "
-             f"sin revisar y {sin} sin causa.\n")
+             f"por una persona, **{por_estado.get('revisada', 0)} revisados** por el asistente "
+             f"en una segunda pasada con el diff, **{por_estado.get('propuesta', 0)} propuestos** "
+             f"por el asistente sin más revisión y {por_estado.get(None, 0)} sin causa.\n")
     if por_estado.get("confirmada", 0) < n:
         L.append("> **Esto no es todavía un análisis de errores hecho por una persona.** Las "
-                 "causas marcadas `propuesta` las puso el asistente leyendo el mensaje y los "
-                 "archivos de cada commit; son un punto de partida para revisar, no un "
-                 "resultado. Cambiar una causa: editar `data/processed/errores_causas.csv` y "
-                 "poner `confirmada` en su estado.\n")
+                 "causas `propuesta` las puso el asistente leyendo el mensaje y los archivos de "
+                 "cada commit. Las `revisada` pasaron por una segunda lectura del asistente, "
+                 "esta vez con el diff, hecha a pedido del autor del repo y con cambios de "
+                 "causa donde el diff lo pedía. Ninguna la vio una persona: son un punto de "
+                 "partida para revisar, no un resultado. Confirmar o corregir una: editar "
+                 "`data/processed/errores_causas.csv` y poner `confirmada` en su estado.\n")
     return L
 
 
@@ -250,10 +258,11 @@ def _seccion_conteo(filas: list[dict]) -> list[str]:
     n = len(filas)
     L = ["## Cuántos errores hay de cada causa\n",
          "Sobre la muestra (10 por repositorio), no sobre todos los errores.\n",
-         "| causa | errores | de la muestra | confirmados |", "|---|---:|---:|---:|"]
+         "| causa | errores | de la muestra | revisados | confirmados |", "|---|---:|---:|---:|---:|"]
     for c in CAUSAS:
         d = [f for f in filas if f["causa"] == c]
-        L.append(f"| `{c}` | {len(d)} | {_pct(len(d), n)} | {sum(f['estado'] == 'confirmada' for f in d)} |")
+        L.append(f"| `{c}` | {len(d)} | {_pct(len(d), n)} | {sum(f['estado'] == 'revisada' for f in d)} | "
+                 f"{sum(f['estado'] == 'confirmada' for f in d)} |")
     L += ["", "Por repositorio:\n",
           "| repositorio | " + " | ".join(f"`{c}`" for c in CAUSAS) + " |",
           "|---|" + "---:|" * len(CAUSAS)]

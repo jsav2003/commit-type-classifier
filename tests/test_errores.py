@@ -76,8 +76,17 @@ def test_las_causas_de_una_muestra_que_cambio_se_rechazan():
 def test_una_propuesta_nunca_se_presenta_como_revisada():
     m = _muestra()
     md = errores.render(m, _causas(m, "propuesta"), _meta())
-    assert "**0 confirmados** por una persona, **4 propuestos**" in md
+    assert "**0 confirmados** por una persona, **0 revisados**" in md
+    assert "**4 propuestos**" in md
     assert "Esto no es todavía un análisis de errores hecho por una persona" in md
+
+
+def test_una_revision_del_asistente_no_cuenta_como_confirmacion_humana():
+    m = _muestra()
+    md = errores.render(m, _causas(m, "revisada"), _meta())
+    assert "**0 confirmados** por una persona, **4 revisados** por el asistente" in md
+    assert "Esto no es todavía un análisis de errores hecho por una persona" in md
+    assert "Ninguna la vio una persona" in md
 
 
 def test_con_todo_confirmado_desaparece_el_aviso():
@@ -100,8 +109,8 @@ def test_el_conteo_por_causa_sale_de_las_causas():
     causas[m[0]["id"]]["causa"] = "mixto"
     md = errores.render(m, causas, _meta())
     seccion = md.split("## Cuántos errores hay de cada causa")[1].split("\n## ")[0]
-    assert "| `mixto` | 1 | 25,0% | 0 |" in seccion
-    assert "| `error_modelo` | 3 | 75,0% | 0 |" in seccion
+    assert "| `mixto` | 1 | 25,0% | 0 | 0 |" in seccion
+    assert "| `error_modelo` | 3 | 75,0% | 0 | 0 |" in seccion
 
 
 def test_una_celda_no_rompe_la_tabla():
