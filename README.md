@@ -18,7 +18,71 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **hay un techo provisional puesto por un LLM** (`docs/F3_TECHO_LLM.md`, no es un techo humano); el techo humano sigue pendiente de que lo etiquete una persona |
 | F4 · Transfer learning | ✅ **cerrada** el 2026-09-22: CodeBERT con las últimas 2 capas reentrenadas (`config/f4.yaml`, fijada antes de entrenar) en las tres particiones, 5 semillas, corrido en Colab T4. **No le gana al clásico reponderado:** en F1 macro empata en 5 de los 6 folds por repositorio y temporal y pierde en vite (71,0% [70,3; 71,8] contra 73,1%). En `refactor` es igual o peor en todos los folds con más de un ejemplo (vite: 48,3% contra 59,4%). La prueba de etiquetas aleatorias **pasa en 7 de 7 folds**. Tablas en `docs/F4_TRANSFER.md` |
 | F5 · Red desde cero | ✅ **cerrada** el 2026-09-28: `config/f5.yaml` fijada antes de entrenar — la arquitectura de CodeBERT con pesos al azar, entrenada entera, con los hiperparámetros de la F4 (DESIGN.md §6.4), corrida en Kaggle T4 (`docs/KAGGLE_F5.md`). **Pierde en los 6 folds honestos**, contra el clásico reponderado y contra CodeBERT (F1 macro por repositorio: 52,7–67,6% contra 56,8–73,1% del clásico; en `refactor` queda 1,4 a 15,9 puntos abajo). Los pesos preentrenados aportan de 1,1 a 8,1 puntos de F1 macro con el mismo presupuesto de entrenamiento. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds**; con etiquetas barajadas la red responde siempre la misma clase en 33 de 35 corridas. Tablas en `docs/F5_DESDE_CERO.md`. No es la mejor red desde cero posible (DESIGN.md §6.4) |
-| F6 · Análisis de errores e informe | 🔶 **en curso** (2026-09-28): `RESULTS.md` (los cuatro enfoques en las tres particiones), `python -m ccls reproducir` (el pipeline entero en un comando; corrido de punta a punta sobre el dataset, `resultados/` y `docs/` salen idénticos byte a byte) y `ERROR-ANALYSIS.md` (50 errores del clásico de referencia, 10 por repo). **Las causas las puso el asistente y no las ha visto una persona**: propuestas leyendo mensaje y archivos, y luego revisadas en una segunda pasada con el diff, a pedido del autor (21 `etiqueta_autor`, 18 `error_modelo`, 7 `fuera_de_clases`, 3 `mensaje_inutil`, 1 `mixto`; estado `revisada`, no `confirmada`). Falta que una persona las confirme, el techo humano de la F3 y el README final como informe |
+| F6 · Análisis de errores e informe | 🔶 **en curso** (2026-09-28): `RESULTS.md` (los cuatro enfoques en las tres particiones), `python -m ccls reproducir` (el pipeline entero en un comando; corrido de punta a punta sobre el dataset, `resultados/` y `docs/` salen idénticos byte a byte) y `ERROR-ANALYSIS.md` (50 errores del clásico de referencia, 10 por repo). **Las causas las puso el asistente y no las ha visto una persona**: propuestas leyendo mensaje y archivos, y luego revisadas en una segunda pasada con el diff, a pedido del autor (21 `etiqueta_autor`, 18 `error_modelo`, 7 `fuera_de_clases`, 3 `mensaje_inutil`, 1 `mixto`; estado `revisada`, no `confirmada`). El informe está en las secciones *Qué se encontró* y *Qué no se afirma*. Falta que una persona confirme las causas y el techo humano de la F3 |
+
+## Qué se encontró
+
+Tres enfoques sobre 10.000 commits de 5 repos TS/JS, con las mismas particiones, las mismas
+métricas y cinco semillas. Las tablas completas, con intervalos, están en
+[`RESULTS.md`](RESULTS.md); cada número sale de `resultados/*.json`.
+
+**F1 macro en la partición por repositorio (la principal), media entre semillas:**
+
+| repo en prueba | trivial | regla `docs` | clásico | clásico reponderado | CodeBERT | red desde cero |
+|---|---:|---:|---:|---:|---:|---:|
+| angular-cli | 15,8% | 39,2% | 59,2% | **68,9%** | 68,1% | 60,0% |
+| nuxt | 16,6% | 43,0% | **72,5%** | 67,6% | 67,0% | 65,8% |
+| svelte | 21,1% | 44,4% | 56,7% | 56,8% | **57,0%** | 52,7% |
+| vite | 17,4% | 40,5% | 70,2% | **73,1%** | 71,0% | 67,6% |
+| vitest | 17,5% | 39,1% | 68,0% | **68,3%** | 67,9% | 62,7% |
+| temporal | 18,4% | 42,4% | 71,6% | 73,3% | **74,0%** | 70,1% |
+
+En negrita, la media más alta de la fila. No es un ganador: los intervalos se superponen en
+varios folds y el veredicto fold por fold está en los reportes de cada fase.
+
+1. **Ningún modelo profundo le gana al clásico reponderado.** CodeBERT empata con él en 5 de
+   los 6 folds honestos (por repositorio y temporal) y pierde en vite; la red desde cero
+   **pierde en los 6**, contra el clásico y contra CodeBERT (`docs/F4_TRANSFER.md`,
+   `docs/F5_DESDE_CERO.md`). El preentrenamiento aporta entre 1,1 y 8,1 puntos de F1 macro
+   sobre la red desde cero, con el mismo presupuesto de entrenamiento.
+2. **La partición aleatoria infla el resultado unos 16 a 18 puntos.** Del clásico
+   reponderado, 74,7% en la aleatoria contra 56,8% en el peor fold por repositorio; de
+   CodeBERT, 72,7% contra 57,0%; de la red desde cero, 69,3% contra 52,7%.
+3. **`refactor` es donde se caen todos.** En angular-cli, el fold con 468 ejemplos, el clásico
+   reponderado saca 55,4% de F1 en `refactor`, CodeBERT 54,3% y la red desde cero 39,5%.
+   En `docs` casi no hace falta modelo: la regla de una línea de `DESIGN.md` §6.1 ya saca de
+   0,80 a 0,91.
+4. **Los números no vienen de una fuga.** La prueba de etiquetas aleatorias pasa en los tres
+   modelos y en los 7 folds de cada uno, y las de prefijo y correlación están en verde
+   (`LEAKAGE.md`). Con las etiquetas barajadas, la red desde cero responde siempre la misma
+   clase en 33 de 35 corridas: sin señal real no aprende nada.
+
+## Qué no se afirma
+
+- **No hay techo humano.** La F3 se hizo de forma provisional con un anotador LLM (Claude),
+  no con una persona. Ese anotador coincide con la etiqueta declarada en 81,4% [73,4; 89,5]
+  y el clásico en 78,9% [71,0; 86,8]: los intervalos se superponen, así que no se puede
+  decir que el modelo esté por debajo del techo. El número **no** es un techo humano y puede
+  estar inflado (`docs/F3_TECHO_LLM.md`, `DESIGN.md` §7.5). La herramienta para etiquetar a
+  mano existe (`python -m ccls f3 label`) y la F3 sigue abierta hasta que alguien la use.
+- **El análisis de errores no lo revisó una persona.** `ERROR-ANALYSIS.md` cubre 50 errores
+  del clásico de referencia (de 2.333 en total, 23,3%), 10 por repo. Las causas las propuso
+  el asistente y las revisó en una segunda pasada con el diff; están en estado `revisada`, no
+  `confirmada`. La muestra pesa igual a todos los repos, así que no da la tasa de cada causa.
+  No se revisaron los errores de CodeBERT ni de la red desde cero, porque sus corridas no
+  guardan la predicción de cada commit.
+- **La red desde cero no es la mejor posible.** Usa los hiperparámetros de la F4 (entrenar la
+  red entera, 3 épocas), fijados antes de entrenar. Con más épocas u otra tasa podría dar
+  mejor; buscarlas obligaba a elegir mirando los folds de prueba (`DESIGN.md` §6.4). CodeBERT
+  tampoco se afinó: reentrena las últimas 2 capas sin búsqueda de hiperparámetros.
+- **Generaliza dentro de un ecosistema**, no a proyectos nuevos en general (ver la limitación
+  principal más abajo).
+
+## Cómo se reproduce
+
+`python -m ccls reproducir` corre el pipeline entero y regenera todos los reportes (`--plan`
+solo lo muestra). Corrido de punta a punta sobre el dataset, `resultados/` y `docs/` salen
+idénticos byte a byte a lo commiteado. Detalle en la sección *Reproducir*.
 
 ## Resultado del piloto (resumen)
 
