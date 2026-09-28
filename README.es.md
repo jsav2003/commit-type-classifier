@@ -7,7 +7,7 @@
 una **red entrenada desde cero** sobre 10.000 commits de 5 repositorios reales, y se
 preocupa menos por el clasificador que por cuánto se puede creer cada número.
 
-![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
+![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue) ![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-green)
 
 ```mermaid
 flowchart LR

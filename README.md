@@ -7,7 +7,7 @@ Which machine-learning approach classifies a Git commit best as `fix`, `feat`, `
 **network trained from scratch** on 10,000 commits from 5 real repositories. It cares less
 about the classifier than about how far each number can be trusted.
 
-![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
+![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 ```mermaid
 flowchart LR
