@@ -396,6 +396,16 @@ etiqueta incorrecta del autor, commit genuinamente mixto, mensaje inútil, o err
 del modelo. **Esta sección es la que más comunica competencia**, porque demuestra que
 miraste los datos y no solo las métricas.
 
+_(Precisado el 2026-09-28.)_ Se revisa el clásico de referencia en la partición por
+repositorio, con 10 errores por repo tomados por orden de hash: es el único con predicciones
+por commit reproducibles en segundos, y la muestra pesa igual a todos los repos, así que dice
+qué tipo de error hay en cada proyecto y no cuántos hay. Se añade una quinta causa,
+`fuera_de_clases` (release, versión, dependencias, CI, tests, estilo), porque la F3 midió que
+esos commits son el 31% en los repos sin convención y el clasificador no puede decir
+"ninguna"; sin ella caerían en "error real del modelo" y lo inflarían. La causa de cada
+error la decide una persona: lo que propone el asistente queda marcado `propuesta` y el
+reporte no lo cuenta como revisado hasta que se confirme (`ERROR-ANALYSIS.md`).
+
 ### 7.7 Reproducibilidad
 
 Un comando reproduce cada tabla del informe. Versiones fijadas, semillas fijadas,

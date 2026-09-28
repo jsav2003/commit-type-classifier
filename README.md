@@ -18,7 +18,7 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **hay un techo provisional puesto por un LLM** (`docs/F3_TECHO_LLM.md`, no es un techo humano); el techo humano sigue pendiente de que lo etiquete una persona |
 | F4 · Transfer learning | ✅ **cerrada** el 2026-09-22: CodeBERT con las últimas 2 capas reentrenadas (`config/f4.yaml`, fijada antes de entrenar) en las tres particiones, 5 semillas, corrido en Colab T4. **No le gana al clásico reponderado:** en F1 macro empata en 5 de los 6 folds por repositorio y temporal y pierde en vite (71,0% [70,3; 71,8] contra 73,1%). En `refactor` es igual o peor en todos los folds con más de un ejemplo (vite: 48,3% contra 59,4%). La prueba de etiquetas aleatorias **pasa en 7 de 7 folds**. Tablas en `docs/F4_TRANSFER.md` |
 | F5 · Red desde cero | ✅ **cerrada** el 2026-09-28: `config/f5.yaml` fijada antes de entrenar — la arquitectura de CodeBERT con pesos al azar, entrenada entera, con los hiperparámetros de la F4 (DESIGN.md §6.4), corrida en Kaggle T4 (`docs/KAGGLE_F5.md`). **Pierde en los 6 folds honestos**, contra el clásico reponderado y contra CodeBERT (F1 macro por repositorio: 52,7–67,6% contra 56,8–73,1% del clásico; en `refactor` queda 1,4 a 15,9 puntos abajo). Los pesos preentrenados aportan de 1,1 a 8,1 puntos de F1 macro con el mismo presupuesto de entrenamiento. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds**; con etiquetas barajadas la red responde siempre la misma clase en 33 de 35 corridas. Tablas en `docs/F5_DESDE_CERO.md`. No es la mejor red desde cero posible (DESIGN.md §6.4) |
-| F6 | no empezada |
+| F6 · Análisis de errores e informe | 🔶 **en curso** (2026-09-28): `RESULTS.md` (los cuatro enfoques en las tres particiones), `python -m ccls reproducir` (el pipeline entero en un comando; corrido de punta a punta sobre el dataset, `resultados/` y `docs/` salen idénticos byte a byte) y `ERROR-ANALYSIS.md` (50 errores del clásico de referencia, 10 por repo). **Las causas son propuestas del asistente, sin confirmar por una persona**: 20 `error_modelo`, 19 `etiqueta_autor`, 7 `fuera_de_clases`, 3 `mensaje_inutil`, 1 `mixto`. Falta confirmarlas, el techo humano de la F3 y el README final como informe |
 
 ## Resultado del piloto (resumen)
 
@@ -149,7 +149,14 @@ python -m venv .venv
 .\.venv\Scripts\pytest -q
 ```
 
-Comandos del pipeline (`python -m ccls <subcomando>`, ver `src/ccls/cli.py`):
+**Todo con un comando:** `python -m ccls reproducir` corre el pipeline en orden y regenera
+todos los reportes; `--plan` solo muestra los pasos. Por defecto corre los baselines, las
+pruebas de fuga y los reportes (minutos, sin GPU), sobre un dataset ya construido.
+`--datos` agrega reconstruir el dataset (clona los repos) y `--gpu` la F4 y la F5
+(necesitan `requirements-f4.txt` y una GPU; son reanudables). Sin `--gpu`, los reportes usan
+los `resultados/f4_*` y `resultados/f5_*` que ya están en el repo.
+
+Los pasos uno por uno (`python -m ccls <subcomando>`, ver `src/ccls/cli.py`):
 
 ```powershell
 python -m ccls discover-check          # verifica metadatos de los candidatos del piloto
@@ -168,6 +175,9 @@ python -m ccls f4 run                  # F4: necesita requirements-f4.txt y GPU;
 python -m ccls f4 report               # escribe docs/F4_TRANSFER.md; no necesita torch
 python -m ccls f5 run                  # F5: la red desde cero; igual que f4 run (data/interim/f5_corridas)
 python -m ccls f5 report               # escribe docs/F5_DESDE_CERO.md; no necesita torch
+python -m ccls results                 # escribe RESULTS.md: los cuatro enfoques en las tres particiones
+python -m ccls errores muestra         # los errores del clásico por repositorio y la muestra de 50 a revisar
+python -m ccls errores report          # escribe ERROR-ANALYSIS.md desde la muestra y las causas
 ```
 
 Las particiones (DESIGN.md §5) y las semillas están en `config/experimentos.yaml`:
@@ -201,12 +211,16 @@ LEAKAGE.md                las pruebas de fuga (§7.1 aleatoria, §7.2 prefijo, �
 config/repos.yaml         criterios de admisión, candidatos del piloto, repos y parámetros de la F0
 config/experimentos.yaml  semillas, particiones y criterio de la prueba de etiquetas aleatorias (F1)
 src/ccls/                 paquete: gitutil, label, clone, discover, pilot, report, build, stats, fuga_correlacion,
-                          particiones, metricas, modelos, experimento, f2, cli
+                          particiones, metricas, modelos, experimento, f2, f4, f5, results, errores, reproducir, cli
 tests/                    pytest — pruebas de fuga, parser de git log, construcción del dataset, particiones, runner
 docs/PILOTO.md            resultados del piloto (Parte B), generado, no escrito a mano
 docs/F0_ESTADISTICAS.md   estadísticas descriptivas del dataset, generado, no escrito a mano
 docs/F1_ETIQUETAS_ALEATORIAS.md  prueba §7.1, generado, no escrito a mano
 docs/F2_BASELINES.md      tablas de los baselines de la F2, generado, no escrito a mano
+docs/F4_TRANSFER.md       CodeBERT contra el clásico, generado, no escrito a mano
+docs/F5_DESDE_CERO.md     la red desde cero contra CodeBERT y el clásico, generado, no escrito a mano
+RESULTS.md                los cuatro enfoques en las tres particiones, generado, no escrito a mano
+ERROR-ANALYSIS.md         50 errores revisados y agrupados por causa (DESIGN.md §7.6), generado desde el CSV de causas
 resultados/               un JSON por modelo × partición (corridas, resumen, versiones, manifest_sha256)
 data/processed/           manifest.csv y dataset_meta.json en git; dataset.jsonl fuera
 ```

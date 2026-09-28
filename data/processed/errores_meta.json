@@ -1,0 +1,36 @@
+{
+  "commits_por_repo": {
+    "angular/angular-cli": 2000,
+    "nuxt/nuxt": 2000,
+    "sveltejs/svelte": 2000,
+    "vitejs/vite": 2000,
+    "vitest-dev/vitest": 2000
+  },
+  "errores_por_par": {
+    "docs->feat": 63,
+    "docs->fix": 89,
+    "docs->refactor": 26,
+    "feat->docs": 38,
+    "feat->fix": 414,
+    "feat->refactor": 156,
+    "fix->docs": 87,
+    "fix->feat": 636,
+    "fix->refactor": 440,
+    "refactor->docs": 12,
+    "refactor->feat": 124,
+    "refactor->fix": 248
+  },
+  "errores_por_repo": {
+    "angular/angular-cli": 594,
+    "nuxt/nuxt": 453,
+    "sveltejs/svelte": 359,
+    "vitejs/vite": 418,
+    "vitest-dev/vitest": 509
+  },
+  "modelo": "clasico_lr_balanceado",
+  "n_commits": 10000,
+  "n_errores": 2333,
+  "particion": "repositorio",
+  "por_repo": 10,
+  "semilla_muestra": 1
+}

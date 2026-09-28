@@ -529,6 +529,73 @@ def cmd_f3_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_errores_muestra(args: argparse.Namespace) -> int:
+    from ccls import errores
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    _, registros, _ = cargado
+    todos = errores.errores_por_repositorio(registros)
+    muestra = errores.muestrear(todos)
+    meta = errores.resumen(todos, registros)
+    sha = errores.escribir_muestra(muestra, meta)
+    print(f"{len(todos)} errores de {len(registros)} commits; muestra de {len(muestra)} -> {errores.MUESTRA_PATH}")
+    print(f"  sha256 {sha}")
+    return 0
+
+
+def cmd_errores_report(args: argparse.Namespace) -> int:
+    from ccls import errores
+    for ruta in (errores.MUESTRA_PATH, errores.META_PATH):
+        if not ruta.exists():
+            print(f"no existe {ruta} (correr 'errores muestra' primero)")
+            return 1
+    meta = json.loads(errores.META_PATH.read_text(encoding="utf-8"))
+    try:
+        texto = errores.render(errores.leer_muestra(), errores.leer_causas(), meta)
+    except (RuntimeError, ValueError) as e:
+        print(e)
+        return 1
+    errores.REPORTE_PATH.write_bytes(texto.encode("utf-8"))
+    print(f"escrito {errores.REPORTE_PATH}")
+    return 0
+
+
+def cmd_results(args: argparse.Namespace) -> int:
+    from ccls import results
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    cfg, _, manifest_sha256 = cargado
+    resultados, barajadas, faltan = results.cargar_todo()
+    if faltan:
+        print("faltan resultados:")
+        for x in faltan:
+            print(f"  {x}")
+        return 1
+    results.RESULTS_PATH.write_text(
+        results.render(resultados, barajadas, cfg["semillas"], manifest_sha256,
+                       cfg["fuga_etiquetas_aleatorias"]["tolerancia"]),
+        encoding="utf-8",
+    )
+    print(f"escrito {results.RESULTS_PATH}")
+    return 0
+
+
+def cmd_reproducir(args: argparse.Namespace) -> int:
+    from ccls import reproducir
+    pasos = reproducir.plan(datos=args.datos, gpu=args.gpu)
+    if args.plan:
+        for i, p in enumerate(pasos, 1):
+            print(f"[{i}/{len(pasos)}] {p.grupo:9} {p.comando}")
+            print(f"{'':14}{p.para_que}")
+        return 0
+    if reproducir.falta_el_dataset(args.datos):
+        print(f"no existe {reproducir.DATASET}: correr con --datos (clona los repos y reconstruye el dataset)")
+        return 1
+    return reproducir.correr(pasos, main)
+
+
 # --------------------------------------------------------------------------- #
 
 def main(argv: list[str] | None = None) -> int:
@@ -636,6 +703,24 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--anotador", default="humano", help='quién etiquetó; con algo distinto de "humano" el reporte lo advierte')
     p.add_argument("--salida", default=None, help="por defecto docs/F3_TECHO_HUMANO.md")
     p.set_defaults(func=cmd_f3_report)
+
+    errores_parser = sub.add_parser("errores", help="análisis de errores (DESIGN.md §7.6)")
+    errores_sub = errores_parser.add_subparsers(dest="errores_comando", required=True)
+
+    p = errores_sub.add_parser("muestra", help="los errores del clásico de referencia por repositorio y la muestra a revisar")
+    p.set_defaults(func=cmd_errores_muestra)
+
+    p = errores_sub.add_parser("report", help="escribe ERROR-ANALYSIS.md desde la muestra y las causas")
+    p.set_defaults(func=cmd_errores_report)
+
+    p = sub.add_parser("results", help="escribe RESULTS.md: los cuatro enfoques en las tres particiones; no necesita torch")
+    p.set_defaults(func=cmd_results)
+
+    p = sub.add_parser("reproducir", help="corre el pipeline entero en orden (DESIGN.md §7.7); por defecto cpu y reportes")
+    p.add_argument("--datos", action="store_true", help="incluye reconstruir el dataset y la muestra de la F3 (clona los repos)")
+    p.add_argument("--gpu", action="store_true", help="incluye la F4 y la F5 (necesitan requirements-f4.txt y GPU; reanudables)")
+    p.add_argument("--plan", action="store_true", help="solo muestra los pasos, sin correr nada")
+    p.set_defaults(func=cmd_reproducir)
 
     args = parser.parse_args(argv)
     return args.func(args)

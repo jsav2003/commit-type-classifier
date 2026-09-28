@@ -1,0 +1,51 @@
+id,causa,estado,nota
+angular/angular-cli@00f21d3a12bd2669c96f3a255df2f60d712820c9,fuera_de_clases,propuesta,"quitar un comentario de lint sin uso: limpieza, no es ninguna de las cuatro"
+angular/angular-cli@33656f7aa8d345ad4916d4d900795e038d58ca68,etiqueta_autor,propuesta,"permite un registro propio: capacidad nueva, el autor puso fix"
+angular/angular-cli@479bfd4fa73d78893af50dd922b080d357fb1549,error_modelo,propuesta,"el mensaje explica el problema previo (""avoid requiring""); es un fix y el modelo lo leyó como feat"
+angular/angular-cli@58ca30b1e7ace139285c0a350da80e6451432bc4,etiqueta_autor,propuesta,agrega una migración nueva (91 líneas en archivos nuevos); el autor puso fix por el issue cerrado
+angular/angular-cli@7d540113377d4496bb4eb3da77a5f3aa339228ec,etiqueta_autor,propuesta,"el propio mensaje dice ""this fixes an issue""; el autor puso refactor"
+angular/angular-cli@8d8ba4f61fc07dd670b705c48e82cf63424b3cce,etiqueta_autor,propuesta,"""can now be customized"": capacidad nueva, el autor puso fix"
+angular/angular-cli@97c0cf86f5ded980c7a2aa9de37c1ec7da2486ae,etiqueta_autor,propuesta,"""add Jest test execution"": es feat; el autor puso refactor y el modelo tampoco acertó"
+angular/angular-cli@9d6c1dad955d1a1b7a37acfb81d065de894c56c4,error_modelo,propuesta,"quita código muerto sin cambiar comportamiento: refactor claro, el modelo lo leyó como fix"
+angular/angular-cli@cabe95c5241e19614de3923fbc9d52494b91bea0,error_modelo,propuesta,optimización de rendimiento sin bug; el modelo lo leyó como fix
+angular/angular-cli@cacb1273122f58004ca0a70fa1b033990c2a85c7,etiqueta_autor,propuesta,"el mensaje empieza con ""fix""; el autor puso refactor"
+nuxt/nuxt@0598aa0b89c19c7e1a1d623cb2cc6ac25af02ca2,etiqueta_autor,propuesta,"reorganiza qué se importa en los builders; sin bug descrito, refactor es defendible"
+nuxt/nuxt@3e0408bd895ce95409c9f000634fe8a3ccce22cc,etiqueta_autor,propuesta,"expone la causa de un error: mejora pequeña, feat es defendible"
+nuxt/nuxt@4be430e13fe7d817ef4f0a805da2c00979f3f1b4,error_modelo,propuesta,cambia una API en asyncData.ts (feat); el modelo se dejó llevar por 2 archivos .md de 3
+nuxt/nuxt@864d2683ab6dd6f1eed16a772846f9b3f633c73b,error_modelo,propuesta,"agrega dos utilidades nuevas: feat claro, el modelo dijo refactor"
+nuxt/nuxt@9a035a15c5035e609ba20ef3106c79d733992e86,error_modelo,propuesta,"cambia imports en 29 archivos sin cambiar comportamiento: refactor claro, el modelo dijo feat"
+nuxt/nuxt@9e5a3cdc6f0fbee93e54d374f1dd5885317b37a3,error_modelo,propuesta,"""avoid redirect..."" describe un bug; el modelo lo leyó como refactor por los 7 archivos"
+nuxt/nuxt@9fe2541ca9d8b2363e1fcf0d72e2d1dee1a4e38e,fuera_de_clases,propuesta,agrega una dependencia que faltaba: manejo de dependencias
+nuxt/nuxt@bb4ed5e406fff579b14775129f6f8b481fd97543,error_modelo,propuesta,"restaura un valor por defecto (regresión); el modelo se fue con ""add"" y dijo feat"
+nuxt/nuxt@c72093b1f2e6f6f7f2cab7d2e5af8fee3243906a,mensaje_inutil,propuesta,el mensaje no dice qué falla ni qué se agrega
+nuxt/nuxt@dd12b243ffaf65efa807066d582ffd0af21f46c4,error_modelo,propuesta,"""replace X with Y"" es refactor típico; el modelo dijo fix"
+sveltejs/svelte@0236cf87e7fa8a4cb9c88dbf4ca0493a2d29bacb,etiqueta_autor,propuesta,"""better support"" agrega soporte y pruebas nuevas; feat es defendible"
+sveltejs/svelte@212b60203f6e4983998d34775faa0b32e6a0d69c,error_modelo,propuesta,"""support HMR with custom elements"" es feat; el modelo se fue con el issue cerrado"
+sveltejs/svelte@3c84c21a033636ae6fd3a65158a13847da833782,etiqueta_autor,propuesta,mejora de rendimiento sin bug: refactor es defendible
+sveltejs/svelte@4715dfaad2562bd9074d3ff79fd775aeee4dc0a0,etiqueta_autor,propuesta,"cambia el resultado de una migración y cierra un issue: fix o feat, ambos defendibles"
+sveltejs/svelte@474c588067fa75f6785d9cfe5ac15ff8bbc829fe,etiqueta_autor,propuesta,agrega una validación nueva con su mensaje de error y documentación: feat es defendible
+sveltejs/svelte@67bf7a80673ce9e1a6f5f5e7ab70be2b89a05690,error_modelo,propuesta,"""correct start of ..."" es un fix; el modelo lo leyó como feat por las 391 líneas de pruebas"
+sveltejs/svelte@7719d0312ca27b9347a04290e94a6a9097fefe94,error_modelo,propuesta,"""perf regression"" es un fix; el modelo dijo refactor"
+sveltejs/svelte@bcf23cafcec9776af28c58bcb2a399e422b57b77,etiqueta_autor,propuesta,"el propio mensaje dice ""refactor CompileError stuff""; el autor puso fix por el cambio de API"
+sveltejs/svelte@bec7ca79186cbdbc40b6992b5a6188ad46a3a577,error_modelo,propuesta,agrega un error de validación; el modelo dijo docs por 2 archivos .md generados
+sveltejs/svelte@c7121aa38c26f5808a61767e4358ca87cfced2c4,error_modelo,propuesta,"""add type of..."" es feat; el modelo dijo fix"
+vitejs/vite@00669e135ecfe7f8dbaddcee531efd368bdfa2d2,error_modelo,propuesta,"""allow initializing..."" es feat; el modelo dijo fix"
+vitejs/vite@5a111cedf31f579e3b8c8af5c4442d2e0cd5aa12,etiqueta_autor,propuesta,"cambio de librería sin bug: refactor es defendible, el autor puso fix"
+vitejs/vite@7ddbf96ae11bf0eeef97ffc00dcf5ac4c561cc20,mensaje_inutil,propuesta,"""explicit the word boundary"" no dice qué cambia ni por qué"
+vitejs/vite@8a13d6337eea3e74d6a7abaaa7e1d378f5b9bc49,fuera_de_clases,propuesta,actualización de una dependencia
+vitejs/vite@9e51a76b3fce27cb0a4a4ae558c4499e9dd540cd,error_modelo,propuesta,"""exports ..."" agrega una exportación: feat claro, el modelo se fue con el issue cerrado"
+vitejs/vite@a0702a1e5e923112abda431770aea41146bdc451,etiqueta_autor,propuesta,mejora un mensaje de error: fix es defendible
+vitejs/vite@ab967c097565f47003a4df32a57ae142857e890b,fuera_de_clases,propuesta,actualización de esbuild con ajustes de código
+vitejs/vite@b529b6fa7d0c7707d0665e76cab78ae1f2422bcb,error_modelo,propuesta,todo es documentación del sitio (docs/.vitepress); el modelo dijo feat por el plugin
+vitejs/vite@d23a493cc4b54a2e2b2c1337b3b1f0c9b1be311e,error_modelo,propuesta,cambia el comportamiento de la configuración de postcss (feat); el modelo dijo docs por un .md
+vitejs/vite@fe4dc8d3fae2eb6344b9b48794d01ad25c46a321,error_modelo,propuesta,"""customize ErrorOverlay"" es feat; el modelo se fue con la palabra ""error"""
+vitest-dev/vitest@07ec3779aba22680ae1dd4cb83cd276354c8023f,error_modelo,propuesta,"""prevent ... from removing user's project"" es un fix claro; el modelo dijo feat"
+vitest-dev/vitest@183e3b7c7fe35d6ff554fe83cbf3d25fa0cc441b,etiqueta_autor,propuesta,mejora la salida de errores: feat es defendible
+vitest-dev/vitest@2118ba97b2570d0d06fdebba9afc815383b57e6d,fuera_de_clases,propuesta,cambio cosmético de un texto de ayuda (+1/-1)
+vitest-dev/vitest@263b7167236540677a112cf9b0bec925f812ebd2,fuera_de_clases,propuesta,sube la versión mínima de node: versión y dependencias
+vitest-dev/vitest@85fce583abed8a99f8c5232781fa7d395a061e73,mensaje_inutil,propuesta,"""rerun tasks"": dos palabras y 9 archivos de UI; el mensaje no alcanza"
+vitest-dev/vitest@8d4a04eaeaf936261564ca8f683b47fd72a0f104,etiqueta_autor,propuesta,cambia una dependencia interna para detectar externalización; ni feat ni fix son claros
+vitest-dev/vitest@8ee59f0d9dff5c15e0fe27e555ed73346f465e20,etiqueta_autor,propuesta,"""show diff on ..."" agrega salida nueva: feat es defendible, el autor puso fix"
+vitest-dev/vitest@9dd26e269eb4edd1071199598449a3640fe7148a,mixto,propuesta,"actualiza un ejemplo, corrige un error de hostname y sube react a la vez"
+vitest-dev/vitest@c01c2ff06aadc2f91e1330ef8064c2a8759e3057,fuera_de_clases,propuesta,configuración de netlify y versión de node: ni docs ni fix
+vitest-dev/vitest@e84e2184ef8ca78a3097eb7b666f81628a87ff6d,etiqueta_autor,propuesta,"cambia lo que genera un comando (""instead of a workspace file""): fix o refactor, ambos defendibles"
