@@ -327,4 +327,4 @@ DESIGN.md §11 pide poner el techo humano al lado de los números del modelo. **
 
 ## Cómo se reproduce cada tabla
 
-`python -m ccls reproducir` corre el pipeline en orden y regenera todos los reportes; `--plan` solo lo muestra. Las tablas de este documento salen de `resultados/*.json` con `python -m ccls results`. Los comandos que produjeron cada modelo están en la tabla de arriba y en `README.md`.
+`python -m ccls reproducir` corre el pipeline en orden y regenera todos los reportes; `--plan` solo lo muestra. Las tablas de este documento salen de `resultados/*.json` con `python -m ccls results`. Los comandos que produjeron cada modelo están en la tabla de arriba y en `docs/ESTADO.md`.

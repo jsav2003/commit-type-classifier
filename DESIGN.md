@@ -56,8 +56,8 @@ es la del diseño original y se deja tal como estaba escrita. El piloto dejó 5 
 admitidos, todos TS/JS, y se decidió no buscar más. La limitación del dataset es la
 diversidad de ecosistema, no el tamaño, y una tercera ola del único perfil que pasa el
 umbral (TS/JS con `commitlint`) la empeoraría. Lo de "varios lenguajes" tampoco se
-cumple, y se declara. El razonamiento completo está en el README ("Limitación
-principal") y la lista fijada, en `config/repos.yaml` → `f0_repos`.
+cumple, y se declara. El razonamiento completo está en `docs/ESTADO.md` ("Limitación
+principal"), resumido en el README y la lista fijada, en `config/repos.yaml` → `f0_repos`.
 
 **Sesgo de selección, declarado.** Exigir una tasa alta de Conventional Commits para
 admitir un repo significa que el dataset entero está hecho de proyectos que ya siguen

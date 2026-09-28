@@ -94,7 +94,7 @@ aunque se borre la línea. Cruce en la primera construcción:
 **Decisión:** `.changeset/` se saca del `diff`, de `files`, de las extensiones y del
 conteo de líneas (`config/repos.yaml` → `f0_extraccion.rutas_excluidas`). svelte **no**
 se descarta: es uno de los dos repos fuera de la comunidad Vite/Vue, y quitarlo
-empeoraría la diversidad, que es la limitación principal del dataset (README).
+empeoraría la diversidad, que es la limitación principal del dataset (README y `docs/ESTADO.md`).
 
 - Afecta a 1.496 de los 2.000 commits de svelte. Ninguno queda con el diff vacío.
 - `manifest_sha256` no cambia (`0177140c…`): son los mismos commits con las mismas

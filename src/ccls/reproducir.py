@@ -1,7 +1,7 @@
 """`python -m ccls reproducir`: el pipeline entero en orden, con un solo comando.
 DESIGN.md §7.7 y §10.
 
-Encadena los mismos subcomandos que están en el README, en el orden en que dependen unos
+Encadena los mismos subcomandos que están en `docs/ESTADO.md`, en el orden en que dependen unos
 de otros, y para en el primero que falle. Los pasos se agrupan por lo que cuestan:
 
 - `datos`: reconstruye el dataset y la muestra de la F3. Clona los repos (red, y GB en
