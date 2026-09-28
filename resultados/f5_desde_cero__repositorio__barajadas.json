@@ -1,0 +1,1980 @@
+{
+  "experimento": {
+    "modelo": "f5_desde_cero",
+    "particion": "repositorio",
+    "etiquetas_barajadas": true,
+    "semillas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "entradas": [
+      "message",
+      "diff",
+      "files",
+      "n_files",
+      "lines_added",
+      "lines_deleted",
+      "n_binarios",
+      "extensiones",
+      "toca_tests",
+      "toca_docs"
+    ],
+    "hiperparametros": {
+      "modelo_base": "microsoft/codebert-base",
+      "revision": "3b0952feddeffad0063f274080e3c23d75e7eb39",
+      "capas_entrenables": null,
+      "max_longitud": 256,
+      "epocas": 3,
+      "tamano_lote": 32,
+      "tasa_aprendizaje": 5e-05,
+      "decaimiento_pesos": 0.01,
+      "calentamiento": 0.1,
+      "pesos_por_clase": "balanceados",
+      "max_archivos_en_texto": 25
+    }
+  },
+  "resumen": [
+    {
+      "fold": "angular/angular-cli",
+      "n_prueba": 2000,
+      "exactitud": {
+        "n": 5,
+        "media": 0.2096,
+        "ic_inf": 0.0343,
+        "ic_sup": 0.3849
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.0827,
+        "ic_inf": 0.0303,
+        "ic_sup": 0.1351
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.4615,
+        "ic_inf": 0.4615,
+        "ic_sup": 0.4615
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "f1": {
+            "n": 5,
+            "media": 0.1263,
+            "ic_inf": -0.2244,
+            "ic_sup": 0.477
+          }
+        },
+        "feat": {
+          "n_prueba": 327,
+          "f1": {
+            "n": 5,
+            "media": 0.0562,
+            "ic_inf": -0.0999,
+            "ic_sup": 0.2123
+          }
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "docs": {
+          "n_prueba": 282,
+          "f1": {
+            "n": 5,
+            "media": 0.1483,
+            "ic_inf": -0.0198,
+            "ic_sup": 0.3164
+          }
+        }
+      }
+    },
+    {
+      "fold": "nuxt/nuxt",
+      "n_prueba": 2000,
+      "exactitud": {
+        "n": 5,
+        "media": 0.4624,
+        "ic_inf": 0.3622,
+        "ic_sup": 0.5626
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.1572,
+        "ic_inf": 0.1318,
+        "ic_sup": 0.1826
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.4985,
+        "ic_inf": 0.4985,
+        "ic_sup": 0.4985
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "f1": {
+            "n": 5,
+            "media": 0.5323,
+            "ic_inf": 0.1628,
+            "ic_sup": 0.9017
+          }
+        },
+        "feat": {
+          "n_prueba": 265,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "docs": {
+          "n_prueba": 636,
+          "f1": {
+            "n": 5,
+            "media": 0.0965,
+            "ic_inf": -0.1714,
+            "ic_sup": 0.3645
+          }
+        }
+      }
+    },
+    {
+      "fold": "sveltejs/svelte",
+      "n_prueba": 2000,
+      "exactitud": {
+        "n": 5,
+        "media": 0.387,
+        "ic_inf": -0.0025,
+        "ic_sup": 0.7765
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.1418,
+        "ic_inf": 0.0546,
+        "ic_sup": 0.229
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.7305,
+        "ic_inf": 0.7305,
+        "ic_sup": 0.7305
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "f1": {
+            "n": 5,
+            "media": 0.3612,
+            "ic_inf": -0.1895,
+            "ic_sup": 0.912
+          }
+        },
+        "feat": {
+          "n_prueba": 209,
+          "f1": {
+            "n": 5,
+            "media": 0.0159,
+            "ic_inf": -0.0283,
+            "ic_sup": 0.0602
+          }
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "f1": {
+            "n": 5,
+            "media": 0.0003,
+            "ic_inf": -0.0006,
+            "ic_sup": 0.0013
+          }
+        },
+        "docs": {
+          "n_prueba": 329,
+          "f1": {
+            "n": 5,
+            "media": 0.1897,
+            "ic_inf": -0.0313,
+            "ic_sup": 0.4108
+          }
+        }
+      }
+    },
+    {
+      "fold": "vitejs/vite",
+      "n_prueba": 2000,
+      "exactitud": {
+        "n": 5,
+        "media": 0.3982,
+        "ic_inf": 0.1675,
+        "ic_sup": 0.6289
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.137,
+        "ic_inf": 0.0739,
+        "ic_sup": 0.2001
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.5335,
+        "ic_inf": 0.5335,
+        "ic_sup": 0.5335
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "f1": {
+            "n": 5,
+            "media": 0.4175,
+            "ic_inf": -0.0557,
+            "ic_sup": 0.8907
+          }
+        },
+        "feat": {
+          "n_prueba": 351,
+          "f1": {
+            "n": 5,
+            "media": 0.0597,
+            "ic_inf": -0.1061,
+            "ic_sup": 0.2255
+          }
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "docs": {
+          "n_prueba": 431,
+          "f1": {
+            "n": 5,
+            "media": 0.0708,
+            "ic_inf": -0.1257,
+            "ic_sup": 0.2673
+          }
+        }
+      }
+    },
+    {
+      "fold": "vitest-dev/vitest",
+      "n_prueba": 2000,
+      "exactitud": {
+        "n": 5,
+        "media": 0.3074,
+        "ic_inf": 0.0351,
+        "ic_sup": 0.5797
+      },
+      "f1_macro": {
+        "n": 5,
+        "media": 0.1089,
+        "ic_inf": 0.0278,
+        "ic_sup": 0.1899
+      },
+      "tasa_mayoritaria": {
+        "n": 5,
+        "media": 0.537,
+        "ic_inf": 0.537,
+        "ic_sup": 0.537
+      },
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "f1": {
+            "n": 5,
+            "media": 0.2796,
+            "ic_inf": -0.1957,
+            "ic_sup": 0.7548
+          }
+        },
+        "feat": {
+          "n_prueba": 414,
+          "f1": {
+            "n": 5,
+            "media": 0.0,
+            "ic_inf": 0.0,
+            "ic_sup": 0.0
+          }
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "f1": {
+            "n": 5,
+            "media": 0.0187,
+            "ic_inf": -0.0332,
+            "ic_sup": 0.0706
+          }
+        },
+        "docs": {
+          "n_prueba": 414,
+          "f1": {
+            "n": 5,
+            "media": 0.1372,
+            "ic_inf": -0.0961,
+            "ic_sup": 0.3705
+          }
+        }
+      }
+    }
+  ],
+  "corridas": [
+    {
+      "semilla": 1,
+      "fold": "angular/angular-cli",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.4615,
+      "f1_macro": 0.1579,
+      "tasa_mayoritaria": 0.4615,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "n_predichos": 2000,
+          "precision": 0.4615,
+          "cobertura": 1.0,
+          "f1": 0.6315
+        },
+        "feat": {
+          "n_prueba": 327,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 282,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          923,
+          0,
+          0,
+          0
+        ],
+        [
+          327,
+          0,
+          0,
+          0
+        ],
+        [
+          468,
+          0,
+          0,
+          0
+        ],
+        [
+          282,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 1,
+      "fold": "nuxt/nuxt",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.4985,
+      "f1_macro": 0.1663,
+      "tasa_mayoritaria": 0.4985,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "n_predichos": 2000,
+          "precision": 0.4985,
+          "cobertura": 1.0,
+          "f1": 0.6653
+        },
+        "feat": {
+          "n_prueba": 265,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 636,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          997,
+          0,
+          0,
+          0
+        ],
+        [
+          265,
+          0,
+          0,
+          0
+        ],
+        [
+          102,
+          0,
+          0,
+          0
+        ],
+        [
+          636,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 1,
+      "fold": "sveltejs/svelte",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.7305,
+      "f1_macro": 0.2111,
+      "tasa_mayoritaria": 0.7305,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "n_predichos": 2000,
+          "precision": 0.7305,
+          "cobertura": 1.0,
+          "f1": 0.8443
+        },
+        "feat": {
+          "n_prueba": 209,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 329,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1461,
+          0,
+          0,
+          0
+        ],
+        [
+          209,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          329,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 1,
+      "fold": "vitejs/vite",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.5335,
+      "f1_macro": 0.1739,
+      "tasa_mayoritaria": 0.5335,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "n_predichos": 2000,
+          "precision": 0.5335,
+          "cobertura": 1.0,
+          "f1": 0.6958
+        },
+        "feat": {
+          "n_prueba": 351,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 431,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1067,
+          0,
+          0,
+          0
+        ],
+        [
+          351,
+          0,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0,
+          0
+        ],
+        [
+          431,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 1,
+      "fold": "vitest-dev/vitest",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.049,
+      "f1_macro": 0.0234,
+      "tasa_mayoritaria": 0.537,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "n_predichos": 2000,
+          "precision": 0.049,
+          "cobertura": 1.0,
+          "f1": 0.0934
+        },
+        "docs": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          1074,
+          0
+        ],
+        [
+          0,
+          0,
+          414,
+          0
+        ],
+        [
+          0,
+          0,
+          98,
+          0
+        ],
+        [
+          0,
+          0,
+          414,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "angular/angular-cli",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.141,
+      "f1_macro": 0.0618,
+      "tasa_mayoritaria": 0.4615,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 327,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 282,
+          "n_predichos": 2000,
+          "precision": 0.141,
+          "cobertura": 1.0,
+          "f1": 0.2472
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          923
+        ],
+        [
+          0,
+          0,
+          0,
+          327
+        ],
+        [
+          0,
+          0,
+          0,
+          468
+        ],
+        [
+          0,
+          0,
+          0,
+          282
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "nuxt/nuxt",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.4985,
+      "f1_macro": 0.1663,
+      "tasa_mayoritaria": 0.4985,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "n_predichos": 2000,
+          "precision": 0.4985,
+          "cobertura": 1.0,
+          "f1": 0.6653
+        },
+        "feat": {
+          "n_prueba": 265,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 636,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          997,
+          0,
+          0,
+          0
+        ],
+        [
+          265,
+          0,
+          0,
+          0
+        ],
+        [
+          102,
+          0,
+          0,
+          0
+        ],
+        [
+          636,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "sveltejs/svelte",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.1645,
+      "f1_macro": 0.0706,
+      "tasa_mayoritaria": 0.7305,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 209,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 329,
+          "n_predichos": 2000,
+          "precision": 0.1645,
+          "cobertura": 1.0,
+          "f1": 0.2825
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          1461
+        ],
+        [
+          0,
+          0,
+          0,
+          209
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          329
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "vitejs/vite",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.1755,
+      "f1_macro": 0.0746,
+      "tasa_mayoritaria": 0.5335,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 351,
+          "n_predichos": 2000,
+          "precision": 0.1755,
+          "cobertura": 1.0,
+          "f1": 0.2986
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 431,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1067,
+          0,
+          0
+        ],
+        [
+          0,
+          351,
+          0,
+          0
+        ],
+        [
+          0,
+          151,
+          0,
+          0
+        ],
+        [
+          0,
+          431,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 2,
+      "fold": "vitest-dev/vitest",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.207,
+      "f1_macro": 0.0857,
+      "tasa_mayoritaria": 0.537,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 414,
+          "n_predichos": 2000,
+          "precision": 0.207,
+          "cobertura": 1.0,
+          "f1": 0.343
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          1074
+        ],
+        [
+          0,
+          0,
+          0,
+          414
+        ],
+        [
+          0,
+          0,
+          0,
+          98
+        ],
+        [
+          0,
+          0,
+          0,
+          414
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "angular/angular-cli",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.141,
+      "f1_macro": 0.0618,
+      "tasa_mayoritaria": 0.4615,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 327,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 282,
+          "n_predichos": 2000,
+          "precision": 0.141,
+          "cobertura": 1.0,
+          "f1": 0.2472
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          923
+        ],
+        [
+          0,
+          0,
+          0,
+          327
+        ],
+        [
+          0,
+          0,
+          0,
+          468
+        ],
+        [
+          0,
+          0,
+          0,
+          282
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "nuxt/nuxt",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.4985,
+      "f1_macro": 0.1663,
+      "tasa_mayoritaria": 0.4985,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "n_predichos": 2000,
+          "precision": 0.4985,
+          "cobertura": 1.0,
+          "f1": 0.6653
+        },
+        "feat": {
+          "n_prueba": 265,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 636,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          997,
+          0,
+          0,
+          0
+        ],
+        [
+          265,
+          0,
+          0,
+          0
+        ],
+        [
+          102,
+          0,
+          0,
+          0
+        ],
+        [
+          636,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "sveltejs/svelte",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.7305,
+      "f1_macro": 0.2111,
+      "tasa_mayoritaria": 0.7305,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "n_predichos": 2000,
+          "precision": 0.7305,
+          "cobertura": 1.0,
+          "f1": 0.8443
+        },
+        "feat": {
+          "n_prueba": 209,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 329,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1461,
+          0,
+          0,
+          0
+        ],
+        [
+          209,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          329,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "vitejs/vite",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.5335,
+      "f1_macro": 0.1739,
+      "tasa_mayoritaria": 0.5335,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "n_predichos": 2000,
+          "precision": 0.5335,
+          "cobertura": 1.0,
+          "f1": 0.6958
+        },
+        "feat": {
+          "n_prueba": 351,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 431,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1067,
+          0,
+          0,
+          0
+        ],
+        [
+          351,
+          0,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0,
+          0
+        ],
+        [
+          431,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 3,
+      "fold": "vitest-dev/vitest",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.537,
+      "f1_macro": 0.1747,
+      "tasa_mayoritaria": 0.537,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "n_predichos": 1999,
+          "precision": 0.5373,
+          "cobertura": 1.0,
+          "f1": 0.699
+        },
+        "feat": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 414,
+          "n_predichos": 1,
+          "precision": 0.0,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1074,
+          0,
+          0,
+          0
+        ],
+        [
+          413,
+          0,
+          0,
+          1
+        ],
+        [
+          98,
+          0,
+          0,
+          0
+        ],
+        [
+          414,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "angular/angular-cli",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.141,
+      "f1_macro": 0.0618,
+      "tasa_mayoritaria": 0.4615,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 327,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 282,
+          "n_predichos": 2000,
+          "precision": 0.141,
+          "cobertura": 1.0,
+          "f1": 0.2472
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          923
+        ],
+        [
+          0,
+          0,
+          0,
+          327
+        ],
+        [
+          0,
+          0,
+          0,
+          468
+        ],
+        [
+          0,
+          0,
+          0,
+          282
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "nuxt/nuxt",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.4985,
+      "f1_macro": 0.1663,
+      "tasa_mayoritaria": 0.4985,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "n_predichos": 2000,
+          "precision": 0.4985,
+          "cobertura": 1.0,
+          "f1": 0.6653
+        },
+        "feat": {
+          "n_prueba": 265,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 636,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          997,
+          0,
+          0,
+          0
+        ],
+        [
+          265,
+          0,
+          0,
+          0
+        ],
+        [
+          102,
+          0,
+          0,
+          0
+        ],
+        [
+          636,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "sveltejs/svelte",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.145,
+      "f1_macro": 0.1456,
+      "tasa_mayoritaria": 0.7305,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "n_predichos": 138,
+          "precision": 0.6812,
+          "cobertura": 0.0643,
+          "f1": 0.1176
+        },
+        "feat": {
+          "n_prueba": 209,
+          "n_predichos": 17,
+          "precision": 0.5294,
+          "cobertura": 0.0431,
+          "f1": 0.0796
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "n_predichos": 1204,
+          "precision": 0.0008,
+          "cobertura": 1.0,
+          "f1": 0.0017
+        },
+        "docs": {
+          "n_prueba": 329,
+          "n_predichos": 641,
+          "precision": 0.2902,
+          "cobertura": 0.5653,
+          "f1": 0.3835
+        }
+      },
+      "confusion": [
+        [
+          94,
+          8,
+          977,
+          382
+        ],
+        [
+          6,
+          9,
+          121,
+          73
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          38,
+          0,
+          105,
+          186
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "vitejs/vite",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.5335,
+      "f1_macro": 0.1739,
+      "tasa_mayoritaria": 0.5335,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "n_predichos": 2000,
+          "precision": 0.5335,
+          "cobertura": 1.0,
+          "f1": 0.6958
+        },
+        "feat": {
+          "n_prueba": 351,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 431,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1067,
+          0,
+          0,
+          0
+        ],
+        [
+          351,
+          0,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0,
+          0
+        ],
+        [
+          431,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 4,
+      "fold": "vitest-dev/vitest",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.207,
+      "f1_macro": 0.0857,
+      "tasa_mayoritaria": 0.537,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 414,
+          "n_predichos": 2000,
+          "precision": 0.207,
+          "cobertura": 1.0,
+          "f1": 0.343
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          1074
+        ],
+        [
+          0,
+          0,
+          0,
+          414
+        ],
+        [
+          0,
+          0,
+          0,
+          98
+        ],
+        [
+          0,
+          0,
+          0,
+          414
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "angular/angular-cli",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.1635,
+      "f1_macro": 0.0703,
+      "tasa_mayoritaria": 0.4615,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 923,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 327,
+          "n_predichos": 2000,
+          "precision": 0.1635,
+          "cobertura": 1.0,
+          "f1": 0.281
+        },
+        "refactor": {
+          "n_prueba": 468,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 282,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          923,
+          0,
+          0
+        ],
+        [
+          0,
+          327,
+          0,
+          0
+        ],
+        [
+          0,
+          468,
+          0,
+          0
+        ],
+        [
+          0,
+          282,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "nuxt/nuxt",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.318,
+      "f1_macro": 0.1206,
+      "tasa_mayoritaria": 0.4985,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 997,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 265,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 102,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 636,
+          "n_predichos": 2000,
+          "precision": 0.318,
+          "cobertura": 1.0,
+          "f1": 0.4825
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          997
+        ],
+        [
+          0,
+          0,
+          0,
+          265
+        ],
+        [
+          0,
+          0,
+          0,
+          102
+        ],
+        [
+          0,
+          0,
+          0,
+          636
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "sveltejs/svelte",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.1645,
+      "f1_macro": 0.0706,
+      "tasa_mayoritaria": 0.7305,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1461,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 209,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 1,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 329,
+          "n_predichos": 2000,
+          "precision": 0.1645,
+          "cobertura": 1.0,
+          "f1": 0.2825
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          1461
+        ],
+        [
+          0,
+          0,
+          0,
+          209
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          329
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "vitejs/vite",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.215,
+      "f1_macro": 0.0885,
+      "tasa_mayoritaria": 0.5335,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1067,
+          "n_predichos": 1,
+          "precision": 0.0,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "feat": {
+          "n_prueba": 351,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 151,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 431,
+          "n_predichos": 1999,
+          "precision": 0.2151,
+          "cobertura": 0.9977,
+          "f1": 0.3539
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          1067
+        ],
+        [
+          0,
+          0,
+          0,
+          351
+        ],
+        [
+          0,
+          0,
+          0,
+          151
+        ],
+        [
+          1,
+          0,
+          0,
+          430
+        ]
+      ]
+    },
+    {
+      "semilla": 5,
+      "fold": "vitest-dev/vitest",
+      "n_entrenamiento": 8000,
+      "n_prueba": 2000,
+      "exactitud": 0.537,
+      "f1_macro": 0.1747,
+      "tasa_mayoritaria": 0.537,
+      "por_clase": {
+        "fix": {
+          "n_prueba": 1074,
+          "n_predichos": 2000,
+          "precision": 0.537,
+          "cobertura": 1.0,
+          "f1": 0.6988
+        },
+        "feat": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "refactor": {
+          "n_prueba": 98,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        },
+        "docs": {
+          "n_prueba": 414,
+          "n_predichos": 0,
+          "precision": null,
+          "cobertura": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": [
+        [
+          1074,
+          0,
+          0,
+          0
+        ],
+        [
+          414,
+          0,
+          0,
+          0
+        ],
+        [
+          98,
+          0,
+          0,
+          0
+        ],
+        [
+          414,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "dataset": {
+    "manifest_sha256": "0177140ce63d03f1fa1aa38f7cde6bdc6ef57f3442b0cc8cf4278e2d7b7249a5"
+  },
+  "versiones": {
+    "python": "3.12.13",
+    "numpy": "2.2.1",
+    "scikit-learn": "1.6.1",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "cuda": "12.8",
+    "plataforma": "Linux-6.12.90+-x86_64-with-glibc2.35"
+  }
+}
