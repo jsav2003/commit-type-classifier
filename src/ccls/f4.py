@@ -57,19 +57,20 @@ def comparar(nuevo: dict, referencia: dict) -> str:
     return "empate"
 
 
-def _seccion_veredicto(resultados: dict[str, dict[str, dict]]) -> list[str]:
+def _seccion_veredicto(resultados: dict[str, dict[str, dict]], modelo: str = MODELO,
+                       referencia: str = REFERENCIA, de_ref: str = "del clásico") -> list[str]:
     L = [
-        f"## `{MODELO}` contra `{REFERENCIA}`, fold por fold\n",
-        "F1 macro. El veredicto compara la media del clásico con el intervalo de "
-        f"`{MODELO}` entre semillas (ver `comparar` en `src/ccls/f4.py`). Ese intervalo "
+        f"## `{modelo}` contra `{referencia}`, fold por fold\n",
+        f"F1 macro. El veredicto compara la media {de_ref} con el intervalo de "
+        f"`{modelo}` entre semillas (ver `comparar` en `src/ccls/f4.py`). Ese intervalo "
         "solo mide el ruido del entrenamiento, no el de la muestra de prueba, así que "
         "\"empate\" es \"la diferencia no pasa ese ruido\", no \"son iguales\".\n",
-        f"| partición | fold | n | `{MODELO}` | `{REFERENCIA}` | diferencia | veredicto |",
+        f"| partición | fold | n | `{modelo}` | `{referencia}` | diferencia | veredicto |",
         "|---|---|---:|---:|---:|---:|---|",
     ]
     cuenta: dict[str, int] = {}
     for particion in PARTICIONES:
-        nuevo, ref = resultados[particion][MODELO], resultados[particion][REFERENCIA]
+        nuevo, ref = resultados[particion][modelo], resultados[particion][referencia]
         for fold in _folds(nuevo):
             a, b = _resumen_de(nuevo, fold), _resumen_de(ref, fold)
             v = comparar(a["f1_macro"], b["f1_macro"])
@@ -86,19 +87,21 @@ def _seccion_veredicto(resultados: dict[str, dict[str, dict]]) -> list[str]:
     return L
 
 
-def _seccion_por_clase(resultados: dict[str, dict[str, dict]]) -> list[str]:
+def _seccion_por_clase(resultados: dict[str, dict[str, dict]], modelo: str = MODELO,
+                       referencia: str = REFERENCIA,
+                       titulo: str = "Qué clase gana y cuál pierde") -> list[str]:
     """Diferencia de F1 por clase, fold por fold. Es donde se ve qué compra el
     preentrenamiento: el macro puede quedar igual ganando en una clase y perdiendo en otra."""
     clases = f2.CLASES_EN_TABLA + (f2.CLASE_POR_FOLD,)
     L = [
-        "## Qué clase gana y cuál pierde\n",
-        f"Diferencia de F1, `{MODELO}` menos `{REFERENCIA}`, en puntos. `—`: la clase no "
+        f"## {titulo}\n",
+        f"Diferencia de F1, `{modelo}` menos `{referencia}`, en puntos. `—`: la clase no "
         "tiene ejemplos en prueba. La columna de `refactor` lleva su n al lado (§5).\n",
         "| partición | fold | " + " | ".join(f"`{c}`" for c in clases) + " |",
         "|---|---" + "|---:" * len(clases) + "|",
     ]
     for particion in PARTICIONES:
-        nuevo, ref = resultados[particion][MODELO], resultados[particion][REFERENCIA]
+        nuevo, ref = resultados[particion][modelo], resultados[particion][referencia]
         for fold in _folds(nuevo):
             a, b = _resumen_de(nuevo, fold)["por_clase"], _resumen_de(ref, fold)["por_clase"]
             celdas = []
@@ -113,13 +116,17 @@ def _seccion_por_clase(resultados: dict[str, dict[str, dict]]) -> list[str]:
     return L
 
 
-def _seccion_fuga(resultados: dict[str, dict[str, dict]], barajadas: dict[str, dict], tolerancia: float) -> list[str]:
+_NOTA_FUGA = ("CodeBERT ve las rutas completas de los archivos, que el clásico no ve: es "
+              "un camino nuevo por el que la etiqueta podría colarse.")
+
+
+def _seccion_fuga(resultados: dict[str, dict[str, dict]], barajadas: dict[str, dict], tolerancia: float,
+                  modelo: str = MODELO, nota: str = _NOTA_FUGA) -> list[str]:
     L = [
-        f"## La prueba de etiquetas aleatorias, sobre `{MODELO}`\n",
+        f"## La prueba de etiquetas aleatorias, sobre `{modelo}`\n",
         "`LEAKAGE.md` §7.1: con las etiquetas de entrenamiento barajadas, la exactitud no "
         f"puede pasar la tasa de la clase mayoritaria de prueba por más de {_puntos(tolerancia)} "
-        "puntos. CodeBERT ve las rutas completas de los archivos, que el clásico no ve: es "
-        "un camino nuevo por el que la etiqueta podría colarse.\n",
+        f"puntos. {nota}\n",
         "| partición | fold | techo del azar | exactitud, etiquetas barajadas | exceso | estado |",
         "|---|---|---:|---:|---:|---|",
     ]
@@ -127,7 +134,7 @@ def _seccion_fuga(resultados: dict[str, dict[str, dict]], barajadas: dict[str, d
     for particion in PARTICIONES:
         if particion not in barajadas:
             continue
-        for f in experimento.evaluar_fuga_aleatoria(barajadas[particion], resultados[particion][MODELO], tolerancia):
+        for f in experimento.evaluar_fuga_aleatoria(barajadas[particion], resultados[particion][modelo], tolerancia):
             estados.append(f["estado"])
             L.append(f"| {particion} | {f['fold']} | {_pct(f['techo_azar'])} | "
                      f"{_ic(f['exactitud_barajadas'])} | {_puntos(f['exceso'])} | {f['estado']} |")

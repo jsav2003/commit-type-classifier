@@ -17,7 +17,7 @@ completo y [`NO-GOALS.md`](NO-GOALS.md) para los límites.
 | F2 · Baselines | ✅ **cerrada** el 2026-09-18: trivial, la regla de `docs` de §6.1 y el clásico (TF-IDF + rasgos, con regresión logística y gradient boosting), en las tres particiones con 5 semillas e intervalos. Tablas en `docs/F2_BASELINES.md` |
 | F3 · Techo humano | 🔶 **en curso** (2026-09-20): la muestra de 350 ítems, la herramienta de etiquetado (`python -m ccls f3 label`), las predicciones y el reporte están listos; **hay un techo provisional puesto por un LLM** (`docs/F3_TECHO_LLM.md`, no es un techo humano); el techo humano sigue pendiente de que lo etiquete una persona |
 | F4 · Transfer learning | ✅ **cerrada** el 2026-09-22: CodeBERT con las últimas 2 capas reentrenadas (`config/f4.yaml`, fijada antes de entrenar) en las tres particiones, 5 semillas, corrido en Colab T4. **No le gana al clásico reponderado:** en F1 macro empata en 5 de los 6 folds por repositorio y temporal y pierde en vite (71,0% [70,3; 71,8] contra 73,1%). En `refactor` es igual o peor en todos los folds con más de un ejemplo (vite: 48,3% contra 59,4%). La prueba de etiquetas aleatorias **pasa en 7 de 7 folds**. Tablas en `docs/F4_TRANSFER.md` |
-| F5 · Red desde cero | 🔶 **corridas terminadas** (2026-09-28): `config/f5.yaml` fijada antes de entrenar — la arquitectura de CodeBERT con pesos al azar, entrenada entera, con los hiperparámetros de la F4 (DESIGN.md §6.4), corrida en Kaggle T4 (`docs/KAGGLE_F5.md`). Las tres particiones corridas con etiquetas reales y barajadas, 5 semillas; la prueba de etiquetas aleatorias (§7.1) **pasa en las tres** (por repositorio, 5 de 5 folds: barajadas entre 21,0% y 46,2% de exactitud contra 63,7–79,6% con etiquetas reales). Falta el reporte comparativo (`docs/F5_*.md`) para cerrarla |
+| F5 · Red desde cero | ✅ **cerrada** el 2026-09-28: `config/f5.yaml` fijada antes de entrenar — la arquitectura de CodeBERT con pesos al azar, entrenada entera, con los hiperparámetros de la F4 (DESIGN.md §6.4), corrida en Kaggle T4 (`docs/KAGGLE_F5.md`). **Pierde en los 6 folds honestos**, contra el clásico reponderado y contra CodeBERT (F1 macro por repositorio: 52,7–67,6% contra 56,8–73,1% del clásico; en `refactor` queda 1,4 a 15,9 puntos abajo). Los pesos preentrenados aportan de 1,1 a 8,1 puntos de F1 macro con el mismo presupuesto de entrenamiento. La prueba de etiquetas aleatorias (§7.1) **pasa en 7 de 7 folds**; con etiquetas barajadas la red responde siempre la misma clase en 33 de 35 corridas. Tablas en `docs/F5_DESDE_CERO.md`. No es la mejor red desde cero posible (DESIGN.md §6.4) |
 | F6 | no empezada |
 
 ## Resultado del piloto (resumen)
@@ -167,6 +167,7 @@ python -m ccls f2 report               # escribe docs/F2_BASELINES.md
 python -m ccls f4 run                  # F4: necesita requirements-f4.txt y GPU; reanudable (data/interim/f4_corridas)
 python -m ccls f4 report               # escribe docs/F4_TRANSFER.md; no necesita torch
 python -m ccls f5 run                  # F5: la red desde cero; igual que f4 run (data/interim/f5_corridas)
+python -m ccls f5 report               # escribe docs/F5_DESDE_CERO.md; no necesita torch
 ```
 
 Las particiones (DESIGN.md §5) y las semillas están en `config/experimentos.yaml`:

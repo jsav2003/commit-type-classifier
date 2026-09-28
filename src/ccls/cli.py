@@ -374,6 +374,39 @@ def cmd_f4_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_f5_report(args: argparse.Namespace) -> int:
+    from ccls import f2, f4, f5
+    cargado = _cargar_f1()
+    if cargado is None:
+        return 1
+    cfg, _, manifest_sha256 = cargado
+    resultados: dict[str, dict[str, dict]] = {}
+    faltan = []
+    for tipo in f5.PARTICIONES:
+        resultados[tipo] = {}
+        for modelo, comando in ((f5.MODELO, "f5 run"), (f5.CODEBERT, "f4 run"), (f5.CLASICO, "f2 run")):
+            doc = f2.cargar(modelo, tipo)
+            if doc is None:
+                faltan.append(f"{modelo} · {tipo} ('{comando}')")
+            else:
+                resultados[tipo][modelo] = doc
+    if faltan:
+        print("faltan resultados:")
+        for x in faltan:
+            print(f"  {x}")
+        return 1
+    barajadas = {t: d for t in f5.PARTICIONES if (d := f2.cargar(f5.MODELO, t, barajadas=True)) is not None}
+    if len(barajadas) < len(f5.PARTICIONES):
+        print(f"aviso: faltan barajadas de {f5.MODELO}; el reporte lo dice en la sección §7.1")
+    f5.F5_REPORTE_PATH.write_text(
+        f5.render(resultados, cfg["semillas"], manifest_sha256, barajadas,
+                  cfg["fuga_etiquetas_aleatorias"]["tolerancia"]),
+        encoding="utf-8",
+    )
+    print(f"escrito {f5.F5_REPORTE_PATH}")
+    return 0
+
+
 def cmd_f2_report(args: argparse.Namespace) -> int:
     from ccls import f2, particiones
     cargado = _cargar_f1()
@@ -582,6 +615,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--cache", default="data/interim/f5_corridas",
                    help="dónde se guarda cada (semilla, fold) al terminar; al relanzar se saltan las hechas")
     p.set_defaults(func=cmd_f4_run, modelo="f5_desde_cero")
+
+    p = f5_sub.add_parser("report", help="escribe docs/F5_DESDE_CERO.md desde resultados/; no necesita torch")
+    p.set_defaults(func=cmd_f5_report)
 
     f3_parser = sub.add_parser("f3", help="techo humano: 300 commits etiquetados a mano (DESIGN.md §4.2 y §7.5)")
     f3_sub = f3_parser.add_subparsers(dest="f3_comando", required=True)
